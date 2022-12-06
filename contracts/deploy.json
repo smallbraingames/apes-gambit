@@ -1,4 +1,7 @@
 {
-  "components": ["CounterComponent"],
-  "systems": [{ "name": "IncrementSystem", "writeAccess": ["CounterComponent"] }]
+  "components": ["OwnerComponent"],
+  "systems": [
+    { "name": "TransferOwnerSystem", "writeAccess": ["OwnerComponent"] },
+    { "name": "SpawnSystem", "writeAccess": ["OwnerComponent"] }
+  ]
 }
