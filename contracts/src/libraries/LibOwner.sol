@@ -14,4 +14,6 @@ library LibOwner {
     address current = ownerComponent.getValue(entity);
     if (current != checkAddress) revert NotOwner();
   }
+
+  /// @notice Checks if a piecei si currently being controlled
 }
