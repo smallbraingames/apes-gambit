@@ -1,6 +1,7 @@
 {
-  "components": ["OwnerComponent"],
+  "components": ["OwnerComponent", "ControllerComponent"],
   "systems": [
+    { "name": "SetControllerSystem", "writeAccess": ["ControllerComponent"] },
     { "name": "TransferOwnerSystem", "writeAccess": ["OwnerComponent"] },
     { "name": "SpawnSystem", "writeAccess": ["OwnerComponent"] }
   ]

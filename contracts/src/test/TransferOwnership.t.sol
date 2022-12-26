@@ -4,7 +4,6 @@ pragma solidity >=0.8.0;
 import { SpawnSystem, ID as SpawnSystemID } from "systems/SpawnSystem.sol";
 import { TransferOwnerSystem, ID as TransferOwnerSystemID } from "systems/TransferOwnerSystem.sol";
 import { OwnerComponent, ID as OwnerComponentID } from "components/OwnerComponent.sol";
-
 import { NotOwner } from "common/Errors.sol";
 
 import { Deploy } from "./Deploy.sol";
