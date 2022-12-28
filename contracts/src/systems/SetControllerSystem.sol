@@ -6,7 +6,6 @@ import { OwnerComponent, ID as OwnerComponentID } from "components/OwnerComponen
 import { ControllerComponent, ID as ControllerComponentID } from "components/ControllerComponent.sol";
 import { LibOwner } from "libraries/LibOwner.sol";
 import { LibController } from "libraries/LibController.sol";
-import { AlreadyHasController } from "common/Errors.sol";
 
 uint256 constant ID = uint256(keccak256("system.SetController"));
 

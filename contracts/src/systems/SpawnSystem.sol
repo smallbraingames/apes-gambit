@@ -2,8 +2,9 @@
 pragma solidity >=0.8.0;
 import { System, IWorld } from "solecs/System.sol";
 import { getAddressById } from "solecs/utils.sol";
+import { PieceType } from "common/PieceType.sol";
 import { OwnerComponent, ID as OwnerComponentID } from "components/OwnerComponent.sol";
-import { LibOwner } from "libraries/LibOwner.sol";
+import { PieceTypeComponent, ID as PieceTypeComponentID } from "components/PieceTypeComponent.sol";
 
 uint256 constant ID = uint256(keccak256("system.Spawn"));
 
@@ -15,9 +16,13 @@ contract SpawnSystem is System {
     // Unique entity
     uint256 entityId = world.getUniqueEntityId();
 
-    // Set owner
+    // Set owner to msg.sender
     OwnerComponent ownerComponent = OwnerComponent(getAddressById(components, OwnerComponentID));
     ownerComponent.set(entityId, msg.sender);
+
+    // Set piece type to pawn
+    PieceTypeComponent pieceTypeComponent = PieceTypeComponent(getAddressById(components, PieceTypeComponentID));
+    pieceTypeComponent.set(entityId, PieceType.PAWN);
 
     return abi.encode(entityId);
   }
