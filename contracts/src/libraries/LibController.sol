@@ -1,9 +1,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 import { ControllerComponent } from "components/ControllerComponent.sol";
-import { NotController } from "common/Errors.sol";
+import { NotController, AlreadyHasController } from "common/Errors.sol";
 
 library LibController {
+  /// @notice Checks if an entity has no controllers
+  function checkNoControllers(ControllerComponent controllerComponent, uint256 entity) internal view {
+    if (!controllerComponent.has(entity)) return;
+    uint256[] memory paddedControllers = controllerComponent.getValue(entity);
+    if (paddedControllers.length > 0) {
+      revert AlreadyHasController();
+    }
+  }
+
   /// @notice Checks if an address is the owner of an entity
   function checkIsController(
     ControllerComponent controllerComponent,
@@ -27,15 +36,21 @@ library LibController {
     address controller
   ) internal {
     uint256[] memory paddedControllers = controllerComponent.getValue(entity);
+    if (paddedControllers.length <= 0) {
+      revert NotController();
+    }
+    uint256[] memory newPaddedControllers = new uint256[](paddedControllers.length - 1);
+    uint256 index = 0;
     for (uint256 i = 0; i < paddedControllers.length; i++) {
-      if (unpadAddress(paddedControllers[i]) == controller) {
-        paddedControllers[i] = paddedControllers[paddedControllers.length - 1];
-        delete paddedControllers[paddedControllers.length - 1];
-        controllerComponent.set(entity, paddedControllers);
-        return;
+      if (unpadAddress(paddedControllers[i]) != controller) {
+        if (index >= paddedControllers.length - 1) {
+          revert NotController();
+        }
+        newPaddedControllers[index] = paddedControllers[i];
+        index++;
       }
     }
-    revert NotController();
+    controllerComponent.set(entity, newPaddedControllers);
   }
 
   /// @notice Pads an address as a uint256
