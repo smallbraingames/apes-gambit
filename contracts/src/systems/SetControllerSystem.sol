@@ -22,9 +22,7 @@ contract SetControllerSystem is System {
     LibOwner.checkIsOwner(ownerComponent, entity, msg.sender);
 
     // Check that msg.sender does not already have controllers
-    if (controllerComponent.has(entity)) {
-      revert AlreadyHasController();
-    }
+    LibController.checkNoControllers(controllerComponent, entity);
 
     // If so, set controller
     uint256[] memory paddedControllers = new uint256[](controllers.length);
