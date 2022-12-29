@@ -3,8 +3,10 @@ pragma solidity >=0.8.0;
 import { System, IWorld } from "solecs/System.sol";
 import { getAddressById } from "solecs/utils.sol";
 import { PieceType } from "common/PieceType.sol";
+import { Coord } from "std-contracts/components/CoordComponent.sol";
 import { OwnerComponent, ID as OwnerComponentID } from "components/OwnerComponent.sol";
 import { PieceTypeComponent, ID as PieceTypeComponentID } from "components/PieceTypeComponent.sol";
+import { PiecePositionComponent, ID as PiecePositionComponentID } from "components/PiecePositionComponent.sol";
 
 uint256 constant ID = uint256(keccak256("system.Spawn"));
 
@@ -23,6 +25,12 @@ contract SpawnSystem is System {
     // Set piece type to pawn
     PieceTypeComponent pieceTypeComponent = PieceTypeComponent(getAddressById(components, PieceTypeComponentID));
     pieceTypeComponent.set(entityId, PieceType.PAWN);
+
+    // Set initial position to (0, 0)
+    PiecePositionComponent piecePositionComponent = PiecePositionComponent(
+      getAddressById(components, PiecePositionComponentID)
+    );
+    piecePositionComponent.set(entityId, Coord({ x: 0, y: 0 }));
 
     return abi.encode(entityId);
   }

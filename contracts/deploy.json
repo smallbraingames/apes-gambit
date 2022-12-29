@@ -1,10 +1,11 @@
 {
-  "components": ["OwnerComponent", "ControllerComponent", "PieceTypeComponent"],
+  "components": ["OwnerComponent", "ControllerComponent", "PieceTypeComponent", "PiecePositionComponent"],
   "systems": [
     { "name": "RevokeControllerSystem", "writeAccess": ["ControllerComponent"] },
     { "name": "SetControllerSystem", "writeAccess": ["ControllerComponent"] },
     { "name": "TransferOwnerSystem", "writeAccess": ["OwnerComponent"] },
-    { "name": "SpawnSystem", "writeAccess": ["OwnerComponent", "PieceTypeComponent"] },
-    { "name": "SetPieceTypeSystem", "writeAccess": ["PieceTypeComponent"] }
+    { "name": "SpawnSystem", "writeAccess": ["OwnerComponent", "PieceTypeComponent", "PiecePositionComponent"] },
+    { "name": "SetPieceTypeSystem", "writeAccess": ["PieceTypeComponent"] },
+    { "name": "MovePieceSystem", "writeAccess": ["PiecePositionComponent"] }
   ]
 }
