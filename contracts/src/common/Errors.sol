@@ -5,3 +5,4 @@ error NotOwner();
 error NotController();
 error AlreadyHasController();
 error CannotControl();
+error UnimplementedPieceType();
