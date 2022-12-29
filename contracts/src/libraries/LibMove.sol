@@ -4,8 +4,23 @@ pragma solidity >=0.8.0;
 import { PieceType } from "common/PieceType.sol";
 import { Coord } from "std-contracts/components/CoordComponent.sol";
 import { UnimplementedPieceType } from "common/Errors.sol";
+import { InvalidMove } from "common/Errors.sol";
 
 library LibMove {
+  /// @notice Checks if a move from start to end position is valid
+  /// Does not check for collisions, etc.
+  function checkValidMove(
+    Coord memory startPosition,
+    Coord memory endPosition,
+    PieceType pieceType
+  ) internal pure {
+    if (!isValidMove(startPosition, endPosition, pieceType)) {
+      revert InvalidMove();
+    }
+  }
+
+  /// @notice Returns if a move from start to end position is valid
+  /// Does not check for collisions, etc.
   function isValidMove(
     Coord memory startPosition,
     Coord memory endPosition,
@@ -25,7 +40,6 @@ library LibMove {
     } else if (pieceType == PieceType.KING) {
       return isValidMoveKing(startPosition, endPosition);
     }
-
     revert UnimplementedPieceType();
   }
 
