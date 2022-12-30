@@ -1,11 +1,20 @@
 {
-  "components": ["OwnerComponent", "ControllerComponent", "PieceTypeComponent", "PiecePositionComponent"],
+  "components": [
+    "OwnerComponent",
+    "ControllerComponent",
+    "PieceTypeComponent",
+    "PiecePositionComponent",
+    "BRGameComponent",
+    "BRInGameComponent"
+  ],
   "systems": [
     { "name": "RevokeControllerSystem", "writeAccess": ["ControllerComponent"] },
     { "name": "SetControllerSystem", "writeAccess": ["ControllerComponent"] },
     { "name": "TransferOwnerSystem", "writeAccess": ["OwnerComponent"] },
     { "name": "SpawnSystem", "writeAccess": ["OwnerComponent", "PieceTypeComponent", "PiecePositionComponent"] },
     { "name": "SetPieceTypeSystem", "writeAccess": ["PieceTypeComponent"] },
-    { "name": "MovePieceSystem", "writeAccess": ["PiecePositionComponent"] }
+    { "name": "MovePieceSystem", "writeAccess": ["PiecePositionComponent"] },
+    { "name": "BRCreateGameSystem", "writeAccess": ["BRGameComponent"] },
+    { "name": "BRJoinGameSystem", "writeAccess": ["BRInGameComponent"] }
   ]
 }
