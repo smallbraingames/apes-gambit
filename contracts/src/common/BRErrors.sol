@@ -6,3 +6,7 @@ error BRGameNotStarted();
 error BREntityNotGame();
 error BRGameAlreadyStarted();
 error BRAlreadyInGame();
+error BRGameNotInProgress();
+error BRNotInGame();
+error BRPieceDead();
+error BRBeforeStartTime();

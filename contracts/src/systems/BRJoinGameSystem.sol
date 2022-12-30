@@ -7,6 +7,7 @@ import { OwnerComponent, ID as OwnerComponentID } from "components/OwnerComponen
 import { ControllerComponent, ID as ControllerComponentID } from "components/ControllerComponent.sol";
 import { BRGameComponent, ID as BRGameComponentID } from "components/BRGameComponent.sol";
 import { BRInGameComponent, ID as BRInGameComponentID } from "components/BRInGameComponent.sol";
+import { BRIsAliveComponent, ID as BRIsAliveComponentID } from "components/BRIsAliveComponent.sol";
 
 import { BRLibGame } from "libraries/BRLibGame.sol";
 
@@ -21,6 +22,7 @@ contract BRJoinGameSystem is System {
     ControllerComponent controllerComponent = ControllerComponent(getAddressById(components, ControllerComponentID));
     BRGameComponent brGameComponent = BRGameComponent(getAddressById(components, BRGameComponentID));
     BRInGameComponent brInGameComponent = BRInGameComponent(getAddressById(components, BRInGameComponentID));
+    BRIsAliveComponent brIsAliveComponent = BRIsAliveComponent(getAddressById(components, BRIsAliveComponentID));
 
     // Check that piece has the correct owner and controllers
     BRLibGame.checkPieceOwnerAndControllers(ownerComponent, controllerComponent, piece, msg.sender);
@@ -31,8 +33,9 @@ contract BRJoinGameSystem is System {
     // Check that piece is not currently in a game
     BRLibGame.checkPieceNotInGame(brInGameComponent, piece);
 
-    // If so, set in game component
+    // If so, set in game component and alive component
     brInGameComponent.set(piece, game);
+    brIsAliveComponent.set(piece);
   }
 
   function executeTyped(uint256 piece, uint256 game) public returns (bytes memory) {
