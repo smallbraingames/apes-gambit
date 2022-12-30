@@ -5,8 +5,6 @@ import { BRGame, BRGameStatus } from "common/BRGame.sol";
 import { SpawnSystem, ID as SpawnSystemID } from "systems/SpawnSystem.sol";
 import { BRCreateGameSystem, ID as BRCreateGameSystemID } from "systems/BRCreateGameSystem.sol";
 import { BRJoinGameSystem, ID as BRJoinGameSystemID } from "systems/BRJoinGameSystem.sol";
-import { SetControllerSystem, ID as SetControllerSystemID } from "systems/SetControllerSystem.sol";
-import { ControllerComponent, ID as ControllerComponentID } from "components/ControllerComponent.sol";
 import { BRGameComponent, ID as BRGameComponentID } from "components/BRGameComponent.sol";
 import { BRInGameComponent, ID as BRInGameComponentID } from "components/BRInGameComponent.sol";
 import { BRAlreadyInGame } from "common/BRErrors.sol";
@@ -22,7 +20,6 @@ contract BRJoinGameTest is MudTest {
     SpawnSystem spawnSystem = SpawnSystem(system(SpawnSystemID));
     BRCreateGameSystem brCreateGameSystem = BRCreateGameSystem(system(BRCreateGameSystemID));
     BRJoinGameSystem brJoinGameSystem = BRJoinGameSystem(system(BRJoinGameSystemID));
-    ControllerComponent controllerComponent = ControllerComponent(component(ControllerComponentID));
     BRGameComponent brGameComponent = BRGameComponent(getAddressById(components, BRGameComponentID));
     BRInGameComponent brInGameComponent = BRInGameComponent(getAddressById(components, BRInGameComponentID));
 

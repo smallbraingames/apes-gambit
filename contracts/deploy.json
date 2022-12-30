@@ -5,7 +5,8 @@
     "PieceTypeComponent",
     "PiecePositionComponent",
     "BRGameComponent",
-    "BRInGameComponent"
+    "BRInGameComponent",
+    "BRIsAliveComponent"
   ],
   "systems": [
     { "name": "RevokeControllerSystem", "writeAccess": ["ControllerComponent"] },
@@ -15,6 +16,8 @@
     { "name": "SetPieceTypeSystem", "writeAccess": ["PieceTypeComponent"] },
     { "name": "MovePieceSystem", "writeAccess": ["PiecePositionComponent"] },
     { "name": "BRCreateGameSystem", "writeAccess": ["BRGameComponent"] },
-    { "name": "BRJoinGameSystem", "writeAccess": ["BRInGameComponent"] }
+    { "name": "BRJoinGameSystem", "writeAccess": ["BRInGameComponent", "BRIsAliveComponent"] },
+    { "name": "BRStartGameSystem", "writeAccess": ["BRGameComponent"] },
+    { "name": "BRMovePieceSystem", "writeAccess": ["BRIsAliveComponent"] }
   ]
 }
