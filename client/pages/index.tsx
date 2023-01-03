@@ -1,38 +1,8 @@
-import { useEffect, useState } from "react";
-
+import GameLoader from "../components/game/GameLoader";
 import Head from "next/head";
-import { Network } from "../network/types";
+import NetworkProvider from "../context/NetworkContext";
 
 export default function Home() {
-  const [network, setNetwork] = useState<any | undefined>(undefined);
-
-  const config = {
-    chainId: 31337,
-    worldAddress: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-    jsonRpc: "http://localhost:8545/",
-    wsRpc: undefined,
-    streamServiceUrl: undefined,
-    snapshotServiceUrl: undefined,
-    devMode: false,
-    initialBlockNumber: 0,
-    externalProvider: undefined,
-  };
-
-  const setupNetwork = async () => {
-    if (typeof window !== "undefined") {
-      const createNetwork = (await import("../network/createNetwork"))
-        .createNetwork;
-      const network: Network = await createNetwork(config);
-      network.startSync();
-      setNetwork(network);
-    }
-  };
-
-  useEffect(() => {
-    setupNetwork();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <>
       <Head>
@@ -42,10 +12,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div>
-          <p className="font-bold">tailwind + next</p>
-        </div>
-        {/* <Game /> */}
+        <NetworkProvider>
+          <div>
+            <p className="font-bold">tailwind + next</p>
+          </div>
+          <GameLoader />
+        </NetworkProvider>
       </main>
     </>
   );

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-import { Game } from "../../game/types";
+import { Game as PhaserGame } from "../../game/types";
 
 const Game = () => {
-  const [game, setGame] = useState<Game | undefined>(undefined);
+  const [game, setGame] = useState<PhaserGame | undefined>(undefined);
 
   const setupGame = async () => {
     const createGame = require("../../game/createGame").createGame;
-    const game: Game = await createGame();
+    const game: PhaserGame = await createGame();
     setGame(game);
   };
   useEffect(() => {
