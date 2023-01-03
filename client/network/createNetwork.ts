@@ -1,0 +1,45 @@
+import { GameConfig, getNetworkConfig } from "./config";
+import { createActionSystem, setupMUDNetwork } from "@latticexyz/std-client";
+
+import { SystemAbis } from "../contracts/types/SystemAbis.mjs";
+import { SystemTypes } from "../contracts/types/SystemTypes";
+import { createWorld } from "@latticexyz/recs";
+import { defineLoadingStateComponent } from "./components/loadingStateComponent";
+
+export async function createNetwork(config: GameConfig) {
+  console.log("Network config", config);
+
+  const world = createWorld();
+
+  const components = {
+    LoadingState: defineLoadingStateComponent(world),
+  };
+
+  console.log("Setup network");
+  const networkConfig = getNetworkConfig(config);
+  const { txQueue, systems, txReduced$, network, startSync, encoders } =
+    await setupMUDNetwork<typeof components, SystemTypes>(
+      networkConfig,
+      world,
+      components,
+      SystemAbis
+    );
+
+  const actions = createActionSystem(world, txReduced$);
+
+  const context = {
+    world,
+    components,
+    txQueue,
+    systems,
+    txReduced$,
+    startSync,
+    network,
+    actions,
+    api: {},
+  };
+
+  (window as any).network = context;
+
+  return context;
+}
