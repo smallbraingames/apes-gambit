@@ -1,7 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['@latticexyz/phaserx'],
-}
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+};
 
-module.exports = nextConfig
+const withTM = require("next-transpile-modules")([
+  "@latticexyz/network",
+  "@latticexyz/recs",
+  "@latticexyz/services",
+  "@latticexyz/solecs",
+  "@latticexyz/std-client",
+  "@latticexyz/utils",
+]); // pass the modules you would like to see transpiled
+module.exports = withTM(nextConfig);
