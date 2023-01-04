@@ -22,7 +22,7 @@ const NetworkProvider = (props: { children: ReactNode }) => {
     wsRpc: undefined,
     streamServiceUrl: undefined,
     snapshotServiceUrl: undefined,
-    devMode: false,
+    devMode: true,
     initialBlockNumber: 0,
     externalProvider: undefined,
   };

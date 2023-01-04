@@ -5,7 +5,14 @@ import {
   defineScaleConfig,
   defineSceneConfig,
 } from "@latticexyz/phaserx";
-import { Maps, Scenes, Sprites, TILE_HEIGHT, TILE_WIDTH } from "./constants";
+import {
+  Assets,
+  Maps,
+  Scenes,
+  Sprites,
+  TILE_HEIGHT,
+  TILE_WIDTH,
+} from "./constants";
 
 const ANIMATION_INTERVAL = 200;
 
@@ -13,18 +20,15 @@ export const phaserConfig = {
   sceneConfig: {
     [Scenes.Main]: defineSceneConfig({
       assets: {
-        chess: {
+        [Assets.ChessTileset]: {
           type: AssetType.Image,
-          key: "chess",
+          key: Assets.ChessTileset,
           path: "assets/tilesets/chess-basic-tileset.png",
         },
-        pieces: {
-          type: AssetType.MultiAtlas,
-          key: "pieces",
-          path: "assets/sprites/atlas.json",
-          options: {
-            imagePath: "assets/sprites",
-          },
+        [Assets.PawnSprite]: {
+          type: AssetType.Image,
+          key: Assets.PawnSprite,
+          path: "assets/sprites/pawn.png",
         },
       },
       maps: {
@@ -44,15 +48,14 @@ export const phaserConfig = {
         }),
       },
       sprites: {
-        [Sprites.Donkey]: {
-          assetKey: "pieces",
-          frame: "sprites/workers/donkey.png",
+        [Sprites.Pawn]: {
+          assetKey: Assets.PawnSprite,
         },
       },
       animations: [],
       tilesets: {
         Default: {
-          assetKey: "chess",
+          assetKey: Assets.ChessTileset,
           tileWidth: TILE_WIDTH,
           tileHeight: TILE_HEIGHT,
         },
