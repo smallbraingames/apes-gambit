@@ -8,3 +8,7 @@ export enum Scenes {
 export enum Maps {
   Main = "Main",
 }
+
+export enum Sprites {
+  Donkey,
+}
