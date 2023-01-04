@@ -1,5 +1,6 @@
 import { createPhaserEngine } from "@latticexyz/phaserx";
 import { phaserConfig } from "./config";
+import renderBoard from "./renderBoard";
 
 export async function createGame() {
   const {
@@ -13,6 +14,9 @@ export async function createGame() {
     scenes,
     disposePhaser,
   };
+
+  // Setup chessboard
+  renderBoard(context);
 
   return context;
 }

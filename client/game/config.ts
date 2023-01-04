@@ -7,18 +7,16 @@ import {
 } from "@latticexyz/phaserx";
 import { Maps, Scenes, TILE_HEIGHT, TILE_WIDTH } from "./constants";
 
-import overworldTileset from "./assets/tilesets/overworld-tileset.png";
-
 const ANIMATION_INTERVAL = 200;
 
 export const phaserConfig = {
   sceneConfig: {
     [Scenes.Main]: defineSceneConfig({
       assets: {
-        overworld: {
+        chess: {
           type: AssetType.Image,
-          key: "overworld",
-          path: "./assets/tilesets/overworld-tileset.png",
+          key: "chess",
+          path: "./assets/tilesets/chess-basic-tileset.png",
         },
       },
       maps: {
@@ -26,7 +24,7 @@ export const phaserConfig = {
           chunkSize: TILE_WIDTH * 64, // tile size * tile amount
           tileWidth: TILE_WIDTH,
           tileHeight: TILE_HEIGHT,
-          backgroundTile: [43],
+          backgroundTile: [1],
           animationInterval: ANIMATION_INTERVAL,
           layers: {
             layers: {
@@ -41,7 +39,7 @@ export const phaserConfig = {
       animations: [],
       tilesets: {
         Default: {
-          assetKey: "overworld",
+          assetKey: "chess",
           tileWidth: TILE_WIDTH,
           tileHeight: TILE_HEIGHT,
         },
@@ -54,11 +52,10 @@ export const phaserConfig = {
     mode: Phaser.Scale.NONE,
   }),
   cameraConfig: defineCameraConfig({
-    //phaserSelector: "phaser-game",
     pinchSpeed: 1,
     wheelSpeed: 1,
-    maxZoom: 4,
-    minZoom: 1,
+    maxZoom: 0.5,
+    minZoom: 0.5,
   }),
   cullingChunkSize: TILE_HEIGHT * 16,
 };
