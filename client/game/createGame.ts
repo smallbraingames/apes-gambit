@@ -1,4 +1,5 @@
 import { Network } from "../network/types";
+import createMovementInputSystem from "./systems/input/createMovementInputSystem";
 import { createPhaserEngine } from "@latticexyz/phaserx";
 import createPiecePositionSystem from "./systems/createPiecePositionSystem";
 import { phaserConfig } from "./config";
@@ -22,6 +23,7 @@ export async function createGame(network: Network) {
 
   // Setup systems
   createPiecePositionSystem(network, context);
+  createMovementInputSystem(network, context);
 
   network.startSync();
 

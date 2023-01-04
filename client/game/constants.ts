@@ -9,6 +9,11 @@ export enum Maps {
   Main = "Main",
 }
 
+export enum Assets {
+  ChessTileset = "OverworldTileset",
+  PawnSprite = "PawnSprite",
+}
+
 export enum Sprites {
-  Donkey,
+  Pawn,
 }

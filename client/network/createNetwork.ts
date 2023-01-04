@@ -2,6 +2,7 @@ import { GameConfig, getNetworkConfig } from "./config";
 import {
   createActionSystem,
   defineCoordComponent,
+  defineStringComponent,
   setupMUDNetwork,
 } from "@latticexyz/std-client";
 
@@ -18,6 +19,10 @@ export async function createNetwork(config: GameConfig) {
 
   const components = {
     LoadingState: defineLoadingStateComponent(world),
+    Owner: defineStringComponent(world, {
+      id: "Owner",
+      metadata: { contractId: "component.Owner" },
+    }),
     PiecePosition: defineCoordComponent(world, {
       id: "PiecePosition",
       metadata: { contractId: "component.PiecePosition" },

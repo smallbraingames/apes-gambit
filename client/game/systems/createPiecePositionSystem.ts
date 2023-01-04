@@ -33,15 +33,13 @@ const createPiecePositionSystem = (network: Network, game: Game) => {
       }
       const object = objectPool.get(update.entity, "Sprite");
       const { x, y } = tileCoordToPixelCoord(position, tileWidth, tileHeight);
-      const sprite = config.sprites[Sprites.Donkey];
+      const sprite = config.sprites[Sprites.Pawn];
 
       object.setComponent({
         id: PiecePosition.id,
         once: (gameObject) => {
-          console.log(
-            `setting ${update.entity} to ${JSON.stringify(position)}`
-          );
-          gameObject.setTexture(sprite.assetKey, sprite.frame);
+          console.log(`setting ${update.entity} to ${x},${y}`);
+          gameObject.setTexture(sprite.assetKey);
           gameObject.setPosition(x, y);
         },
       });
