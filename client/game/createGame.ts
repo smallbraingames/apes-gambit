@@ -1,8 +1,9 @@
+import { Network } from "../network/types";
 import { createPhaserEngine } from "@latticexyz/phaserx";
 import { phaserConfig } from "./config";
 import renderBoard from "./renderBoard";
 
-export async function createGame() {
+export async function createGame(network: Network) {
   const {
     game,
     scenes,
