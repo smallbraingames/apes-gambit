@@ -12,11 +12,11 @@ contract BRGameComponent is Component {
     keys = new string[](2);
     values = new LibTypes.SchemaValue[](2);
 
-    keys[0] = "status";
-    values[0] = LibTypes.SchemaValue.UINT8;
+    keys[0] = "startTime";
+    values[0] = LibTypes.SchemaValue.UINT256;
 
-    keys[1] = "startTime";
-    values[1] = LibTypes.SchemaValue.UINT256;
+    keys[1] = "status";
+    values[1] = LibTypes.SchemaValue.UINT8;
   }
 
   function set(uint256 entity, BRGame memory value) public virtual {
