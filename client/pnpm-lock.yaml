@@ -4,7 +4,7 @@ specifiers:
   '@ethersproject/abi': ^5.7.0
   '@ethersproject/providers': ^5.7.2
   '@latticexyz/network': ^1.31.3
-  '@latticexyz/phaserx': ^1.31.3
+  '@latticexyz/phaserx': https://gitpkg.now.sh/latticexyz/mud/packages/phaserx?9d6ed0115d977a1a9678c23d42c4daaf3a9b8947
   '@latticexyz/recs': ^1.31.3
   '@latticexyz/services': ^1.31.3
   '@latticexyz/solecs': ^1.31.3
@@ -22,6 +22,7 @@ specifiers:
   long: ^5.2.1
   next: ^13.1.1
   next-transpile-modules: ^10.0.0
+  phaser3spectorjs: ^0.0.8
   postcss: ^8.4.20
   protobufjs: ^7.1.2
   react: 18.2.0
@@ -34,7 +35,7 @@ dependencies:
   '@ethersproject/abi': 5.7.0
   '@ethersproject/providers': 5.7.2
   '@latticexyz/network': 1.31.3_w45ov5m6f346kwr6k6e7vlemqu
-  '@latticexyz/phaserx': 1.31.3_ez5tm4wyxcjgo6mqfspj7thuca
+  '@latticexyz/phaserx': '@gitpkg.now.sh/latticexyz/mud/packages/phaserx?9d6ed0115d977a1a9678c23d42c4daaf3a9b8947_ez5tm4wyxcjgo6mqfspj7thuca'
   '@latticexyz/recs': 1.31.3_w4bsey3wsi5fkgnqaz3ef6jco4
   '@latticexyz/services': 1.31.3
   '@latticexyz/solecs': 1.31.3
@@ -51,6 +52,7 @@ dependencies:
   long: 5.2.1
   next: 13.1.1_biqbaboplfbrettd7655fr4n2y
   next-transpile-modules: 10.0.0
+  phaser3spectorjs: 0.0.8
   protobufjs: 7.1.2
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -476,21 +478,6 @@ packages:
       threads: 1.7.0
     transitivePeerDependencies:
       - supports-color
-    dev: false
-
-  /@latticexyz/phaserx/1.31.3_ez5tm4wyxcjgo6mqfspj7thuca:
-    resolution: {integrity: sha512-WZyQ1yK0lzYuyq3QsGb9DQIIarxCwWBpfFfEW/1Nq9ZQ/vXN59i7zhrTZc3qtOZ5+jZ2pMWKghpKZQfPm4gklA==}
-    peerDependencies:
-      '@latticexyz/utils': ^1.28.1
-      mobx: ^6.5.0
-      phaser: 3.60.0-beta.14
-      rxjs: ^7.5.5
-    dependencies:
-      '@latticexyz/utils': 1.31.3_jwd7bzlgenayhjv5j44vuvmc4u
-      '@use-gesture/vanilla': 10.2.9
-      mobx: 6.7.0
-      phaser: 3.60.0-beta.14
-      rxjs: 7.8.0
     dev: false
 
   /@latticexyz/recs/1.31.3_w4bsey3wsi5fkgnqaz3ef6jco4:
@@ -2854,6 +2841,10 @@ packages:
       eventemitter3: 4.0.7
     dev: false
 
+  /phaser3spectorjs/0.0.8:
+    resolution: {integrity: sha512-0dSO7/aMjEUPrp5EcjRvRRsEf+jXDbmzalPeJ6VtTB2Pn1PeaKc+qlL/DmO3l1Dvc5lkzc+Sil1Ta+Hkyi5cbA==}
+    dev: false
+
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
 
@@ -3643,4 +3634,22 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+    dev: false
+
+  '@gitpkg.now.sh/latticexyz/mud/packages/phaserx?9d6ed0115d977a1a9678c23d42c4daaf3a9b8947_ez5tm4wyxcjgo6mqfspj7thuca':
+    resolution: {tarball: https://gitpkg.now.sh/latticexyz/mud/packages/phaserx?9d6ed0115d977a1a9678c23d42c4daaf3a9b8947}
+    id: '@gitpkg.now.sh/latticexyz/mud/packages/phaserx?9d6ed0115d977a1a9678c23d42c4daaf3a9b8947'
+    name: '@latticexyz/phaserx'
+    version: 1.31.3
+    peerDependencies:
+      '@latticexyz/utils': ^1.28.1
+      mobx: ^6.5.0
+      phaser: 3.60.0-beta.14
+      rxjs: ^7.5.5
+    dependencies:
+      '@latticexyz/utils': 1.31.3_jwd7bzlgenayhjv5j44vuvmc4u
+      '@use-gesture/vanilla': 10.2.9
+      mobx: 6.7.0
+      phaser: 3.60.0-beta.14
+      rxjs: 7.8.0
     dev: false

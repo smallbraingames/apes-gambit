@@ -1,6 +1,11 @@
 import { GameConfig, getNetworkConfig } from "./config";
-import { createActionSystem, setupMUDNetwork } from "@latticexyz/std-client";
+import {
+  createActionSystem,
+  defineCoordComponent,
+  setupMUDNetwork,
+} from "@latticexyz/std-client";
 
+import { Coord } from "@latticexyz/utils";
 import { SystemAbis } from "../contracts/types/SystemAbis.mjs";
 import { SystemTypes } from "../contracts/types/SystemTypes";
 import { createWorld } from "@latticexyz/recs";
@@ -13,6 +18,10 @@ export async function createNetwork(config: GameConfig) {
 
   const components = {
     LoadingState: defineLoadingStateComponent(world),
+    PiecePosition: defineCoordComponent(world, {
+      id: "PiecePosition",
+      metadata: { contractId: "component.PiecePosition" },
+    }),
   };
 
   console.log("Setup network");
@@ -27,6 +36,14 @@ export async function createNetwork(config: GameConfig) {
 
   const actions = createActionSystem(world, txReduced$);
 
+  const spawnPiece = () => {
+    systems["system.Spawn"].executeTyped();
+  };
+
+  const movePiece = (entity: string, position: Coord) => {
+    systems["system.MovePiece"].executeTyped(entity, position);
+  };
+
   const context = {
     world,
     components,
@@ -36,7 +53,7 @@ export async function createNetwork(config: GameConfig) {
     startSync,
     network,
     actions,
-    api: {},
+    api: { spawnPiece, movePiece },
   };
 
   (window as any).network = context;

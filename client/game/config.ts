@@ -5,7 +5,7 @@ import {
   defineScaleConfig,
   defineSceneConfig,
 } from "@latticexyz/phaserx";
-import { Maps, Scenes, TILE_HEIGHT, TILE_WIDTH } from "./constants";
+import { Maps, Scenes, Sprites, TILE_HEIGHT, TILE_WIDTH } from "./constants";
 
 const ANIMATION_INTERVAL = 200;
 
@@ -16,7 +16,15 @@ export const phaserConfig = {
         chess: {
           type: AssetType.Image,
           key: "chess",
-          path: "./assets/tilesets/chess-basic-tileset.png",
+          path: "assets/tilesets/chess-basic-tileset.png",
+        },
+        pieces: {
+          type: AssetType.MultiAtlas,
+          key: "pieces",
+          path: "assets/sprites/atlas.json",
+          options: {
+            imagePath: "assets/sprites",
+          },
         },
       },
       maps: {
@@ -35,7 +43,12 @@ export const phaserConfig = {
           },
         }),
       },
-      sprites: {},
+      sprites: {
+        [Sprites.Donkey]: {
+          assetKey: "pieces",
+          frame: "sprites/workers/donkey.png",
+        },
+      },
       animations: [],
       tilesets: {
         Default: {
@@ -54,8 +67,8 @@ export const phaserConfig = {
   cameraConfig: defineCameraConfig({
     pinchSpeed: 1,
     wheelSpeed: 1,
-    maxZoom: 0.5,
-    minZoom: 0.5,
+    maxZoom: 3,
+    minZoom: 0.3,
   }),
   cullingChunkSize: TILE_HEIGHT * 16,
 };
