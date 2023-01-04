@@ -1,5 +1,5 @@
-export const TILE_WIDTH = 16;
-export const TILE_HEIGHT = 16;
+export const TILE_WIDTH = 200;
+export const TILE_HEIGHT = 200;
 
 export enum Scenes {
   Main = "Main",

@@ -6,7 +6,7 @@ const Game = () => {
   const [game, setGame] = useState<PhaserGame | undefined>(undefined);
 
   const setupGame = async () => {
-    const createGame = require("../../game/createGame").createGame;
+    const createGame = (await import("../../game/createGame")).createGame;
     const game: PhaserGame = await createGame();
     setGame(game);
   };
