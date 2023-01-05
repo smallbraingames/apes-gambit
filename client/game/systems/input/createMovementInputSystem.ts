@@ -1,14 +1,7 @@
-import {
-  Component,
-  EntityIndex,
-  Type,
-  World,
-  getEntitiesWithValue,
-  getEntityComponents,
-} from "@latticexyz/recs";
-
 import { Game } from "../../types";
 import { Network } from "../../../network/types";
+import getEntityFromEntityIndex from "../../utils/getEntityFromEntityIndex";
+import getOwnedPieceEntityIndex from "../../utils/getOwnedPieceEntityIndex";
 import { pixelCoordToTileCoord } from "@latticexyz/phaserx";
 
 const createMovementInputSystem = (network: Network, game: Game) => {
@@ -23,23 +16,6 @@ const createMovementInputSystem = (network: Network, game: Game) => {
     },
   } = game;
 
-  const getOwnedPieceEntity = (
-    owner: string,
-    OwnerComponent: Component<{ value: Type.String }>,
-    world: World
-  ): string => {
-    const ownedEntities = getEntitiesWithValue(OwnerComponent, {
-      value: owner,
-    });
-    const ownedEntityIndexes: EntityIndex[] = [];
-    ownedEntities.forEach((entityIndex) => {
-      const components = getEntityComponents(world, entityIndex);
-      // Todo: check that component is a piece that can play
-      ownedEntityIndexes.push(entityIndex);
-    });
-    return world.entities[ownedEntityIndexes[0]];
-  };
-
   input.click$.subscribe((p) => {
     const pointer = p as Phaser.Input.Pointer;
     const tilePosition = pixelCoordToTileCoord(
@@ -49,11 +25,15 @@ const createMovementInputSystem = (network: Network, game: Game) => {
     );
     console.log(`Got input with position ${JSON.stringify(tilePosition)}`);
     network.api.movePiece(
-      getOwnedPieceEntity(
-        "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
-        network.components.Owner,
+      getEntityFromEntityIndex(
+        getOwnedPieceEntityIndex(
+          "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+          network.components.Owner,
+          network.world
+        ),
         network.world
       ),
+      game.gameEntity,
       tilePosition
     );
   });
