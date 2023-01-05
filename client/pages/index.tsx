@@ -12,12 +12,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <NetworkProvider>
-          <div>
-            <p className="font-bold">tailwind + next</p>
-          </div>
-          <GameLoader />
-        </NetworkProvider>
+        <div>
+          <p className="font-bold">tailwind + next</p>
+        </div>
+        <GameLoader />
       </main>
     </>
   );
