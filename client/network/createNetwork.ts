@@ -1,6 +1,9 @@
+import { BigNumber, ContractTransaction } from "ethers";
+import { EntityID, createWorld } from "@latticexyz/recs";
 import { GameConfig, getNetworkConfig } from "./config";
 import {
   createActionSystem,
+  defineBoolComponent,
   defineCoordComponent,
   defineStringComponent,
   setupMUDNetwork,
@@ -9,7 +12,6 @@ import {
 import { Coord } from "@latticexyz/utils";
 import { SystemAbis } from "../contracts/types/SystemAbis.mjs";
 import { SystemTypes } from "../contracts/types/SystemTypes";
-import { createWorld } from "@latticexyz/recs";
 import { defineGameComponent } from "./components/gameComponent";
 import { defineLoadingStateComponent } from "./components/loadingStateComponent";
 
@@ -29,6 +31,10 @@ export async function createNetwork(config: GameConfig) {
       metadata: { contractId: "component.PiecePosition" },
     }),
     Game: defineGameComponent(world),
+    InGame: defineBoolComponent(world, {
+      id: "InGame",
+      metadata: { contractId: "component.BRInGame" },
+    }),
   };
 
   console.log("Setup network");
@@ -43,19 +49,49 @@ export async function createNetwork(config: GameConfig) {
 
   const actions = createActionSystem(world, txReduced$);
 
-  const spawnPiece = () => {
-    systems["system.Spawn"].executeTyped();
+  const spawnPiece = (): Promise<ContractTransaction> => {
+    return systems["system.Spawn"].executeTyped();
   };
 
-  const movePiece = (entity: string, position: Coord) => {
-    systems["system.MovePiece"].executeTyped(entity, position);
+  const movePiece = (
+    pieceEntity: EntityID,
+    gameEntity: EntityID,
+    position: Coord
+  ): Promise<ContractTransaction> => {
+    return systems["system.BRMovePieceSystem"].executeTyped(
+      pieceEntity,
+      gameEntity,
+      position
+    );
   };
 
-  const createBRGame = (startTime: number) => {
-    systems["system.BRCreateGameSystem"].executeTyped(startTime);
+  const createGame = (startTime: number): Promise<ContractTransaction> => {
+    return systems["system.BRCreateGameSystem"].executeTyped(startTime);
+  };
+
+  const setControllers = (entity: EntityID): Promise<ContractTransaction> => {
+    const controllers = [systems["system.BRMovePieceSystem"].address as string];
+    console.log("setting controllers");
+    console.log(controllers, entity);
+    return systems["system.SetController"].executeTyped(entity, controllers);
+  };
+
+  const joinGame = (
+    pieceEntity: EntityID,
+    gameEntity: EntityID
+  ): Promise<ContractTransaction> => {
+    return systems["system.BRJoinGameSystem"].executeTyped(
+      pieceEntity,
+      gameEntity
+    );
+  };
+
+  const startGame = (gameEntity: EntityID): Promise<ContractTransaction> => {
+    return systems["system.BRStartGameSystem"].executeTyped(gameEntity);
   };
 
   const context = {
+    config,
     world,
     components,
     txQueue,
@@ -64,7 +100,14 @@ export async function createNetwork(config: GameConfig) {
     startSync,
     network,
     actions,
-    api: { spawnPiece, movePiece, createBRGame },
+    api: {
+      spawnPiece,
+      movePiece,
+      createGame,
+      setControllers,
+      joinGame,
+      startGame,
+    },
   };
 
   (window as any).network = context;

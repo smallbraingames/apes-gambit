@@ -8,6 +8,12 @@ export enum GameStatus {
   OVER = 2,
 }
 
+export enum EntityType {
+  GAME_CONFIG,
+  BR_PIECE,
+  NON_BR_PIECE,
+}
+
 export type GameConfig = {
   startTime: number;
   status: GameStatus;

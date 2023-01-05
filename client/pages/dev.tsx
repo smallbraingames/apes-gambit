@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 
+import { EntityIndex } from "@latticexyz/recs";
 import { GameConfig } from "../game/types";
 import { NetworkContext } from "../context/NetworkContext";
+import getEntityFromEntityIndex from "../game/utils/getEntityFromEntityIndex";
 
 export default function Dev() {
   const network = useContext(NetworkContext);
@@ -29,7 +31,7 @@ export default function Dev() {
               type="button"
               className="mt-2 py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
               onClick={() => {
-                network.network?.api.createBRGame(
+                network.network?.api.createGame(
                   Math.floor(new Date().getTime() / 1000)
                 );
               }}
@@ -39,8 +41,15 @@ export default function Dev() {
             <h2 className="text-lg mt-2">Games</h2>
             <div>
               {[...games.entries()].map((game) => {
-                const entityIndex = game[0];
-                const entity = network.network?.world.entities[entityIndex];
+                const entityIndex = game[0] as EntityIndex;
+                let entity = "-";
+                // Hack because of proxies
+                if (network.network!.world.entities[entityIndex]) {
+                  entity = getEntityFromEntityIndex(
+                    entityIndex,
+                    network.network!.world
+                  );
+                }
                 return (
                   <p key={game[0]}>
                     Start time:{" "}
