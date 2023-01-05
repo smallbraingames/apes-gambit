@@ -10,6 +10,7 @@ import { Coord } from "@latticexyz/utils";
 import { SystemAbis } from "../contracts/types/SystemAbis.mjs";
 import { SystemTypes } from "../contracts/types/SystemTypes";
 import { createWorld } from "@latticexyz/recs";
+import { defineGameComponent } from "./components/gameComponent";
 import { defineLoadingStateComponent } from "./components/loadingStateComponent";
 
 export async function createNetwork(config: GameConfig) {
@@ -27,6 +28,7 @@ export async function createNetwork(config: GameConfig) {
       id: "PiecePosition",
       metadata: { contractId: "component.PiecePosition" },
     }),
+    Game: defineGameComponent(world),
   };
 
   console.log("Setup network");
@@ -49,6 +51,10 @@ export async function createNetwork(config: GameConfig) {
     systems["system.MovePiece"].executeTyped(entity, position);
   };
 
+  const createBRGame = (startTime: number) => {
+    systems["system.BRCreateGameSystem"].executeTyped(startTime);
+  };
+
   const context = {
     world,
     components,
@@ -58,7 +64,7 @@ export async function createNetwork(config: GameConfig) {
     startSync,
     network,
     actions,
-    api: { spawnPiece, movePiece },
+    api: { spawnPiece, movePiece, createBRGame },
   };
 
   (window as any).network = context;
