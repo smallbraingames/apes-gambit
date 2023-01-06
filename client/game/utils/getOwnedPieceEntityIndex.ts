@@ -12,15 +12,22 @@ const getOwnedPieceEntityIndex = (
   OwnerComponent: Component<{ value: Type.String }>,
   world: World
 ): EntityIndex => {
-  const ownedEntities = getEntitiesWithValue(OwnerComponent, {
-    value: owner,
-  });
+  // Hack: get around checksummed issue
+  const ownedEntities = new Set([
+    ...getEntitiesWithValue(OwnerComponent, {
+      value: owner,
+    }),
+    ...getEntitiesWithValue(OwnerComponent, {
+      value: owner.toLowerCase(),
+    }),
+  ]);
   const ownedEntityIndexes: EntityIndex[] = [];
   ownedEntities.forEach((entityIndex) => {
     const components = getEntityComponents(world, entityIndex);
     // Todo: check that component is a piece that can play
     ownedEntityIndexes.push(entityIndex);
   });
+  console.log(ownedEntityIndexes);
   return ownedEntityIndexes[0];
 };
 export default getOwnedPieceEntityIndex;
