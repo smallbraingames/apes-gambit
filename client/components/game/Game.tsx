@@ -19,7 +19,7 @@ const Game = () => {
     const createGame = (await import("../../game/createGame")).createGame;
     const game: PhaserGame = await createGame(
       network,
-      "0xd833147d7dc355ba459fc788f669e58cfaf9dc25ddcd0702e87d69c7b5124289" as EntityID
+      "0xc624b66cc0138b8fabc209247f72d758e1cf3343756d543badbf24212bed8c15" as EntityID
     );
     setGame(game);
     // Disable clickthroughs on components
@@ -50,7 +50,6 @@ const Game = () => {
       network.network!.components.Owner,
       network.network!.world
     );
-    console.log("joining game");
     joinGame(pieceEntity, game!.gameEntity, network.network!);
   };
 

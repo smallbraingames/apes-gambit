@@ -9,9 +9,9 @@ export enum GameStatus {
 }
 
 export enum EntityType {
-  GAME_CONFIG,
-  BR_PIECE,
-  NON_BR_PIECE,
+  GAME_CONFIG, // Not a piece, but rather a game configuration entity
+  BR_PIECE, // A piece in the given game
+  NON_BR_PIECE, // A piece, but not in the given game
 }
 
 export type GameConfig = {
