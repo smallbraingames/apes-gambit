@@ -2,6 +2,7 @@ import { Game } from "../types";
 import { Network } from "../../network/types";
 import { Sprites } from "../constants";
 import { defineComponentSystem } from "@latticexyz/recs";
+import isActiveGamePiece from "../utils/isActiveGamePiece";
 import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
 
 const createPiecePositionSystem = (network: Network, game: Game) => {
@@ -11,6 +12,7 @@ const createPiecePositionSystem = (network: Network, game: Game) => {
   } = network;
 
   const {
+    gameEntity,
     scenes: {
       Main: {
         objectPool,
@@ -26,6 +28,8 @@ const createPiecePositionSystem = (network: Network, game: Game) => {
     world,
     PiecePosition,
     (update) => {
+      if (!isActiveGamePiece(update.entity, network, gameEntity)) return;
+
       const position = update.value[0];
       if (!position) {
         objectPool.remove(update.entity);

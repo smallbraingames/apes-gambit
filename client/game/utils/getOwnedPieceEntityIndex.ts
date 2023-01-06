@@ -27,7 +27,6 @@ const getOwnedPieceEntityIndex = (
     // Todo: check that component is a piece that can play
     ownedEntityIndexes.push(entityIndex);
   });
-  console.log(ownedEntityIndexes);
   return ownedEntityIndexes[0];
 };
 export default getOwnedPieceEntityIndex;
