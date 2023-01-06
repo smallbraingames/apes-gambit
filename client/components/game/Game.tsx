@@ -36,7 +36,6 @@ const Game = () => {
     }
   };
   useEffect(() => {
-    console.log("calling effect hook");
     if (network.network) setupGame(network.network);
     return () => {
       if (game) game.disposePhaser();
