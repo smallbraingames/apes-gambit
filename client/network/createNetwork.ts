@@ -1,14 +1,15 @@
-import { BigNumber, ContractTransaction } from "ethers";
 import { EntityID, createWorld } from "@latticexyz/recs";
 import { GameConfig, getNetworkConfig } from "./config";
 import {
   createActionSystem,
   defineBoolComponent,
   defineCoordComponent,
+  defineNumberComponent,
   defineStringComponent,
   setupMUDNetwork,
 } from "@latticexyz/std-client";
 
+import { ContractTransaction } from "ethers";
 import { Coord } from "@latticexyz/utils";
 import { SystemAbis } from "../contracts/types/SystemAbis.mjs";
 import { SystemTypes } from "../contracts/types/SystemTypes";
@@ -31,9 +32,13 @@ export async function createNetwork(config: GameConfig) {
       metadata: { contractId: "component.PiecePosition" },
     }),
     Game: defineGameComponent(world),
-    InGame: defineBoolComponent(world, {
+    InGame: defineNumberComponent(world, {
       id: "InGame",
       metadata: { contractId: "component.BRInGame" },
+    }),
+    IsAlive: defineBoolComponent(world, {
+      id: "IsAlive",
+      metadata: { contractId: "component.BRIsAlive" },
     }),
   };
 
