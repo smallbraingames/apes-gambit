@@ -4,15 +4,13 @@ import { Subscription } from "rxjs";
 import getEntityFromEntityIndex from "../../../utils/getEntityFromEntityIndex";
 import getNetworkWallet from "../../../../network/wallet/getNetworkWallet";
 import getOwnedPieceEntityIndex from "../../../utils/getOwnedPieceEntityIndex";
-import isActiveGamePiece from "../../../utils/isActiveGamePiece";
 import { pixelCoordToTileCoord } from "@latticexyz/phaserx";
 
-const createBRMovementInputSystem = (
+const createMovementInputSystem = (
   network: Network,
   game: Game
 ): Subscription => {
   const {
-    gameEntity,
     scenes: {
       Main: {
         input,
@@ -29,8 +27,6 @@ const createBRMovementInputSystem = (
       network.components.Owner,
       network.world
     );
-    // Check if is active game piece (alive, in right game, piece entity)
-    if (!isActiveGamePiece(entityIndex, network, gameEntity!)) return;
 
     const pointer = p as Phaser.Input.Pointer;
     const tilePosition = pixelCoordToTileCoord(
@@ -39,9 +35,8 @@ const createBRMovementInputSystem = (
       tileHeight
     );
 
-    network.api.br.moveBRPiece(
+    network.api.movePiece(
       getEntityFromEntityIndex(entityIndex, network.world),
-      game.gameEntity!,
       tilePosition
     );
   });
@@ -49,4 +44,4 @@ const createBRMovementInputSystem = (
   return subscription;
 };
 
-export default createBRMovementInputSystem;
+export default createMovementInputSystem;

@@ -5,6 +5,7 @@ import { Subscription } from "rxjs";
 import createBRMovementInputSystem from "./br/input/createBRMovementInputSystem";
 import createBRPieceDeathSystem from "./br/createBRPieceDeathSystem";
 import createBRPiecePositionSystem from "./br/createBRPiecePositionSystem";
+import createMovementInputSystem from "./lobby/input/createMovementInputSystem";
 import createPiecePositionSystem from "./lobby/createPiecePositionSystem";
 import { defineComponentSystem } from "@latticexyz/recs";
 
@@ -25,7 +26,10 @@ const clearSystems = (game: Game) => {
 
 const setupLobbySystems = (network: Network, game: Game) => {
   console.log("Setting up lobby systems");
-  setupSystems(network, game, [createPiecePositionSystem]);
+  setupSystems(network, game, [
+    createMovementInputSystem,
+    createPiecePositionSystem,
+  ]);
 };
 
 const setupBRSystems = (network: Network, game: Game) => {
