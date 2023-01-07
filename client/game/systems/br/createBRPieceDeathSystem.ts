@@ -1,13 +1,18 @@
-import { EntityType, Game } from "../types";
+import { EntityType, Game } from "../../types";
 
-import { Network } from "../../network/types";
+import { Network } from "../../../network/types";
+import { Subscription } from "rxjs";
 import { defineComponentSystem } from "@latticexyz/recs";
-import getEntityType from "../utils/getEntityType";
+import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
+import getEntityType from "../../utils/getEntityType";
 
-const createPieceDeathSystem = (network: Network, game: Game) => {
+const createBRPieceDeathSystem = (
+  network: Network,
+  game: Game
+): Subscription => {
   const {
     world,
-    components: { IsAlive },
+    components: { BRIsAlive: IsAlive },
   } = network;
 
   const {
@@ -17,7 +22,7 @@ const createPieceDeathSystem = (network: Network, game: Game) => {
     },
   } = game;
 
-  defineComponentSystem(
+  const subscription = defineComponentSystemUnsubscribable(
     world,
     IsAlive,
     (update) => {
@@ -36,6 +41,8 @@ const createPieceDeathSystem = (network: Network, game: Game) => {
     },
     { runOnInit: true }
   );
+
+  return subscription;
 };
 
-export default createPieceDeathSystem;
+export default createBRPieceDeathSystem;

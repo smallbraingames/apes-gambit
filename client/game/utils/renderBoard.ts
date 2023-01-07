@@ -1,6 +1,6 @@
-import { TILE_HEIGHT, TILE_WIDTH } from "./constants";
+import { TILE_HEIGHT, TILE_WIDTH } from "../constants";
 
-import { Game } from "./types";
+import { Game } from "../types";
 import { Subscription } from "rxjs";
 import { pixelCoordToTileCoord } from "@latticexyz/phaserx";
 

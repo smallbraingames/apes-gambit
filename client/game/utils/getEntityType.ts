@@ -19,12 +19,12 @@ const getEntityType = (
       (component) => component.id
     )
   );
-  if (componentIds.has(network.components.Game.id))
+  if (componentIds.has(network.components.BRGame.id))
     return EntityType.GAME_CONFIG;
   else if (componentIds.has(network.components.PiecePosition.id)) {
-    if (componentIds.has(network.components.InGame.id)) {
+    if (componentIds.has(network.components.BRInGame.id)) {
       const inGameEntity = getComponentValue(
-        network.components.InGame,
+        network.components.BRInGame,
         entityIndex
       );
       if (!inGameEntity) return EntityType.NON_BR_PIECE;

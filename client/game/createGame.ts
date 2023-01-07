@@ -1,11 +1,10 @@
 import { EntityID } from "@latticexyz/recs";
 import { Network } from "../network/types";
-import createMovementInputSystem from "./systems/input/createMovementInputSystem";
+import { Subscription } from "rxjs";
 import { createPhaserEngine } from "@latticexyz/phaserx";
-import createPieceDeathSystem from "./systems/createPieceDeathSystem";
-import createPiecePositionSystem from "./systems/createPiecePositionSystem";
+import createSystemManagerSystem from "./systems/createSystemManagerSystem";
 import { phaserConfig } from "./config";
-import renderBoard from "./renderBoard";
+import renderBoard from "./utils/renderBoard";
 
 export async function createGame(network: Network, gameEntity: EntityID) {
   const {
@@ -16,6 +15,7 @@ export async function createGame(network: Network, gameEntity: EntityID) {
 
   const context = {
     gameEntity,
+    subscribedSystems: [] as Subscription[],
     game,
     scenes,
     disposePhaser,
@@ -24,10 +24,8 @@ export async function createGame(network: Network, gameEntity: EntityID) {
   // Setup chessboard
   renderBoard(context);
 
-  // Setup systems
-  createPiecePositionSystem(network, context);
-  createPieceDeathSystem(network, context);
-  createMovementInputSystem(network, context);
+  // Setup system manager
+  createSystemManagerSystem(network, context);
 
   network.startSync();
 

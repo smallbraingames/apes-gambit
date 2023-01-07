@@ -1,15 +1,16 @@
-import { EntityType, Game } from "../../types";
-
-import { Network } from "../../../network/types";
-import getEntityFromEntityIndex from "../../utils/getEntityFromEntityIndex";
-import getEntityType from "../../utils/getEntityType";
-import getNetworkWallet from "../../../network/wallet/getNetworkWallet";
-import getOwnedPieceEntityIndex from "../../utils/getOwnedPieceEntityIndex";
-import isActiveGamePiece from "../../utils/isActiveGamePiece";
-import isPieceAlive from "../../utils/isPieceAlive";
+import { Game } from "../../../types";
+import { Network } from "../../../../network/types";
+import { Subscription } from "rxjs";
+import getEntityFromEntityIndex from "../../../utils/getEntityFromEntityIndex";
+import getNetworkWallet from "../../../../network/wallet/getNetworkWallet";
+import getOwnedPieceEntityIndex from "../../../utils/getOwnedPieceEntityIndex";
+import isActiveGamePiece from "../../../utils/isActiveGamePiece";
 import { pixelCoordToTileCoord } from "@latticexyz/phaserx";
 
-const createMovementInputSystem = (network: Network, game: Game) => {
+const createBRMovementInputSystem = (
+  network: Network,
+  game: Game
+): Subscription => {
   const {
     gameEntity,
     scenes: {
@@ -22,13 +23,12 @@ const createMovementInputSystem = (network: Network, game: Game) => {
     },
   } = game;
 
-  input.click$.subscribe((p) => {
+  const subscription = input.click$.subscribe((p) => {
     const entityIndex = getOwnedPieceEntityIndex(
       getNetworkWallet(network).address,
       network.components.Owner,
       network.world
     );
-
     // Check if is active game piece (alive, in right game, piece entity)
     if (!isActiveGamePiece(entityIndex, network, gameEntity)) return;
 
@@ -39,12 +39,14 @@ const createMovementInputSystem = (network: Network, game: Game) => {
       tileHeight
     );
 
-    network.api.movePiece(
+    network.api.moveBRPiece(
       getEntityFromEntityIndex(entityIndex, network.world),
       game.gameEntity,
       tilePosition
     );
   });
+
+  return subscription;
 };
 
-export default createMovementInputSystem;
+export default createBRMovementInputSystem;

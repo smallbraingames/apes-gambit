@@ -11,11 +11,11 @@ const joinGame = async (
   const pieceEntity = getEntityFromEntityIndex(pieceEntityIndex, network.world);
   // Set correct controller components
   console.log(`setting controllers for entity ${pieceEntityIndex}`);
-  const setControllersTx = await network.api.setControllers(pieceEntity);
+  const setControllersTx = await network.api.setBRControllers(pieceEntity);
   await setControllersTx.wait();
   // Join game
   console.log("joining game");
-  const joinGameTx = await network.api.joinGame(pieceEntity, gameEntity);
+  const joinGameTx = await network.api.joinBRGame(pieceEntity, gameEntity);
   await joinGameTx.wait();
 };
 
