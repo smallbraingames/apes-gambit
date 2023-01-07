@@ -44,15 +44,27 @@ const createSystemManagerSystem = (network: Network, game: Game) => {
   } = network;
 
   const { gameEntity } = game;
-  const gameEntityIndex = world.entityToIndex.get(gameEntity);
+  const gameEntityIndex = gameEntity
+    ? world.entityToIndex.get(gameEntity)
+    : undefined;
   if (!gameEntityIndex)
-    throw Error(`Game entity ${gameEntity} could not be resolved to index`);
+    console.error(`Game entity ${gameEntity} could not be resolved to index`);
 
   defineComponentSystem(world, Game, (update) => {
-    if (update.entity != gameEntityIndex) return;
-    const gameConfig: GameConfig | undefined = update.value[0];
-    if (!gameConfig)
-      throw Error(`Game config is undefined: ${JSON.stringify(gameConfig)}`);
+    let gameConfig: GameConfig | undefined = undefined;
+    if (update.entity === gameEntityIndex) gameConfig = update.value[0];
+
+    if (!gameConfig) {
+      console.warn(
+        `Game config is undefined: ${JSON.stringify(
+          gameConfig
+        )}, setting up lobby`
+      );
+      clearSystems(game);
+      setupLobbySystems(network, game);
+      return;
+    }
+
     switch (gameConfig.status) {
       case GameStatus.NOT_STARTED:
         console.log("Game status not started, switching to lobby systems");

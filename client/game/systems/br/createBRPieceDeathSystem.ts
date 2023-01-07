@@ -28,7 +28,7 @@ const createBRPieceDeathSystem = (
     (update) => {
       // Before we remove this entity, they must be an entity in the current game
       if (
-        getEntityType(update.entity, network, gameEntity) !==
+        getEntityType(update.entity, network, gameEntity!) !==
         EntityType.BR_PIECE
       )
         return;
