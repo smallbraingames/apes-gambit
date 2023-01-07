@@ -58,6 +58,15 @@ export async function createNetwork(config: GameConfig) {
     return systems["system.Spawn"].executeTyped();
   };
 
+  const movePiece = (
+    entity: EntityID,
+    position: Coord
+  ): Promise<ContractTransaction> => {
+    return systems["system.MovePiece"].executeTyped(entity, position);
+  };
+
+  // Battle Royale
+
   const moveBRPiece = (
     pieceEntity: EntityID,
     gameEntity: EntityID,
@@ -107,11 +116,14 @@ export async function createNetwork(config: GameConfig) {
     actions,
     api: {
       spawnPiece,
-      moveBRPiece,
-      createBRGame,
-      setBRControllers,
-      joinBRGame,
-      startBRGame,
+      movePiece,
+      br: {
+        moveBRPiece,
+        createBRGame,
+        setBRControllers,
+        joinBRGame,
+        startBRGame,
+      },
     },
   };
 
