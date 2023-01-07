@@ -13,7 +13,7 @@ import { ContractTransaction } from "ethers";
 import { Coord } from "@latticexyz/utils";
 import { SystemAbis } from "../contracts/types/SystemAbis.mjs";
 import { SystemTypes } from "../contracts/types/SystemTypes";
-import { defineGameComponent } from "./components/gameComponent";
+import { defineBRGameComponent } from "./components/brGameComponent";
 import { defineLoadingStateComponent } from "./components/loadingStateComponent";
 
 export async function createNetwork(config: GameConfig) {
@@ -31,12 +31,12 @@ export async function createNetwork(config: GameConfig) {
       id: "PiecePosition",
       metadata: { contractId: "component.PiecePosition" },
     }),
-    Game: defineGameComponent(world),
-    InGame: defineNumberComponent(world, {
-      id: "InGame",
+    BRGame: defineBRGameComponent(world),
+    BRInGame: defineNumberComponent(world, {
+      id: "BRInGame",
       metadata: { contractId: "component.BRInGame" },
     }),
-    IsAlive: defineBoolComponent(world, {
+    BRIsAlive: defineBoolComponent(world, {
       id: "IsAlive",
       metadata: { contractId: "component.BRIsAlive" },
     }),
@@ -58,7 +58,7 @@ export async function createNetwork(config: GameConfig) {
     return systems["system.Spawn"].executeTyped();
   };
 
-  const movePiece = (
+  const moveBRPiece = (
     pieceEntity: EntityID,
     gameEntity: EntityID,
     position: Coord
@@ -70,18 +70,18 @@ export async function createNetwork(config: GameConfig) {
     );
   };
 
-  const createGame = (startTime: number): Promise<ContractTransaction> => {
+  const createBRGame = (startTime: number): Promise<ContractTransaction> => {
     return systems["system.BRCreateGameSystem"].executeTyped(startTime);
   };
 
-  const setControllers = (entity: EntityID): Promise<ContractTransaction> => {
+  const setBRControllers = (entity: EntityID): Promise<ContractTransaction> => {
     const controllers = [systems["system.BRMovePieceSystem"].address as string];
     console.log("setting controllers");
     console.log(controllers, entity);
     return systems["system.SetController"].executeTyped(entity, controllers);
   };
 
-  const joinGame = (
+  const joinBRGame = (
     pieceEntity: EntityID,
     gameEntity: EntityID
   ): Promise<ContractTransaction> => {
@@ -91,7 +91,7 @@ export async function createNetwork(config: GameConfig) {
     );
   };
 
-  const startGame = (gameEntity: EntityID): Promise<ContractTransaction> => {
+  const startBRGame = (gameEntity: EntityID): Promise<ContractTransaction> => {
     return systems["system.BRStartGameSystem"].executeTyped(gameEntity);
   };
 
@@ -107,11 +107,11 @@ export async function createNetwork(config: GameConfig) {
     actions,
     api: {
       spawnPiece,
-      movePiece,
-      createGame,
-      setControllers,
-      joinGame,
-      startGame,
+      moveBRPiece,
+      createBRGame,
+      setBRControllers,
+      joinBRGame,
+      startBRGame,
     },
   };
 

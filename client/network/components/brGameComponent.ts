@@ -1,6 +1,6 @@
 import { Type, World, defineComponent } from "@latticexyz/recs";
 
-export function defineGameComponent(world: World) {
+export function defineBRGameComponent(world: World) {
   return defineComponent(
     world,
     {

@@ -1,11 +1,15 @@
-import { Game } from "../types";
-import { Network } from "../../network/types";
-import { Sprites } from "../constants";
-import { defineComponentSystem } from "@latticexyz/recs";
-import isActiveGamePiece from "../utils/isActiveGamePiece";
+import { Game } from "../../types";
+import { Network } from "../../../network/types";
+import { Sprites } from "../../constants";
+import { Subscription } from "rxjs";
+import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
+import isActiveGamePiece from "../../utils/isActiveGamePiece";
 import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
 
-const createPiecePositionSystem = (network: Network, game: Game) => {
+const createBRPiecePositionSystem = (
+  network: Network,
+  game: Game
+): Subscription => {
   const {
     world,
     components: { PiecePosition },
@@ -24,7 +28,7 @@ const createPiecePositionSystem = (network: Network, game: Game) => {
     },
   } = game;
 
-  defineComponentSystem(
+  const subscription = defineComponentSystemUnsubscribable(
     world,
     PiecePosition,
     (update) => {
@@ -50,6 +54,8 @@ const createPiecePositionSystem = (network: Network, game: Game) => {
     },
     { runOnInit: true }
   );
+
+  return subscription;
 };
 
-export default createPiecePositionSystem;
+export default createBRPiecePositionSystem;
