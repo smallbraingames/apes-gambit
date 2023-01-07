@@ -6,7 +6,7 @@ import createSystemManagerSystem from "./systems/createSystemManagerSystem";
 import { phaserConfig } from "./config";
 import renderBoard from "./utils/renderBoard";
 
-export async function createGame(network: Network, gameEntity: EntityID) {
+export async function createGame(network: Network, gameEntity?: EntityID) {
   const {
     game,
     scenes,

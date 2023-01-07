@@ -49,7 +49,7 @@ const Game = () => {
       network.network!.components.Owner,
       network.network!.world
     );
-    joinGame(pieceEntity, game!.gameEntity, network.network!);
+    joinGame(pieceEntity, game!.gameEntity!, network.network!);
   };
 
   return (

@@ -30,7 +30,7 @@ const createBRMovementInputSystem = (
       network.world
     );
     // Check if is active game piece (alive, in right game, piece entity)
-    if (!isActiveGamePiece(entityIndex, network, gameEntity)) return;
+    if (!isActiveGamePiece(entityIndex, network, gameEntity!)) return;
 
     const pointer = p as Phaser.Input.Pointer;
     const tilePosition = pixelCoordToTileCoord(
@@ -41,7 +41,7 @@ const createBRMovementInputSystem = (
 
     network.api.moveBRPiece(
       getEntityFromEntityIndex(entityIndex, network.world),
-      game.gameEntity,
+      game.gameEntity!,
       tilePosition
     );
   });

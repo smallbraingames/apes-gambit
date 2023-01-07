@@ -32,7 +32,7 @@ const createBRPiecePositionSystem = (
     world,
     PiecePosition,
     (update) => {
-      if (!isActiveGamePiece(update.entity, network, gameEntity)) return;
+      if (!isActiveGamePiece(update.entity, network, gameEntity!)) return;
 
       const position = update.value[0];
       if (!position) {
