@@ -15,11 +15,11 @@ const Game = () => {
   const [game, setGame] = useState<PhaserGame | undefined>(undefined);
 
   const setupGame = async (network: Network) => {
-    console.log("setting up game");
     const createGame = (await import("../../game/createGame")).createGame;
+    const params = new URLSearchParams(window.location.search);
     const game: PhaserGame = await createGame(
       network,
-      "0x944998273e477b495144fb8794c914197f3ccb46be2900f4698fd0ef743c9695" as EntityID
+      params.get("gameEntity") as EntityID | undefined
     );
     setGame(game);
     // Disable clickthroughs on components
