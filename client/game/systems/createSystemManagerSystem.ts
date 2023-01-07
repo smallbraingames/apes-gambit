@@ -8,6 +8,7 @@ import createBRPiecePositionSystem from "./br/createBRPiecePositionSystem";
 import createMovementInputSystem from "./lobby/input/createMovementInputSystem";
 import createPiecePositionSystem from "./lobby/createPiecePositionSystem";
 import { defineComponentSystem } from "@latticexyz/recs";
+import { defineComponentSystemUnsubscribable } from "../utils/defineComponentSystemUnsubscribable";
 
 const setupSystems = (
   network: Network,
@@ -51,42 +52,49 @@ const createSystemManagerSystem = (network: Network, game: Game) => {
   const gameEntityIndex = gameEntity
     ? world.entityToIndex.get(gameEntity)
     : undefined;
-  if (!gameEntityIndex)
-    console.error(`Game entity ${gameEntity} could not be resolved to index`);
 
-  defineComponentSystem(world, Game, (update) => {
-    let gameConfig: GameConfig | undefined = undefined;
-    if (update.entity === gameEntityIndex) gameConfig = update.value[0];
+  if (!gameEntityIndex) {
+    console.warn(`Game entity ${gameEntity} could not be resolved to index`);
+  }
 
-    if (!gameConfig) {
-      console.warn(
-        `Game config is undefined: ${JSON.stringify(
-          gameConfig
-        )}, setting up lobby`
-      );
-      clearSystems(game);
-      setupLobbySystems(network, game);
-      return;
-    }
+  defineComponentSystem(
+    world,
+    Game,
+    (update) => {
+      let gameConfig: GameConfig | undefined = undefined;
+      if (update.entity === gameEntityIndex) gameConfig = update.value[0];
 
-    switch (gameConfig.status) {
-      case GameStatus.NOT_STARTED:
-        console.log("Game status not started, switching to lobby systems");
+      if (!gameConfig) {
+        console.warn(
+          `Game config is undefined: ${JSON.stringify(
+            gameConfig
+          )}, setting up lobby`
+        );
         clearSystems(game);
         setupLobbySystems(network, game);
-        break;
-      case GameStatus.IN_PROGRESS:
-        console.log("Game status in progress, switching to BR systems");
-        clearSystems(game);
-        setupBRSystems(network, game);
-        break;
-      case GameStatus.OVER:
-        console.log("Game status over, switching to lobby systems");
-        clearSystems(game);
-        setupBRSystems(network, game);
-        break;
-    }
-  });
+        return;
+      }
+
+      switch (gameConfig.status) {
+        case GameStatus.NOT_STARTED:
+          console.log("Game status not started, switching to lobby systems");
+          clearSystems(game);
+          setupLobbySystems(network, game);
+          break;
+        case GameStatus.IN_PROGRESS:
+          console.log("Game status in progress, switching to BR systems");
+          clearSystems(game);
+          setupBRSystems(network, game);
+          break;
+        case GameStatus.OVER:
+          console.log("Game status over, switching to lobby systems");
+          clearSystems(game);
+          setupLobbySystems(network, game);
+          break;
+      }
+    },
+    { runOnInit: true }
+  );
 };
 
 export default createSystemManagerSystem;

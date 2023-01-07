@@ -1,14 +1,32 @@
 import { useContext, useEffect, useState } from "react";
 
 import { EntityID } from "@latticexyz/recs";
+import JoinGame from "./JoinGame";
 import { Network } from "../../network/types";
 import { NetworkContext } from "../../context/NetworkContext";
 import { Game as PhaserGame } from "../../game/types";
-import getBurnerWallet from "../../network/wallet/getBurnerWallet";
-import getOwnedPieceEntityIndex from "../../game/utils/getOwnedPieceEntityIndex";
-import joinGame from "../../game/utils/joinGame";
+import SpawnPiece from "./SpawnPiece";
 
-const CONTROL_COMPONENTS_ID = "controllers";
+export const CONTROLLER_COMPONENT_CLASS_NAME = "controller";
+
+// Disable clickthroughs on components to allow react components to overlay on Phaser
+export const disableClickthroughs = () => {
+  const controllers = document.getElementsByClassName(
+    CONTROLLER_COMPONENT_CLASS_NAME
+  )!;
+  for (const eventName of [
+    "mouseup",
+    "mousedown",
+    "touchstart",
+    "touchmove",
+    "touchend",
+    "touchcancel",
+  ]) {
+    for (const controller of controllers) {
+      controller.addEventListener(eventName, (e) => e.stopPropagation());
+    }
+  }
+};
 
 const Game = () => {
   const network = useContext(NetworkContext);
@@ -22,19 +40,8 @@ const Game = () => {
       params.get("gameEntity") as EntityID | undefined
     );
     setGame(game);
-    // Disable clickthroughs on components
-    const controllers = document.getElementById(CONTROL_COMPONENTS_ID)!;
-    for (const eventName of [
-      "mouseup",
-      "mousedown",
-      "touchstart",
-      "touchmove",
-      "touchend",
-      "touchcancel",
-    ]) {
-      controllers.addEventListener(eventName, (e) => e.stopPropagation());
-    }
   };
+
   useEffect(() => {
     if (network.network) setupGame(network.network);
     return () => {
@@ -43,22 +50,14 @@ const Game = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [network.network]);
 
-  const handleJoinGame = (e: any) => {
-    const pieceEntity = getOwnedPieceEntityIndex(
-      getBurnerWallet().address,
-      network.network!.components.Owner,
-      network.network!.world
-    );
-    joinGame(pieceEntity, game!.gameEntity!, network.network!);
-  };
-
   return (
     <>
-      <div id={CONTROL_COMPONENTS_ID}>
-        <div className="absolute bg-green-200 p-4">
-          <button onClick={handleJoinGame}>Join Game</button>
-        </div>
-      </div>
+      {game && (
+        <>
+          <SpawnPiece />
+          <JoinGame game={game} />
+        </>
+      )}
     </>
   );
 };
