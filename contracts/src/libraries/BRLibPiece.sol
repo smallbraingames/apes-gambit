@@ -10,7 +10,7 @@ import { BRInGameComponent } from "components/BRInGameComponent.sol";
 import { BRIsAliveComponent } from "components/BRIsAliveComponent.sol";
 import { BRPointsComponent } from "components/BRPointsComponent.sol";
 import { PiecePositionComponent } from "components/PiecePositionComponent.sol";
-import { BRPieceDead } from "common/BRErrors.sol";
+import { BRPieceDead, BRNotEnoughPoints } from "common/BRErrors.sol";
 import { UnimplementedPieceType } from "common/Errors.sol";
 import { BRLibGame } from "libraries/BRLibGame.sol";
 import { LibOwner } from "libraries/LibOwner.sol";
@@ -112,6 +112,22 @@ library BRLibPiece {
     }
     uint32 previousPoints = brPointsComponent.getValue(piece);
     brPointsComponent.set(piece, previousPoints + increment);
+  }
+
+  /// @notice Increments the points of a given entity
+  function decrementPoints(
+    BRPointsComponent brPointsComponent,
+    uint256 piece,
+    uint32 decrement
+  ) internal {
+    if (!brPointsComponent.has(piece)) {
+      revert BRNotEnoughPoints();
+    }
+    uint32 previousPoints = brPointsComponent.getValue(piece);
+    if (decrement > previousPoints) {
+      revert BRNotEnoughPoints();
+    }
+    brPointsComponent.set(piece, previousPoints - decrement);
   }
 
   /// @notice Returns the points for a given piece type
