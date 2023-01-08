@@ -12,7 +12,7 @@ import { BRMovePieceSystem, ID as BRMovePieceSystemID } from "systems/BRMovePiec
 import { BRGameComponent, ID as BRGameComponentID } from "components/BRGameComponent.sol";
 import { BRIsAliveComponent, ID as BRIsAliveComponentID } from "components/BRIsAliveComponent.sol";
 import { BRAlreadyInGame } from "common/BRErrors.sol";
-import { BRLibGame } from "libraries/BRLibGame.sol";
+import { BRLibPiece } from "libraries/BRLibPiece.sol";
 import { Deploy } from "./Deploy.sol";
 import "std-contracts/test/MudTest.t.sol";
 import { console } from "forge-std/console.sol";
@@ -95,6 +95,6 @@ contract BRMovePieceTest is MudTest {
     // Move taker piece one back to take original piece, and check
     brMovePieceSystem.executeTyped(takerPiece, game, Coord({ x: 0, y: 0 }));
     assertTrue(!brIsAliveComponent.has(piece));
-    assertTrue(!BRLibGame.isPieceAlive(brIsAliveComponent, piece));
+    assertTrue(!BRLibPiece.isPieceAlive(brIsAliveComponent, piece));
   }
 }

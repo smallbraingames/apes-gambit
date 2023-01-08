@@ -40,5 +40,5 @@
     "typescript": "^4.6.2",
     "wait-on": "^6.0.1"
   },
-  "dependencies": {}
+  "packageManager": "yarn@1.22.19"
 }
