@@ -10,3 +10,4 @@ error BRGameNotInProgress();
 error BRNotInGame();
 error BRPieceDead();
 error BRBeforeStartTime();
+error BRNotEnoughPoints();

@@ -30,7 +30,6 @@ contract BRMovePieceTest is MudTest {
     BRMovePieceSystem brMovePieceSystem = BRMovePieceSystem(system(BRMovePieceSystemID));
     SetControllerSystem setControllerSystem = SetControllerSystem(system(SetControllerSystemID));
     BRGameComponent brGameComponent = BRGameComponent(getAddressById(components, BRGameComponentID));
-    BRPointsComponent brPointsComponent = BRPointsComponent(getAddressById(components, BRPointsComponentID));
 
     // Spawn a new piece
     uint256 piece = spawnSystem.executeTyped();
