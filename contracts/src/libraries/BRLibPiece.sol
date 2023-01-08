@@ -2,13 +2,16 @@
 pragma solidity >=0.8.0;
 
 import { Coord } from "std-contracts/components/CoordComponent.sol";
+import { PieceType } from "common/PieceType.sol";
 import { OwnerComponent } from "components/OwnerComponent.sol";
 import { ControllerComponent } from "components/ControllerComponent.sol";
 import { BRGameComponent } from "components/BRGameComponent.sol";
 import { BRInGameComponent } from "components/BRInGameComponent.sol";
 import { BRIsAliveComponent } from "components/BRIsAliveComponent.sol";
+import { BRPointsComponent } from "components/BRPointsComponent.sol";
 import { PiecePositionComponent } from "components/PiecePositionComponent.sol";
 import { BRPieceDead } from "common/BRErrors.sol";
+import { UnimplementedPieceType } from "common/Errors.sol";
 import { BRLibGame } from "libraries/BRLibGame.sol";
 import { LibOwner } from "libraries/LibOwner.sol";
 
@@ -95,5 +98,33 @@ library BRLibPiece {
     }
     bool isAlive = brIsAliveComponent.getValue(piece);
     return isAlive;
+  }
+
+  /// @notice Increments the points of a given entity
+  function incrementPoints(
+    BRPointsComponent brPointsComponent,
+    uint256 piece,
+    uint32 increment
+  ) internal {
+    if (!brPointsComponent.has(piece)) {
+      brPointsComponent.set(piece, increment);
+      return;
+    }
+    uint32 previousPoints = brPointsComponent.getValue(piece);
+    brPointsComponent.set(piece, previousPoints + increment);
+  }
+
+  /// @notice Returns the points for a given piece type
+  function getPointsFromPieceType(PieceType pieceType) internal pure returns (uint32) {
+    if (pieceType == PieceType.PAWN) {
+      return 1;
+    } else if (pieceType == PieceType.KNIGHT || pieceType == PieceType.BISHOP) {
+      return 3;
+    } else if (pieceType == PieceType.ROOK) {
+      return 5;
+    } else if (pieceType == PieceType.QUEEN) {
+      return 9;
+    }
+    revert UnimplementedPieceType();
   }
 }

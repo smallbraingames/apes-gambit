@@ -7,3 +7,4 @@ error AlreadyHasController();
 error CannotControl();
 error UnimplementedPieceType();
 error InvalidMove();
+error NotPiece();

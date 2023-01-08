@@ -9,8 +9,10 @@ import { BRCreateGameSystem, ID as BRCreateGameSystemID } from "systems/BRCreate
 import { BRJoinGameSystem, ID as BRJoinGameSystemID } from "systems/BRJoinGameSystem.sol";
 import { BRStartGameSystem, ID as BRStartGameSystemID } from "systems/BRStartGameSystem.sol";
 import { BRMovePieceSystem, ID as BRMovePieceSystemID } from "systems/BRMovePieceSystem.sol";
+import { BRMovePieceSystem, ID as BRMovePieceSystemID } from "systems/BRMovePieceSystem.sol";
 import { BRGameComponent, ID as BRGameComponentID } from "components/BRGameComponent.sol";
 import { BRIsAliveComponent, ID as BRIsAliveComponentID } from "components/BRIsAliveComponent.sol";
+import { BRPointsComponent, ID as BRPointsComponentID } from "components/BRPointsComponent.sol";
 import { BRAlreadyInGame } from "common/BRErrors.sol";
 import { BRLibPiece } from "libraries/BRLibPiece.sol";
 import { Deploy } from "./Deploy.sol";
@@ -28,6 +30,7 @@ contract BRMovePieceTest is MudTest {
     BRMovePieceSystem brMovePieceSystem = BRMovePieceSystem(system(BRMovePieceSystemID));
     SetControllerSystem setControllerSystem = SetControllerSystem(system(SetControllerSystemID));
     BRGameComponent brGameComponent = BRGameComponent(getAddressById(components, BRGameComponentID));
+    BRPointsComponent brPointsComponent = BRPointsComponent(getAddressById(components, BRPointsComponentID));
 
     // Spawn a new piece
     uint256 piece = spawnSystem.executeTyped();
@@ -61,6 +64,7 @@ contract BRMovePieceTest is MudTest {
     BRMovePieceSystem brMovePieceSystem = BRMovePieceSystem(system(BRMovePieceSystemID));
     SetControllerSystem setControllerSystem = SetControllerSystem(system(SetControllerSystemID));
     BRIsAliveComponent brIsAliveComponent = BRIsAliveComponent(getAddressById(components, BRIsAliveComponentID));
+    BRPointsComponent brPointsComponent = BRPointsComponent(getAddressById(components, BRPointsComponentID));
 
     // Setup
     uint256 piece = spawnSystem.executeTyped();
@@ -96,5 +100,7 @@ contract BRMovePieceTest is MudTest {
     brMovePieceSystem.executeTyped(takerPiece, game, Coord({ x: 0, y: 0 }));
     assertTrue(!brIsAliveComponent.has(piece));
     assertTrue(!BRLibPiece.isPieceAlive(brIsAliveComponent, piece));
+    // Took a pawn, so check value
+    assertEq(brPointsComponent.getValue(takerPiece), 1);
   }
 }
