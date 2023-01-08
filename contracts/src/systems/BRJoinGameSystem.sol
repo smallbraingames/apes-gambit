@@ -8,7 +8,7 @@ import { ControllerComponent, ID as ControllerComponentID } from "components/Con
 import { BRGameComponent, ID as BRGameComponentID } from "components/BRGameComponent.sol";
 import { BRInGameComponent, ID as BRInGameComponentID } from "components/BRInGameComponent.sol";
 import { BRIsAliveComponent, ID as BRIsAliveComponentID } from "components/BRIsAliveComponent.sol";
-
+import { BRLibPiece } from "libraries/BRLibPiece.sol";
 import { BRLibGame } from "libraries/BRLibGame.sol";
 
 uint256 constant ID = uint256(keccak256("system.BRJoinGameSystem"));
@@ -25,7 +25,7 @@ contract BRJoinGameSystem is System {
     BRIsAliveComponent brIsAliveComponent = BRIsAliveComponent(getAddressById(components, BRIsAliveComponentID));
 
     // Check that piece has the correct owner and controllers
-    BRLibGame.checkPieceOwnerAndControllers(ownerComponent, controllerComponent, piece, msg.sender);
+    BRLibPiece.checkPieceOwnerAndControllers(ownerComponent, controllerComponent, piece, msg.sender);
 
     // Check that game has not started (checks that entity is a game)
     BRLibGame.checkGameNotStarted(brGameComponent, game);

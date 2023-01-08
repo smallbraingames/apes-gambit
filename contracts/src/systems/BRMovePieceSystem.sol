@@ -11,6 +11,7 @@ import { BRInGameComponent, ID as BRInGameComponentID } from "components/BRInGam
 import { BRIsAliveComponent, ID as BRIsAliveComponentID } from "components/BRIsAliveComponent.sol";
 import { PiecePositionComponent, ID as PiecePositionComponentID } from "components/PiecePositionComponent.sol";
 import { MovePieceSystem, ID as MovePieceSystemID } from "systems/MovePieceSystem.sol";
+import { BRLibPiece } from "libraries/BRLibPiece.sol";
 import { BRLibGame } from "libraries/BRLibGame.sol";
 
 uint256 constant ID = uint256(keccak256("system.BRMovePieceSystem"));
@@ -31,7 +32,7 @@ contract BRMovePieceSystem is System {
     MovePieceSystem movePieceSystem = MovePieceSystem(getSystemAddressById(components, MovePieceSystemID));
 
     // Check that this piece can play
-    BRLibGame.checkCanPlay(
+    BRLibPiece.checkCanPlay(
       ownerComponent,
       controllerComponent,
       brGameComponent,
@@ -43,7 +44,7 @@ contract BRMovePieceSystem is System {
     );
 
     // Kill collided piece
-    (bool hasCollidedPiece, uint256 collidedPiece) = BRLibGame.getPieceAt(
+    (bool hasCollidedPiece, uint256 collidedPiece) = BRLibPiece.getPieceAt(
       piecePositionComponent,
       brInGameComponent,
       brIsAliveComponent,
@@ -52,6 +53,7 @@ contract BRMovePieceSystem is System {
     );
     if (hasCollidedPiece) {
       brIsAliveComponent.remove(collidedPiece);
+      // Get the points for a certain entity type
     }
 
     // Move piece
