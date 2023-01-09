@@ -5,10 +5,10 @@ import { Subscription } from "rxjs";
 import createBRMovementInputSystem from "./br/input/createBRMovementInputSystem";
 import createBRPieceDeathSystem from "./br/createBRPieceDeathSystem";
 import createBRPiecePositionSystem from "./br/createBRPiecePositionSystem";
+import createBRPieceTypeSystem from "./br/createBRPieceTypeSystem";
 import createMovementInputSystem from "./lobby/input/createMovementInputSystem";
 import createPiecePositionSystem from "./lobby/createPiecePositionSystem";
 import { defineComponentSystem } from "@latticexyz/recs";
-import { defineComponentSystemUnsubscribable } from "../utils/defineComponentSystemUnsubscribable";
 
 const setupSystems = (
   network: Network,
@@ -39,6 +39,7 @@ const setupBRSystems = (network: Network, game: Game) => {
     createBRMovementInputSystem,
     createBRPieceDeathSystem,
     createBRPiecePositionSystem,
+    createBRPieceTypeSystem,
   ]);
 };
 
