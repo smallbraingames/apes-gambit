@@ -1,5 +1,5 @@
 import {
-  AssetType,
+  Asset,
   defineCameraConfig,
   defineMapConfig,
   defineScaleConfig,
@@ -14,23 +14,14 @@ import {
   TILE_WIDTH,
 } from "./constants";
 
-const ANIMATION_INTERVAL = 200;
+import assets from "./utils/config/assets";
+import sprites from "./utils/config/sprites";
 
+const ANIMATION_INTERVAL = 200;
 export const phaserConfig = {
   sceneConfig: {
     [Scenes.Main]: defineSceneConfig({
-      assets: {
-        [Assets.ChessTileset]: {
-          type: AssetType.Image,
-          key: Assets.ChessTileset,
-          path: "assets/tilesets/chess-basic-tileset.png",
-        },
-        [Assets.PawnSprite]: {
-          type: AssetType.Image,
-          key: Assets.PawnSprite,
-          path: "assets/sprites/pawn.png",
-        },
-      },
+      assets: assets as { [key: string]: Asset },
       maps: {
         [Maps.Main]: defineMapConfig({
           chunkSize: TILE_WIDTH * 64, // tile size * tile amount
@@ -47,11 +38,7 @@ export const phaserConfig = {
           },
         }),
       },
-      sprites: {
-        [Sprites.Pawn]: {
-          assetKey: Assets.PawnSprite,
-        },
-      },
+      sprites,
       animations: [],
       tilesets: {
         Default: {

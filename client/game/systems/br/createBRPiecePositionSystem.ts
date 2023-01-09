@@ -43,7 +43,7 @@ const createBRPiecePositionSystem = (
       console.log(getEntityFromEntityIndex(update.entity, world));
       const object = objectPool.get(update.entity, "Sprite");
       const { x, y } = tileCoordToPixelCoord(position, tileWidth, tileHeight);
-      const sprite = config.sprites[Sprites.Pawn];
+      const sprite = config.sprites[Sprites.MainPawn];
       object.setComponent({
         id: PiecePosition.id,
         once: (gameObject) => {
