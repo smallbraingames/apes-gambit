@@ -11,6 +11,7 @@ import {
 
 import { ContractTransaction } from "ethers";
 import { Coord } from "@latticexyz/utils";
+import { PieceType } from "./types";
 import { SystemAbis } from "../contracts/types/SystemAbis.mjs";
 import { SystemTypes } from "../contracts/types/SystemTypes";
 import { defineBRGameComponent } from "./components/brGameComponent";
@@ -30,6 +31,10 @@ export async function createNetwork(config: GameConfig) {
     PiecePosition: defineCoordComponent(world, {
       id: "PiecePosition",
       metadata: { contractId: "component.PiecePosition" },
+    }),
+    PieceType: defineNumberComponent(world, {
+      id: "PieceType",
+      metadata: { contractId: "component.PieceType" },
     }),
     BRGame: defineBRGameComponent(world),
     BRInGame: defineNumberComponent(world, {
@@ -84,7 +89,10 @@ export async function createNetwork(config: GameConfig) {
   };
 
   const setBRControllers = (entity: EntityID): Promise<ContractTransaction> => {
-    const controllers = [systems["system.BRMovePieceSystem"].address as string];
+    const controllers = [
+      systems["system.BRMovePieceSystem"].address as string,
+      systems["system.BRSetPieceTypeSystem"].address as string,
+    ];
     console.log("setting controllers");
     console.log(controllers, entity);
     return systems["system.SetController"].executeTyped(entity, controllers);
@@ -102,6 +110,18 @@ export async function createNetwork(config: GameConfig) {
 
   const startBRGame = (gameEntity: EntityID): Promise<ContractTransaction> => {
     return systems["system.BRStartGameSystem"].executeTyped(gameEntity);
+  };
+
+  const setBRPieceType = (
+    pieceEntity: EntityID,
+    gameEntity: EntityID,
+    pieceType: PieceType
+  ): Promise<ContractTransaction> => {
+    return systems["system.BRSetPieceTypeSystem"].executeTyped(
+      pieceEntity,
+      gameEntity,
+      pieceType
+    );
   };
 
   const context = {
@@ -123,6 +143,7 @@ export async function createNetwork(config: GameConfig) {
         setBRControllers,
         joinBRGame,
         startBRGame,
+        setBRPieceType,
       },
     },
   };
