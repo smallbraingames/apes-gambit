@@ -1,9 +1,7 @@
 import { Game } from "../../types";
 import { Network } from "../../../network/types";
-import { Sprites } from "../../constants";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
-import getEntityFromEntityIndex from "../../utils/getEntityFromEntityIndex";
 import isActiveGamePiece from "../../utils/isActiveGamePiece";
 import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
 
@@ -21,7 +19,6 @@ const createBRPiecePositionSystem = (
     scenes: {
       Main: {
         objectPool,
-        config,
         maps: {
           Main: { tileWidth, tileHeight },
         },
@@ -40,14 +37,11 @@ const createBRPiecePositionSystem = (
         objectPool.remove(update.entity);
         return;
       }
-      console.log(getEntityFromEntityIndex(update.entity, world));
       const object = objectPool.get(update.entity, "Sprite");
       const { x, y } = tileCoordToPixelCoord(position, tileWidth, tileHeight);
-      const sprite = config.sprites[Sprites.MainPawn];
       object.setComponent({
         id: PiecePosition.id,
         once: (gameObject) => {
-          gameObject.setTexture(sprite.assetKey);
           gameObject.setPosition(x, y);
         },
       });

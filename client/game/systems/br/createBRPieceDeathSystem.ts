@@ -2,7 +2,6 @@ import { EntityType, Game } from "../../types";
 
 import { Network } from "../../../network/types";
 import { Subscription } from "rxjs";
-import { defineComponentSystem } from "@latticexyz/recs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getEntityType from "../../utils/getEntityType";
 
