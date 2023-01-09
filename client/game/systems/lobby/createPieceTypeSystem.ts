@@ -3,19 +3,14 @@ import { Network } from "../../../network/types";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getSpriteForPiece from "../../utils/getSpriteForPiece";
-import isActiveGamePiece from "../../utils/isActiveGamePiece";
 
-const createBRPieceTypeSystem = (
-  network: Network,
-  game: Game
-): Subscription => {
+const createPieceTypeSystem = (network: Network, game: Game): Subscription => {
   const {
     world,
     components: { PieceType },
   } = network;
 
   const {
-    gameEntity,
     scenes: {
       Main: { objectPool, config },
     },
@@ -25,7 +20,6 @@ const createBRPieceTypeSystem = (
     world,
     PieceType,
     (update) => {
-      if (!isActiveGamePiece(update.entity, network, gameEntity!)) return;
       const object = objectPool.get(update.entity, "Sprite");
       const sprite = config.sprites[getSpriteForPiece(update.entity, network)];
       object.setComponent({
@@ -41,4 +35,4 @@ const createBRPieceTypeSystem = (
   return subscription;
 };
 
-export default createBRPieceTypeSystem;
+export default createPieceTypeSystem;

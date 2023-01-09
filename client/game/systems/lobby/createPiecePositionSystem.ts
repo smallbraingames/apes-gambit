@@ -38,13 +38,13 @@ const createPiecePositionSystem = (
       }
       const object = objectPool.get(update.entity, "Sprite");
       const { x, y } = tileCoordToPixelCoord(position, tileWidth, tileHeight);
-      const sprite = config.sprites[Sprites.Pawn];
+      //const sprite = config.sprites[Sprites.Pawn];
 
       object.setComponent({
         id: PiecePosition.id,
         once: (gameObject) => {
           console.log(`setting ${update.entity} to ${x},${y}`);
-          gameObject.setTexture(sprite.assetKey);
+          //gameObject.setTexture(sprite.assetKey);
           gameObject.setPosition(x, y);
         },
       });

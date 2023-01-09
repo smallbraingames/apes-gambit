@@ -8,6 +8,7 @@ import createBRPiecePositionSystem from "./br/createBRPiecePositionSystem";
 import createBRPieceTypeSystem from "./br/createBRPieceTypeSystem";
 import createMovementInputSystem from "./lobby/input/createMovementInputSystem";
 import createPiecePositionSystem from "./lobby/createPiecePositionSystem";
+import createPieceTypeSystem from "./lobby/createPieceTypeSystem";
 import { defineComponentSystem } from "@latticexyz/recs";
 
 const setupSystems = (
@@ -30,6 +31,7 @@ const setupLobbySystems = (network: Network, game: Game) => {
   setupSystems(network, game, [
     createMovementInputSystem,
     createPiecePositionSystem,
+    createPieceTypeSystem,
   ]);
 };
 
