@@ -12,7 +12,7 @@ import { BRPointsComponent, ID as BRPointsComponentID } from "components/BRPoint
 import { SetPieceTypeSystem, ID as SetPieceTypeSystemID } from "systems/SetPieceTypeSystem.sol";
 import { BRLibPiece } from "libraries/BRLibPiece.sol";
 
-uint256 constant ID = uint256(keccak256("system.BRAlterPieceTypeSystem"));
+uint256 constant ID = uint256(keccak256("system.BRSetPieceTypeSystem"));
 
 contract BRSetPieceTypeSystem is System {
   constructor(IWorld _world, address _components) System(_world, _components) {}
