@@ -27,11 +27,13 @@ const getEntityType = (
         network.components.BRInGame,
         entityIndex
       );
-      if (!inGameEntity) return EntityType.NON_BR_PIECE;
       if (
+        inGameEntity &&
         inGameEntity.value.toString().toLowerCase() === gameEntity.toLowerCase()
-      )
+      ) {
         return EntityType.BR_PIECE;
+      }
+      return EntityType.NON_BR_PIECE;
     } else {
       return EntityType.NON_BR_PIECE;
     }
