@@ -1,6 +1,7 @@
+import { PIECE_X_OFFSET, PIECE_Y_OFFSET } from "../../constants";
+
 import { Game } from "../../types";
 import { Network } from "../../../network/types";
-import { Sprites } from "../../constants";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
@@ -18,7 +19,6 @@ const createPiecePositionSystem = (
     scenes: {
       Main: {
         objectPool,
-        config,
         maps: {
           Main: { tileWidth, tileHeight },
         },
@@ -38,14 +38,11 @@ const createPiecePositionSystem = (
       }
       const object = objectPool.get(update.entity, "Sprite");
       const { x, y } = tileCoordToPixelCoord(position, tileWidth, tileHeight);
-      //const sprite = config.sprites[Sprites.Pawn];
 
       object.setComponent({
         id: PiecePosition.id,
         once: (gameObject) => {
-          console.log(`setting ${update.entity} to ${x},${y}`);
-          //gameObject.setTexture(sprite.assetKey);
-          gameObject.setPosition(x, y);
+          gameObject.setPosition(x + PIECE_X_OFFSET, y + PIECE_Y_OFFSET);
         },
       });
     },
