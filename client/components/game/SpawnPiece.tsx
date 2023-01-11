@@ -1,4 +1,3 @@
-import { CONTROLLER_COMPONENT_CLASS_NAME, disableClickthroughs } from "./Game";
 import { useContext, useEffect } from "react";
 
 import { NetworkContext } from "../../context/NetworkContext";
@@ -7,10 +6,6 @@ import getOwnedPieceEntityIndex from "../../game/utils/getOwnedPieceEntityIndex"
 
 const SpawnPiece = () => {
   const network = useContext(NetworkContext);
-
-  useEffect(() => {
-    disableClickthroughs();
-  }, []);
 
   const handleSpawnPiece = () => {
     const pieceEntity = getOwnedPieceEntityIndex(
@@ -22,7 +17,7 @@ const SpawnPiece = () => {
   };
 
   return (
-    <div className={CONTROLLER_COMPONENT_CLASS_NAME}>
+    <div>
       <button className="bg-blue-500 p-5" onClick={handleSpawnPiece}>
         Spawn Piece
       </button>

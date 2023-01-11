@@ -1,18 +1,14 @@
-import { CONTROLLER_COMPONENT_CLASS_NAME, disableClickthroughs } from "./Game";
 import { useContext, useEffect } from "react";
 
 import { Game } from "../../game/types";
 import { NetworkContext } from "../../context/NetworkContext";
+import { disableClickthroughs } from "../../utils/disableControllers";
 import getBurnerWallet from "../../network/wallet/getBurnerWallet";
 import getOwnedPieceEntityIndex from "../../game/utils/getOwnedPieceEntityIndex";
 import joinGame from "../../game/utils/joinGame";
 
 const JoinGame = (props: { game: Game }) => {
   const network = useContext(NetworkContext);
-
-  useEffect(() => {
-    disableClickthroughs();
-  }, []);
 
   const handleJoinGame = () => {
     const pieceEntity = getOwnedPieceEntityIndex(
@@ -24,7 +20,7 @@ const JoinGame = (props: { game: Game }) => {
   };
 
   return (
-    <div className={CONTROLLER_COMPONENT_CLASS_NAME}>
+    <div>
       <button className="bg-green-500 p-5" onClick={handleJoinGame}>
         Join Game
       </button>
