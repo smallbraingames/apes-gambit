@@ -6,6 +6,7 @@ import { useContext, useEffect } from "react";
 
 import { GameContext } from "../../context/GameContext";
 import JoinGame from "./JoinGame";
+import Points from "./Points";
 import SpawnPiece from "./SpawnPiece";
 import UpgradePiece from "./UpgradePiece";
 
@@ -23,6 +24,7 @@ const BRControls = () => {
           <div className="p-4 bg-amber-500 rounded-md">
             <JoinGame game={game.game} />
             <SpawnPiece />
+            <Points />
             <UpgradePiece />
           </div>
         )}

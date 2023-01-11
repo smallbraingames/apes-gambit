@@ -42,8 +42,12 @@ export async function createNetwork(config: GameConfig) {
       metadata: { contractId: "component.BRInGame" },
     }),
     BRIsAlive: defineBoolComponent(world, {
-      id: "IsAlive",
+      id: "BRIsAlive",
       metadata: { contractId: "component.BRIsAlive" },
+    }),
+    BRPoints: defineNumberComponent(world, {
+      id: "BRPoints",
+      metadata: { contractId: "component.BRPoints" },
     }),
   };
 
@@ -93,8 +97,6 @@ export async function createNetwork(config: GameConfig) {
       systems["system.BRMovePieceSystem"].address as string,
       systems["system.BRSetPieceTypeSystem"].address as string,
     ];
-    console.log("setting controllers");
-    console.log(controllers, entity);
     return systems["system.SetController"].executeTyped(entity, controllers);
   };
 

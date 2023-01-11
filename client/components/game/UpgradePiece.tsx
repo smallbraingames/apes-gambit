@@ -2,7 +2,7 @@ import { GameContext } from "../../context/GameContext";
 import { NetworkContext } from "../../context/NetworkContext";
 import { PieceType } from "../../network/types";
 import getEntityFromEntityIndex from "../../game/utils/getEntityFromEntityIndex";
-import getPieceName from "../../utils/getPieceName";
+import getPieceInfo from "../../utils/getPieceName";
 import { useContext } from "react";
 
 const UpgradePieceButton = (props: { pieceType: PieceType }) => {
@@ -17,10 +17,12 @@ const UpgradePieceButton = (props: { pieceType: PieceType }) => {
       props.pieceType
     );
   };
+
+  const pieceInfo = getPieceInfo(props.pieceType);
   return (
     <div>
       <button className="p-2 bg-white" onClick={handleSetPieceType}>
-        switch to {getPieceName(props.pieceType)}
+        switch to {pieceInfo.name} (costs {pieceInfo.points} points)
       </button>
     </div>
   );
