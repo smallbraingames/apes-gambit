@@ -23,6 +23,7 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
 
   // Setup chessboard
   renderBoard(context);
+  //console.log("texture keys", context.game.textures.get("MainPawnSprite")!.s);
 
   // Setup system manager
   createSystemManagerSystem(network, context);

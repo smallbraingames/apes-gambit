@@ -1,5 +1,6 @@
-export const TILE_WIDTH = 200;
-export const TILE_HEIGHT = 200;
+export const TILE_WIDTH = 800;
+export const TILE_HEIGHT = 800;
+export const PIECE_SPRITE_SCALE = 0.7;
 
 export enum Scenes {
   Main = "Main",
@@ -26,12 +27,12 @@ export enum Assets {
 }
 
 export enum Sprites {
-  MainPawn,
-  MainBishop,
-  MainKnight,
-  MainRook,
-  MainQueen,
-  MainKing,
+  MainPawn = 0,
+  MainBishop = 1,
+  MainKnight = 2,
+  MainRook = 3,
+  MainQueen = 4,
+  MainKing = 5,
   // EnemyPawn,
   // EnemyBishop,
   // EnemyKnight,
