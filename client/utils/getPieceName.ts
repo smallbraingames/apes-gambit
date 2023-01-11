@@ -1,20 +1,22 @@
 import { PieceType } from "../network/types";
 
-const getPieceName = (pieceType: PieceType): string => {
+const getPieceInfo = (
+  pieceType: PieceType
+): { name: string; points: number } => {
   switch (pieceType) {
     case PieceType.PAWN:
-      return "PAWN";
+      return { name: "PAWN", points: 1 };
     case PieceType.BISHOP:
-      return "BISHOP";
+      return { name: "BISHOP", points: 3 };
     case PieceType.KNIGHT:
-      return "KNIGHT";
+      return { name: "KNIGHT", points: 3 };
     case PieceType.ROOK:
-      return "ROOK";
+      return { name: "ROOK", points: 5 };
     case PieceType.QUEEN:
-      return "QUEEN";
+      return { name: "QUEEN", points: 9 };
     case PieceType.KING:
-      return "KING";
+      return { name: "PAWN", points: 100 };
   }
 };
 
-export default getPieceName;
+export default getPieceInfo;

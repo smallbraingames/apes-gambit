@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "pnpm contracts && next dev",
-    "build": "pnpm contracts && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "contracts": "cp -a ../contracts/types/ contracts/types/ && cp -a ../contracts/abi contracts/"
