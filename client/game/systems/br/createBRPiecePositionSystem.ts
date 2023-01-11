@@ -1,3 +1,5 @@
+import { PIECE_X_OFFSET, PIECE_Y_OFFSET } from "../../constants";
+
 import { Game } from "../../types";
 import { Network } from "../../../network/types";
 import { Subscription } from "rxjs";
@@ -42,7 +44,7 @@ const createBRPiecePositionSystem = (
       object.setComponent({
         id: PiecePosition.id,
         once: (gameObject) => {
-          gameObject.setPosition(x, y);
+          gameObject.setPosition(x + PIECE_X_OFFSET, y + PIECE_Y_OFFSET);
         },
       });
     },
