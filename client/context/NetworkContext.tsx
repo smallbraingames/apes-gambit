@@ -1,8 +1,9 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 
-import { GameConfig } from "../network/config";
 import { Network } from "../network/types";
-import getBurnerWallet from "../network/wallet/getBurnerWallet";
+import { Subscription } from "rxjs";
+import { getFaucetFundsIfNecessary } from "../network/getFaucetFunds";
+import getGameConfig from "../utils/getGameConfig";
 
 interface NetworkContextInterface {
   network?: Network;
@@ -17,18 +18,7 @@ const NetworkProvider = (props: { children: ReactNode }) => {
 
   const setupNetwork = async () => {
     if (typeof window !== "undefined" && !network) {
-      const config: GameConfig = {
-        chainId: 31337,
-        worldAddress: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-        jsonRpc: "http://localhost:8545",
-        privateKey: getBurnerWallet().privateKey,
-        wsRpc: undefined,
-        streamServiceUrl: undefined,
-        snapshotServiceUrl: undefined,
-        devMode: true,
-        initialBlockNumber: 0,
-        externalProvider: undefined,
-      };
+      const config = getGameConfig();
       const createNetwork = (await import("../network/createNetwork"))
         .createNetwork;
       const network: Network = await createNetwork(config);
@@ -37,10 +27,36 @@ const NetworkProvider = (props: { children: ReactNode }) => {
     }
   };
 
+  const setupFaucetCall = (network: Network) => {
+    getFaucetFundsIfNecessary(network.config.jsonRpc);
+    const dripSubscriptionPosition =
+      network.components.PiecePosition.update$.subscribe(() => {
+        getFaucetFundsIfNecessary(network.config.jsonRpc);
+      });
+
+    const dripSubscriptionType = network.components.PieceType.update$.subscribe(
+      () => {
+        getFaucetFundsIfNecessary(network.config.jsonRpc);
+      }
+    );
+    return [dripSubscriptionPosition, dripSubscriptionType];
+  };
+
   useEffect(() => {
     setupNetwork();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    let subscriptions: Subscription[] = [];
+    if (network) subscriptions.push(...setupFaucetCall(network));
+    console.log(subscriptions);
+    return () => {
+      console.log(`unsubscribing from ${subscriptions}`);
+      subscriptions.forEach((sub) => sub.unsubscribe());
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [network]);
 
   return (
     <NetworkContext.Provider value={{ network }}>
