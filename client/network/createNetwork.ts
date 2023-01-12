@@ -53,13 +53,23 @@ export async function createNetwork(config: GameConfig) {
 
   console.log("Setup network");
   const networkConfig = getNetworkConfig(config);
-  const { txQueue, systems, txReduced$, network, startSync, encoders } =
-    await setupMUDNetwork<typeof components, SystemTypes>(
-      networkConfig,
-      world,
-      components,
-      SystemAbis
-    );
+  const {
+    txQueue,
+    systems,
+    txReduced$,
+    network,
+    startSync,
+    encoders,
+    systemCallStreams,
+  } = await setupMUDNetwork<typeof components, SystemTypes>(
+    networkConfig,
+    world,
+    components,
+    SystemAbis,
+    {
+      fetchSystemCalls: true,
+    }
+  );
 
   const actions = createActionSystem(world, txReduced$);
 
@@ -136,6 +146,7 @@ export async function createNetwork(config: GameConfig) {
     startSync,
     network,
     actions,
+    systemCallStreams,
     api: {
       spawnPiece,
       movePiece,
