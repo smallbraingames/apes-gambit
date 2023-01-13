@@ -57,8 +57,8 @@ export const phaserConfig = {
   cameraConfig: defineCameraConfig({
     pinchSpeed: 1,
     wheelSpeed: 1,
-    maxZoom: 3,
-    minZoom: 0.1,
+    maxZoom: 1,
+    minZoom: 0.08,
   }),
   cullingChunkSize: TILE_HEIGHT * 16,
 };
