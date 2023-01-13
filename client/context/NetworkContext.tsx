@@ -50,9 +50,7 @@ const NetworkProvider = (props: { children: ReactNode }) => {
   useEffect(() => {
     let subscriptions: Subscription[] = [];
     if (network) subscriptions.push(...setupFaucetCall(network));
-    console.log(subscriptions);
     return () => {
-      console.log(`unsubscribing from ${subscriptions}`);
       subscriptions.forEach((sub) => sub.unsubscribe());
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

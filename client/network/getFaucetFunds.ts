@@ -19,8 +19,10 @@ const isPlayerBroke = async (jsonRpcUrl: string): Promise<boolean> => {
 
 export const getFaucetFundsIfNecessary = async (jsonRpcUrl: string) => {
   const chain = getChain();
-  if (chain !== Chain.LATTICE_TESTNET)
+  if (chain !== Chain.LATTICE_TESTNET) {
     console.warn("Not requesting faucet funds, not on lattice testnet");
+    return;
+  }
   if (await isPlayerBroke(jsonRpcUrl)) {
     console.log("Requesting funds from faucet...");
     getFaucetFunds();
