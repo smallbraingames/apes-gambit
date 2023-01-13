@@ -1,9 +1,9 @@
+import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
+
 import { Game } from "../../../types";
 import { Network } from "../../../../network/types";
 import { Subscription } from "rxjs";
 import getEntityFromEntityIndex from "../../../utils/getEntityFromEntityIndex";
-import getNetworkWallet from "../../../../network/wallet/getNetworkWallet";
-import getOwnedPieceEntityIndex from "../../../utils/getOwnedPieceEntityIndex";
 import isActiveGamePiece from "../../../utils/isActiveGamePiece";
 import { pixelCoordToTileCoord } from "@latticexyz/phaserx";
 
@@ -11,8 +11,10 @@ const createBRMovementInputSystem = (
   network: Network,
   game: Game
 ): Subscription => {
+  const { godEntityIndex } = network;
   const {
     gameEntity,
+    components: { ActivePiece },
     scenes: {
       Main: {
         input,
@@ -24,11 +26,8 @@ const createBRMovementInputSystem = (
   } = game;
 
   const subscription = input.click$.subscribe((p) => {
-    const entityIndex = getOwnedPieceEntityIndex(
-      getNetworkWallet(network).address,
-      network.components.Owner,
-      network.world
-    );
+    const entityIndex = getComponentValueStrict(ActivePiece, godEntityIndex)
+      .value as EntityIndex;
     // Check if is active game piece (alive, in right game, piece entity)
     if (!isActiveGamePiece(entityIndex, network, gameEntity!)) return;
 

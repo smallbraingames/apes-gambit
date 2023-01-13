@@ -8,6 +8,7 @@ import createSystemManagerSystem from "./systems/createSystemManagerSystem";
 import { defineNumberComponent } from "@latticexyz/std-client";
 import { phaserConfig } from "./config";
 import renderBoard from "./utils/renderBoard";
+import setupActivePieceComponent from "./components/setupActivePieceComponent";
 import setupHoveredPieceComponent from "./components/setupHoveredPieceComponent";
 
 export async function createGame(network: Network, gameEntity?: EntityID) {
@@ -21,6 +22,7 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
 
   const components = {
     HoveredPiece: defineNumberComponent(gameWorld, { id: "HoveredPiece" }),
+    ActivePiece: defineNumberComponent(gameWorld, { id: "ActivePiece" }),
   };
 
   const context = {
@@ -35,6 +37,7 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
 
   // Setup game components
   setupHoveredPieceComponent(network, context);
+  setupActivePieceComponent(network, context);
 
   // Set zoom
   scenes.Main.camera.setZoom(INITIAL_ZOOM);
