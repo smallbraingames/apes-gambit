@@ -4,6 +4,7 @@ export const PIECE_SPRITE_SCALE = 0.8;
 export const PIECE_X_OFFSET = -80;
 export const PIECE_Y_OFFSET = -130;
 export const INITIAL_ZOOM = 0.08;
+export const GAME_WORLD_NAMESPACE = "game";
 
 export enum Scenes {
   Main = "Main",

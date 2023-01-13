@@ -7,6 +7,7 @@ import {
 } from "@latticexyz/phaserx";
 import {
   Assets,
+  INITIAL_ZOOM,
   Maps,
   Scenes,
   Sprites,
@@ -57,8 +58,8 @@ export const phaserConfig = {
   cameraConfig: defineCameraConfig({
     pinchSpeed: 1,
     wheelSpeed: 1,
-    maxZoom: 1,
-    minZoom: 0.08,
+    maxZoom: INITIAL_ZOOM,
+    minZoom: INITIAL_ZOOM,
   }),
   cullingChunkSize: TILE_HEIGHT * 16,
 };
