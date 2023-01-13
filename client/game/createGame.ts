@@ -1,4 +1,5 @@
 import { EntityID } from "@latticexyz/recs";
+import { INITIAL_ZOOM } from "./constants";
 import { Network } from "../network/types";
 import { Subscription } from "rxjs";
 import { createPhaserEngine } from "@latticexyz/phaserx";
@@ -21,9 +22,12 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
     disposePhaser,
   };
 
+  // Set zoom
+  scenes.Main.camera.setZoom(INITIAL_ZOOM);
+
   // Setup chessboard
   renderBoard(context);
-  //console.log("texture keys", context.game.textures.get("MainPawnSprite")!.s);
+  scenes.Main.camera.centerOn(0, 1);
 
   // Setup system manager
   createSystemManagerSystem(network, context);
