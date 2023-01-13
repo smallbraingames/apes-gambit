@@ -1,4 +1,4 @@
-import { EntityID, createWorld } from "@latticexyz/recs";
+import { EntityID, EntityIndex, createWorld } from "@latticexyz/recs";
 import { GameConfig, getNetworkConfig } from "./config";
 import {
   createActionSystem,
@@ -11,6 +11,7 @@ import {
 
 import { ContractTransaction } from "ethers";
 import { Coord } from "@latticexyz/utils";
+import { GodID } from "@latticexyz/network";
 import { PieceType } from "./types";
 import { SystemAbis } from "../contracts/types/SystemAbis.mjs";
 import { SystemTypes } from "../contracts/types/SystemTypes";
@@ -139,6 +140,7 @@ export async function createNetwork(config: GameConfig) {
   const context = {
     config,
     world,
+    godEntityIndex: world.entityToIndex.get(GodID) || (0 as EntityIndex),
     components,
     txQueue,
     systems,

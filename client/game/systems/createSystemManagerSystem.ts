@@ -6,6 +6,7 @@ import createBRMovementInputSystem from "./br/input/createBRMovementInputSystem"
 import createBRPieceDeathSystem from "./br/createBRPieceDeathSystem";
 import createBRPiecePositionSystem from "./br/createBRPiecePositionSystem";
 import createBRPieceTypeSystem from "./br/createBRPieceTypeSystem";
+import createHoveredPieceSystem from "./lobby/createHoveredPieceSystem";
 import createMovementInputSystem from "./lobby/input/createMovementInputSystem";
 import createPiecePositionSystem from "./lobby/createPiecePositionSystem";
 import createPieceTypeSystem from "./lobby/createPieceTypeSystem";
@@ -32,6 +33,7 @@ const setupLobbySystems = (network: Network, game: Game) => {
     createMovementInputSystem,
     createPiecePositionSystem,
     createPieceTypeSystem,
+    createHoveredPieceSystem,
   ]);
 };
 

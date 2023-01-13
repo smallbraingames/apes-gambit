@@ -1,11 +1,14 @@
-import { EntityID } from "@latticexyz/recs";
-import { INITIAL_ZOOM } from "./constants";
+import { EntityID, createWorld, namespaceWorld } from "@latticexyz/recs";
+import { GAME_WORLD_NAMESPACE, INITIAL_ZOOM } from "./constants";
+
 import { Network } from "../network/types";
 import { Subscription } from "rxjs";
 import { createPhaserEngine } from "@latticexyz/phaserx";
 import createSystemManagerSystem from "./systems/createSystemManagerSystem";
+import { defineNumberComponent } from "@latticexyz/std-client";
 import { phaserConfig } from "./config";
 import renderBoard from "./utils/renderBoard";
+import setupHoveredPieceComponent from "./components/setupHoveredPieceComponent";
 
 export async function createGame(network: Network, gameEntity?: EntityID) {
   const {
@@ -14,13 +17,24 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
     dispose: disposePhaser,
   } = await createPhaserEngine(phaserConfig);
 
+  const gameWorld = namespaceWorld(network.world, GAME_WORLD_NAMESPACE);
+
+  const components = {
+    HoveredPiece: defineNumberComponent(gameWorld, { id: "HoveredPiece" }),
+  };
+
   const context = {
     gameEntity,
+    gameWorld,
+    components,
     subscribedSystems: [] as Subscription[],
     game,
     scenes,
     disposePhaser,
   };
+
+  // Setup game components
+  setupHoveredPieceComponent(network, context);
 
   // Set zoom
   scenes.Main.camera.setZoom(INITIAL_ZOOM);

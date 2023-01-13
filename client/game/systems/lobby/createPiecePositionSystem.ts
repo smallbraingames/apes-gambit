@@ -30,7 +30,6 @@ const createPiecePositionSystem = (
     world,
     PiecePosition,
     (update) => {
-      console.log(update);
       const position = update.value[0];
       if (!position) {
         objectPool.remove(update.entity);
