@@ -6,19 +6,21 @@ import createBRMovementInputSystem from "./br/input/createBRMovementInputSystem"
 import createBRPieceDeathSystem from "./br/createBRPieceDeathSystem";
 import createBRPiecePositionSystem from "./br/createBRPiecePositionSystem";
 import createBRPieceTypeSystem from "./br/createBRPieceTypeSystem";
+import createBRValidMoveSystem from "./br/createBRValidMoveSystem";
 import createHoveredPieceSystem from "./lobby/createHoveredPieceSystem";
 import createMovementInputSystem from "./lobby/input/createMovementInputSystem";
 import createPiecePositionSystem from "./lobby/createPiecePositionSystem";
 import createPieceTypeSystem from "./lobby/createPieceTypeSystem";
+import createValidMoveSystem from "./lobby/createValidMoveSystem";
 import { defineComponentSystem } from "@latticexyz/recs";
 
 const setupSystems = (
   network: Network,
   game: Game,
-  systems: ((network: Network, game: Game) => Subscription)[]
+  systems: ((network: Network, game: Game) => Subscription[])[]
 ) => {
   systems.forEach((system) => {
-    game.subscribedSystems.push(system(network, game));
+    game.subscribedSystems.push(...system(network, game));
   });
 };
 
@@ -34,6 +36,7 @@ const setupLobbySystems = (network: Network, game: Game) => {
     createPiecePositionSystem,
     createPieceTypeSystem,
     createHoveredPieceSystem,
+    createValidMoveSystem,
   ]);
 };
 
@@ -44,6 +47,7 @@ const setupBRSystems = (network: Network, game: Game) => {
     createBRPieceDeathSystem,
     createBRPiecePositionSystem,
     createBRPieceTypeSystem,
+    createBRValidMoveSystem,
   ]);
 };
 

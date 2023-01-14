@@ -14,6 +14,11 @@ export enum Maps {
   Main = "Main",
 }
 
+export enum RenderDepth {
+  TILE_OVERLAY = 1,
+  PIECE = 2,
+}
+
 export enum Assets {
   ChessTileset = "OverworldTileset",
   MainPawnSprite = "MainPawnSprite",

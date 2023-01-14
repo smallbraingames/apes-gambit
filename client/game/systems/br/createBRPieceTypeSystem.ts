@@ -8,7 +8,7 @@ import setPieceSprite from "../../utils/setPieceSprite";
 const createBRPieceTypeSystem = (
   network: Network,
   game: Game
-): Subscription => {
+): Subscription[] => {
   const {
     world,
     components: { PieceType },
@@ -37,7 +37,7 @@ const createBRPieceTypeSystem = (
     { runOnInit: true }
   );
 
-  return subscription;
+  return [subscription];
 };
 
 export default createBRPieceTypeSystem;

@@ -1,4 +1,4 @@
-import { EntityID, createWorld, namespaceWorld } from "@latticexyz/recs";
+import { EntityID, namespaceWorld } from "@latticexyz/recs";
 import { GAME_WORLD_NAMESPACE, INITIAL_ZOOM } from "./constants";
 
 import { Network } from "../network/types";
@@ -20,6 +20,9 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
 
   const gameWorld = namespaceWorld(network.world, GAME_WORLD_NAMESPACE);
 
+  // A registry for non-entity game objects
+  const gameObjectRegistry = new Map<string, Phaser.GameObjects.Group>();
+
   const components = {
     HoveredPiece: defineNumberComponent(gameWorld, { id: "HoveredPiece" }),
     ActivePiece: defineNumberComponent(gameWorld, { id: "ActivePiece" }),
@@ -28,6 +31,7 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   const context = {
     gameEntity,
     gameWorld,
+    gameObjectRegistry,
     components,
     subscribedSystems: [] as Subscription[],
     game,

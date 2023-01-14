@@ -8,7 +8,7 @@ import getEntityType from "../../utils/getEntityType";
 const createBRPieceDeathSystem = (
   network: Network,
   game: Game
-): Subscription => {
+): Subscription[] => {
   const {
     world,
     components: { BRIsAlive: IsAlive },
@@ -41,7 +41,7 @@ const createBRPieceDeathSystem = (
     { runOnInit: true }
   );
 
-  return subscription;
+  return [subscription];
 };
 
 export default createBRPieceDeathSystem;
