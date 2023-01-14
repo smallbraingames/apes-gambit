@@ -4,7 +4,10 @@ import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import setPieceSprite from "../../utils/setPieceSprite";
 
-const createPieceTypeSystem = (network: Network, game: Game): Subscription => {
+const createPieceTypeSystem = (
+  network: Network,
+  game: Game
+): Subscription[] => {
   const {
     world,
     components: { PieceType },
@@ -31,7 +34,7 @@ const createPieceTypeSystem = (network: Network, game: Game): Subscription => {
     { runOnInit: true }
   );
 
-  return subscription;
+  return [subscription];
 };
 
 export default createPieceTypeSystem;

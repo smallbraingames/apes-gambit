@@ -9,7 +9,7 @@ import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
 const createPiecePositionSystem = (
   network: Network,
   game: Game
-): Subscription => {
+): Subscription[] => {
   const {
     world,
     components: { PiecePosition },
@@ -48,7 +48,7 @@ const createPiecePositionSystem = (
     { runOnInit: true }
   );
 
-  return subscription;
+  return [subscription];
 };
 
 export default createPiecePositionSystem;

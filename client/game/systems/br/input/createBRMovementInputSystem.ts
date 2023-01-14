@@ -10,7 +10,7 @@ import { pixelCoordToTileCoord } from "@latticexyz/phaserx";
 const createBRMovementInputSystem = (
   network: Network,
   game: Game
-): Subscription => {
+): Subscription[] => {
   const { godEntityIndex } = network;
   const {
     gameEntity,
@@ -45,7 +45,7 @@ const createBRMovementInputSystem = (
     );
   });
 
-  return subscription;
+  return [subscription];
 };
 
 export default createBRMovementInputSystem;

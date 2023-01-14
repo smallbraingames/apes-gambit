@@ -1,7 +1,8 @@
+import { PIECE_SPRITE_SCALE, RenderDepth } from "../constants";
+
 import { EntityIndex } from "@latticexyz/recs";
 import { Game } from "../types";
 import { Network } from "../../network/types";
-import { PIECE_SPRITE_SCALE } from "../constants";
 import getSpriteForPiece from "./getSpriteForPiece";
 
 const setPieceSprite = (
@@ -15,6 +16,7 @@ const setPieceSprite = (
       .assetKey;
   gameObject.setScale(PIECE_SPRITE_SCALE, PIECE_SPRITE_SCALE);
   gameObject.setTexture(spriteAssetKey);
+  gameObject.setDepth(RenderDepth.PIECE);
 };
 
 export default setPieceSprite;

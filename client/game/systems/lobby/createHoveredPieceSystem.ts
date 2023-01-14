@@ -3,7 +3,7 @@ import { Network } from "../../../network/types";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 
-const createHoveredPieceSystem = (_: Network, game: Game): Subscription => {
+const createHoveredPieceSystem = (_: Network, game: Game): Subscription[] => {
   const {
     gameWorld,
     components: { HoveredPiece },
@@ -15,7 +15,7 @@ const createHoveredPieceSystem = (_: Network, game: Game): Subscription => {
     (update) => {}
   );
 
-  return subscription;
+  return [subscription];
 };
 
 export default createHoveredPieceSystem;

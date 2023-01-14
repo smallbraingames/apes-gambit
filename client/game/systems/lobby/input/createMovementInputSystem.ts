@@ -9,7 +9,7 @@ import { pixelCoordToTileCoord } from "@latticexyz/phaserx";
 const createMovementInputSystem = (
   network: Network,
   game: Game
-): Subscription => {
+): Subscription[] => {
   const { godEntityIndex } = network;
 
   const {
@@ -40,7 +40,7 @@ const createMovementInputSystem = (
     );
   });
 
-  return subscription;
+  return [subscription];
 };
 
 export default createMovementInputSystem;
