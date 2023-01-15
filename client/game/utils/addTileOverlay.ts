@@ -6,7 +6,8 @@ const addTileOverlay = (
   tilePosition: Coord,
   phaserScene: Phaser.Scene,
   tileWidth: number,
-  tileHeight: number
+  tileHeight: number,
+  color: number
 ): Phaser.GameObjects.Rectangle => {
   const { x, y } = tileCoordToPixelCoord(tilePosition, tileWidth, tileHeight);
   const overlay = phaserScene.add.rectangle(
@@ -14,9 +15,18 @@ const addTileOverlay = (
     y + tileHeight / 2,
     tileWidth,
     tileHeight,
-    0xff0000,
-    0.6
+    color,
+    1
   );
+  overlay.setAlpha(0.6);
+  overlay.setInteractive();
+  overlay.on("pointerover", () => {
+    overlay.setAlpha(1);
+  });
+  overlay.on("pointerout", () => {
+    overlay.setAlpha(0.6);
+  });
+
   overlay.setDepth(RenderDepth.TILE_OVERLAY);
   return overlay;
 };
