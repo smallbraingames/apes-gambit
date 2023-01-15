@@ -1,5 +1,10 @@
-import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
+import {
+  EntityIndex,
+  getComponentValueStrict,
+  getEntitiesWithValue,
+} from "@latticexyz/recs";
 import { Network, PieceType } from "../../../network/types";
+import { TILE_OVERLAY_COLOR, TILE_OVERLAY_TAKE_COLOR } from "../../constants";
 
 import { Coord } from "@latticexyz/utils";
 import { Game } from "../../types";
@@ -42,8 +47,14 @@ const createBRValidMoveSystem = (
 
     const validMoves = getValidMoves(pieceType, piecePosition);
     validMoves.forEach((potentialMove) => {
+      const pieceAtPosition = getEntitiesWithValue(
+        PiecePosition,
+        potentialMove
+      );
+      let color = TILE_OVERLAY_COLOR;
+      if (pieceAtPosition.size > 0) color = TILE_OVERLAY_TAKE_COLOR;
       validMoveGroup!.add(
-        addTileOverlay(potentialMove, phaserScene, tileWidth, tileHeight)
+        addTileOverlay(potentialMove, phaserScene, tileWidth, tileHeight, color)
       );
     });
     gameObjectRegistry.set(BR_VALID_MOVE_GROUP, validMoveGroup);
@@ -52,18 +63,22 @@ const createBRValidMoveSystem = (
   const piecePositionSubscription = defineComponentSystemUnsubscribable(
     world,
     PiecePosition,
-    (update) => {
-      const position = update.value[0];
+    () => {
+      // On every piece position update, reset overlays for active piece
+      // This is necessary since another piece might move into range
       const activePieceEntityIndex = getComponentValueStrict(
         ActivePiece,
         godEntityIndex
       ).value as EntityIndex;
-      if (!position || update.entity !== activePieceEntityIndex) return;
+      const piecePosition = getComponentValueStrict(
+        PiecePosition,
+        activePieceEntityIndex
+      );
       const pieceType: PieceType = getComponentValueStrict(
         PieceType,
-        update.entity
+        activePieceEntityIndex
       ).value;
-      setValidMoveOverlays(pieceType, position);
+      setValidMoveOverlays(pieceType, piecePosition);
     },
     { runOnInit: true }
   );

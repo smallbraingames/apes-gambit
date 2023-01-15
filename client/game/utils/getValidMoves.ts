@@ -3,7 +3,7 @@ import { PieceType } from "../../network/types";
 
 const getValidBishopMoves = (position: Coord, limit: number): Set<Coord> => {
   const moves = new Set<Coord>();
-  for (let i = 0; i < Math.floor(limit / 2); i++) {
+  for (let i = 1; i <= limit; i++) {
     moves.add({ x: position.x + i, y: position.y + i });
     moves.add({ x: position.x - i, y: position.y + i });
     moves.add({ x: position.x + i, y: position.y - i });
@@ -14,7 +14,7 @@ const getValidBishopMoves = (position: Coord, limit: number): Set<Coord> => {
 
 const getValidRookMoves = (position: Coord, limit: number): Set<Coord> => {
   const moves = new Set<Coord>();
-  for (let i = 0; i < limit; i++) {
+  for (let i = 1; i <= limit; i++) {
     moves.add({ x: position.x + i, y: position.y });
     moves.add({ x: position.x - i, y: position.y });
     moves.add({ x: position.x, y: position.y + i });

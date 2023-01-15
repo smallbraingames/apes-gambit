@@ -4,6 +4,7 @@ import { Network, PieceType } from "../../../network/types";
 import { Coord } from "@latticexyz/utils";
 import { Game } from "../../types";
 import { Subscription } from "rxjs";
+import { TILE_OVERLAY_COLOR } from "../../constants";
 import addTileOverlay from "../../utils/addTileOverlay";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getValidMoves from "../../utils/getValidMoves";
@@ -43,7 +44,13 @@ const createValidMoveSystem = (
     const validMoves = getValidMoves(pieceType, piecePosition);
     validMoves.forEach((potentialMove) => {
       validMoveGroup!.add(
-        addTileOverlay(potentialMove, phaserScene, tileWidth, tileHeight)
+        addTileOverlay(
+          potentialMove,
+          phaserScene,
+          tileWidth,
+          tileHeight,
+          TILE_OVERLAY_COLOR
+        )
       );
     });
     gameObjectRegistry.set(VALID_MOVE_GROUP, validMoveGroup);

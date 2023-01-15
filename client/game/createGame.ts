@@ -46,6 +46,9 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   // Set zoom
   scenes.Main.camera.setZoom(INITIAL_ZOOM);
 
+  // Set input passes down from top
+  scenes.Main.phaserScene.input.setTopOnly(false);
+
   // Setup chessboard
   renderBoard(context);
   scenes.Main.camera.centerOn(0, 1);
