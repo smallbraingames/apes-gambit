@@ -1,11 +1,18 @@
-import { PIECE_X_OFFSET, PIECE_Y_OFFSET } from "../../constants";
+import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
+import {
+  MOVE_ANIMATION_DURATION,
+  PIECE_X_OFFSET,
+  PIECE_Y_OFFSET,
+  TILE_OVERLAY_RENDER_MULTIPLE,
+} from "../../constants";
+import { tileCoordToPixelCoord, tween } from "@latticexyz/phaserx";
 
 import { Game } from "../../types";
 import { Network } from "../../../network/types";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import isActiveGamePiece from "../../utils/isActiveGamePiece";
-import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
+import { renderBoardInView } from "../../utils/renderBoard";
 
 const createBRPiecePositionSystem = (
   network: Network,
@@ -13,17 +20,18 @@ const createBRPiecePositionSystem = (
 ): Subscription[] => {
   const {
     world,
+    godEntityIndex,
     components: { PiecePosition },
   } = network;
 
   const {
     gameEntity,
+    components: { ActivePiece },
     scenes: {
       Main: {
         objectPool,
-        maps: {
-          Main: { tileWidth, tileHeight },
-        },
+        camera,
+        maps: { Main },
       },
     },
   } = game;
@@ -40,11 +48,59 @@ const createBRPiecePositionSystem = (
         return;
       }
       const object = objectPool.get(update.entity, "Sprite");
-      const { x, y } = tileCoordToPixelCoord(position, tileWidth, tileHeight);
+      const { x, y } = tileCoordToPixelCoord(
+        position,
+        Main.tileWidth,
+        Main.tileHeight
+      );
+
+      const activePiece = getComponentValueStrict(ActivePiece, godEntityIndex)
+        .value as EntityIndex;
+
+      const pieceX = x + PIECE_X_OFFSET;
+      const pieceY = y + PIECE_Y_OFFSET;
+
       object.setComponent({
         id: PiecePosition.id,
+        now: async (gameObject) => {
+          await Promise.all([
+            tween({
+              targets: gameObject,
+              duration: MOVE_ANIMATION_DURATION,
+              props: { x: pieceX, y: pieceY },
+              ease: Phaser.Math.Easing.Sine.InOut,
+            }),
+            activePiece === update.entity
+              ? tween({
+                  // @ts-ignore
+                  targets: camera.phaserCamera,
+                  props: {
+                    scrollX: pieceX,
+                    scrollY: pieceY,
+                  },
+                  duration: MOVE_ANIMATION_DURATION,
+                  ease: "Sine.easeInOut",
+                  onStart: () => {
+                    const width = camera.phaserCamera.worldView.width;
+                    const height = camera.phaserCamera.worldView.height;
+                    renderBoardInView(
+                      pieceX - width,
+                      pieceY - height,
+                      width * TILE_OVERLAY_RENDER_MULTIPLE,
+                      height * TILE_OVERLAY_RENDER_MULTIPLE,
+                      Main
+                    );
+                  },
+                  onComplete: () => {
+                    // @ts-ignore
+                    camera.worldView$.next(camera.phaserCamera.worldView);
+                  },
+                })
+              : async () => true,
+          ]);
+        },
         once: (gameObject) => {
-          gameObject.setPosition(x + PIECE_X_OFFSET, y + PIECE_Y_OFFSET);
+          gameObject.setPosition(pieceX, pieceY);
         },
       });
     },
