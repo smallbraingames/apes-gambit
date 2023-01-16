@@ -79,7 +79,7 @@ contract BRMovePieceSystem is System {
       position,
       game
     );
-    if (hasCollidedPiece) {
+    if (hasCollidedPiece && collidedPiece != piece) {
       brIsAliveComponent.remove(collidedPiece);
       // Add points based on what type of piece was taken
       PieceType pieceType = pieceTypeComponent.getValue(collidedPiece);
