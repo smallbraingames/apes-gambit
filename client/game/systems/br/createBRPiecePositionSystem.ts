@@ -13,6 +13,7 @@ import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import isActiveGamePiece from "../../utils/isActiveGamePiece";
 import { renderBoardInView } from "../../utils/renderBoard";
+import tweenCamera from "../../utils/tweenCamera";
 
 const createBRPiecePositionSystem = (
   network: Network,
@@ -71,31 +72,7 @@ const createBRPiecePositionSystem = (
               ease: Phaser.Math.Easing.Sine.InOut,
             }),
             activePiece === update.entity
-              ? tween({
-                  // @ts-ignore
-                  targets: camera.phaserCamera,
-                  props: {
-                    scrollX: pieceX,
-                    scrollY: pieceY,
-                  },
-                  duration: MOVE_ANIMATION_DURATION,
-                  ease: "Sine.easeInOut",
-                  onStart: () => {
-                    const width = camera.phaserCamera.worldView.width;
-                    const height = camera.phaserCamera.worldView.height;
-                    renderBoardInView(
-                      pieceX - width,
-                      pieceY - height,
-                      width * TILE_OVERLAY_RENDER_MULTIPLE,
-                      height * TILE_OVERLAY_RENDER_MULTIPLE,
-                      Main
-                    );
-                  },
-                  onComplete: () => {
-                    // @ts-ignore
-                    camera.worldView$.next(camera.phaserCamera.worldView);
-                  },
-                })
+              ? tweenCamera(camera, Main, pieceX, pieceY)
               : async () => true,
           ]);
         },
