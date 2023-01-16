@@ -70,7 +70,7 @@ const createBRValidMoveSystem = (
   const piecePositionSubscription = defineComponentSystemUnsubscribable(
     world,
     PiecePosition,
-    () => {
+    async () => {
       // On every piece position update, reset overlays for active piece
       // This is necessary since another piece might move into range
       const activePieceEntityIndex = getComponentValueStrict(
@@ -93,6 +93,8 @@ const createBRValidMoveSystem = (
         PieceType,
         activePieceEntityIndex
       ).value;
+      await new Promise((r) => setTimeout(r, 200));
+
       setValidMoveOverlays(pieceType, piecePosition);
     },
     { runOnInit: true }
@@ -109,6 +111,7 @@ const createBRValidMoveSystem = (
       ).value as EntityIndex;
       if (!pieceType || update.entity !== activePieceEntityIndex) return;
       const position = getComponentValueStrict(PiecePosition, update.entity);
+      // Only show after move appears
       setValidMoveOverlays(pieceType, position);
     },
     { runOnInit: true }

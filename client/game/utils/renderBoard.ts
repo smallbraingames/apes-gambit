@@ -1,24 +1,48 @@
-import { TILE_HEIGHT, TILE_WIDTH } from "../constants";
+import { AnimatedTilemap, pixelCoordToTileCoord } from "@latticexyz/phaserx";
+import { Coord, tile } from "@latticexyz/utils";
+import {
+  TILE_HEIGHT,
+  TILE_OVERLAY_COLOR,
+  TILE_OVERLAY_RENDER_MULTIPLE,
+  TILE_WIDTH,
+} from "../constants";
 
 import { Game } from "../types";
 import { Subscription } from "rxjs";
-import { pixelCoordToTileCoord } from "@latticexyz/phaserx";
+
+export const renderBoardInView = (
+  x: number,
+  y: number,
+  renderWidth: number,
+  renderHeight: number,
+  map: AnimatedTilemap<number, string, string>
+) => {
+  for (let h = 0; h < renderHeight; h += TILE_HEIGHT) {
+    for (let w = 0; w < renderWidth; w += TILE_WIDTH) {
+      const tileCoord = pixelCoordToTileCoord(
+        { x: x + w, y: y + h },
+        TILE_WIDTH,
+        TILE_HEIGHT
+      );
+      if ((tileCoord.x + tileCoord.y) % 2 == 0) {
+        map.putTileAt(tileCoord, 0);
+      }
+    }
+  }
+};
 
 const renderBoard = (game: Game): Subscription => {
   const renderBoardSubscription = game.scenes.Main.camera.worldView$.subscribe(
     (view: Phaser.Geom.Rectangle) => {
-      for (let h = 0; h < view.height * 1.5; h += TILE_HEIGHT) {
-        for (let w = 0; w < view.width * 1.5; w += TILE_WIDTH) {
-          const tileCoord = pixelCoordToTileCoord(
-            { x: view.x + w, y: view.y + h },
-            TILE_WIDTH,
-            TILE_HEIGHT
-          );
-          if ((tileCoord.x + tileCoord.y) % 2 == 0) {
-            game.scenes.Main.maps.Main.putTileAt(tileCoord, 0);
-          }
-        }
-      }
+      const renderHeight = view.height * TILE_OVERLAY_RENDER_MULTIPLE;
+      const renderWidth = view.width * TILE_OVERLAY_RENDER_MULTIPLE;
+      renderBoardInView(
+        view.x,
+        view.y,
+        renderWidth,
+        renderHeight,
+        game.scenes.Main.maps.Main
+      );
     }
   );
   return renderBoardSubscription;

@@ -10,7 +10,6 @@ import {
   INITIAL_ZOOM,
   Maps,
   Scenes,
-  Sprites,
   TILE_HEIGHT,
   TILE_WIDTH,
 } from "./constants";
@@ -52,7 +51,7 @@ export const phaserConfig = {
   },
   scale: defineScaleConfig({
     parent: "phaser-game",
-    zoom: 2,
+    zoom: 1,
     mode: Phaser.Scale.NONE,
   }),
   cameraConfig: defineCameraConfig({
