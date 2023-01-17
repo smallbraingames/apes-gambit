@@ -14,3 +14,16 @@ export const getFormattedPieceTypeUpdate = (
     </div>
   );
 };
+
+export const getFormattedPieceDeathUpdate = (
+  takerEntity: EntityIndex,
+  deadEntity: EntityIndex
+): JSX.Element => {
+  return (
+    <div>
+      <div>
+        {takerEntity} took {deadEntity}
+      </div>
+    </div>
+  );
+};

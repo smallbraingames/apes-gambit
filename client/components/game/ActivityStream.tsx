@@ -1,12 +1,14 @@
+import {
+  getFormattedPieceDeathUpdate,
+  getFormattedPieceTypeUpdate,
+} from "../../utils/getFormattedActivityUpdate";
 import { useContext, useEffect, useState } from "react";
 
 import { NetworkContext } from "../../context/NetworkContext";
 import { PieceType } from "../../network/types";
-import { getFormattedPieceTypeUpdate } from "../../utils/getFormattedActivityUpdate";
 
 const ActivityStream = () => {
   const network = useContext(NetworkContext);
-
   const [activity, setActivity] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
@@ -14,7 +16,7 @@ const ActivityStream = () => {
 
     const {
       systemCallStreams,
-      components: { PieceType },
+      components: { PieceType, BRIsAlive, PiecePosition },
     } = network.network;
 
     systemCallStreams["system.BRSetPieceTypeSystem"].subscribe((systemCall) => {
@@ -36,6 +38,41 @@ const ActivityStream = () => {
           getFormattedPieceTypeUpdate(entity, pieceType),
         ]);
       });
+    });
+
+    systemCallStreams["system.BRMovePieceSystem"].subscribe((systemCall) => {
+      const piecePositionUpdates = systemCall.updates.filter(
+        (update) => update.component.id === PiecePosition.id
+      );
+      const pieceAliveUpdates = systemCall.updates.filter(
+        (update) => update.component.id === BRIsAlive.id
+      );
+
+      const piecePositionUpdate =
+        piecePositionUpdates.length > 0 ? piecePositionUpdates[0] : undefined;
+      const pieceAliveUpdate =
+        pieceAliveUpdates.length > 0 ? pieceAliveUpdates[0] : undefined;
+
+      if (piecePositionUpdate === undefined || pieceAliveUpdate === undefined) {
+        return;
+      }
+
+      // PieceAliveUpdates should always signify that the piece died
+      // since a piece cannot be set to alive from the BR movement system
+      if (pieceAliveUpdate.value && pieceAliveUpdate.value.value) {
+        console.warn(
+          "Received invalid piece alive update from BRMovePieceSystem",
+          pieceAliveUpdate
+        );
+      }
+
+      setActivity((a) => [
+        ...a,
+        getFormattedPieceDeathUpdate(
+          piecePositionUpdate.entity,
+          pieceAliveUpdate.entity
+        ),
+      ]);
     });
   }, [network]);
 
