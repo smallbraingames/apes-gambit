@@ -15,7 +15,6 @@ const getSpriteForPiece = (
   if (pieceType === undefined) throw Error("Piece type not found");
 
   if (isEnemy) {
-    console.log("is ENEMY!!!!!!");
     switch (pieceType) {
       case PieceType.PAWN:
         return Sprites.EnemyPawn;

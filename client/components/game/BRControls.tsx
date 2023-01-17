@@ -21,10 +21,10 @@ const BRControls = () => {
     <>
       <div className={CONTROLLER_COMPONENT_CLASS_NAME}>
         {game.game && (
-          <div className="p-4 bg-amber-500 rounded-md">
-            <JoinGame game={game.game} />
-            <SpawnPiece />
-            <Points />
+          <div className="p-4 bg-yellow-200 bg-opacity-80 rounded-lg">
+            {/* <JoinGame game={game.game} />
+            <SpawnPiece /> */}
+            {/* <Points /> */}
             <UpgradePiece />
           </div>
         )}
