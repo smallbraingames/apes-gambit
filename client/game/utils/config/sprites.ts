@@ -1,6 +1,7 @@
 import { Assets, Sprites } from "../../constants";
 
 const sprites = {
+  // Main pieces
   [Sprites.MainPawn]: {
     assetKey: Assets.MainPawnSprite,
   },
@@ -18,6 +19,25 @@ const sprites = {
   },
   [Sprites.MainKing]: {
     assetKey: Assets.MainKingSprite,
+  },
+  // Enemy pieces
+  [Sprites.EnemyPawn]: {
+    assetKey: Assets.EnemyPawnSprite,
+  },
+  [Sprites.EnemyBishop]: {
+    assetKey: Assets.EnemyBishopSprite,
+  },
+  [Sprites.EnemyKnight]: {
+    assetKey: Assets.EnemyKnightSprite,
+  },
+  [Sprites.EnemyRook]: {
+    assetKey: Assets.EnemyRookSprite,
+  },
+  [Sprites.EnemyQueen]: {
+    assetKey: Assets.EnemyQueenSprite,
+  },
+  [Sprites.EnemyKing]: {
+    assetKey: Assets.EnemyKingSprite,
   },
 };
 export default sprites;

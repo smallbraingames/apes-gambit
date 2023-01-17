@@ -9,10 +9,11 @@ const setPieceSprite = (
   entity: EntityIndex,
   gameObject: Phaser.GameObjects.Sprite,
   game: Game,
-  network: Network
+  network: Network,
+  isEnemy: boolean = false
 ) => {
   const spriteAssetKey =
-    game.scenes.Main.config.sprites[getSpriteForPiece(entity, network)]
+    game.scenes.Main.config.sprites[getSpriteForPiece(entity, network, isEnemy)]
       .assetKey;
   gameObject.setScale(PIECE_SPRITE_SCALE, PIECE_SPRITE_SCALE);
   gameObject.setTexture(spriteAssetKey);

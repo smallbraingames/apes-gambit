@@ -3,7 +3,6 @@ import {
   MOVE_ANIMATION_DURATION,
   PIECE_X_OFFSET,
   PIECE_Y_OFFSET,
-  TILE_OVERLAY_RENDER_MULTIPLE,
 } from "../../constants";
 import { tileCoordToPixelCoord, tween } from "@latticexyz/phaserx";
 
@@ -12,7 +11,6 @@ import { Network } from "../../../network/types";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import isActiveGamePiece from "../../utils/isActiveGamePiece";
-import { renderBoardInView } from "../../utils/renderBoard";
 import tweenCamera from "../../utils/tweenCamera";
 
 const createBRPiecePositionSystem = (
