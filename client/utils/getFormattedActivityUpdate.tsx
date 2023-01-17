@@ -1,6 +1,6 @@
 import { EntityIndex } from "@latticexyz/recs";
 import { PieceType } from "../network/types";
-import getPieceInfo from "./getPieceName";
+import getPieceInfo from "./getPieceInfo";
 
 export const getFormattedPieceTypeUpdate = (
   pieceEntity: EntityIndex,
