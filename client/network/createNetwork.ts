@@ -60,7 +60,6 @@ export async function createNetwork(config: GameConfig) {
     txReduced$,
     network,
     startSync,
-    encoders,
     systemCallStreams,
   } = await setupMUDNetwork<typeof components, SystemTypes>(
     networkConfig,
@@ -147,8 +146,8 @@ export async function createNetwork(config: GameConfig) {
     txReduced$,
     startSync,
     network,
-    actions,
     systemCallStreams,
+    actions,
     api: {
       spawnPiece,
       movePiece,
