@@ -6,9 +6,11 @@ const Game = () => {
   return (
     <>
       <GameProvider>
-        <div className="absolute m-10">
+        <div className="absolute p-6 h-full">
           <BRControls />
-          <ActivityStream />
+          <div className="absolute bottom-6">
+            <ActivityStream />
+          </div>
         </div>
       </GameProvider>
     </>
