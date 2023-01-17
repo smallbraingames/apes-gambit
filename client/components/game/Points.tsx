@@ -1,5 +1,4 @@
 import { EntityIndex } from "@latticexyz/recs";
-import { Game } from "../../game/types";
 import { GameContext } from "../../context/GameContext";
 import { Network } from "../../network/types";
 import { NetworkContext } from "../../context/NetworkContext";
@@ -17,7 +16,19 @@ const PointDisplay = (props: {
 
   return (
     <div>
-      <div>Points: {points?.value}</div>
+      <div className="flex">
+        <div className="h-10 w-10">
+          <img
+            alt="Banana"
+            src="icons/banana.svg"
+            style={{ objectFit: "contain" }}
+          />
+        </div>
+        <div className="ml-2">
+          <div className="text-xs">BANANAS</div>
+          <div className="text-lg font-bold">{points?.value}</div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -29,7 +40,7 @@ const Points = () => {
   return (
     <>
       {network.network && game.activePiece && (
-        <div>
+        <div className="bg-stone-100 rounded-lg p-4">
           <PointDisplay
             network={network.network}
             activePiece={game.activePiece}

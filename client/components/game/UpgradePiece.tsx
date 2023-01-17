@@ -34,6 +34,7 @@ const UpgradePieceButton = (props: {
   return (
     <div
       onClick={handleSetPieceType}
+      style={{ cursor: "pointer" }}
       className={
         "rounded-lg pr-4 " +
         (enabled
@@ -75,9 +76,9 @@ const UpgradePiece = () => {
       {network.network !== undefined &&
         game.game !== undefined &&
         game.activePiece && (
-          <div>
-            <h1 className="text-lg mb-2"> SELECT A PIECE</h1>
-            <div className="grid grid-cols-3 gap-2">
+          <div className="p-4 bg-yellow-200 bg-opacity-80 rounded-lg">
+            <h1 className="text-lg mb-2"> SELECT A PIECE </h1>
+            <div className="grid grid-cols-2 gap-2">
               {pieceTypes.map((pieceType) => (
                 <div key={pieceType}>
                   <UpgradePieceButton

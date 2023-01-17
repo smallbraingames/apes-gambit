@@ -77,7 +77,7 @@ const ActivityStream = () => {
   }, [network]);
 
   return (
-    <div>
+    <div className="h-10 w-10 bg-green-200">
       <div>
         {activity.map((element, i) => (
           <div key={i}>{element}</div>
