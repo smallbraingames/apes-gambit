@@ -21,7 +21,7 @@ const JoinGame = (props: { game: Game }) => {
 
   return (
     <div>
-      <button className="bg-green-500 p-5" onClick={handleJoinGame}>
+      <button className="btn btn-primary" onClick={handleJoinGame}>
         Join Game
       </button>
     </div>
