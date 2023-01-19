@@ -1,6 +1,6 @@
 import { Coord, tween } from "@latticexyz/phaserx";
+import { MOVE_ANIMATION_DURATION, TILE_HEIGHT } from "../constants";
 
-import { MOVE_ANIMATION_DURATION } from "../constants";
 import { PieceState } from "../types";
 import { PieceType } from "../../network/types";
 import { getAssetKeyForPiece } from "./config/assets";
@@ -20,6 +20,17 @@ export const repeatIdleAnimation = async (
   });
 };
 
+export const getMoveAnimationDuration = (
+  position: Coord,
+  previousPosition: Coord
+): number =>
+  (Math.hypot(
+    previousPosition.x - position.x,
+    previousPosition.y - position.y
+  ) /
+    TILE_HEIGHT) *
+  MOVE_ANIMATION_DURATION;
+
 export const movePieceAnimation = async (
   gameObject: Phaser.GameObjects.Sprite,
   position: Coord,
@@ -29,11 +40,15 @@ export const movePieceAnimation = async (
   gameObject.setTexture(
     getAssetKeyForPiece(pieceType, PieceState.MOVE, isEnemy)
   );
+  const animationDuration = getMoveAnimationDuration(
+    { x: gameObject.x, y: gameObject.y },
+    position
+  );
   await Promise.all([
     tween(
       {
         targets: gameObject,
-        duration: MOVE_ANIMATION_DURATION / 2,
+        duration: animationDuration / 2,
         props: {
           angle: 40,
         },
@@ -45,7 +60,7 @@ export const movePieceAnimation = async (
     tween(
       {
         targets: gameObject,
-        duration: MOVE_ANIMATION_DURATION,
+        duration: animationDuration,
         props: { x: position.x, y: position.y },
         ease: Phaser.Math.Easing.Sine.InOut,
       },
