@@ -1,6 +1,6 @@
-import { Assets, MOVE_ANIMATION_DURATION, Sprites } from "../constants";
 import { Coord, tween } from "@latticexyz/phaserx";
 
+import { MOVE_ANIMATION_DURATION } from "../constants";
 import { PieceState } from "../types";
 import { PieceType } from "../../network/types";
 import { getAssetKeyForPiece } from "./config/assets";
