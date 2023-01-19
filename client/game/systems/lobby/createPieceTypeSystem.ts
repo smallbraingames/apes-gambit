@@ -1,5 +1,7 @@
-import { Game } from "../../types";
-import { Network } from "../../../network/types";
+import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
+import { Game, PieceState } from "../../types";
+import { Network, PieceType } from "../../../network/types";
+
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import setPieceSprite from "../../utils/setPieceSprite";
@@ -9,11 +11,13 @@ const createPieceTypeSystem = (
   game: Game
 ): Subscription[] => {
   const {
+    godEntityIndex,
     world,
     components: { PieceType },
   } = network;
 
   const {
+    components: { ActivePiece },
     scenes: {
       Main: { objectPool },
     },
@@ -23,11 +27,24 @@ const createPieceTypeSystem = (
     world,
     PieceType,
     (update) => {
+      const activePiece = getComponentValueStrict(ActivePiece, godEntityIndex)
+        .value as EntityIndex;
+
+      const pieceType: PieceType = getComponentValueStrict(
+        PieceType,
+        update.entity
+      ).value;
+
       const object = objectPool.get(update.entity, "Sprite");
       object.setComponent({
         id: PieceType.id,
         once: (gameObject) => {
-          setPieceSprite(update.entity, gameObject, game, network);
+          setPieceSprite(
+            gameObject,
+            pieceType,
+            PieceState.IDLE,
+            activePiece !== update.entity
+          );
         },
       });
     },
