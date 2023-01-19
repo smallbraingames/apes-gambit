@@ -1,43 +1,41 @@
-import { Assets, Sprites } from "../../constants";
+import { Asset, Assets, Sprite } from "@latticexyz/phaserx/src/types";
+
+import { PieceState } from "../../types";
+import { PieceType } from "../../../network/types";
+import { getAssetKeyForPiece } from "./assets";
+
+export const getSpriteKeyForPiece = (
+  pieceType: PieceType,
+  pieceState: PieceState,
+  isEnemy: boolean
+) => `sprite-${pieceType}-${pieceState}-${isEnemy}`;
+
+const getPieceSprites = () => {
+  const pieceTypes = [
+    PieceType.PAWN,
+    PieceType.KNIGHT,
+    PieceType.BISHOP,
+    PieceType.ROOK,
+    PieceType.QUEEN,
+    PieceType.KING,
+  ];
+  const pieceStates = [PieceState.IDLE, PieceState.MOVE];
+  const isEnemies = [true, false];
+  const sprites: { [key: string]: Sprite<Assets> } = {};
+  pieceTypes.forEach((pieceType) => {
+    pieceStates.forEach((pieceState) => {
+      isEnemies.forEach((isEnemy) => {
+        const key = getSpriteKeyForPiece(pieceType, pieceState, isEnemy);
+        sprites[key] = {
+          assetKey: getAssetKeyForPiece(pieceType, pieceState, isEnemy),
+        };
+      });
+    });
+  });
+  return sprites;
+};
 
 const sprites = {
-  // Main pieces
-  [Sprites.MainPawn]: {
-    assetKey: Assets.MainPawnSprite,
-  },
-  [Sprites.MainBishop]: {
-    assetKey: Assets.MainBishopSprite,
-  },
-  [Sprites.MainKnight]: {
-    assetKey: Assets.MainKnightSprite,
-  },
-  [Sprites.MainRook]: {
-    assetKey: Assets.MainRookSprite,
-  },
-  [Sprites.MainQueen]: {
-    assetKey: Assets.MainQueenSprite,
-  },
-  [Sprites.MainKing]: {
-    assetKey: Assets.MainKingSprite,
-  },
-  // Enemy pieces
-  [Sprites.EnemyPawn]: {
-    assetKey: Assets.EnemyPawnSprite,
-  },
-  [Sprites.EnemyBishop]: {
-    assetKey: Assets.EnemyBishopSprite,
-  },
-  [Sprites.EnemyKnight]: {
-    assetKey: Assets.EnemyKnightSprite,
-  },
-  [Sprites.EnemyRook]: {
-    assetKey: Assets.EnemyRookSprite,
-  },
-  [Sprites.EnemyQueen]: {
-    assetKey: Assets.EnemyQueenSprite,
-  },
-  [Sprites.EnemyKing]: {
-    assetKey: Assets.EnemyKingSprite,
-  },
+  ...getPieceSprites(),
 };
 export default sprites;
