@@ -22,8 +22,8 @@ const BRControls = () => {
       <div className={CONTROLLER_COMPONENT_CLASS_NAME}>
         {game.game && (
           <div>
-            {/* <JoinGame game={game.game} />
-            <SpawnPiece /> */}
+            <JoinGame game={game.game} />
+            <SpawnPiece />
             <div className="mb-2">
               <Points />
             </div>

@@ -1,20 +1,17 @@
 import { PIECE_SPRITE_SCALE, RenderDepth } from "../constants";
 
-import { EntityIndex } from "@latticexyz/recs";
-import { Game } from "../types";
-import { Network } from "../../network/types";
-import getSpriteForPiece from "./getSpriteForPiece";
+import { PieceState } from "../types";
+import { PieceType } from "../../network/types";
+import { getAssetKeyForPiece } from "./config/assets";
 
-const setPieceSprite = (
-  entity: EntityIndex,
+const setPieceSprite = async (
   gameObject: Phaser.GameObjects.Sprite,
-  game: Game,
-  network: Network,
-  isEnemy: boolean = false
+  pieceType: PieceType,
+  pieceState: PieceState,
+  isEnemy: boolean
 ) => {
-  const spriteAssetKey =
-    game.scenes.Main.config.sprites[getSpriteForPiece(entity, network, isEnemy)]
-      .assetKey;
+  gameObject.setOrigin(0.5, 0.5);
+  const spriteAssetKey = getAssetKeyForPiece(pieceType, pieceState, isEnemy);
   gameObject.setScale(PIECE_SPRITE_SCALE, PIECE_SPRITE_SCALE);
   gameObject.setTexture(spriteAssetKey);
   gameObject.setDepth(RenderDepth.PIECE);
