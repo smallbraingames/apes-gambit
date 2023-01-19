@@ -1,5 +1,8 @@
 import { EntityID, namespaceWorld } from "@latticexyz/recs";
 import { GAME_WORLD_NAMESPACE, INITIAL_ZOOM } from "./constants";
+import setupPiecePositionContextComponent, {
+  definePiecePositionContextComponent,
+} from "./components/setupPiecePositionContextComponent";
 
 import { Network } from "../network/types";
 import { Subscription } from "rxjs";
@@ -26,6 +29,10 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   const components = {
     HoveredPiece: defineNumberComponent(gameWorld, { id: "HoveredPiece" }),
     ActivePiece: defineNumberComponent(gameWorld, { id: "ActivePiece" }),
+    // Updates Piece Positions through a system call
+    // In order to associate piece positions with point additions or other piece deaths
+    // (this is done for animation purposes)
+    PiecePositionContext: definePiecePositionContextComponent(gameWorld),
   };
 
   const context = {
@@ -42,6 +49,7 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   // Setup game components
   setupHoveredPieceComponent(network, context);
   setupActivePieceComponent(network, context);
+  setupPiecePositionContextComponent(network, context);
 
   // Set zoom
   scenes.Main.camera.setZoom(INITIAL_ZOOM);
