@@ -51,7 +51,7 @@ const UpgradePieceButton = (props: {
           />
         </div>
         <div>
-          <div className="text-xs">{pieceInfo.name}</div>
+          <div className="label">{pieceInfo.name}</div>
           <div className="text-lg font-bold">{pieceInfo.points}</div>
         </div>
       </div>
