@@ -77,7 +77,7 @@ const UpgradePiece = () => {
         game.game !== undefined &&
         game.activePiece && (
           <div className="p-4 bg-yellow-200 bg-opacity-80 rounded-lg">
-            <h1 className="text-lg mb-2"> SELECT A PIECE </h1>
+            <h1 className="label"> SELECT A PIECE </h1>
             <div className="grid grid-cols-2 gap-2">
               {pieceTypes.map((pieceType) => (
                 <div key={pieceType}>

@@ -25,7 +25,7 @@ const PointDisplay = (props: {
           />
         </div>
         <div className="ml-2">
-          <div className="text-xs">BANANAS</div>
+          <div className="label">BANANAS</div>
           <div className="text-lg font-bold">{points?.value}</div>
         </div>
       </div>
