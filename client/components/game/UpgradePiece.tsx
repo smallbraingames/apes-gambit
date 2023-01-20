@@ -29,7 +29,7 @@ const UpgradePieceButton = (props: {
   };
 
   const pieceInfo = getPieceInfo(props.pieceType);
-  const enabled = true;
+  const enabled = points?.value ? points.value >= pieceInfo.points : false;
 
   return (
     <div
