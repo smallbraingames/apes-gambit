@@ -29,30 +29,35 @@ const UpgradePieceButton = (props: {
   };
 
   const pieceInfo = getPieceInfo(props.pieceType);
-  const enabled = points?.value ? points.value >= pieceInfo.points : false;
+  const enabled = true;
 
   return (
     <div
       onClick={handleSetPieceType}
-      style={{ cursor: "pointer" }}
       className={
-        "rounded-lg pr-4 " +
+        "rounded-xl text-gray-800 pr-4 border border-yellow-900 bg-opacity-10 " +
         (enabled
-          ? "bg-stone-100 text-yellow-600"
-          : "bg-stone-200 text-stone-400")
+          ? "bg-yellow-600 hover:bg-opacity-40 cursor-pointer"
+          : "bg-gray-600 saturate-0 cursor-not-allowed")
       }
     >
-      <div className="h-28 w-28 flex items-center">
-        <div className={enabled ? "opacity-100" : "opacity-50"}>
+      <div className="h-20 w-28 flex items-center">
+        <div
+          className={
+            enabled
+              ? "opacity-100 group-hover:-rotate-6 transform duration-150 ease-in"
+              : "opacity-100"
+          }
+        >
           <img
             alt={pieceInfo.name}
             src={pieceInfo.image}
             style={{ objectFit: "contain" }}
           />
         </div>
-        <div>
+        <div className="text-right">
           <div className="label">{pieceInfo.name}</div>
-          <div className="text-lg font-bold">{pieceInfo.points}</div>
+          <div className="bignumber">{pieceInfo.points}</div>
         </div>
       </div>
     </div>
@@ -76,11 +81,11 @@ const UpgradePiece = () => {
       {network.network !== undefined &&
         game.game !== undefined &&
         game.activePiece && (
-          <div className="p-4 bg-yellow-200 bg-opacity-80 rounded-lg">
-            <h1 className="label"> SELECT A PIECE </h1>
+          <div className="p-4 bg-yellow-400 bg-opacity-95 rounded-lg">
+            <h1 className="label mb-2 ml-1"> SELECT A PIECE </h1>
             <div className="grid grid-cols-2 gap-2">
               {pieceTypes.map((pieceType) => (
-                <div key={pieceType}>
+                <div className="group upgrade-piece" key={pieceType}>
                   <UpgradePieceButton
                     pieceType={pieceType}
                     network={network.network!}
