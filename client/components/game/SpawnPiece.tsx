@@ -18,7 +18,7 @@ const SpawnPiece = () => {
 
   return (
     <div>
-      <button className="bg-blue-500 p-5" onClick={handleSpawnPiece}>
+      <button className="btn btn-secondary" onClick={handleSpawnPiece}>
         Spawn Piece
       </button>
     </div>

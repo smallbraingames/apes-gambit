@@ -25,8 +25,11 @@ const PointDisplay = (props: {
           />
         </div>
         <div className="ml-2">
-          <div className="text-xs">BANANAS</div>
-          <div className="text-lg font-bold">{points?.value}</div>
+          {/* Commented out because I don't think we need it, if we provide clear instructions to players pre-game. */}
+          {/* <div className="label">BANANAS</div> */}
+          <div className="bignumber flex items-center">
+            {points?.value || "00"}
+          </div>
         </div>
       </div>
     </div>
@@ -40,7 +43,7 @@ const Points = () => {
   return (
     <>
       {network.network && game.activePiece && (
-        <div className="bg-stone-100 rounded-lg p-4">
+        <div className="bg-yellow-400 bg-opacity-90 rounded-lg p-4 max-w-md">
           <PointDisplay
             network={network.network}
             activePiece={game.activePiece}
