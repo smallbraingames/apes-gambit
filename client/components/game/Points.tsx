@@ -27,7 +27,9 @@ const PointDisplay = (props: {
         <div className="ml-2">
           {/* Commented out because I don't think we need it, if we provide clear instructions to players pre-game. */}
           {/* <div className="label">BANANAS</div> */}
-          <div className="bignumber flex items-center">{points?.value}</div>
+          <div className="bignumber flex items-center">
+            {points?.value || "00"}
+          </div>
         </div>
       </div>
     </div>
