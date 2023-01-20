@@ -1,6 +1,9 @@
+import { useState } from "react";
 import Image from "next/image";
 
+// TODO: Conditionally render the below based on useState var
 const TitleScreen = () => {
+  const [play, setPlay] = useState(false);
   return (
     <div className="bg-blue-800 bg-opacity-50 h-full w-full fixed flex items-start justify-center">
       <div className="flex flex-col justify-center rounded-xl  w-full max-w-2xl p-8">
@@ -23,7 +26,9 @@ const TitleScreen = () => {
           </div>
         </div>
         <div className="flex flex-col items-center">
-          <button className="btn btn-primary">Play</button>
+          <button className="btn btn-primary" onClick={() => setPlay(true)}>
+            Play
+          </button>
           <button className="btn btn-secondary">Help</button>
         </div>
       </div>
