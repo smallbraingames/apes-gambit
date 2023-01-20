@@ -3,6 +3,8 @@ import {
   Type,
   World,
   defineComponent,
+  getComponentEntities,
+  getComponentValueStrict,
   setComponent,
 } from "@latticexyz/recs";
 
@@ -30,9 +32,19 @@ const setupPiecePositionContextComponent = (network: Network, game: Game) => {
   } = game;
 
   const {
+    world,
     systemCallStreams,
     components: { PiecePosition, BRIsAlive },
   } = network;
+
+  // Setup with initial piece position
+  [...getComponentEntities(PiecePosition)].forEach((entity) => {
+    const position = getComponentValueStrict(PiecePosition, entity);
+    setComponent(PiecePositionContext, entity, {
+      ...position,
+      pieceTaken: undefined,
+    });
+  });
 
   systemCallStreams["system.BRMovePieceSystem"].subscribe((call) => {
     const positionUpdates = call.updates.filter(

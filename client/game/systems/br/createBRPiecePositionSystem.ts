@@ -107,6 +107,7 @@ const createBRPiecePositionSystem = (
           await Promise.all([moveAnimation, cameraAnimation]);
         },
         once: (gameObject) => {
+          console.log("setting position", pieceX, pieceY);
           gameObject.setPosition(pieceX, pieceY);
           gameObject.setAngle(0);
           loopPieceIdleAnimation(gameObject, pieceX, pieceY);

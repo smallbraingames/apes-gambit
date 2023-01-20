@@ -36,6 +36,7 @@ const createBRPieceTypeSystem = (
       if (pieceType === undefined)
         throw Error("No piece type component for active game piece");
       const object = objectPool.get(update.entity, "Sprite");
+      console.log("is active piece", activePiece !== update.entity);
       object.setComponent({
         id: PieceType.id,
         once: (gameObject) => {
