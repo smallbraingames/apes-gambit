@@ -2,9 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  /* Default font declaration */
+
+  /* TODO: Add add'l font formats to max out compatibility */
+  @font-face {
+    font-family: "Fredoka";
+    src: url("/fonts/fredoka/Fredoka-Light.woff") format("woff");
+    font-weight: 200;
+  }
+
+  @font-face {
+    font-family: "Fredoka";
+    src: url("/fonts/fredoka/Fredoka-Regular.woff") format("woff");
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: "Fredoka";
+    src: url("/fonts/fredoka/Fredoka-Bold.woff") format("woff");
+    font-weight: 800;
+  }
+}
+
+* {
+  font-family: "Fredoka";
+}
+
 @layer components {
   /* Text Components */
-
   .label {
     @apply text-sm uppercase;
   }
