@@ -81,7 +81,7 @@ const UpgradePiece = () => {
       {network.network !== undefined &&
         game.game !== undefined &&
         game.activePiece && (
-          <div className="p-4 bg-yellow-400 bg-opacity-95 rounded-lg">
+          <div className="p-4 bg-yellow-400 bg-opacity-95 rounded-lg max-w-xs">
             <h1 className="label mb-2 ml-1"> SELECT A PIECE </h1>
             <div className="grid grid-cols-2 gap-2">
               {pieceTypes.map((pieceType) => (
