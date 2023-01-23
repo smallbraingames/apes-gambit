@@ -53,6 +53,12 @@
   }
 }
 
+/* Game UI components */
+
+.container-gamestats {
+  @apply bg-yellow-400 bg-opacity-90 rounded-lg p-4 my-1;
+}
+
 @layer utilities {
   .text-outline-1 {
     text-shadow: -2px -2px 0 #c08d35, 2px -2px 0 #c08d35, -2px 2px 0 #c08d35,
