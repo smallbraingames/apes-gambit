@@ -1,6 +1,8 @@
+import { useState } from "react";
+
 const SummaryCard = () => {
   return (
-    <div className="relative flex flex-col w-full items-center m-4 px-4 pt-4 pb-2  bg-yellow-400 bg-opacity-95 rounded-lg">
+    <div className="relative flex flex-col w-full max-w-xs items-center m-4 px-4 pt-4 pb-2  bg-yellow-400 bg-opacity-95 rounded-lg">
       <div className="w-full flex flex-col items-center h-auto transform -translate-y-16">
         <span className="flex items-center justify-center w-24 h-24 rounded-full border-2 border-yellow-800  bg-yellow-400">
           {/* {/* TODO: Dynamically display win/lose icons */}
