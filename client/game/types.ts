@@ -17,7 +17,6 @@ export enum EntityType {
 export enum PieceState {
   IDLE = "idle",
   MOVE = "move",
-  ATTACK = "attack",
 }
 
 export type GameConfig = {

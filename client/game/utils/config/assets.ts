@@ -33,7 +33,7 @@ const getPieceAssets = (): { [key: string]: Asset } => {
     PieceType.QUEEN,
     PieceType.KING,
   ];
-  const pieceStates = [PieceState.IDLE, PieceState.MOVE, PieceState.ATTACK];
+  const pieceStates = [PieceState.IDLE, PieceState.MOVE];
   const isEnemies = [true, false];
   const assets: { [key: string]: Asset } = {};
   pieceTypes.forEach((pieceType) => {
