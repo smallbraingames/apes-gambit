@@ -32,7 +32,7 @@ const BRControls = () => {
               <JoinGame game={game.game} />
               <SpawnPiece />
             </div>
-            Displays the UpgradePiece window
+
             {/* <div>
               <UpgradePiece />
             </div> */}
