@@ -52,3 +52,10 @@
     @apply bg-gray-50 border-gray-50 text-gray-800 hover:border-gray-600;
   }
 }
+
+@layer utilities {
+  .text-outline-1 {
+    text-shadow: -2px -2px 0 #c08d35, 2px -2px 0 #c08d35, -2px 2px 0 #c08d35,
+      2px 2px 0 #c08d35;
+  }
+}
