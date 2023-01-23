@@ -14,11 +14,6 @@ export enum EntityType {
   NON_BR_PIECE, // A piece, but not in the given game
 }
 
-export enum PieceState {
-  IDLE = "idle",
-  MOVE = "move",
-}
-
 export type GameConfig = {
   startTime: number;
   status: GameStatus;

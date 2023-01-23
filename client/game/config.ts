@@ -1,5 +1,11 @@
 import {
-  Animations,
+  Asset,
+  defineCameraConfig,
+  defineMapConfig,
+  defineScaleConfig,
+  defineSceneConfig,
+} from "@latticexyz/phaserx";
+import {
   Assets,
   INITIAL_ZOOM,
   Maps,
@@ -7,18 +13,11 @@ import {
   TILE_HEIGHT,
   TILE_WIDTH,
 } from "./constants";
-import {
-  Asset,
-  defineCameraConfig,
-  defineMapConfig,
-  defineScaleConfig,
-  defineSceneConfig,
-} from "@latticexyz/phaserx";
 
 import assets from "./utils/config/assets";
 import sprites from "./utils/config/sprites";
 
-const ANIMATION_INTERVAL = 50;
+const ANIMATION_INTERVAL = 200;
 export const phaserConfig = {
   sceneConfig: {
     [Scenes.Main]: defineSceneConfig({

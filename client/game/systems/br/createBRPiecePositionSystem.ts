@@ -4,10 +4,6 @@ import {
   PIECE_X_OFFSET,
   PIECE_Y_OFFSET,
 } from "../../constants";
-import {
-  movePieceAnimation,
-  repeatIdleAnimation,
-} from "../../utils/pieceAnimations";
 import { tileCoordToPixelCoord, tween } from "@latticexyz/phaserx";
 
 import { Game } from "../../types";
@@ -46,12 +42,6 @@ const createBRPiecePositionSystem = (
       if (!isActiveGamePiece(update.entity, network, gameEntity!)) return;
 
       const position = update.value[0];
-      const previousPosition = tileCoordToPixelCoord(
-        update.value[1] ? update.value[1] : { x: 0, y: 0 },
-        Main.tileWidth,
-        Main.tileHeight
-      );
-
       if (!position) {
         objectPool.remove(update.entity);
         return;
@@ -68,19 +58,17 @@ const createBRPiecePositionSystem = (
 
       const pieceX = x + PIECE_X_OFFSET;
       const pieceY = y + PIECE_Y_OFFSET;
-      console.log("SETTING THE THING");
+
       object.setComponent({
         id: PiecePosition.id,
         now: async (gameObject) => {
           await Promise.all([
-            movePieceAnimation(
-              gameObject,
-              { x: pieceX, y: pieceY },
-              {
-                x: previousPosition.x + PIECE_X_OFFSET,
-                y: previousPosition.y + PIECE_Y_OFFSET,
-              }
-            ),
+            tween({
+              targets: gameObject,
+              duration: MOVE_ANIMATION_DURATION,
+              props: { x: pieceX, y: pieceY },
+              ease: Phaser.Math.Easing.Sine.InOut,
+            }),
             activePiece === update.entity
               ? tweenCamera(camera, Main, pieceX, pieceY)
               : async () => true,
@@ -88,8 +76,6 @@ const createBRPiecePositionSystem = (
         },
         once: (gameObject) => {
           gameObject.setPosition(pieceX, pieceY);
-          gameObject.setAngle(0);
-          repeatIdleAnimation(gameObject, pieceX, pieceY);
         },
       });
     },
