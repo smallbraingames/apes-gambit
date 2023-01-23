@@ -6,7 +6,7 @@ const Game = () => {
   return (
     <>
       <GameProvider>
-        <div className="absolute p-6 h-full">
+        <div className="absolute p-6 h-full w-full">
           <BRControls />
           <div className="absolute bottom-6">
             <ActivityStream />
