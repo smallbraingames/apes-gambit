@@ -37,7 +37,6 @@ export const playMovePieceAnimation = async (
   pieceType: PieceType,
   isEnemy: boolean
 ) => {
-  console.log("move piece");
   gameObject.setTexture(
     getAssetKeyForPiece(pieceType, PieceState.MOVE, isEnemy)
   );
@@ -79,8 +78,6 @@ export const playPieceAttackAnimation = async (
   pieceType: PieceType,
   isEnemy: boolean
 ) => {
-  console.log("attack piece");
-
   gameObject.setTexture(
     getAssetKeyForPiece(pieceType, PieceState.ATTACK, isEnemy)
   );
