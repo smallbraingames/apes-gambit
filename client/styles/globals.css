@@ -56,7 +56,7 @@
 /* Game UI components */
 
 .container-gamestats {
-  @apply bg-yellow-400 bg-opacity-90 rounded-lg p-4 my-1;
+  @apply flex bg-yellow-400 bg-opacity-90 rounded-lg px-4 py-3 my-1;
 }
 
 @layer utilities {
