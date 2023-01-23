@@ -11,6 +11,7 @@ import SpawnPiece from "./SpawnPiece";
 import UpgradePiece from "./UpgradePiece";
 import SummaryCard from "./SummaryCard";
 import PlayerCount from "./PlayerCount";
+import Timer from "./Timer";
 
 const BRControls = () => {
   const game = useContext(GameContext);
@@ -24,9 +25,12 @@ const BRControls = () => {
       <div className={CONTROLLER_COMPONENT_CLASS_NAME}>
         {game.game && (
           <div className="block">
-            <div className="w-full flex justify-between mb-2">
+            <div className="flex justify-between w-full gap-2 mb-2">
               <Points />
-              <PlayerCount />
+              <span className="flex w-full justify-end gap-2">
+                <PlayerCount />
+                <Timer />
+              </span>
             </div>
             <div>
               <JoinGame game={game.game} />
