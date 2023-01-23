@@ -1,10 +1,6 @@
 import { Assets, MOVE_ANIMATION_DURATION, Sprites } from "../constants";
 import { Coord, tween } from "@latticexyz/phaserx";
 
-import { PieceState } from "../types";
-import { PieceType } from "../../network/types";
-import { getAssetKeyForPiece } from "./config/assets";
-
 export const repeatIdleAnimation = async (
   gameObject: Phaser.GameObjects.Sprite,
   x: number,
@@ -22,13 +18,9 @@ export const repeatIdleAnimation = async (
 
 export const movePieceAnimation = async (
   gameObject: Phaser.GameObjects.Sprite,
-  position: Coord,
-  pieceType: PieceType,
-  isEnemy: boolean
+  position: Coord
 ) => {
-  gameObject.setTexture(
-    getAssetKeyForPiece(pieceType, PieceState.MOVE, isEnemy)
-  );
+  //gameObject.setTexture(Assets.MainPawnMoveSprite);
   await Promise.all([
     tween(
       {
@@ -52,7 +44,5 @@ export const movePieceAnimation = async (
       { keepExistingTweens: true }
     ),
   ]);
-  gameObject.setTexture(
-    getAssetKeyForPiece(pieceType, PieceState.IDLE, isEnemy)
-  );
+  //gameObject.setTexture(Assets.MainPawnSprite);
 };
