@@ -10,8 +10,7 @@ const tweenCamera = async (
   camera: Camera,
   tilemap: AnimatedTilemap<number, string, string>,
   x: number,
-  y: number,
-  duration: number
+  y: number
 ) => {
   return tween({
     // @ts-ignore
@@ -20,7 +19,7 @@ const tweenCamera = async (
       scrollX: x,
       scrollY: y,
     },
-    duration,
+    duration: MOVE_ANIMATION_DURATION,
     ease: "Sine.easeInOut",
     onStart: () => {
       const width = camera.phaserCamera.worldView.width;

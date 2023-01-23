@@ -2,7 +2,6 @@ import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
 import { Network, PieceType } from "../../../network/types";
 import { PIECE_X_OFFSET, PIECE_Y_OFFSET } from "../../constants";
 import {
-  getMoveAnimationDuration,
   movePieceAnimation,
   repeatIdleAnimation,
 } from "../../utils/pieceAnimations";
@@ -78,16 +77,7 @@ const createBRPiecePositionSystem = (
               isEnemy
             ),
             !isEnemy
-              ? tweenCamera(
-                  camera,
-                  Main,
-                  pieceX,
-                  pieceY,
-                  getMoveAnimationDuration(
-                    { x: pieceX, y: pieceY },
-                    { x: gameObject.x, y: gameObject.y }
-                  )
-                )
+              ? tweenCamera(camera, Main, pieceX, pieceY)
               : async () => true,
           ]);
         },
