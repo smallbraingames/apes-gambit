@@ -1,4 +1,5 @@
 import GameLoader from "../components/game/GameLoader";
+import TitleScreen from "../components/TitleScreen";
 import Head from "next/head";
 import NetworkProvider from "../context/NetworkContext";
 
@@ -12,6 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <TitleScreen />
         <GameLoader />
       </main>
     </>
