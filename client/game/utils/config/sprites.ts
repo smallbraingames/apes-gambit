@@ -19,7 +19,12 @@ const getPieceSprites = () => {
     PieceType.QUEEN,
     PieceType.KING,
   ];
-  const pieceStates = [PieceState.IDLE, PieceState.MOVE, PieceState.ATTACK];
+  const pieceStates = [
+    PieceState.IDLE,
+    PieceState.MOVE,
+    PieceState.ATTACK,
+    PieceState.DEAD,
+  ];
   const isEnemies = [true, false];
   const sprites: { [key: string]: Sprite<Assets> } = {};
   pieceTypes.forEach((pieceType) => {

@@ -18,6 +18,7 @@ export enum PieceState {
   IDLE = "idle",
   MOVE = "move",
   ATTACK = "attack",
+  DEAD = "dead",
 }
 
 export type GameConfig = {

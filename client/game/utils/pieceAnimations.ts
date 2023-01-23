@@ -1,8 +1,9 @@
 import { Coord, tween } from "@latticexyz/phaserx";
+import { Game, PieceState } from "../types";
 import { MOVE_ANIMATION_DURATION, TILE_HEIGHT } from "../constants";
+import { Network, PieceType } from "../../network/types";
 
-import { PieceState } from "../types";
-import { PieceType } from "../../network/types";
+import { EntityIndex } from "@latticexyz/recs";
 import { getAssetKeyForPiece } from "./config/assets";
 
 export const loopPieceIdleAnimation = async (
@@ -37,7 +38,6 @@ export const playMovePieceAnimation = async (
   pieceType: PieceType,
   isEnemy: boolean
 ) => {
-  console.log("move piece");
   gameObject.setTexture(
     getAssetKeyForPiece(pieceType, PieceState.MOVE, isEnemy)
   );
@@ -74,24 +74,26 @@ export const playMovePieceAnimation = async (
 };
 
 export const playPieceAttackAnimation = async (
-  gameObject: Phaser.GameObjects.Sprite,
-  position: Coord,
-  pieceType: PieceType,
-  isEnemy: boolean
+  mainGameObject: Phaser.GameObjects.Sprite,
+  mainPosition: Coord,
+  mainPieceType: PieceType,
+  isMainEnemy: boolean,
+  game: Game,
+  network: Network,
+  takenEntity: EntityIndex
 ) => {
-  console.log("attack piece");
-
-  gameObject.setTexture(
-    getAssetKeyForPiece(pieceType, PieceState.ATTACK, isEnemy)
+  // 1. Move Main Piece
+  mainGameObject.setTexture(
+    getAssetKeyForPiece(mainPieceType, PieceState.ATTACK, isMainEnemy)
   );
   const animationDuration = getMoveAnimationDuration(
-    { x: gameObject.x, y: gameObject.y },
-    position
+    { x: mainGameObject.x, y: mainGameObject.y },
+    mainPosition
   );
   await Promise.all([
     tween(
       {
-        targets: gameObject,
+        targets: mainGameObject,
         duration: animationDuration / 2,
         props: {
           angle: 40,
@@ -103,15 +105,19 @@ export const playPieceAttackAnimation = async (
     ),
     tween(
       {
-        targets: gameObject,
+        targets: mainGameObject,
         duration: animationDuration,
-        props: { x: position.x, y: position.y },
+        props: { x: mainPosition.x, y: mainPosition.y },
         ease: Phaser.Math.Easing.Sine.InOut,
       },
       { keepExistingTweens: true }
     ),
   ]);
-  gameObject.setTexture(
-    getAssetKeyForPiece(pieceType, PieceState.IDLE, isEnemy)
+  mainGameObject.setTexture(
+    getAssetKeyForPiece(mainPieceType, PieceState.IDLE, isMainEnemy)
   );
+  // Switch expression of other piece
+  console.log(game.scenes.Main);
+
+  game.scenes.Main.phaserScene.physics.collide(mainGameObject, mainGameObject);
 };
