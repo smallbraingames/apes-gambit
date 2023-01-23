@@ -20,7 +20,7 @@ const PointDisplay = (props: {
         <div className="h-10 w-10">
           <img
             alt="Banana"
-            src="icons/banana.svg"
+            src="icons/newbanana.svg"
             style={{ objectFit: "contain" }}
           />
         </div>
@@ -43,7 +43,7 @@ const Points = () => {
   return (
     <>
       {network.network && game.activePiece && (
-        <div className="bg-yellow-400 bg-opacity-90 rounded-lg p-4 max-w-md">
+        <div className="container-gamestats">
           <PointDisplay
             network={network.network}
             activePiece={game.activePiece}
