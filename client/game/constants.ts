@@ -28,7 +28,7 @@ export enum Animations {
 }
 
 export enum Assets {
-  ChessTileset = "OverworldTileset",
+  ChessTileset = "ChessTileset",
   Shadow = "Shadow",
 }
 

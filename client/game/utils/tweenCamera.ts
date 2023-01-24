@@ -4,7 +4,7 @@ import {
   TILE_OVERLAY_RENDER_MULTIPLE,
 } from "../constants";
 
-import { renderBoardInView } from "./renderBoard";
+import { renderBoardInView } from "./createChessBoardTilemap";
 
 const tweenCamera = async (
   camera: Camera,
