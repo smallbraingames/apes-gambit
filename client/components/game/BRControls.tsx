@@ -12,6 +12,7 @@ import UpgradePiece from "./UpgradePiece";
 import SummaryCard from "./SummaryCard";
 import PlayerCount from "./PlayerCount";
 import Timer from "./Timer";
+import GameClock from "./GameClock";
 
 const BRControls = () => {
   const game = useContext(GameContext);
@@ -27,9 +28,10 @@ const BRControls = () => {
           <div className="block">
             <div className="flex justify-between w-full gap-2 mb-2">
               <Points />
+              <Timer />
               <span className="flex w-full justify-end gap-2">
                 <PlayerCount />
-                <Timer />
+                <GameClock />
               </span>
             </div>
             <div>
