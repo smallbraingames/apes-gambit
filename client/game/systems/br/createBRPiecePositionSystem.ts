@@ -1,8 +1,4 @@
-import {
-  EntityIndex,
-  getComponentValueStrict,
-  getEntitiesWithValue,
-} from "@latticexyz/recs";
+import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
 import { Network, PieceType } from "../../../network/types";
 import { PIECE_X_OFFSET, PIECE_Y_OFFSET } from "../../constants";
 import {
@@ -13,7 +9,6 @@ import {
 } from "../../utils/pieceAnimations";
 import { tileCoordToPixelCoord, tween } from "@latticexyz/phaserx";
 
-import { Coord } from "@latticexyz/utils";
 import { Game } from "../../types";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";

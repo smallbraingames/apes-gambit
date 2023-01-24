@@ -1,30 +1,73 @@
+import {
+  Assets,
+  GAME_WORLD_NAMESPACE,
+  Scenes,
+  TILE_HEIGHT,
+  TILE_WIDTH,
+} from "./constants";
 import { EntityID, namespaceWorld } from "@latticexyz/recs";
-import { GAME_WORLD_NAMESPACE, INITIAL_ZOOM } from "./constants";
 import setupPiecePositionContextComponent, {
   definePiecePositionContextComponent,
 } from "./components/setupPiecePositionContextComponent";
 
 import { Network } from "../network/types";
 import { Subscription } from "rxjs";
-import { createPhaserEngine } from "@latticexyz/phaserx";
-import createSystemManagerSystem from "./systems/createSystemManagerSystem";
+import { config } from "./config";
+import { createCamera } from "@latticexyz/phaserx";
+import createChessBoardTilemap from "./utils/createChessBoardTilemap";
+import createPhaserGame from "../phaser/createPhaserGame";
+import createScene from "../phaser/createScene";
 import { defineNumberComponent } from "@latticexyz/std-client";
-import { phaserConfig } from "./config";
-import renderBoard from "./utils/renderBoard";
+import load from "../phaser/load";
 import setupActivePieceComponent from "./components/setupActivePieceComponent";
 import setupHoveredPieceComponent from "./components/setupHoveredPieceComponent";
 
 export async function createGame(network: Network, gameEntity?: EntityID) {
-  const {
-    game,
-    scenes,
-    dispose: disposePhaser,
-  } = await createPhaserEngine(phaserConfig);
+  const sceneConstructors = Object.keys(config.scenes).map((key) => {
+    return createScene({ key });
+  });
+
+  const phaserConfig = {
+    type: Phaser.WEBGL,
+    scale: {
+      parent: "phaser-game",
+      zoom: 1,
+      mode: Phaser.Scale.RESIZE,
+    },
+    pixelArt: false,
+    autoFocus: true,
+    render: {
+      antialiasGL: false,
+      pixelArt: false,
+    },
+    scene: sceneConstructors,
+  };
+
+  const game = await createPhaserGame(phaserConfig);
+
+  // Load scene assets and setup scene object
+  const scenes: { [key: string]: Phaser.Scene } = {};
+  await Promise.all(
+    game.game.scene.getScenes(false).map(async (scene) => {
+      const key = scene.scene.key;
+      scenes[scene.scene.key] = scene;
+
+      const assets = [];
+      for (const [_, asset] of Object.entries(config.scenes[key].assets)) {
+        assets.push(load(scene, asset));
+      }
+      await Promise.all(assets);
+    })
+  );
+
+  createCamera(scenes[Scenes.Main].cameras.main, {
+    pinchSpeed: 1,
+    wheelSpeed: 1,
+    maxZoom: 2,
+    minZoom: 0.1,
+  });
 
   const gameWorld = namespaceWorld(network.world, GAME_WORLD_NAMESPACE);
-
-  // A registry for non-entity game objects
-  const gameObjectRegistry = new Map<string, Phaser.GameObjects.Group>();
 
   const components = {
     HoveredPiece: defineNumberComponent(gameWorld, { id: "HoveredPiece" }),
@@ -38,12 +81,10 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   const context = {
     gameEntity,
     gameWorld,
-    gameObjectRegistry,
     components,
     subscribedSystems: [] as Subscription[],
     game,
     scenes,
-    disposePhaser,
   };
 
   // Setup game components
@@ -51,18 +92,19 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   setupActivePieceComponent(network, context);
   setupPiecePositionContextComponent(network, context);
 
-  // Set zoom
-  scenes.Main.camera.setZoom(INITIAL_ZOOM);
+  // Setup chessboard
+  createChessBoardTilemap(
+    scenes[Scenes.Main],
+    TILE_WIDTH,
+    TILE_HEIGHT,
+    Assets.ChessTileset
+  );
 
   // Set input passes down from top
-  scenes.Main.phaserScene.input.setTopOnly(false);
-
-  // Setup chessboard
-  renderBoard(context);
-  scenes.Main.camera.centerOn(0, 1);
+  scenes[Scenes.Main].input.setTopOnly(false);
 
   // Setup system manager
-  createSystemManagerSystem(network, context);
+  //createSystemManagerSystem(network, context);
 
   network.startSync();
 
