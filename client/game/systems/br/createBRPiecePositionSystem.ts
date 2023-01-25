@@ -1,19 +1,18 @@
 import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
 import { Network, PieceType } from "../../../network/types";
-import { PIECE_X_OFFSET, PIECE_Y_OFFSET } from "../../constants";
+import { PIECE_SPRITE_ID, TILE_HEIGHT, TILE_WIDTH } from "../../constants";
 import {
-  getMoveAnimationDuration,
   loopPieceIdleAnimation,
   playMovePieceAnimation,
   playPieceAttackAnimation,
 } from "../../utils/pieceAnimations";
-import { tileCoordToPixelCoord, tween } from "@latticexyz/phaserx";
 
 import { Game } from "../../types";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
+import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
 import isActiveGamePiece from "../../utils/isActiveGamePiece";
-import tweenCamera from "../../utils/tweenCamera";
+import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
 
 const createBRPiecePositionSystem = (
   network: Network,
@@ -26,33 +25,32 @@ const createBRPiecePositionSystem = (
   } = network;
 
   const {
+    objectRegistry,
     gameEntity,
     components: { ActivePiece, PiecePositionContext },
-    scenes: {
-      Main: {
-        objectPool,
-        camera,
-        maps: { Main },
-      },
-    },
+    scenes: { Main },
   } = game;
 
   const subscription = defineComponentSystemUnsubscribable(
     world,
     PiecePositionContext,
-    (update) => {
+    async (update) => {
       if (!isActiveGamePiece(update.entity, network, gameEntity!)) return;
       const positionContext = update.value[0];
 
       if (!positionContext) {
-        objectPool.remove(update.entity);
+        objectRegistry.remove(update.entity, PIECE_SPRITE_ID);
         return;
       }
-      const object = objectPool.get(update.entity, "Sprite");
+      const sprite = getPieceSpriteGameObject(
+        update.entity,
+        objectRegistry,
+        Main
+      );
       const { x, y } = tileCoordToPixelCoord(
         positionContext,
-        Main.tileWidth,
-        Main.tileHeight
+        TILE_WIDTH,
+        TILE_HEIGHT
       );
 
       const activePiece = getComponentValueStrict(ActivePiece, godEntityIndex)
@@ -63,51 +61,42 @@ const createBRPiecePositionSystem = (
         update.entity
       ).value;
 
-      const isEnemy = activePiece != update.entity;
+      const isEnemy = activePiece !== update.entity;
 
-      const pieceX = x + PIECE_X_OFFSET;
-      const pieceY = y + PIECE_Y_OFFSET;
+      let moveAnimation;
+      if (positionContext.pieceTaken !== undefined) {
+        moveAnimation = playPieceAttackAnimation(
+          sprite,
+          { x, y },
+          pieceType,
+          isEnemy
+        );
+      } else {
+        moveAnimation = playMovePieceAnimation(
+          sprite,
+          { x, y },
+          pieceType,
+          isEnemy
+        );
+      }
+      // const cameraAnimation = !isEnemy
+      //   ? tweenCamera(
+      //       camera,
+      //       Main,
+      //       pieceX,
+      //       pieceY,
+      //       getMoveAnimationDuration(
+      //         { x: pieceX, y: pieceY },
+      //         { x: gameObject.x, y: gameObject.y }
+      //       )
+      //     )
+      //   : async () => true;
+      await Promise.all([moveAnimation]);
 
-      object.setComponent({
-        id: PiecePositionContext.id,
-        now: async (gameObject) => {
-          let moveAnimation;
-          if (positionContext.pieceTaken !== undefined) {
-            moveAnimation = playPieceAttackAnimation(
-              gameObject,
-              { x: pieceX, y: pieceY },
-              pieceType,
-              isEnemy
-            );
-          } else {
-            moveAnimation = playMovePieceAnimation(
-              gameObject,
-              { x: pieceX, y: pieceY },
-              pieceType,
-              isEnemy
-            );
-          }
-          const cameraAnimation = !isEnemy
-            ? tweenCamera(
-                camera,
-                Main,
-                pieceX,
-                pieceY,
-                getMoveAnimationDuration(
-                  { x: pieceX, y: pieceY },
-                  { x: gameObject.x, y: gameObject.y }
-                )
-              )
-            : async () => true;
-          await Promise.all([moveAnimation, cameraAnimation]);
-        },
-        once: (gameObject) => {
-          console.log("setting position", pieceX, pieceY);
-          gameObject.setPosition(pieceX, pieceY);
-          gameObject.setAngle(0);
-          loopPieceIdleAnimation(gameObject, pieceX, pieceY);
-        },
-      });
+      //console.log("setting position", pieceX, pieceY);
+      sprite.setPosition(x, y);
+      sprite.setAngle(0);
+      loopPieceIdleAnimation(sprite, x, y);
     },
     { runOnInit: true }
   );

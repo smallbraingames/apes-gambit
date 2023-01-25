@@ -1,13 +1,11 @@
-import { Assets, PIECE_SPRITE_ID } from "../../constants";
 import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
 import { Game, PieceState } from "../../types";
 import { Network, PieceType } from "../../../network/types";
 
+import { PIECE_SPRITE_ID } from "../../constants";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
-import { getAssetKeyForPiece } from "../../utils/config/assets";
 import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
-import { getSpriteKeyForPiece } from "../../utils/config/sprites";
 import setPieceSprite from "../../utils/setPieceSprite";
 
 const createPieceTypeSystem = (
@@ -30,8 +28,8 @@ const createPieceTypeSystem = (
     world,
     PieceType,
     (update) => {
-      // const activePiece = getComponentValueStrict(ActivePiece, godEntityIndex)
-      //   .value as EntityIndex;
+      const activePiece = getComponentValueStrict(ActivePiece, godEntityIndex)
+        .value as EntityIndex;
 
       const pieceType: PieceType = getComponentValueStrict(
         PieceType,
@@ -45,7 +43,12 @@ const createPieceTypeSystem = (
         Main
       );
 
-      setPieceSprite(sprite, pieceType, PieceState.IDLE, false);
+      setPieceSprite(
+        sprite,
+        pieceType,
+        PieceState.IDLE,
+        update.entity !== activePiece
+      );
 
       objectRegistry.set(update.entity, PIECE_SPRITE_ID, sprite);
     }

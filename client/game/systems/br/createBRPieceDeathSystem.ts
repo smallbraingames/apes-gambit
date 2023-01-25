@@ -1,6 +1,7 @@
 import { EntityType, Game } from "../../types";
 
 import { Network } from "../../../network/types";
+import { PIECE_SPRITE_ID } from "../../constants";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getEntityType from "../../utils/getEntityType";
@@ -14,12 +15,7 @@ const createBRPieceDeathSystem = (
     components: { BRIsAlive: IsAlive },
   } = network;
 
-  const {
-    gameEntity,
-    scenes: {
-      Main: { objectPool },
-    },
-  } = game;
+  const { objectRegistry, gameEntity } = game;
 
   const subscription = defineComponentSystemUnsubscribable(
     world,
@@ -34,7 +30,7 @@ const createBRPieceDeathSystem = (
 
       const isAlive = update.value[0];
       if (!isAlive) {
-        objectPool.remove(update.entity);
+        objectRegistry.remove(update.entity, PIECE_SPRITE_ID);
         return;
       }
     },
