@@ -32,7 +32,6 @@ const setupPiecePositionContextComponent = (network: Network, game: Game) => {
   } = game;
 
   const {
-    world,
     systemCallStreams,
     components: { PiecePosition, BRIsAlive },
   } = network;

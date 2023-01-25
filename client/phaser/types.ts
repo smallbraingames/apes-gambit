@@ -1,3 +1,5 @@
+import createObjectRegistry from "./createObjectRegistry";
+
 export enum AssetType {
   IMAGE,
   SPRITESHEET,
@@ -31,3 +33,5 @@ export type Asset =
 export type GameConfig = {
   scenes: { [key: string]: { assets: { [key: string]: Asset } } };
 };
+
+export type ObjectRegistry = ReturnType<typeof createObjectRegistry>;

@@ -1,9 +1,16 @@
-import { PIECE_X_OFFSET, PIECE_Y_OFFSET } from "../../constants";
+import {
+  PIECE_SPRITE_ID,
+  PIECE_X_OFFSET,
+  PIECE_Y_OFFSET,
+  TILE_HEIGHT,
+  TILE_WIDTH,
+} from "../../constants";
 
 import { Game } from "../../types";
 import { Network } from "../../../network/types";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
+import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
 import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
 
 const createPiecePositionSystem = (
@@ -16,14 +23,8 @@ const createPiecePositionSystem = (
   } = network;
 
   const {
-    scenes: {
-      Main: {
-        objectPool,
-        maps: {
-          Main: { tileWidth, tileHeight },
-        },
-      },
-    },
+    objectRegistry,
+    scenes: { Main },
   } = game;
 
   const subscription = defineComponentSystemUnsubscribable(
@@ -32,18 +33,16 @@ const createPiecePositionSystem = (
     (update) => {
       const position = update.value[0];
       if (!position) {
-        objectPool.remove(update.entity);
+        objectRegistry.remove(update.entity, PIECE_SPRITE_ID);
         return;
       }
-      const object = objectPool.get(update.entity, "Sprite");
-      const { x, y } = tileCoordToPixelCoord(position, tileWidth, tileHeight);
-
-      object.setComponent({
-        id: PiecePosition.id,
-        once: (gameObject) => {
-          gameObject.setPosition(x + PIECE_X_OFFSET, y + PIECE_Y_OFFSET);
-        },
-      });
+      const sprite = getPieceSpriteGameObject(
+        update.entity,
+        objectRegistry,
+        Main
+      );
+      const { x, y } = tileCoordToPixelCoord(position, TILE_WIDTH, TILE_HEIGHT);
+      sprite.setPosition(x, y);
     },
     { runOnInit: true }
   );

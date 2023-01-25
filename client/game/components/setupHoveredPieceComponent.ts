@@ -6,13 +6,13 @@ import {
 
 import { Game } from "../types";
 import { Network } from "../../network/types";
+import getPieceSpriteGameObject from "../utils/getPieceSpriteGameObject";
 
 const setupHoveredPieceComponent = (network: Network, game: Game) => {
   const {
     gameWorld,
-    scenes: {
-      Main: { objectPool },
-    },
+    objectRegistry,
+    scenes: { Main },
     components: { HoveredPiece },
   } = game;
 
@@ -22,22 +22,21 @@ const setupHoveredPieceComponent = (network: Network, game: Game) => {
   } = network;
 
   defineComponentSystem(gameWorld, PiecePosition, (update) => {
-    const object = objectPool.get(update.entity, "Sprite");
-    if (object.hasComponent(HoveredPiece.id)) return;
-    object.setComponent({
-      id: HoveredPiece.id,
-      once: (gameObject) => {
-        gameObject.setInteractive();
-        gameObject.on("pointerover", () =>
-          setComponent(HoveredPiece, godEntityIndex, {
-            value: update.entity,
-          })
-        );
-        gameObject.on("pointerout", () =>
-          removeComponent(HoveredPiece, godEntityIndex)
-        );
-      },
+    const sprite = getPieceSpriteGameObject(
+      update.entity,
+      objectRegistry,
+      Main
+    );
+    sprite.setInteractive();
+    sprite.on("pointerover", () => {
+      setComponent(HoveredPiece, godEntityIndex, {
+        value: update.entity,
+      });
     });
+
+    sprite.on("pointerout", () =>
+      removeComponent(HoveredPiece, godEntityIndex)
+    );
   });
 };
 
