@@ -17,6 +17,7 @@ import { createCamera } from "@latticexyz/phaserx";
 import createChessBoardTilemap from "./utils/createChessBoardTilemap";
 import createPhaserGame from "../phaser/createPhaserGame";
 import createScene from "../phaser/createScene";
+import createSystemManagerSystem from "./systems/createSystemManagerSystem";
 import { defineNumberComponent } from "@latticexyz/std-client";
 import load from "../phaser/load";
 import setupActivePieceComponent from "./components/setupActivePieceComponent";
@@ -36,6 +37,12 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
     },
     pixelArt: false,
     autoFocus: true,
+    physics: {
+      default: "arcade",
+      arcade: {
+        debug: true,
+      },
+    },
     render: {
       antialiasGL: false,
       pixelArt: false,
@@ -83,7 +90,8 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
     gameWorld,
     components,
     subscribedSystems: [] as Subscription[],
-    game,
+    game: game.game,
+    objectRegistry: game.objectRegistry,
     scenes,
   };
 
@@ -104,7 +112,7 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   scenes[Scenes.Main].input.setTopOnly(false);
 
   // Setup system manager
-  //createSystemManagerSystem(network, context);
+  createSystemManagerSystem(network, context);
 
   network.startSync();
 

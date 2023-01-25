@@ -10,7 +10,7 @@ const setPieceSprite = async (
   pieceState: PieceState,
   isEnemy: boolean
 ) => {
-  gameObject.setOrigin(0.5, 0.5);
+  gameObject.setOrigin(0, 0);
   const spriteAssetKey = getAssetKeyForPiece(pieceType, pieceState, isEnemy);
   gameObject.setScale(PIECE_SPRITE_SCALE, PIECE_SPRITE_SCALE);
   gameObject.setTexture(spriteAssetKey);

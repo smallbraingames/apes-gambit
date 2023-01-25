@@ -1,10 +1,10 @@
 import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
 import { Network, PieceType } from "../../../network/types";
+import { TILE_HEIGHT, TILE_OVERLAY_COLOR, TILE_WIDTH } from "../../constants";
 
 import { Coord } from "@latticexyz/utils";
 import { Game } from "../../types";
 import { Subscription } from "rxjs";
-import { TILE_OVERLAY_COLOR } from "../../constants";
 import addTileOverlay from "../../utils/addTileOverlay";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getValidMoves from "../../utils/getValidMoves";
@@ -22,21 +22,21 @@ const createValidMoveSystem = (
   } = network;
 
   const {
-    gameObjectRegistry,
-    scenes: {
-      Main: {
-        phaserScene,
-        maps: {
-          Main: { tileWidth, tileHeight },
-        },
-      },
-    },
+    objectRegistry,
+    scenes: { Main },
     components: { ActivePiece },
   } = game;
 
   const setValidMoveOverlays = (pieceType: PieceType, piecePosition: Coord) => {
-    let validMoveGroup = gameObjectRegistry.get(VALID_MOVE_GROUP);
-    if (!validMoveGroup) validMoveGroup = phaserScene.add.group();
+    let validMoveGroup: Phaser.GameObjects.Group;
+    if (!objectRegistry.has(godEntityIndex, VALID_MOVE_GROUP)) {
+      validMoveGroup = Main.add.group();
+    } else {
+      validMoveGroup = objectRegistry.get(
+        godEntityIndex,
+        VALID_MOVE_GROUP
+      ) as Phaser.GameObjects.Group;
+    }
 
     // Clear the valid move group
     validMoveGroup.clear(true, true);
@@ -46,14 +46,14 @@ const createValidMoveSystem = (
       validMoveGroup!.add(
         addTileOverlay(
           potentialMove,
-          phaserScene,
-          tileWidth,
-          tileHeight,
+          Main,
+          TILE_WIDTH,
+          TILE_HEIGHT,
           TILE_OVERLAY_COLOR
         )
       );
     });
-    gameObjectRegistry.set(VALID_MOVE_GROUP, validMoveGroup);
+    objectRegistry.set(godEntityIndex, VALID_MOVE_GROUP, validMoveGroup);
   };
 
   const piecePositionSubscription = defineComponentSystemUnsubscribable(

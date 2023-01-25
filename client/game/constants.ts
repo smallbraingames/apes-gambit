@@ -1,6 +1,6 @@
 export const TILE_WIDTH = 800;
 export const TILE_HEIGHT = 800;
-export const PIECE_SPRITE_SCALE = 0.8;
+export const PIECE_SPRITE_SCALE = 1;
 export const PIECE_X_OFFSET = 400;
 export const PIECE_Y_OFFSET = 400;
 export const INITIAL_ZOOM = 0.13;
@@ -9,6 +9,7 @@ export const MOVE_ANIMATION_DURATION = 200;
 export const TILE_OVERLAY_COLOR = 0x86efac;
 export const TILE_OVERLAY_TAKE_COLOR = 0xfca5a5;
 export const TILE_OVERLAY_RENDER_MULTIPLE = 1.5;
+export const PIECE_SPRITE_ID = "piece-sprite";
 
 export enum Scenes {
   Main = "Main",
