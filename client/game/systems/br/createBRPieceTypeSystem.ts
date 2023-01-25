@@ -2,8 +2,10 @@ import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
 import { Game, PieceState } from "../../types";
 import { Network, PieceType } from "../../../network/types";
 
+import { PIECE_SPRITE_ID } from "../../constants";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
+import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
 import isActiveGamePiece from "../../utils/isActiveGamePiece";
 import setPieceSprite from "../../utils/setPieceSprite";
 
@@ -19,10 +21,9 @@ const createBRPieceTypeSystem = (
 
   const {
     gameEntity,
+    objectRegistry,
     components: { ActivePiece },
-    scenes: {
-      Main: { objectPool },
-    },
+    scenes: { Main },
   } = game;
 
   const subscription = defineComponentSystemUnsubscribable(
@@ -35,19 +36,19 @@ const createBRPieceTypeSystem = (
       const pieceType: PieceType | undefined = update.value[0]?.value;
       if (pieceType === undefined)
         throw Error("No piece type component for active game piece");
-      const object = objectPool.get(update.entity, "Sprite");
-      console.log("is active piece", activePiece !== update.entity);
-      object.setComponent({
-        id: PieceType.id,
-        once: (gameObject) => {
-          setPieceSprite(
-            gameObject,
-            pieceType,
-            PieceState.IDLE,
-            activePiece !== update.entity
-          );
-        },
-      });
+
+      const sprite = getPieceSpriteGameObject(
+        update.entity,
+        objectRegistry,
+        Main
+      );
+
+      setPieceSprite(
+        sprite,
+        pieceType,
+        PieceState.IDLE,
+        activePiece !== update.entity
+      );
     },
     { runOnInit: true }
   );

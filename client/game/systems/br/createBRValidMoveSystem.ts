@@ -4,7 +4,12 @@ import {
   getEntitiesWithValue,
 } from "@latticexyz/recs";
 import { Network, PieceType } from "../../../network/types";
-import { TILE_OVERLAY_COLOR, TILE_OVERLAY_TAKE_COLOR } from "../../constants";
+import {
+  TILE_HEIGHT,
+  TILE_OVERLAY_COLOR,
+  TILE_OVERLAY_TAKE_COLOR,
+  TILE_WIDTH,
+} from "../../constants";
 
 import { Coord } from "@latticexyz/utils";
 import { Game } from "../../types";
@@ -27,22 +32,22 @@ const createBRValidMoveSystem = (
   } = network;
 
   const {
+    objectRegistry,
     gameEntity,
-    gameObjectRegistry,
-    scenes: {
-      Main: {
-        phaserScene,
-        maps: {
-          Main: { tileWidth, tileHeight },
-        },
-      },
-    },
+    scenes: { Main },
     components: { ActivePiece },
   } = game;
 
   const setValidMoveOverlays = (pieceType: PieceType, piecePosition: Coord) => {
-    let validMoveGroup = gameObjectRegistry.get(BR_VALID_MOVE_GROUP);
-    if (!validMoveGroup) validMoveGroup = phaserScene.add.group();
+    let validMoveGroup: Phaser.GameObjects.Group;
+    if (!objectRegistry.has(godEntityIndex, BR_VALID_MOVE_GROUP)) {
+      validMoveGroup = Main.add.group();
+    } else {
+      validMoveGroup = objectRegistry.get(
+        godEntityIndex,
+        BR_VALID_MOVE_GROUP
+      ) as Phaser.GameObjects.Group;
+    }
 
     // Clear the valid move group
     validMoveGroup.clear(true, true);
@@ -61,10 +66,10 @@ const createBRValidMoveSystem = (
       );
       if (pieceAtPositionInGame.length > 0) color = TILE_OVERLAY_TAKE_COLOR;
       validMoveGroup!.add(
-        addTileOverlay(potentialMove, phaserScene, tileWidth, tileHeight, color)
+        addTileOverlay(potentialMove, Main, TILE_WIDTH, TILE_HEIGHT, color)
       );
     });
-    gameObjectRegistry.set(BR_VALID_MOVE_GROUP, validMoveGroup);
+    objectRegistry.set(godEntityIndex, BR_VALID_MOVE_GROUP, validMoveGroup);
   };
 
   const piecePositionSubscription = defineComponentSystemUnsubscribable(
@@ -82,7 +87,7 @@ const createBRValidMoveSystem = (
       if (!gameEntity)
         throw Error("Cannot set valid move overlays without a game entity ID");
       if (!isActiveGamePiece(activePieceEntityIndex, network, gameEntity)) {
-        gameObjectRegistry.get(BR_VALID_MOVE_GROUP)?.clear(true, true);
+        objectRegistry.remove(godEntityIndex, BR_VALID_MOVE_GROUP);
         return;
       }
       const piecePosition = getComponentValueStrict(
