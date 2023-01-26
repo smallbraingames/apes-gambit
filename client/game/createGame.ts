@@ -1,6 +1,7 @@
 import {
   Assets,
   GAME_WORLD_NAMESPACE,
+  INITIAL_ZOOM,
   Scenes,
   TILE_HEIGHT,
   TILE_WIDTH,
@@ -67,7 +68,7 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
     })
   );
 
-  createCamera(scenes[Scenes.Main].cameras.main, {
+  const camera = createCamera(scenes[Scenes.Main].cameras.main, {
     pinchSpeed: 1,
     wheelSpeed: 1,
     maxZoom: 2,
@@ -89,6 +90,7 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
     gameEntity,
     gameWorld,
     components,
+    camera,
     subscribedSystems: [] as Subscription[],
     game: game.game,
     objectRegistry: game.objectRegistry,
@@ -113,6 +115,9 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
 
   // Setup correct systems
   setupSystems(network, context);
+
+  // Set zoom
+  camera.setZoom(INITIAL_ZOOM);
 
   network.startSync();
 
