@@ -6,7 +6,7 @@ import { Game } from "../../../types";
 import { Network } from "../../../../network/types";
 import { Subscription } from "rxjs";
 import getEntityFromEntityIndex from "../../../utils/getEntityFromEntityIndex";
-import isActiveGamePiece from "../../../utils/isActiveGamePiece";
+import isLiveGamePiece from "../../../utils/isLiveGamePiece";
 
 const createBRMovementInputSystem = (
   network: Network,
@@ -25,7 +25,7 @@ const createBRMovementInputSystem = (
     const entityIndex = getComponentValueStrict(ActivePiece, godEntityIndex)
       .value as EntityIndex;
     // Check if is active game piece (alive, in right game, piece entity)
-    if (!isActiveGamePiece(entityIndex, network, gameEntity!)) return;
+    if (!isLiveGamePiece(entityIndex, network, gameEntity!)) return;
 
     const pointer = p as Phaser.Input.Pointer;
     const tilePosition = pixelCoordToTileCoord(
@@ -34,6 +34,7 @@ const createBRMovementInputSystem = (
       TILE_HEIGHT
     );
 
+    console.log("moving br piece");
     network.api.br.moveBRPiece(
       getEntityFromEntityIndex(entityIndex, network.world),
       game.gameEntity!,

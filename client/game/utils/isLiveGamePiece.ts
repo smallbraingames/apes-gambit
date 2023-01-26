@@ -5,7 +5,7 @@ import { Network } from "../../network/types";
 import getEntityType from "./getEntityType";
 import isPieceAlive from "./isPieceAlive";
 
-const isActiveGamePiece = (
+const isLiveGamePiece = (
   entityIndex: EntityIndex,
   network: Network,
   gameEntity: EntityID
@@ -24,4 +24,4 @@ const isActiveGamePiece = (
   return true;
 };
 
-export default isActiveGamePiece;
+export default isLiveGamePiece;

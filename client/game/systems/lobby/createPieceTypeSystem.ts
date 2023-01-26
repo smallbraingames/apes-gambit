@@ -1,4 +1,8 @@
-import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
+import {
+  EntityIndex,
+  getComponentValue,
+  getComponentValueStrict,
+} from "@latticexyz/recs";
 import { Game, PieceState } from "../../types";
 import { Network, PieceType } from "../../../network/types";
 
@@ -28,8 +32,8 @@ const createPieceTypeSystem = (
     world,
     PieceType,
     (update) => {
-      const activePiece = getComponentValueStrict(ActivePiece, godEntityIndex)
-        .value as EntityIndex;
+      const activePiece = getComponentValue(ActivePiece, godEntityIndex)
+        ?.value as EntityIndex | undefined;
 
       const pieceType: PieceType = getComponentValueStrict(
         PieceType,

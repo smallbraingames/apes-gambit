@@ -11,7 +11,7 @@ const getOwnedPieceEntityIndex = (
   owner: string,
   OwnerComponent: Component<{ value: Type.String }>,
   world: World
-): EntityIndex => {
+): EntityIndex | undefined => {
   // Hack: get around checksummed issue
   const ownedEntities = new Set([
     ...getEntitiesWithValue(OwnerComponent, {

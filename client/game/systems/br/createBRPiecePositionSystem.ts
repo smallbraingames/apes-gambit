@@ -11,7 +11,7 @@ import { Game } from "../../types";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
-import isActiveGamePiece from "../../utils/isActiveGamePiece";
+import isLiveGamePiece from "../../utils/isLiveGamePiece";
 import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
 
 const createBRPiecePositionSystem = (
@@ -35,7 +35,7 @@ const createBRPiecePositionSystem = (
     world,
     PiecePositionContext,
     async (update) => {
-      if (!isActiveGamePiece(update.entity, network, gameEntity!)) return;
+      if (!isLiveGamePiece(update.entity, network, gameEntity!)) return;
       const positionContext = update.value[0];
 
       if (!positionContext) {
