@@ -7,7 +7,6 @@ import { useContext, useEffect } from "react";
 import { GameContext } from "../../context/GameContext";
 import JoinGame from "./JoinGame";
 import Points from "./Points";
-import SpawnPiece from "./SpawnPiece";
 import UpgradePiece from "./UpgradePiece";
 
 const BRControls = () => {
@@ -23,7 +22,6 @@ const BRControls = () => {
         {game.game && (
           <div>
             <JoinGame game={game.game} />
-            <SpawnPiece />
             <div className="mb-2">
               <Points />
             </div>

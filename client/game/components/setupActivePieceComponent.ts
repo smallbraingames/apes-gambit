@@ -24,6 +24,7 @@ const setupActivePieceComponent = (network: Network, game: Game) => {
       Owner,
       world
     );
+    console.log("owned piece index", ownedPieceEntityIndex, activeAddress);
     setComponent(ActivePiece, godEntityIndex, { value: ownedPieceEntityIndex });
   });
 };

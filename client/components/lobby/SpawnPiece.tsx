@@ -1,18 +1,18 @@
-import { useContext, useEffect } from "react";
-
+import { GameContext } from "../../context/GameContext";
 import { NetworkContext } from "../../context/NetworkContext";
-import getBurnerWallet from "../../network/wallet/getBurnerWallet";
-import getOwnedPieceEntityIndex from "../../game/utils/getOwnedPieceEntityIndex";
+import { useContext } from "react";
 
 const SpawnPiece = () => {
   const network = useContext(NetworkContext);
+  const game = useContext(GameContext);
 
   const handleSpawnPiece = () => {
-    const pieceEntity = getOwnedPieceEntityIndex(
-      getBurnerWallet().address,
-      network.network!.components.Owner,
-      network.network!.world
-    );
+    if (game.activePiece) {
+      console.warn(
+        `Not spawing piece since active piece with entity index ${game.activePiece}`
+      );
+      return;
+    }
     network.network?.api.spawnPiece();
   };
 
