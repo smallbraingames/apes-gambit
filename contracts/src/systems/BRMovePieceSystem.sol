@@ -11,6 +11,8 @@ import { BRGameComponent, ID as BRGameComponentID } from "components/BRGameCompo
 import { BRInGameComponent, ID as BRInGameComponentID } from "components/BRInGameComponent.sol";
 import { BRIsAliveComponent, ID as BRIsAliveComponentID } from "components/BRIsAliveComponent.sol";
 import { BRPointsComponent, ID as BRPointsComponentID } from "components/BRPointsComponent.sol";
+import { BRPointsComponent, ID as BRPointsComponentID } from "components/BRPointsComponent.sol";
+import { BRPreviousMoveTimestampComponent, ID as BRPreviousMoveTimestampComponentID } from "components/BRPreviousMoveTimestampComponent.sol";
 import { PieceTypeComponent, ID as PieceTypeComponentID } from "components/PieceTypeComponent.sol";
 import { PiecePositionComponent, ID as PiecePositionComponentID } from "components/PiecePositionComponent.sol";
 import { MovePieceSystem, ID as MovePieceSystemID } from "systems/MovePieceSystem.sol";
@@ -29,6 +31,10 @@ contract BRMovePieceSystem is System {
     BRGameComponent brGameComponent = BRGameComponent(getAddressById(components, BRGameComponentID));
     BRInGameComponent brInGameComponent = BRInGameComponent(getAddressById(components, BRInGameComponentID));
     BRIsAliveComponent brIsAliveComponent = BRIsAliveComponent(getAddressById(components, BRIsAliveComponentID));
+    BRPreviousMoveTimestampComponent brPreviousMoveTimestampComponent = BRPreviousMoveTimestampComponent(
+      getAddressById(components, BRPreviousMoveTimestampComponentID)
+    );
+
     MovePieceSystem movePieceSystem = MovePieceSystem(getSystemAddressById(components, MovePieceSystemID));
 
     // Check that this piece can play
@@ -43,7 +49,11 @@ contract BRMovePieceSystem is System {
       msg.sender
     );
 
+    // If there is a piece at this position, take it
     takePieceAtPosition(piece, game, position);
+
+    // Update the last move timestamp
+    brPreviousMoveTimestampComponent.set(piece, block.timestamp);
 
     // Move piece
     movePieceSystem.executeTyped(piece, position);
