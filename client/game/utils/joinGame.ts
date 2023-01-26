@@ -9,6 +9,9 @@ const joinGame = async (
   network: Network
 ) => {
   const pieceEntity = getEntityFromEntityIndex(pieceEntityIndex, network.world);
+  console.log(
+    `Joining game with piece: ${pieceEntity} and game: ${gameEntity}`
+  );
   // Set correct controller components
   console.log(`setting controllers for entity ${pieceEntityIndex}`);
   const setControllersTx = await network.api.br.setBRControllers(pieceEntity);
