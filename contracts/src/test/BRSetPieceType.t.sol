@@ -29,7 +29,7 @@ contract BRMovePieceTest is MudTest {
 
     // Create a new game
     uint256 startTime = block.timestamp;
-    uint256 game = brCreateGameSystem.executeTyped(startTime, 5);
+    uint256 game = brCreateGameSystem.executeTyped(startTime, 0);
 
     // Setup players
     address taker = address(123456);

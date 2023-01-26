@@ -9,7 +9,6 @@ import { BRCreateGameSystem, ID as BRCreateGameSystemID } from "systems/BRCreate
 import { BRJoinGameSystem, ID as BRJoinGameSystemID } from "systems/BRJoinGameSystem.sol";
 import { BRStartGameSystem, ID as BRStartGameSystemID } from "systems/BRStartGameSystem.sol";
 import { BRMovePieceSystem, ID as BRMovePieceSystemID } from "systems/BRMovePieceSystem.sol";
-import { BRMovePieceSystem, ID as BRMovePieceSystemID } from "systems/BRMovePieceSystem.sol";
 import { BRGameComponent, ID as BRGameComponentID } from "components/BRGameComponent.sol";
 import { BRIsAliveComponent, ID as BRIsAliveComponentID } from "components/BRIsAliveComponent.sol";
 import { BRPointsComponent, ID as BRPointsComponentID } from "components/BRPointsComponent.sol";
@@ -41,7 +40,7 @@ contract BRMovePieceTest is MudTest {
 
     // Create a new game
     uint256 startTime = block.timestamp;
-    uint256 game = brCreateGameSystem.executeTyped(startTime, 5);
+    uint256 game = brCreateGameSystem.executeTyped(startTime, 0);
 
     // Join the game
     brJoinGameSystem.executeTyped(piece, game);
@@ -75,7 +74,7 @@ contract BRMovePieceTest is MudTest {
 
     // Create a new game
     uint256 startTime = block.timestamp;
-    uint256 game = brCreateGameSystem.executeTyped(startTime, 5);
+    uint256 game = brCreateGameSystem.executeTyped(startTime, 0);
 
     // Join the game
     brJoinGameSystem.executeTyped(piece, game);

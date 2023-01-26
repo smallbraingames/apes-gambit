@@ -11,3 +11,4 @@ error BRNotInGame();
 error BRPieceDead();
 error BRBeforeStartTime();
 error BRNotEnoughPoints();
+error BRNotRecharged();
