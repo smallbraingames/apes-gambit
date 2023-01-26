@@ -11,6 +11,7 @@ import { Game } from "../game/types";
 import { Network } from "../network/types";
 import { NetworkContext } from "./NetworkContext";
 import { Game as PhaserGame } from "../game/types";
+import { defineComponentSystemUnsubscribable } from "../game/utils/defineComponentSystemUnsubscribable";
 import getBurnerWallet from "../network/wallet/getBurnerWallet";
 import getOwnedPieceEntityIndex from "../game/utils/getOwnedPieceEntityIndex";
 
@@ -47,13 +48,15 @@ const GameProvider = (props: {
 
   useEffect(() => {
     if (!network.network) return;
-    setActivePiece(
-      getOwnedPieceEntityIndex(
-        getBurnerWallet().address,
-        network.network?.components.Owner,
-        network.network?.world
-      )
-    );
+    if (game) {
+      defineComponentSystemUnsubscribable(
+        game.gameWorld,
+        game.components.ActivePiece,
+        (update) => {
+          setActivePiece(update.value[0]?.value as EntityIndex | undefined);
+        }
+      );
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [game]);
 
