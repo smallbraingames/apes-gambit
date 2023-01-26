@@ -1,5 +1,4 @@
-import { Game, GameConfig, GameStatus } from "../types";
-
+import { Game } from "../types";
 import { Network } from "../../network/types";
 import { Subscription } from "rxjs";
 import createBRMovementInputSystem from "./br/input/createBRMovementInputSystem";
@@ -12,9 +11,8 @@ import createMovementInputSystem from "./lobby/input/createMovementInputSystem";
 import createPiecePositionSystem from "./lobby/createPiecePositionSystem";
 import createPieceTypeSystem from "./lobby/createPieceTypeSystem";
 import createValidMoveSystem from "./lobby/createValidMoveSystem";
-import { defineComponentSystem } from "@latticexyz/recs";
 
-const setupSystems = (
+const createSystems = (
   network: Network,
   game: Game,
   systems: ((network: Network, game: Game) => Subscription[])[]
@@ -31,7 +29,7 @@ const clearSystems = (game: Game) => {
 
 const setupLobbySystems = (network: Network, game: Game) => {
   console.log("Setting up lobby systems");
-  setupSystems(network, game, [
+  createSystems(network, game, [
     createMovementInputSystem,
     createPiecePositionSystem,
     createPieceTypeSystem,
@@ -42,7 +40,7 @@ const setupLobbySystems = (network: Network, game: Game) => {
 
 const setupBRSystems = (network: Network, game: Game) => {
   console.log("Setting up BR systems");
-  setupSystems(network, game, [
+  createSystems(network, game, [
     createBRMovementInputSystem,
     createBRPieceDeathSystem,
     createBRPiecePositionSystem,
@@ -51,13 +49,11 @@ const setupBRSystems = (network: Network, game: Game) => {
   ]);
 };
 
-const createSystemManagerSystem = (network: Network, game: Game) => {
-  const {
-    world,
-    components: { BRGame: Game },
-  } = network;
+const setupSystems = (network: Network, game: Game) => {
+  const { world } = network;
 
   const { gameEntity } = game;
+
   const gameEntityIndex = gameEntity
     ? world.entityToIndex.get(gameEntity)
     : undefined;
@@ -66,44 +62,14 @@ const createSystemManagerSystem = (network: Network, game: Game) => {
     console.warn(`Game entity ${gameEntity} could not be resolved to index`);
   }
 
-  defineComponentSystem(
-    world,
-    Game,
-    (update) => {
-      let gameConfig: GameConfig | undefined = undefined;
-      if (update.entity === gameEntityIndex) gameConfig = update.value[0];
-
-      if (!gameConfig) {
-        console.warn(
-          `Game config is undefined: ${JSON.stringify(
-            gameConfig
-          )}, setting up lobby`
-        );
-        clearSystems(game);
-        setupLobbySystems(network, game);
-        return;
-      }
-
-      switch (gameConfig.status) {
-        case GameStatus.NOT_STARTED:
-          console.log("Game status not started, switching to lobby systems");
-          clearSystems(game);
-          setupLobbySystems(network, game);
-          break;
-        case GameStatus.IN_PROGRESS:
-          console.log("Game status in progress, switching to BR systems");
-          clearSystems(game);
-          setupBRSystems(network, game);
-          break;
-        case GameStatus.OVER:
-          console.log("Game status over, switching to lobby systems");
-          clearSystems(game);
-          setupLobbySystems(network, game);
-          break;
-      }
-    },
-    { runOnInit: true }
-  );
+  if (gameEntityIndex) {
+    // Set up a battle royale world
+    clearSystems(game);
+    setupBRSystems(network, game);
+  } else {
+    clearSystems(game);
+    setupLobbySystems(network, game);
+  }
 };
 
-export default createSystemManagerSystem;
+export default setupSystems;
