@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 
-import Game from "./Game";
-import { Network } from "../../network/types";
-import { NetworkContext } from "../../context/NetworkContext";
+import { Network } from "../network/types";
+import { NetworkContext } from "../context/NetworkContext";
 
 const NETWORK_POLL = 200;
 
@@ -18,29 +17,25 @@ export const awaitNetworkLayer = async (network?: Network) => {
   });
 };
 
-const GameLoader = () => {
-  const [isGameLoaded, setIsGameLoaded] = useState(false);
+const NetworkLoader = (props: { children: ReactNode }) => {
+  const [isNetworkLoaded, setIsNetworkLoaded] = useState(false);
   const { network } = useContext(NetworkContext);
 
-  const loadGame = async () => {
+  const loadNetwork = async () => {
     await awaitNetworkLayer(network);
-    setIsGameLoaded(true);
+    setIsNetworkLoaded(true);
   };
 
   useEffect(() => {
-    loadGame();
+    loadNetwork();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [network]);
 
-  if (!isGameLoaded) {
+  if (!isNetworkLoaded) {
     return <div>Loading network layer....</div>;
   }
 
-  return (
-    <div>
-      <Game />
-    </div>
-  );
+  return <div>{props.children}</div>;
 };
 
-export default GameLoader;
+export default NetworkLoader;

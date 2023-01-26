@@ -1,8 +1,8 @@
+import BRGame from "../components/br/BRGame";
 import Head from "next/head";
-import Lobby from "../components/lobby/Lobby";
 import NetworkLoader from "../components/NetworkLoader";
 
-export default function Home() {
+export default function BR() {
   return (
     <>
       <Head>
@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
       <main>
         <NetworkLoader>
-          <Lobby />
+          <BRGame />
         </NetworkLoader>
       </main>
     </>

@@ -24,7 +24,10 @@ export const GameContext = createContext<GameContextInterface>({
   activePiece: undefined,
 });
 
-const GameProvider = (props: { children: ReactNode }) => {
+const GameProvider = (props: {
+  brGameEntity: EntityID | undefined;
+  children: ReactNode;
+}) => {
   const network = useContext(NetworkContext);
   const [game, setGame] = useState<PhaserGame | undefined>(undefined);
   const [activePiece, setActivePiece] = useState<EntityIndex | undefined>(
@@ -33,19 +36,12 @@ const GameProvider = (props: { children: ReactNode }) => {
 
   const setupGame = async (network: Network) => {
     const createGame = (await import("../game/createGame")).createGame;
-    const params = new URLSearchParams(window.location.search);
-    const game: PhaserGame = await createGame(
-      network,
-      params.get("gameEntity") as EntityID | undefined
-    );
+    const game: PhaserGame = await createGame(network, props.brGameEntity);
     setGame(game);
   };
 
   useEffect(() => {
     if (network.network) setupGame(network.network);
-    return () => {
-      if (game) game.disposePhaser();
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [network.network]);
 
