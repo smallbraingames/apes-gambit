@@ -114,7 +114,8 @@ const createBRValidMoveSystem = (
         ActivePiece,
         godEntityIndex
       ).value as EntityIndex;
-      if (!pieceType || update.entity !== activePieceEntityIndex) return;
+      if (pieceType === undefined || update.entity !== activePieceEntityIndex)
+        return;
       const position = getComponentValueStrict(PiecePosition, update.entity);
       // Only show after move appears
       setValidMoveOverlays(pieceType, position);

@@ -2,7 +2,6 @@ import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
 import { Game, PieceState } from "../../types";
 import { Network, PieceType } from "../../../network/types";
 
-import { PIECE_SPRITE_ID } from "../../constants";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
