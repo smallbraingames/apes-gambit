@@ -12,20 +12,23 @@ contract BRCreateGameSystem is System {
 
   /// @notice Spawns a new piece with msg.sender as owner
   function execute(bytes memory arguments) public returns (bytes memory) {
-    uint256 startTime = abi.decode(arguments, (uint256));
+    (uint256 startTime, uint32 rechargeTime) = abi.decode(arguments, (uint256, uint32));
 
     // Unique entity
     uint256 entityId = world.getUniqueEntityId();
 
     // Create game
     BRGameComponent brGameComponent = BRGameComponent(getAddressById(components, BRGameComponentID));
-    brGameComponent.set(entityId, BRGame({ startTime: startTime, status: BRGameStatus.NOT_STARTED }));
+    brGameComponent.set(
+      entityId,
+      BRGame({ startTime: startTime, rechargeTime: rechargeTime, status: BRGameStatus.NOT_STARTED })
+    );
 
     return abi.encode(entityId);
   }
 
-  function executeTyped(uint256 startTime) public returns (uint256) {
-    uint256 entityId = abi.decode(execute(abi.encode(startTime)), (uint256));
+  function executeTyped(uint256 startTime, uint32 rechargeTime) public returns (uint256) {
+    uint256 entityId = abi.decode(execute(abi.encode(startTime, rechargeTime)), (uint256));
     return entityId;
   }
 }
