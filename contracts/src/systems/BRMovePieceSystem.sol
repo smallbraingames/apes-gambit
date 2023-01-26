@@ -49,11 +49,12 @@ contract BRMovePieceSystem is System {
       msg.sender
     );
 
+    // Check if we can move, if so, update the previous move timestamp
+    BRLibPiece.checkIsRecharged(brPreviousMoveTimestampComponent, brGameComponent, piece, game);
+    brPreviousMoveTimestampComponent.set(piece, block.timestamp);
+
     // If there is a piece at this position, take it
     takePieceAtPosition(piece, game, position);
-
-    // Update the last move timestamp
-    brPreviousMoveTimestampComponent.set(piece, block.timestamp);
 
     // Move piece
     movePieceSystem.executeTyped(piece, position);

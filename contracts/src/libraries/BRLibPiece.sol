@@ -9,8 +9,9 @@ import { BRGameComponent } from "components/BRGameComponent.sol";
 import { BRInGameComponent } from "components/BRInGameComponent.sol";
 import { BRIsAliveComponent } from "components/BRIsAliveComponent.sol";
 import { BRPointsComponent } from "components/BRPointsComponent.sol";
+import { BRPreviousMoveTimestampComponent } from "components/BRPreviousMoveTimestampComponent.sol";
 import { PiecePositionComponent } from "components/PiecePositionComponent.sol";
-import { BRPieceDead, BRNotEnoughPoints } from "common/BRErrors.sol";
+import { BRPieceDead, BRNotEnoughPoints, BRNotRecharged } from "common/BRErrors.sol";
 import { UnimplementedPieceType } from "common/Errors.sol";
 import { BRLibGame } from "libraries/BRLibGame.sol";
 import { LibOwner } from "libraries/LibOwner.sol";
@@ -38,6 +39,23 @@ library BRLibPiece {
       }
     }
     return (false, 0);
+  }
+
+  /// @notice Checks whether a piece has enough charge to make a move
+  function checkIsRecharged(
+    BRPreviousMoveTimestampComponent brPreviousMoveTimestampComponent,
+    BRGameComponent brGameComponent,
+    uint256 piece,
+    uint256 game
+  ) internal view {
+    if (!brPreviousMoveTimestampComponent.has(piece)) {
+      return;
+    }
+    uint256 previousMoveTimestamp = brPreviousMoveTimestampComponent.getValue(piece);
+    uint32 rechargeTime = brGameComponent.getValue(game).rechargeTime;
+    if (previousMoveTimestamp + rechargeTime > block.timestamp) {
+      revert BRNotRecharged();
+    }
   }
 
   /// @notice Checks whether msg.sender can move or upgrade a piece in a game
