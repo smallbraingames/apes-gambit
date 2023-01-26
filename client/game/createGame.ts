@@ -36,7 +36,6 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
       zoom: 1,
       mode: Phaser.Scale.RESIZE,
     },
-    pixelArt: false,
     autoFocus: true,
     physics: {
       default: "arcade",
@@ -45,8 +44,7 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
       },
     },
     render: {
-      antialiasGL: false,
-      pixelArt: false,
+      antialiasGL: true,
     },
     scene: sceneConstructors,
   };
