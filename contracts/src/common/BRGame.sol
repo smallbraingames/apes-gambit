@@ -9,5 +9,6 @@ enum BRGameStatus {
 
 struct BRGame {
   uint256 startTime;
+  uint32 rechargeTime;
   BRGameStatus status;
 }
