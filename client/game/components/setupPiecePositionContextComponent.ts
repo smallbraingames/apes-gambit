@@ -46,6 +46,8 @@ const setupPiecePositionContextComponent = (network: Network, game: Game) => {
   });
 
   systemCallStreams["system.BRMovePieceSystem"].subscribe((call) => {
+    console.log(call);
+    console.log("system call");
     const positionUpdates = call.updates.filter(
       (update) => update.component.id === PiecePosition.id
     );

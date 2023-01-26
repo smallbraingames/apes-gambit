@@ -1,11 +1,15 @@
-import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
+import {
+  EntityIndex,
+  getComponentValue,
+  getComponentValueStrict,
+} from "@latticexyz/recs";
 import { Game, PieceState } from "../../types";
 import { Network, PieceType } from "../../../network/types";
 
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
-import isActiveGamePiece from "../../utils/isActiveGamePiece";
+import isLiveGamePiece from "../../utils/isLiveGamePiece";
 import setPieceSprite from "../../utils/setPieceSprite";
 
 const createBRPieceTypeSystem = (
@@ -29,9 +33,9 @@ const createBRPieceTypeSystem = (
     world,
     PieceType,
     (update) => {
-      if (!isActiveGamePiece(update.entity, network, gameEntity!)) return;
-      const activePiece = getComponentValueStrict(ActivePiece, godEntityIndex)
-        .value as EntityIndex;
+      if (!isLiveGamePiece(update.entity, network, gameEntity!)) return;
+      const activePiece = getComponentValue(ActivePiece, godEntityIndex)
+        ?.value as EntityIndex | undefined;
       const pieceType: PieceType | undefined = update.value[0]?.value;
       if (pieceType === undefined)
         throw Error("No piece type component for active game piece");

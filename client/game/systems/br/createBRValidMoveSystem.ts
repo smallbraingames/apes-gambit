@@ -17,7 +17,7 @@ import { Subscription } from "rxjs";
 import addTileOverlay from "../../utils/addTileOverlay";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getValidMoves from "../../utils/getValidMoves";
-import isActiveGamePiece from "../../utils/isActiveGamePiece";
+import isLiveGamePiece from "../../utils/isLiveGamePiece";
 
 const BR_VALID_MOVE_GROUP = "br-valid-moves";
 
@@ -62,7 +62,7 @@ const createBRValidMoveSystem = (
       if (!gameEntity)
         throw Error("Cannot set valid move overlays without a game entity ID");
       const pieceAtPositionInGame = [...pieceAtPosition].filter((piece) =>
-        isActiveGamePiece(piece, network, gameEntity)
+        isLiveGamePiece(piece, network, gameEntity)
       );
       if (pieceAtPositionInGame.length > 0) color = TILE_OVERLAY_TAKE_COLOR;
       validMoveGroup!.add(
@@ -86,7 +86,7 @@ const createBRValidMoveSystem = (
       // If piece was just taken, remove overlays
       if (!gameEntity)
         throw Error("Cannot set valid move overlays without a game entity ID");
-      if (!isActiveGamePiece(activePieceEntityIndex, network, gameEntity)) {
+      if (!isLiveGamePiece(activePieceEntityIndex, network, gameEntity)) {
         objectRegistry.remove(godEntityIndex, BR_VALID_MOVE_GROUP);
         return;
       }

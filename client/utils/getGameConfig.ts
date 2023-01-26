@@ -62,7 +62,7 @@ const getGameConfig = (): GameConfig => {
         jsonRpc: "https://follower.testnet-chain.linfra.xyz",
         privateKey,
         wsRpc: "wss://follower.testnet-chain.linfra.xyz",
-        streamServiceUrl: "https://ecs-stream.testnet-mud-services.linfra.xyz",
+        //streamServiceUrl: "https://ecs-stream.testnet-mud-services.linfra.xyz",
         snapshotServiceUrl:
           "https://ecs-snapshot.testnet-mud-services.linfra.xyz",
         devMode: false,

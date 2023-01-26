@@ -1,4 +1,8 @@
-import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
+import {
+  EntityIndex,
+  getComponentValue,
+  getComponentValueStrict,
+} from "@latticexyz/recs";
 import { Network, PieceType } from "../../../network/types";
 import { TILE_HEIGHT, TILE_OVERLAY_COLOR, TILE_WIDTH } from "../../constants";
 
@@ -61,11 +65,9 @@ const createValidMoveSystem = (
     PiecePosition,
     (update) => {
       const position = update.value[0];
-      const activePieceEntityIndex = getComponentValueStrict(
-        ActivePiece,
-        godEntityIndex
-      ).value as EntityIndex;
-      if (!position || update.entity !== activePieceEntityIndex) return;
+      const activePiece = getComponentValue(ActivePiece, godEntityIndex)
+        ?.value as EntityIndex | undefined;
+      if (!position || update.entity !== activePiece) return;
       const pieceType: PieceType = getComponentValueStrict(
         PieceType,
         update.entity
@@ -80,12 +82,9 @@ const createValidMoveSystem = (
     PieceType,
     (update) => {
       const pieceType: PieceType | undefined = update.value[0]?.value;
-      const activePieceEntityIndex = getComponentValueStrict(
-        ActivePiece,
-        godEntityIndex
-      ).value as EntityIndex;
-      if (pieceType === undefined || update.entity !== activePieceEntityIndex)
-        return;
+      const activePiece = getComponentValue(ActivePiece, godEntityIndex)
+        ?.value as EntityIndex | undefined;
+      if (pieceType === undefined || update.entity !== activePiece) return;
       const position = getComponentValueStrict(PiecePosition, update.entity);
       setValidMoveOverlays(pieceType, position);
     },
