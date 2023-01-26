@@ -17,11 +17,11 @@ import { createCamera } from "@latticexyz/phaserx";
 import createChessBoardTilemap from "./utils/createChessBoardTilemap";
 import createPhaserGame from "../phaser/createPhaserGame";
 import createScene from "../phaser/createScene";
-import createSystemManagerSystem from "./systems/createSystemManagerSystem";
 import { defineNumberComponent } from "@latticexyz/std-client";
 import load from "../phaser/load";
 import setupActivePieceComponent from "./components/setupActivePieceComponent";
 import setupHoveredPieceComponent from "./components/setupHoveredPieceComponent";
+import setupSystems from "./systems/setupSystems";
 
 export async function createGame(network: Network, gameEntity?: EntityID) {
   const sceneConstructors = Object.keys(config.scenes).map((key) => {
@@ -111,8 +111,8 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   // Set input passes down from top
   scenes[Scenes.Main].input.setTopOnly(false);
 
-  // Setup system manager
-  createSystemManagerSystem(network, context);
+  // Setup correct systems
+  setupSystems(network, context);
 
   network.startSync();
 
