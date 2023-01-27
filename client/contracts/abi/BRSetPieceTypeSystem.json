@@ -720,7 +720,7 @@
   },
   "ast": {
     "absolutePath": "src/systems/BRSetPieceTypeSystem.sol",
-    "id": 18311,
+    "id": 18331,
     "exportedSymbols": {
       "BRGameComponent": [
         15796
@@ -750,7 +750,7 @@
         15855
       ],
       "BRSetPieceTypeSystem": [
-        18310
+        18330
       ],
       "ControllerComponent": [
         15916
@@ -759,7 +759,7 @@
         15903
       ],
       "ID": [
-        18139
+        18159
       ],
       "IWorld": [
         3389
@@ -774,10 +774,10 @@
         15642
       ],
       "SetPieceTypeSystem": [
-        18966
+        18986
       ],
       "SetPieceTypeSystemID": [
-        18862
+        18882
       ],
       "System": [
         2413
@@ -793,7 +793,7 @@
     "src": "32:2862:54",
     "nodes": [
       {
-        "id": 18100,
+        "id": 18120,
         "nodeType": "PragmaDirective",
         "src": "32:24:54",
         "literals": [
@@ -804,18 +804,18 @@
         ]
       },
       {
-        "id": 18102,
+        "id": 18122,
         "nodeType": "ImportDirective",
         "src": "57:49:54",
         "absolutePath": "src/common/PieceType.sol",
         "file": "common/PieceType.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 18311,
+        "scope": 18331,
         "sourceUnit": 15643,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 18101,
+              "id": 18121,
               "name": "PieceType",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -829,18 +829,18 @@
         "unitAlias": ""
       },
       {
-        "id": 18105,
+        "id": 18125,
         "nodeType": "ImportDirective",
         "src": "107:51:54",
         "absolutePath": "node_modules/@latticexyz/solecs/src/System.sol",
         "file": "solecs/System.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 18311,
+        "scope": 18331,
         "sourceUnit": 2414,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 18103,
+              "id": 18123,
               "name": "System",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -852,7 +852,7 @@
           },
           {
             "foreign": {
-              "id": 18104,
+              "id": 18124,
               "name": "IWorld",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -866,18 +866,18 @@
         "unitAlias": ""
       },
       {
-        "id": 18108,
+        "id": 18128,
         "nodeType": "ImportDirective",
         "src": "159:72:54",
         "absolutePath": "node_modules/@latticexyz/solecs/src/utils.sol",
         "file": "solecs/utils.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 18311,
+        "scope": 18331,
         "sourceUnit": 3916,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 18106,
+              "id": 18126,
               "name": "getAddressById",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -889,7 +889,7 @@
           },
           {
             "foreign": {
-              "id": 18107,
+              "id": 18127,
               "name": "getSystemAddressById",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -903,18 +903,18 @@
         "unitAlias": ""
       },
       {
-        "id": 18111,
+        "id": 18131,
         "nodeType": "ImportDirective",
         "src": "232:87:54",
         "absolutePath": "src/components/OwnerComponent.sol",
         "file": "components/OwnerComponent.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 18311,
+        "scope": 18331,
         "sourceUnit": 15941,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 18109,
+              "id": 18129,
               "name": "OwnerComponent",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -926,7 +926,7 @@
           },
           {
             "foreign": {
-              "id": 18110,
+              "id": 18130,
               "name": "ID",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -941,18 +941,18 @@
         "unitAlias": ""
       },
       {
-        "id": 18114,
+        "id": 18134,
         "nodeType": "ImportDirective",
         "src": "320:102:54",
         "absolutePath": "src/components/ControllerComponent.sol",
         "file": "components/ControllerComponent.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 18311,
+        "scope": 18331,
         "sourceUnit": 15917,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 18112,
+              "id": 18132,
               "name": "ControllerComponent",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -964,7 +964,7 @@
           },
           {
             "foreign": {
-              "id": 18113,
+              "id": 18133,
               "name": "ID",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -979,18 +979,18 @@
         "unitAlias": ""
       },
       {
-        "id": 18117,
+        "id": 18137,
         "nodeType": "ImportDirective",
         "src": "423:90:54",
         "absolutePath": "src/components/BRGameComponent.sol",
         "file": "components/BRGameComponent.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 18311,
+        "scope": 18331,
         "sourceUnit": 15797,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 18115,
+              "id": 18135,
               "name": "BRGameComponent",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -1002,7 +1002,7 @@
           },
           {
             "foreign": {
-              "id": 18116,
+              "id": 18136,
               "name": "ID",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -1017,18 +1017,18 @@
         "unitAlias": ""
       },
       {
-        "id": 18120,
+        "id": 18140,
         "nodeType": "ImportDirective",
         "src": "514:96:54",
         "absolutePath": "src/components/BRInGameComponent.sol",
         "file": "components/BRInGameComponent.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 18311,
+        "scope": 18331,
         "sourceUnit": 15821,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 18118,
+              "id": 18138,
               "name": "BRInGameComponent",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -1040,7 +1040,7 @@
           },
           {
             "foreign": {
-              "id": 18119,
+              "id": 18139,
               "name": "ID",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -1055,18 +1055,18 @@
         "unitAlias": ""
       },
       {
-        "id": 18123,
+        "id": 18143,
         "nodeType": "ImportDirective",
         "src": "611:99:54",
         "absolutePath": "src/components/BRIsAliveComponent.sol",
         "file": "components/BRIsAliveComponent.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 18311,
+        "scope": 18331,
         "sourceUnit": 15845,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 18121,
+              "id": 18141,
               "name": "BRIsAliveComponent",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -1078,7 +1078,7 @@
           },
           {
             "foreign": {
-              "id": 18122,
+              "id": 18142,
               "name": "ID",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -1093,18 +1093,18 @@
         "unitAlias": ""
       },
       {
-        "id": 18126,
+        "id": 18146,
         "nodeType": "ImportDirective",
         "src": "711:96:54",
         "absolutePath": "src/components/BRPointsComponent.sol",
         "file": "components/BRPointsComponent.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 18311,
+        "scope": 18331,
         "sourceUnit": 15869,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 18124,
+              "id": 18144,
               "name": "BRPointsComponent",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -1116,7 +1116,7 @@
           },
           {
             "foreign": {
-              "id": 18125,
+              "id": 18145,
               "name": "ID",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -1131,22 +1131,22 @@
         "unitAlias": ""
       },
       {
-        "id": 18129,
+        "id": 18149,
         "nodeType": "ImportDirective",
         "src": "808:96:54",
         "absolutePath": "src/systems/SetPieceTypeSystem.sol",
         "file": "systems/SetPieceTypeSystem.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 18311,
-        "sourceUnit": 18967,
+        "scope": 18331,
+        "sourceUnit": 18987,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 18127,
+              "id": 18147,
               "name": "SetPieceTypeSystem",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 18966,
+              "referencedDeclaration": 18986,
               "src": "817:18:54",
               "typeDescriptions": {}
             },
@@ -1154,11 +1154,11 @@
           },
           {
             "foreign": {
-              "id": 18128,
+              "id": 18148,
               "name": "ID",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 18862,
+              "referencedDeclaration": 18882,
               "src": "837:2:54",
               "typeDescriptions": {}
             },
@@ -1169,18 +1169,18 @@
         "unitAlias": ""
       },
       {
-        "id": 18131,
+        "id": 18151,
         "nodeType": "ImportDirective",
         "src": "905:54:54",
         "absolutePath": "src/libraries/BRLibPiece.sol",
         "file": "libraries/BRLibPiece.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 18311,
+        "scope": 18331,
         "sourceUnit": 16769,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 18130,
+              "id": 18150,
               "name": "BRLibPiece",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -1194,14 +1194,14 @@
         "unitAlias": ""
       },
       {
-        "id": 18139,
+        "id": 18159,
         "nodeType": "VariableDeclaration",
         "src": "961:71:54",
         "constant": true,
         "mutability": "constant",
         "name": "ID",
         "nameLocation": "978:2:54",
-        "scope": 18311,
+        "scope": 18331,
         "stateVariable": false,
         "storageLocation": "default",
         "typeDescriptions": {
@@ -1209,7 +1209,7 @@
           "typeString": "uint256"
         },
         "typeName": {
-          "id": 18132,
+          "id": 18152,
           "name": "uint256",
           "nodeType": "ElementaryTypeName",
           "src": "961:7:54",
@@ -1224,7 +1224,7 @@
               "arguments": [
                 {
                   "hexValue": "73797374656d2e425253657450696563655479706553797374656d",
-                  "id": 18136,
+                  "id": 18156,
                   "isConstant": false,
                   "isLValue": false,
                   "isPure": true,
@@ -1246,7 +1246,7 @@
                     "typeString": "literal_string \"system.BRSetPieceTypeSystem\""
                   }
                 ],
-                "id": 18135,
+                "id": 18155,
                 "name": "keccak256",
                 "nodeType": "Identifier",
                 "overloadedDeclarations": [],
@@ -1257,7 +1257,7 @@
                   "typeString": "function (bytes memory) pure returns (bytes32)"
                 }
               },
-              "id": 18137,
+              "id": 18157,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -1281,7 +1281,7 @@
                 "typeString": "bytes32"
               }
             ],
-            "id": 18134,
+            "id": 18154,
             "isConstant": false,
             "isLValue": false,
             "isPure": true,
@@ -1293,14 +1293,14 @@
               "typeString": "type(uint256)"
             },
             "typeName": {
-              "id": 18133,
+              "id": 18153,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "983:7:54",
               "typeDescriptions": {}
             }
           },
-          "id": 18138,
+          "id": 18158,
           "isConstant": false,
           "isLValue": false,
           "isPure": true,
@@ -1319,16 +1319,16 @@
         "visibility": "internal"
       },
       {
-        "id": 18310,
+        "id": 18330,
         "nodeType": "ContractDefinition",
         "src": "1035:1858:54",
         "nodes": [
           {
-            "id": 18154,
+            "id": 18174,
             "nodeType": "FunctionDefinition",
             "src": "1079:78:54",
             "body": {
-              "id": 18153,
+              "id": 18173,
               "nodeType": "Block",
               "src": "1155:2:54",
               "statements": []
@@ -1339,11 +1339,11 @@
               {
                 "arguments": [
                   {
-                    "id": 18149,
+                    "id": 18169,
                     "name": "_world",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 18144,
+                    "referencedDeclaration": 18164,
                     "src": "1134:6:54",
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_IWorld_$3389",
@@ -1351,11 +1351,11 @@
                     }
                   },
                   {
-                    "id": 18150,
+                    "id": 18170,
                     "name": "_components",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 18146,
+                    "referencedDeclaration": 18166,
                     "src": "1142:11:54",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1363,10 +1363,10 @@
                     }
                   }
                 ],
-                "id": 18151,
+                "id": 18171,
                 "kind": "baseConstructorSpecifier",
                 "modifierName": {
-                  "id": 18148,
+                  "id": 18168,
                   "name": "System",
                   "nameLocations": [
                     "1127:6:54"
@@ -1382,17 +1382,17 @@
             "name": "",
             "nameLocation": "-1:-1:-1",
             "parameters": {
-              "id": 18147,
+              "id": 18167,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 18144,
+                  "id": 18164,
                   "mutability": "mutable",
                   "name": "_world",
                   "nameLocation": "1098:6:54",
                   "nodeType": "VariableDeclaration",
-                  "scope": 18154,
+                  "scope": 18174,
                   "src": "1091:13:54",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1401,10 +1401,10 @@
                     "typeString": "contract IWorld"
                   },
                   "typeName": {
-                    "id": 18143,
+                    "id": 18163,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 18142,
+                      "id": 18162,
                       "name": "IWorld",
                       "nameLocations": [
                         "1091:6:54"
@@ -1424,12 +1424,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 18146,
+                  "id": 18166,
                   "mutability": "mutable",
                   "name": "_components",
                   "nameLocation": "1114:11:54",
                   "nodeType": "VariableDeclaration",
-                  "scope": 18154,
+                  "scope": 18174,
                   "src": "1106:19:54",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1438,7 +1438,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 18145,
+                    "id": 18165,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1106:7:54",
@@ -1454,40 +1454,40 @@
               "src": "1090:36:54"
             },
             "returnParameters": {
-              "id": 18152,
+              "id": 18172,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1155:0:54"
             },
-            "scope": 18310,
+            "scope": 18330,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           },
           {
-            "id": 18287,
+            "id": 18307,
             "nodeType": "FunctionDefinition",
             "src": "1219:1489:54",
             "body": {
-              "id": 18286,
+              "id": 18306,
               "nodeType": "Block",
               "src": "1290:1418:54",
               "statements": [
                 {
                   "assignments": [
-                    18163,
-                    18165,
-                    18168
+                    18183,
+                    18185,
+                    18188
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 18163,
+                      "id": 18183,
                       "mutability": "mutable",
                       "name": "piece",
                       "nameLocation": "1305:5:54",
                       "nodeType": "VariableDeclaration",
-                      "scope": 18286,
+                      "scope": 18306,
                       "src": "1297:13:54",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -1496,7 +1496,7 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 18162,
+                        "id": 18182,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
                         "src": "1297:7:54",
@@ -1509,12 +1509,12 @@
                     },
                     {
                       "constant": false,
-                      "id": 18165,
+                      "id": 18185,
                       "mutability": "mutable",
                       "name": "game",
                       "nameLocation": "1320:4:54",
                       "nodeType": "VariableDeclaration",
-                      "scope": 18286,
+                      "scope": 18306,
                       "src": "1312:12:54",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -1523,7 +1523,7 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 18164,
+                        "id": 18184,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
                         "src": "1312:7:54",
@@ -1536,12 +1536,12 @@
                     },
                     {
                       "constant": false,
-                      "id": 18168,
+                      "id": 18188,
                       "mutability": "mutable",
                       "name": "pieceType",
                       "nameLocation": "1336:9:54",
                       "nodeType": "VariableDeclaration",
-                      "scope": 18286,
+                      "scope": 18306,
                       "src": "1326:19:54",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -1550,10 +1550,10 @@
                         "typeString": "enum PieceType"
                       },
                       "typeName": {
-                        "id": 18167,
+                        "id": 18187,
                         "nodeType": "UserDefinedTypeName",
                         "pathNode": {
-                          "id": 18166,
+                          "id": 18186,
                           "name": "PieceType",
                           "nameLocations": [
                             "1326:9:54"
@@ -1572,15 +1572,15 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 18179,
+                  "id": 18199,
                   "initialValue": {
                     "arguments": [
                       {
-                        "id": 18171,
+                        "id": 18191,
                         "name": "arguments",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 18157,
+                        "referencedDeclaration": 18177,
                         "src": "1360:9:54",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes_memory_ptr",
@@ -1590,7 +1590,7 @@
                       {
                         "components": [
                           {
-                            "id": 18173,
+                            "id": 18193,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -1602,7 +1602,7 @@
                               "typeString": "type(uint256)"
                             },
                             "typeName": {
-                              "id": 18172,
+                              "id": 18192,
                               "name": "uint256",
                               "nodeType": "ElementaryTypeName",
                               "src": "1372:7:54",
@@ -1610,7 +1610,7 @@
                             }
                           },
                           {
-                            "id": 18175,
+                            "id": 18195,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -1622,7 +1622,7 @@
                               "typeString": "type(uint256)"
                             },
                             "typeName": {
-                              "id": 18174,
+                              "id": 18194,
                               "name": "uint256",
                               "nodeType": "ElementaryTypeName",
                               "src": "1381:7:54",
@@ -1630,7 +1630,7 @@
                             }
                           },
                           {
-                            "id": 18176,
+                            "id": 18196,
                             "name": "PieceType",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -1642,7 +1642,7 @@
                             }
                           }
                         ],
-                        "id": 18177,
+                        "id": 18197,
                         "isConstant": false,
                         "isInlineArray": false,
                         "isLValue": false,
@@ -1668,7 +1668,7 @@
                         }
                       ],
                       "expression": {
-                        "id": 18169,
+                        "id": 18189,
                         "name": "abi",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -1679,7 +1679,7 @@
                           "typeString": "abi"
                         }
                       },
-                      "id": 18170,
+                      "id": 18190,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -1693,7 +1693,7 @@
                         "typeString": "function () pure"
                       }
                     },
-                    "id": 18178,
+                    "id": 18198,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1714,17 +1714,17 @@
                 },
                 {
                   "assignments": [
-                    18182
+                    18202
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 18182,
+                      "id": 18202,
                       "mutability": "mutable",
                       "name": "ownerComponent",
                       "nameLocation": "1423:14:54",
                       "nodeType": "VariableDeclaration",
-                      "scope": 18286,
+                      "scope": 18306,
                       "src": "1408:29:54",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -1733,10 +1733,10 @@
                         "typeString": "contract OwnerComponent"
                       },
                       "typeName": {
-                        "id": 18181,
+                        "id": 18201,
                         "nodeType": "UserDefinedTypeName",
                         "pathNode": {
-                          "id": 18180,
+                          "id": 18200,
                           "name": "OwnerComponent",
                           "nameLocations": [
                             "1408:14:54"
@@ -1755,13 +1755,13 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 18189,
+                  "id": 18209,
                   "initialValue": {
                     "arguments": [
                       {
                         "arguments": [
                           {
-                            "id": 18185,
+                            "id": 18205,
                             "name": "components",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -1773,7 +1773,7 @@
                             }
                           },
                           {
-                            "id": 18186,
+                            "id": 18206,
                             "name": "OwnerComponentID",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -1796,7 +1796,7 @@
                               "typeString": "uint256"
                             }
                           ],
-                          "id": 18184,
+                          "id": 18204,
                           "name": "getAddressById",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -1807,7 +1807,7 @@
                             "typeString": "function (contract IUint256Component,uint256) view returns (address)"
                           }
                         },
-                        "id": 18187,
+                        "id": 18207,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1831,7 +1831,7 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 18183,
+                      "id": 18203,
                       "name": "OwnerComponent",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
@@ -1842,7 +1842,7 @@
                         "typeString": "type(contract OwnerComponent)"
                       }
                     },
-                    "id": 18188,
+                    "id": 18208,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1863,17 +1863,17 @@
                 },
                 {
                   "assignments": [
-                    18192
+                    18212
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 18192,
+                      "id": 18212,
                       "mutability": "mutable",
                       "name": "controllerComponent",
                       "nameLocation": "1526:19:54",
                       "nodeType": "VariableDeclaration",
-                      "scope": 18286,
+                      "scope": 18306,
                       "src": "1506:39:54",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -1882,10 +1882,10 @@
                         "typeString": "contract ControllerComponent"
                       },
                       "typeName": {
-                        "id": 18191,
+                        "id": 18211,
                         "nodeType": "UserDefinedTypeName",
                         "pathNode": {
-                          "id": 18190,
+                          "id": 18210,
                           "name": "ControllerComponent",
                           "nameLocations": [
                             "1506:19:54"
@@ -1904,13 +1904,13 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 18199,
+                  "id": 18219,
                   "initialValue": {
                     "arguments": [
                       {
                         "arguments": [
                           {
-                            "id": 18195,
+                            "id": 18215,
                             "name": "components",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -1922,7 +1922,7 @@
                             }
                           },
                           {
-                            "id": 18196,
+                            "id": 18216,
                             "name": "ControllerComponentID",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -1945,7 +1945,7 @@
                               "typeString": "uint256"
                             }
                           ],
-                          "id": 18194,
+                          "id": 18214,
                           "name": "getAddressById",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -1956,7 +1956,7 @@
                             "typeString": "function (contract IUint256Component,uint256) view returns (address)"
                           }
                         },
-                        "id": 18197,
+                        "id": 18217,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1980,7 +1980,7 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 18193,
+                      "id": 18213,
                       "name": "ControllerComponent",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
@@ -1991,7 +1991,7 @@
                         "typeString": "type(contract ControllerComponent)"
                       }
                     },
-                    "id": 18198,
+                    "id": 18218,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2012,17 +2012,17 @@
                 },
                 {
                   "assignments": [
-                    18202
+                    18222
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 18202,
+                      "id": 18222,
                       "mutability": "mutable",
                       "name": "brGameComponent",
                       "nameLocation": "1640:15:54",
                       "nodeType": "VariableDeclaration",
-                      "scope": 18286,
+                      "scope": 18306,
                       "src": "1624:31:54",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -2031,10 +2031,10 @@
                         "typeString": "contract BRGameComponent"
                       },
                       "typeName": {
-                        "id": 18201,
+                        "id": 18221,
                         "nodeType": "UserDefinedTypeName",
                         "pathNode": {
-                          "id": 18200,
+                          "id": 18220,
                           "name": "BRGameComponent",
                           "nameLocations": [
                             "1624:15:54"
@@ -2053,13 +2053,13 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 18209,
+                  "id": 18229,
                   "initialValue": {
                     "arguments": [
                       {
                         "arguments": [
                           {
-                            "id": 18205,
+                            "id": 18225,
                             "name": "components",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -2071,7 +2071,7 @@
                             }
                           },
                           {
-                            "id": 18206,
+                            "id": 18226,
                             "name": "BRGameComponentID",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -2094,7 +2094,7 @@
                               "typeString": "uint256"
                             }
                           ],
-                          "id": 18204,
+                          "id": 18224,
                           "name": "getAddressById",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -2105,7 +2105,7 @@
                             "typeString": "function (contract IUint256Component,uint256) view returns (address)"
                           }
                         },
-                        "id": 18207,
+                        "id": 18227,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2129,7 +2129,7 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 18203,
+                      "id": 18223,
                       "name": "BRGameComponent",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
@@ -2140,7 +2140,7 @@
                         "typeString": "type(contract BRGameComponent)"
                       }
                     },
-                    "id": 18208,
+                    "id": 18228,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2161,17 +2161,17 @@
                 },
                 {
                   "assignments": [
-                    18212
+                    18232
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 18212,
+                      "id": 18232,
                       "mutability": "mutable",
                       "name": "brInGameComponent",
                       "nameLocation": "1744:17:54",
                       "nodeType": "VariableDeclaration",
-                      "scope": 18286,
+                      "scope": 18306,
                       "src": "1726:35:54",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -2180,10 +2180,10 @@
                         "typeString": "contract BRInGameComponent"
                       },
                       "typeName": {
-                        "id": 18211,
+                        "id": 18231,
                         "nodeType": "UserDefinedTypeName",
                         "pathNode": {
-                          "id": 18210,
+                          "id": 18230,
                           "name": "BRInGameComponent",
                           "nameLocations": [
                             "1726:17:54"
@@ -2202,13 +2202,13 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 18219,
+                  "id": 18239,
                   "initialValue": {
                     "arguments": [
                       {
                         "arguments": [
                           {
-                            "id": 18215,
+                            "id": 18235,
                             "name": "components",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -2220,7 +2220,7 @@
                             }
                           },
                           {
-                            "id": 18216,
+                            "id": 18236,
                             "name": "BRInGameComponentID",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -2243,7 +2243,7 @@
                               "typeString": "uint256"
                             }
                           ],
-                          "id": 18214,
+                          "id": 18234,
                           "name": "getAddressById",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -2254,7 +2254,7 @@
                             "typeString": "function (contract IUint256Component,uint256) view returns (address)"
                           }
                         },
-                        "id": 18217,
+                        "id": 18237,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2278,7 +2278,7 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 18213,
+                      "id": 18233,
                       "name": "BRInGameComponent",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
@@ -2289,7 +2289,7 @@
                         "typeString": "type(contract BRInGameComponent)"
                       }
                     },
-                    "id": 18218,
+                    "id": 18238,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2310,17 +2310,17 @@
                 },
                 {
                   "assignments": [
-                    18222
+                    18242
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 18222,
+                      "id": 18242,
                       "mutability": "mutable",
                       "name": "brIsAliveComponent",
                       "nameLocation": "1855:18:54",
                       "nodeType": "VariableDeclaration",
-                      "scope": 18286,
+                      "scope": 18306,
                       "src": "1836:37:54",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -2329,10 +2329,10 @@
                         "typeString": "contract BRIsAliveComponent"
                       },
                       "typeName": {
-                        "id": 18221,
+                        "id": 18241,
                         "nodeType": "UserDefinedTypeName",
                         "pathNode": {
-                          "id": 18220,
+                          "id": 18240,
                           "name": "BRIsAliveComponent",
                           "nameLocations": [
                             "1836:18:54"
@@ -2351,13 +2351,13 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 18229,
+                  "id": 18249,
                   "initialValue": {
                     "arguments": [
                       {
                         "arguments": [
                           {
-                            "id": 18225,
+                            "id": 18245,
                             "name": "components",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -2369,7 +2369,7 @@
                             }
                           },
                           {
-                            "id": 18226,
+                            "id": 18246,
                             "name": "BRIsAliveComponentID",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -2392,7 +2392,7 @@
                               "typeString": "uint256"
                             }
                           ],
-                          "id": 18224,
+                          "id": 18244,
                           "name": "getAddressById",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -2403,7 +2403,7 @@
                             "typeString": "function (contract IUint256Component,uint256) view returns (address)"
                           }
                         },
-                        "id": 18227,
+                        "id": 18247,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2427,7 +2427,7 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 18223,
+                      "id": 18243,
                       "name": "BRIsAliveComponent",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
@@ -2438,7 +2438,7 @@
                         "typeString": "type(contract BRIsAliveComponent)"
                       }
                     },
-                    "id": 18228,
+                    "id": 18248,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2459,17 +2459,17 @@
                 },
                 {
                   "assignments": [
-                    18232
+                    18252
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 18232,
+                      "id": 18252,
                       "mutability": "mutable",
                       "name": "brPointsComponent",
                       "nameLocation": "1968:17:54",
                       "nodeType": "VariableDeclaration",
-                      "scope": 18286,
+                      "scope": 18306,
                       "src": "1950:35:54",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -2478,10 +2478,10 @@
                         "typeString": "contract BRPointsComponent"
                       },
                       "typeName": {
-                        "id": 18231,
+                        "id": 18251,
                         "nodeType": "UserDefinedTypeName",
                         "pathNode": {
-                          "id": 18230,
+                          "id": 18250,
                           "name": "BRPointsComponent",
                           "nameLocations": [
                             "1950:17:54"
@@ -2500,13 +2500,13 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 18239,
+                  "id": 18259,
                   "initialValue": {
                     "arguments": [
                       {
                         "arguments": [
                           {
-                            "id": 18235,
+                            "id": 18255,
                             "name": "components",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -2518,7 +2518,7 @@
                             }
                           },
                           {
-                            "id": 18236,
+                            "id": 18256,
                             "name": "BRPointsComponentID",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -2541,7 +2541,7 @@
                               "typeString": "uint256"
                             }
                           ],
-                          "id": 18234,
+                          "id": 18254,
                           "name": "getAddressById",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -2552,7 +2552,7 @@
                             "typeString": "function (contract IUint256Component,uint256) view returns (address)"
                           }
                         },
-                        "id": 18237,
+                        "id": 18257,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2576,7 +2576,7 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 18233,
+                      "id": 18253,
                       "name": "BRPointsComponent",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
@@ -2587,7 +2587,7 @@
                         "typeString": "type(contract BRPointsComponent)"
                       }
                     },
-                    "id": 18238,
+                    "id": 18258,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2608,54 +2608,54 @@
                 },
                 {
                   "assignments": [
-                    18242
+                    18262
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 18242,
+                      "id": 18262,
                       "mutability": "mutable",
                       "name": "setPieceTypeSystem",
                       "nameLocation": "2079:18:54",
                       "nodeType": "VariableDeclaration",
-                      "scope": 18286,
+                      "scope": 18306,
                       "src": "2060:37:54",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_SetPieceTypeSystem_$18966",
+                        "typeIdentifier": "t_contract$_SetPieceTypeSystem_$18986",
                         "typeString": "contract SetPieceTypeSystem"
                       },
                       "typeName": {
-                        "id": 18241,
+                        "id": 18261,
                         "nodeType": "UserDefinedTypeName",
                         "pathNode": {
-                          "id": 18240,
+                          "id": 18260,
                           "name": "SetPieceTypeSystem",
                           "nameLocations": [
                             "2060:18:54"
                           ],
                           "nodeType": "IdentifierPath",
-                          "referencedDeclaration": 18966,
+                          "referencedDeclaration": 18986,
                           "src": "2060:18:54"
                         },
-                        "referencedDeclaration": 18966,
+                        "referencedDeclaration": 18986,
                         "src": "2060:18:54",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_SetPieceTypeSystem_$18966",
+                          "typeIdentifier": "t_contract$_SetPieceTypeSystem_$18986",
                           "typeString": "contract SetPieceTypeSystem"
                         }
                       },
                       "visibility": "internal"
                     }
                   ],
-                  "id": 18249,
+                  "id": 18269,
                   "initialValue": {
                     "arguments": [
                       {
                         "arguments": [
                           {
-                            "id": 18245,
+                            "id": 18265,
                             "name": "components",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -2667,11 +2667,11 @@
                             }
                           },
                           {
-                            "id": 18246,
+                            "id": 18266,
                             "name": "SetPieceTypeSystemID",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 18862,
+                            "referencedDeclaration": 18882,
                             "src": "2152:20:54",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -2690,7 +2690,7 @@
                               "typeString": "uint256"
                             }
                           ],
-                          "id": 18244,
+                          "id": 18264,
                           "name": "getSystemAddressById",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -2701,7 +2701,7 @@
                             "typeString": "function (contract IUint256Component,uint256) view returns (address)"
                           }
                         },
-                        "id": 18247,
+                        "id": 18267,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2725,18 +2725,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 18243,
+                      "id": 18263,
                       "name": "SetPieceTypeSystem",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 18966,
+                      "referencedDeclaration": 18986,
                       "src": "2100:18:54",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_contract$_SetPieceTypeSystem_$18966_$",
+                        "typeIdentifier": "t_type$_t_contract$_SetPieceTypeSystem_$18986_$",
                         "typeString": "type(contract SetPieceTypeSystem)"
                       }
                     },
-                    "id": 18248,
+                    "id": 18268,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2748,7 +2748,7 @@
                     "src": "2100:74:54",
                     "tryCall": false,
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_SetPieceTypeSystem_$18966",
+                      "typeIdentifier": "t_contract$_SetPieceTypeSystem_$18986",
                       "typeString": "contract SetPieceTypeSystem"
                     }
                   },
@@ -2759,11 +2759,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 18253,
+                        "id": 18273,
                         "name": "ownerComponent",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 18182,
+                        "referencedDeclaration": 18202,
                         "src": "2250:14:54",
                         "typeDescriptions": {
                           "typeIdentifier": "t_contract$_OwnerComponent_$15940",
@@ -2771,11 +2771,11 @@
                         }
                       },
                       {
-                        "id": 18254,
+                        "id": 18274,
                         "name": "controllerComponent",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 18192,
+                        "referencedDeclaration": 18212,
                         "src": "2272:19:54",
                         "typeDescriptions": {
                           "typeIdentifier": "t_contract$_ControllerComponent_$15916",
@@ -2783,11 +2783,11 @@
                         }
                       },
                       {
-                        "id": 18255,
+                        "id": 18275,
                         "name": "brGameComponent",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 18202,
+                        "referencedDeclaration": 18222,
                         "src": "2299:15:54",
                         "typeDescriptions": {
                           "typeIdentifier": "t_contract$_BRGameComponent_$15796",
@@ -2795,11 +2795,11 @@
                         }
                       },
                       {
-                        "id": 18256,
+                        "id": 18276,
                         "name": "brInGameComponent",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 18212,
+                        "referencedDeclaration": 18232,
                         "src": "2322:17:54",
                         "typeDescriptions": {
                           "typeIdentifier": "t_contract$_BRInGameComponent_$15820",
@@ -2807,11 +2807,11 @@
                         }
                       },
                       {
-                        "id": 18257,
+                        "id": 18277,
                         "name": "brIsAliveComponent",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 18222,
+                        "referencedDeclaration": 18242,
                         "src": "2347:18:54",
                         "typeDescriptions": {
                           "typeIdentifier": "t_contract$_BRIsAliveComponent_$15844",
@@ -2819,11 +2819,11 @@
                         }
                       },
                       {
-                        "id": 18258,
+                        "id": 18278,
                         "name": "piece",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 18163,
+                        "referencedDeclaration": 18183,
                         "src": "2373:5:54",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -2831,11 +2831,11 @@
                         }
                       },
                       {
-                        "id": 18259,
+                        "id": 18279,
                         "name": "game",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 18165,
+                        "referencedDeclaration": 18185,
                         "src": "2386:4:54",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -2844,7 +2844,7 @@
                       },
                       {
                         "expression": {
-                          "id": 18260,
+                          "id": 18280,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -2855,7 +2855,7 @@
                             "typeString": "msg"
                           }
                         },
-                        "id": 18261,
+                        "id": 18281,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2906,7 +2906,7 @@
                         }
                       ],
                       "expression": {
-                        "id": 18250,
+                        "id": 18270,
                         "name": "BRLibPiece",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -2917,7 +2917,7 @@
                           "typeString": "type(library BRLibPiece)"
                         }
                       },
-                      "id": 18252,
+                      "id": 18272,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -2932,7 +2932,7 @@
                         "typeString": "function (contract OwnerComponent,contract ControllerComponent,contract BRGameComponent,contract BRInGameComponent,contract BRIsAliveComponent,uint256,uint256,address) view"
                       }
                     },
-                    "id": 18262,
+                    "id": 18282,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2948,23 +2948,23 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 18263,
+                  "id": 18283,
                   "nodeType": "ExpressionStatement",
                   "src": "2219:195:54"
                 },
                 {
                   "assignments": [
-                    18265
+                    18285
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 18265,
+                      "id": 18285,
                       "mutability": "mutable",
                       "name": "pieceTypePoints",
                       "nameLocation": "2488:15:54",
                       "nodeType": "VariableDeclaration",
-                      "scope": 18286,
+                      "scope": 18306,
                       "src": "2481:22:54",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -2973,7 +2973,7 @@
                         "typeString": "uint32"
                       },
                       "typeName": {
-                        "id": 18264,
+                        "id": 18284,
                         "name": "uint32",
                         "nodeType": "ElementaryTypeName",
                         "src": "2481:6:54",
@@ -2985,15 +2985,15 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 18270,
+                  "id": 18290,
                   "initialValue": {
                     "arguments": [
                       {
-                        "id": 18268,
+                        "id": 18288,
                         "name": "pieceType",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 18168,
+                        "referencedDeclaration": 18188,
                         "src": "2540:9:54",
                         "typeDescriptions": {
                           "typeIdentifier": "t_enum$_PieceType_$15642",
@@ -3009,7 +3009,7 @@
                         }
                       ],
                       "expression": {
-                        "id": 18266,
+                        "id": 18286,
                         "name": "BRLibPiece",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -3020,7 +3020,7 @@
                           "typeString": "type(library BRLibPiece)"
                         }
                       },
-                      "id": 18267,
+                      "id": 18287,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -3035,7 +3035,7 @@
                         "typeString": "function (enum PieceType) pure returns (uint32)"
                       }
                     },
-                    "id": 18269,
+                    "id": 18289,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3058,11 +3058,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 18274,
+                        "id": 18294,
                         "name": "brPointsComponent",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 18232,
+                        "referencedDeclaration": 18252,
                         "src": "2583:17:54",
                         "typeDescriptions": {
                           "typeIdentifier": "t_contract$_BRPointsComponent_$15868",
@@ -3070,11 +3070,11 @@
                         }
                       },
                       {
-                        "id": 18275,
+                        "id": 18295,
                         "name": "piece",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 18163,
+                        "referencedDeclaration": 18183,
                         "src": "2602:5:54",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -3082,11 +3082,11 @@
                         }
                       },
                       {
-                        "id": 18276,
+                        "id": 18296,
                         "name": "pieceTypePoints",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 18265,
+                        "referencedDeclaration": 18285,
                         "src": "2609:15:54",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint32",
@@ -3110,7 +3110,7 @@
                         }
                       ],
                       "expression": {
-                        "id": 18271,
+                        "id": 18291,
                         "name": "BRLibPiece",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -3121,7 +3121,7 @@
                           "typeString": "type(library BRLibPiece)"
                         }
                       },
-                      "id": 18273,
+                      "id": 18293,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -3136,7 +3136,7 @@
                         "typeString": "function (contract BRPointsComponent,uint256,uint32)"
                       }
                     },
-                    "id": 18277,
+                    "id": 18297,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3152,7 +3152,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 18278,
+                  "id": 18298,
                   "nodeType": "ExpressionStatement",
                   "src": "2556:69:54"
                 },
@@ -3160,11 +3160,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 18282,
+                        "id": 18302,
                         "name": "piece",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 18163,
+                        "referencedDeclaration": 18183,
                         "src": "2686:5:54",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -3172,11 +3172,11 @@
                         }
                       },
                       {
-                        "id": 18283,
+                        "id": 18303,
                         "name": "pieceType",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 18168,
+                        "referencedDeclaration": 18188,
                         "src": "2693:9:54",
                         "typeDescriptions": {
                           "typeIdentifier": "t_enum$_PieceType_$15642",
@@ -3196,18 +3196,18 @@
                         }
                       ],
                       "expression": {
-                        "id": 18279,
+                        "id": 18299,
                         "name": "setPieceTypeSystem",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 18242,
+                        "referencedDeclaration": 18262,
                         "src": "2654:18:54",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_SetPieceTypeSystem_$18966",
+                          "typeIdentifier": "t_contract$_SetPieceTypeSystem_$18986",
                           "typeString": "contract SetPieceTypeSystem"
                         }
                       },
-                      "id": 18281,
+                      "id": 18301,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -3215,14 +3215,14 @@
                       "memberLocation": "2673:12:54",
                       "memberName": "executeTyped",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 18965,
+                      "referencedDeclaration": 18985,
                       "src": "2654:31:54",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_enum$_PieceType_$15642_$returns$_t_bytes_memory_ptr_$",
                         "typeString": "function (uint256,enum PieceType) external returns (bytes memory)"
                       }
                     },
-                    "id": 18284,
+                    "id": 18304,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3238,7 +3238,7 @@
                       "typeString": "bytes memory"
                     }
                   },
-                  "id": 18285,
+                  "id": 18305,
                   "nodeType": "ExpressionStatement",
                   "src": "2654:49:54"
                 }
@@ -3248,7 +3248,7 @@
               3246
             ],
             "documentation": {
-              "id": 18155,
+              "id": 18175,
               "nodeType": "StructuredDocumentation",
               "src": "1161:55:54",
               "text": "@notice Spawns a new piece with msg.sender as owner"
@@ -3260,17 +3260,17 @@
             "name": "execute",
             "nameLocation": "1228:7:54",
             "parameters": {
-              "id": 18158,
+              "id": 18178,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 18157,
+                  "id": 18177,
                   "mutability": "mutable",
                   "name": "arguments",
                   "nameLocation": "1249:9:54",
                   "nodeType": "VariableDeclaration",
-                  "scope": 18287,
+                  "scope": 18307,
                   "src": "1236:22:54",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -3279,7 +3279,7 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 18156,
+                    "id": 18176,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
                     "src": "1236:5:54",
@@ -3294,17 +3294,17 @@
               "src": "1235:24:54"
             },
             "returnParameters": {
-              "id": 18161,
+              "id": 18181,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 18160,
+                  "id": 18180,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 18287,
+                  "scope": 18307,
                   "src": "1276:12:54",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -3313,7 +3313,7 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 18159,
+                    "id": 18179,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
                     "src": "1276:5:54",
@@ -3327,17 +3327,17 @@
               ],
               "src": "1275:14:54"
             },
-            "scope": 18310,
+            "scope": 18330,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           },
           {
-            "id": 18309,
+            "id": 18329,
             "nodeType": "FunctionDefinition",
             "src": "2712:179:54",
             "body": {
-              "id": 18308,
+              "id": 18328,
               "nodeType": "Block",
               "src": "2830:61:54",
               "statements": [
@@ -3347,11 +3347,11 @@
                       {
                         "arguments": [
                           {
-                            "id": 18302,
+                            "id": 18322,
                             "name": "piece",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 18289,
+                            "referencedDeclaration": 18309,
                             "src": "2862:5:54",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -3359,11 +3359,11 @@
                             }
                           },
                           {
-                            "id": 18303,
+                            "id": 18323,
                             "name": "game",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 18291,
+                            "referencedDeclaration": 18311,
                             "src": "2869:4:54",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -3371,11 +3371,11 @@
                             }
                           },
                           {
-                            "id": 18304,
+                            "id": 18324,
                             "name": "pieceType",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 18294,
+                            "referencedDeclaration": 18314,
                             "src": "2875:9:54",
                             "typeDescriptions": {
                               "typeIdentifier": "t_enum$_PieceType_$15642",
@@ -3399,7 +3399,7 @@
                             }
                           ],
                           "expression": {
-                            "id": 18300,
+                            "id": 18320,
                             "name": "abi",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -3410,7 +3410,7 @@
                               "typeString": "abi"
                             }
                           },
-                          "id": 18301,
+                          "id": 18321,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -3424,7 +3424,7 @@
                             "typeString": "function () pure returns (bytes memory)"
                           }
                         },
-                        "id": 18305,
+                        "id": 18325,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -3448,18 +3448,18 @@
                           "typeString": "bytes memory"
                         }
                       ],
-                      "id": 18299,
+                      "id": 18319,
                       "name": "execute",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 18287,
+                      "referencedDeclaration": 18307,
                       "src": "2843:7:54",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_bytes_memory_ptr_$returns$_t_bytes_memory_ptr_$",
                         "typeString": "function (bytes memory) returns (bytes memory)"
                       }
                     },
-                    "id": 18306,
+                    "id": 18326,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3475,8 +3475,8 @@
                       "typeString": "bytes memory"
                     }
                   },
-                  "functionReturnParameters": 18298,
-                  "id": 18307,
+                  "functionReturnParameters": 18318,
+                  "id": 18327,
                   "nodeType": "Return",
                   "src": "2836:50:54"
                 }
@@ -3489,17 +3489,17 @@
             "name": "executeTyped",
             "nameLocation": "2721:12:54",
             "parameters": {
-              "id": 18295,
+              "id": 18315,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 18289,
+                  "id": 18309,
                   "mutability": "mutable",
                   "name": "piece",
                   "nameLocation": "2747:5:54",
                   "nodeType": "VariableDeclaration",
-                  "scope": 18309,
+                  "scope": 18329,
                   "src": "2739:13:54",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3508,7 +3508,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 18288,
+                    "id": 18308,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2739:7:54",
@@ -3521,12 +3521,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 18291,
+                  "id": 18311,
                   "mutability": "mutable",
                   "name": "game",
                   "nameLocation": "2766:4:54",
                   "nodeType": "VariableDeclaration",
-                  "scope": 18309,
+                  "scope": 18329,
                   "src": "2758:12:54",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3535,7 +3535,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 18290,
+                    "id": 18310,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2758:7:54",
@@ -3548,12 +3548,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 18294,
+                  "id": 18314,
                   "mutability": "mutable",
                   "name": "pieceType",
                   "nameLocation": "2786:9:54",
                   "nodeType": "VariableDeclaration",
-                  "scope": 18309,
+                  "scope": 18329,
                   "src": "2776:19:54",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3562,10 +3562,10 @@
                     "typeString": "enum PieceType"
                   },
                   "typeName": {
-                    "id": 18293,
+                    "id": 18313,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 18292,
+                      "id": 18312,
                       "name": "PieceType",
                       "nameLocations": [
                         "2776:9:54"
@@ -3587,17 +3587,17 @@
               "src": "2733:66:54"
             },
             "returnParameters": {
-              "id": 18298,
+              "id": 18318,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 18297,
+                  "id": 18317,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 18309,
+                  "scope": 18329,
                   "src": "2816:12:54",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -3606,7 +3606,7 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 18296,
+                    "id": 18316,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
                     "src": "2816:5:54",
@@ -3620,7 +3620,7 @@
               ],
               "src": "2815:14:54"
             },
-            "scope": 18310,
+            "scope": 18330,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
@@ -3630,7 +3630,7 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 18140,
+              "id": 18160,
               "name": "System",
               "nameLocations": [
                 "1068:6:54"
@@ -3639,7 +3639,7 @@
               "referencedDeclaration": 2413,
               "src": "1068:6:54"
             },
-            "id": 18141,
+            "id": 18161,
             "nodeType": "InheritanceSpecifier",
             "src": "1068:6:54"
           }
@@ -3649,14 +3649,14 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "linearizedBaseContracts": [
-          18310,
+          18330,
           2413,
           3247,
           3191
         ],
         "name": "BRSetPieceTypeSystem",
         "nameLocation": "1044:20:54",
-        "scope": 18311,
+        "scope": 18331,
         "usedErrors": [
           15587,
           15593,
