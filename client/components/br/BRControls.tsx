@@ -7,6 +7,7 @@ import { useContext, useEffect } from "react";
 import { GameContext } from "../../context/GameContext";
 import JoinGame from "./JoinGame";
 import Points from "./Points";
+import RechargeTimer from "./RechargeTimer";
 import UpgradePiece from "./UpgradePiece";
 
 const BRControls = () => {
@@ -21,6 +22,7 @@ const BRControls = () => {
       <div className={CONTROLLER_COMPONENT_CLASS_NAME}>
         {game.game && (
           <div>
+            <RechargeTimer />
             <JoinGame game={game.game} />
             <div className="mb-2">
               <Points />

@@ -1,19 +1,17 @@
-import { useContext, useEffect } from "react";
-
 import { Game } from "../../game/types";
 import { GameContext } from "../../context/GameContext";
 import { NetworkContext } from "../../context/NetworkContext";
-import getBurnerWallet from "../../network/wallet/getBurnerWallet";
-import getOwnedPieceEntityIndex from "../../game/utils/getOwnedPieceEntityIndex";
 import joinGame from "../../game/utils/joinGame";
+import { useContext } from "react";
 
 const JoinGame = (props: { game: Game }) => {
   const network = useContext(NetworkContext);
   const game = useContext(GameContext);
 
   const handleJoinGame = () => {
-    if (game.activePiece)
+    if (game.activePiece) {
       joinGame(game.activePiece, props.game.gameEntity!, network.network!);
+    }
   };
 
   return (

@@ -5,7 +5,7 @@ import { createInput, pixelCoordToTileCoord } from "@latticexyz/phaserx";
 import { Game } from "../../../types";
 import { Network } from "../../../../network/types";
 import { Subscription } from "rxjs";
-import getEntityFromEntityIndex from "../../../utils/getEntityFromEntityIndex";
+import { getEntityFromEntityIndex } from "../../../utils/resolveEntity";
 import isLiveGamePiece from "../../../utils/isLiveGamePiece";
 
 const createBRMovementInputSystem = (

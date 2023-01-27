@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { GameConfig } from "../game/types";
 import { NetworkContext } from "../context/NetworkContext";
-import getEntityFromEntityIndex from "../game/utils/getEntityFromEntityIndex";
+import { getEntityFromEntityIndex } from "../game/utils/resolveEntity";
 
 const GAME_START_TIME = Math.floor(new Date().getTime() / 1000);
 const GAME_RECHARGE_TIME = 5;
