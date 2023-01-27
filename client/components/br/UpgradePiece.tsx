@@ -4,7 +4,7 @@ import { Network, PieceType } from "../../network/types";
 
 import { GameContext } from "../../context/GameContext";
 import { NetworkContext } from "../../context/NetworkContext";
-import getEntityFromEntityIndex from "../../game/utils/getEntityFromEntityIndex";
+import { getEntityFromEntityIndex } from "../../game/utils/resolveEntity";
 import getPieceInfo from "../../utils/getPieceInfo";
 import { useComponentValueStream } from "@latticexyz/std-client";
 import { useContext } from "react";

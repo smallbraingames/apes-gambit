@@ -1,7 +1,7 @@
 import { EntityID, EntityIndex } from "@latticexyz/recs";
 
 import { Network } from "../../network/types";
-import getEntityFromEntityIndex from "./getEntityFromEntityIndex";
+import { getEntityFromEntityIndex } from "./resolveEntity";
 
 const joinGame = async (
   pieceEntityIndex: EntityIndex,
