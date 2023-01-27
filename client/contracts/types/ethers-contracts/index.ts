@@ -9,6 +9,7 @@ export type { BRIsAliveComponent } from "./BRIsAliveComponent";
 export type { BRJoinGameSystem } from "./BRJoinGameSystem";
 export type { BRMovePieceSystem } from "./BRMovePieceSystem";
 export type { BRPointsComponent } from "./BRPointsComponent";
+export type { BRPreviousMoveTimestampComponent } from "./BRPreviousMoveTimestampComponent";
 export type { BRSetPieceTypeSystem } from "./BRSetPieceTypeSystem";
 export type { BRStartGameSystem } from "./BRStartGameSystem";
 export type { BareComponent } from "./BareComponent";
@@ -44,6 +45,7 @@ export { BRIsAliveComponent__factory } from "./factories/BRIsAliveComponent__fac
 export { BRJoinGameSystem__factory } from "./factories/BRJoinGameSystem__factory";
 export { BRMovePieceSystem__factory } from "./factories/BRMovePieceSystem__factory";
 export { BRPointsComponent__factory } from "./factories/BRPointsComponent__factory";
+export { BRPreviousMoveTimestampComponent__factory } from "./factories/BRPreviousMoveTimestampComponent__factory";
 export { BRSetPieceTypeSystem__factory } from "./factories/BRSetPieceTypeSystem__factory";
 export { BRStartGameSystem__factory } from "./factories/BRStartGameSystem__factory";
 export { ControllerComponent__factory } from "./factories/ControllerComponent__factory";

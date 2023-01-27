@@ -30,7 +30,7 @@ import type {
 export interface BRCreateGameSystemInterface extends utils.Interface {
   functions: {
     "execute(bytes)": FunctionFragment;
-    "executeTyped(uint256)": FunctionFragment;
+    "executeTyped(uint256,uint32)": FunctionFragment;
     "owner()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
@@ -49,7 +49,7 @@ export interface BRCreateGameSystemInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "executeTyped",
-    values: [PromiseOrValue<BigNumberish>]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
@@ -121,6 +121,7 @@ export interface BRCreateGameSystem extends BaseContract {
 
     executeTyped(
       startTime: PromiseOrValue<BigNumberish>,
+      rechargeTime: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -139,6 +140,7 @@ export interface BRCreateGameSystem extends BaseContract {
 
   executeTyped(
     startTime: PromiseOrValue<BigNumberish>,
+    rechargeTime: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -157,6 +159,7 @@ export interface BRCreateGameSystem extends BaseContract {
 
     executeTyped(
       startTime: PromiseOrValue<BigNumberish>,
+      rechargeTime: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -187,6 +190,7 @@ export interface BRCreateGameSystem extends BaseContract {
 
     executeTyped(
       startTime: PromiseOrValue<BigNumberish>,
+      rechargeTime: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -206,6 +210,7 @@ export interface BRCreateGameSystem extends BaseContract {
 
     executeTyped(
       startTime: PromiseOrValue<BigNumberish>,
+      rechargeTime: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
