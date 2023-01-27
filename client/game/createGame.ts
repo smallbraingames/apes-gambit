@@ -21,6 +21,7 @@ import createScene from "../phaser/createScene";
 import { defineNumberComponent } from "@latticexyz/std-client";
 import load from "../phaser/load";
 import setupActivePieceComponent from "./components/setupActivePieceComponent";
+import setupBRRechargeTimerComponent from "./components/setupBRRechargeTimerComponent";
 import setupHoveredPieceComponent from "./components/setupHoveredPieceComponent";
 import setupSystems from "./systems/setupSystems";
 
@@ -82,6 +83,9 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
     // In order to associate piece positions with point additions or other piece deaths
     // (this is done for animation purposes)
     PiecePositionContext: definePiecePositionContextComponent(gameWorld),
+    BRRechargeTimerComponent: defineNumberComponent(gameWorld, {
+      id: "BRRechargeTimer",
+    }),
   };
 
   const context = {
@@ -99,6 +103,7 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   setupHoveredPieceComponent(network, context);
   setupActivePieceComponent(network, context);
   setupPiecePositionContextComponent(network, context);
+  setupBRRechargeTimerComponent(network, context);
 
   // Setup chessboard
   createChessBoardTilemap(
