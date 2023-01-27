@@ -22,5 +22,6 @@ export enum PieceState {
 
 export type GameConfig = {
   startTime: number;
+  rechargeTime: number;
   status: GameStatus;
 };

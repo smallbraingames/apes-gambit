@@ -50,6 +50,10 @@ export async function createNetwork(config: GameConfig) {
       id: "BRPoints",
       metadata: { contractId: "component.BRPoints" },
     }),
+    BRPreviousMoveTimestamp: defineNumberComponent(world, {
+      id: "BRPreviousMoveTimestamp",
+      metadata: { contractId: "component.BRPreviousMoveTimestamp" },
+    }),
   };
 
   console.log("Setup network");
@@ -98,8 +102,14 @@ export async function createNetwork(config: GameConfig) {
     );
   };
 
-  const createBRGame = (startTime: number): Promise<ContractTransaction> => {
-    return systems["system.BRCreateGameSystem"].executeTyped(startTime);
+  const createBRGame = (
+    startTime: number,
+    rechargeTime: number
+  ): Promise<ContractTransaction> => {
+    return systems["system.BRCreateGameSystem"].executeTyped(
+      startTime,
+      rechargeTime
+    );
   };
 
   const setBRControllers = (entity: EntityID): Promise<ContractTransaction> => {

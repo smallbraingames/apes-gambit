@@ -5,6 +5,7 @@ export function defineBRGameComponent(world: World) {
     world,
     {
       startTime: Type.Number,
+      rechargeTime: Type.Number,
       status: Type.Number,
     },
     {
