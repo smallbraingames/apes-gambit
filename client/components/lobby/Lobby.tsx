@@ -4,7 +4,7 @@ import {
 } from "../../utils/disableControllers";
 import { LoadingContext, LoadingState } from "../../context/LoadingContext";
 
-import SpawnPiece from "./SpawnPiece";
+import SpawnPieceIfNecessary from "./SpawnPieceIfNecessary";
 import { useEffect } from "react";
 
 const Lobby = () => {
@@ -16,7 +16,7 @@ const Lobby = () => {
     <>
       <div className={CONTROLLER_COMPONENT_CLASS_NAME}>
         <div className="absolute p-6">
-          <SpawnPiece />
+          <SpawnPieceIfNecessary />
         </div>
       </div>
     </>

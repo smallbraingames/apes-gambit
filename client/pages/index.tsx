@@ -16,7 +16,6 @@ export default function Home() {
       <main>
         <GameProvider brGameEntity={undefined}>
           <Lobby />
-
           <LoadingProvider>
             <Title />
           </LoadingProvider>
