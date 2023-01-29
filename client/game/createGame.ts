@@ -7,6 +7,7 @@ import {
   TILE_WIDTH,
 } from "./constants";
 import { EntityID, namespaceWorld } from "@latticexyz/recs";
+import { createCamera, tileCoordToPixelCoord } from "@latticexyz/phaserx";
 import setupPiecePositionContextComponent, {
   definePiecePositionContextComponent,
 } from "./components/setupPiecePositionContextComponent";
@@ -14,7 +15,6 @@ import setupPiecePositionContextComponent, {
 import { Network } from "../network/types";
 import { Subscription } from "rxjs";
 import { config } from "./config";
-import { createCamera } from "@latticexyz/phaserx";
 import createChessBoardTilemap from "./utils/createChessBoardTilemap";
 import createPhaserGame from "../phaser/createPhaserGame";
 import createScene from "../phaser/createScene";
@@ -24,6 +24,7 @@ import setupActivePieceComponent from "./components/setupActivePieceComponent";
 import setupBRRechargeTimerComponent from "./components/setupBRRechargeTimerComponent";
 import setupHoveredPieceComponent from "./components/setupHoveredPieceComponent";
 import setupSystems from "./systems/setupSystems";
+import tweenCamera from "./utils/tweenCamera";
 
 export async function createGame(network: Network, gameEntity?: EntityID) {
   const sceneConstructors = Object.keys(config.scenes).map((key) => {
