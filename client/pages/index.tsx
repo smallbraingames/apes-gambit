@@ -1,6 +1,8 @@
+import GameProvider from "../context/GameContext";
 import Head from "next/head";
+import LoadingProvider from "../context/LoadingContext";
 import Lobby from "../components/lobby/Lobby";
-import NetworkLoader from "../components/NetworkLoader";
+import Title from "../components/Title";
 
 export default function Home() {
   return (
@@ -12,9 +14,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <NetworkLoader>
+        <GameProvider brGameEntity={undefined}>
           <Lobby />
-        </NetworkLoader>
+
+          <LoadingProvider>
+            <Title />
+          </LoadingProvider>
+        </GameProvider>
       </main>
     </>
   );

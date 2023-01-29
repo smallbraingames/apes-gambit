@@ -12,17 +12,17 @@ import { Network } from "../network/types";
 import { NetworkContext } from "./NetworkContext";
 import { Game as PhaserGame } from "../game/types";
 import { defineComponentSystemUnsubscribable } from "../game/utils/defineComponentSystemUnsubscribable";
-import getBurnerWallet from "../network/wallet/getBurnerWallet";
-import getOwnedPieceEntityIndex from "../game/utils/getOwnedPieceEntityIndex";
 
 interface GameContextInterface {
   game?: Game;
   activePiece: EntityIndex | undefined;
+  setupGame: (network: Network) => Promise<void>;
 }
 
 export const GameContext = createContext<GameContextInterface>({
   game: undefined,
   activePiece: undefined,
+  setupGame: async (network: Network) => {},
 });
 
 const GameProvider = (props: {
@@ -41,10 +41,10 @@ const GameProvider = (props: {
     setGame(game);
   };
 
-  useEffect(() => {
-    if (network.network) setupGame(network.network);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [network.network]);
+  // useEffect(() => {
+  //   if (network.network) setupGame(network.network);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [network.network]);
 
   useEffect(() => {
     if (!network.network) return;
@@ -61,7 +61,7 @@ const GameProvider = (props: {
   }, [game]);
 
   return (
-    <GameContext.Provider value={{ game, activePiece }}>
+    <GameContext.Provider value={{ game, activePiece, setupGame }}>
       {props.children}
     </GameContext.Provider>
   );
