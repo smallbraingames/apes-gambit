@@ -2,12 +2,10 @@ import {
   CONTROLLER_COMPONENT_CLASS_NAME,
   disableClickthroughs,
 } from "../utils/disableControllers";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 
-import { GameContext } from "../context/GameContext";
 import Image from "next/image";
 import { LoadingContext } from "../context/LoadingContext";
-import { NetworkContext } from "../context/NetworkContext";
 
 enum LoadingState {
   // Loading game and network
@@ -20,12 +18,6 @@ enum LoadingState {
 
 const Title = () => {
   const { loadingState, setLoadingState } = useContext(LoadingContext);
-  const { network } = useContext(NetworkContext);
-  const { setupGame, game } = useContext(GameContext);
-
-  useEffect(() => {
-    if (network && !game) setupGame(network);
-  }, [network, game]);
 
   useEffect(() => {
     disableClickthroughs();

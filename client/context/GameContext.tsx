@@ -16,13 +16,11 @@ import { defineComponentSystemUnsubscribable } from "../game/utils/defineCompone
 interface GameContextInterface {
   game?: Game;
   activePiece: EntityIndex | undefined;
-  setupGame: (network: Network) => Promise<void>;
 }
 
 export const GameContext = createContext<GameContextInterface>({
   game: undefined,
   activePiece: undefined,
-  setupGame: async (network: Network) => {},
 });
 
 const GameProvider = (props: {
@@ -41,10 +39,10 @@ const GameProvider = (props: {
     setGame(game);
   };
 
-  // useEffect(() => {
-  //   if (network.network) setupGame(network.network);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [network.network]);
+  useEffect(() => {
+    if (network.network) setupGame(network.network);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [network.network]);
 
   useEffect(() => {
     if (!network.network) return;
@@ -53,7 +51,8 @@ const GameProvider = (props: {
         game.gameWorld,
         game.components.ActivePiece,
         (update) => {
-          setActivePiece(update.value[0]?.value as EntityIndex | undefined);
+          const activePiece = update.value[0]?.value as EntityIndex;
+          setActivePiece(activePiece ? activePiece : (-1 as EntityIndex));
         }
       );
     }
@@ -61,7 +60,7 @@ const GameProvider = (props: {
   }, [game]);
 
   return (
-    <GameContext.Provider value={{ game, activePiece, setupGame }}>
+    <GameContext.Provider value={{ game, activePiece }}>
       {props.children}
     </GameContext.Provider>
   );
