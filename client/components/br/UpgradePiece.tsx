@@ -37,7 +37,7 @@ const UpgradePieceButton = (props: {
       className={
         "rounded-xl pr-4 border border-yellow-900 bg-opacity-10 " +
         (enabled
-          ? "bg-yellow-600 hover:bg-opacity-40 cursor-pointer"
+          ? "bg-yellow-600 hover:bg-opacity-40 cursor-pointer border-yellow-900 border-b-4 border-r-2 active:border-0 active:translate-y-0.5"
           : "bg-gray-600 saturate-0 cursor-not-allowed")
       }
     >
@@ -81,7 +81,7 @@ const UpgradePiece = () => {
       {network.network !== undefined &&
         game.game !== undefined &&
         game.activePiece && (
-          <div className="p-4 bg-yellow-50 text-yellow-800 bg-opacity-95 rounded-lg max-w-xs">
+          <div className="p-4 bg-yellow-50 text-yellow-800 rounded-lg max-w-xs">
             <h1 className="label mb-2 ml-1"> SELECT A PIECE </h1>
             <div className="grid grid-cols-2 gap-2">
               {pieceTypes.map((pieceType) => (

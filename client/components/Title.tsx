@@ -29,7 +29,7 @@ const Title = () => {
 
   return (
     <div className={CONTROLLER_COMPONENT_CLASS_NAME}>
-      <div className="bg-green-100 h-full w-full fixed flex items-start justify-center lg:pt-24">
+      <div className="bg-yellow-100 h-full w-full fixed flex items-start justify-center lg:pt-24">
         <div className="flex flex-col justify-center rounded-xl w-full max-w-2xl p-8">
           <div className="flex flex-wrap justify-center">
             <Image
@@ -51,7 +51,7 @@ const Title = () => {
             <div className="flex items-center gap-2">
               {loadingState === LoadingState.GAME_LOADED ? (
                 <button
-                  className="w-48 h-16 text-center bg-green-700 text-stone-100 rounded-lg border-b-4 border-r-2 border-green-900 text-xl active:border-b-0 active:border-r-0 active:translate-y-0.5"
+                  className="w-48 h-16 rounded-xl p-4 text-yellow-800 border border-yellow-900 bg-opacity-10 bg-yellow-600 hover:bg-opacity-40 cursor-pointer border-yellow-900 border-b-4 border-r-2 active:border-0 active:translate-y-0.5"
                   onClick={() => setLoadingState(LoadingState.IN_GAME)}
                 >
                   PLAY
