@@ -2,14 +2,14 @@ import { EntityIndex } from "@latticexyz/recs";
 import { GameContext } from "../../context/GameContext";
 import { Network } from "../../network/types";
 import { NetworkContext } from "../../context/NetworkContext";
-import { useComponentValueStream } from "@latticexyz/std-client";
+import { useComponentValue } from "@latticexyz/react";
 import { useContext } from "react";
 
 const PointDisplay = (props: {
   network: Network;
   activePiece: EntityIndex;
 }) => {
-  const points = useComponentValueStream(
+  const points = useComponentValue(
     props.network.components.BRPoints,
     props.activePiece
   );
@@ -25,8 +25,9 @@ const PointDisplay = (props: {
           />
         </div>
         <div className="ml-2">
-          <div className="text-xs">BANANAS</div>
-          <div className="text-lg font-bold">{points?.value}</div>
+          <div className="bignumber flex items-center">
+            {points?.value || "0"}
+          </div>
         </div>
       </div>
     </div>
@@ -40,7 +41,7 @@ const Points = () => {
   return (
     <>
       {network.network && game.activePiece && (
-        <div className="bg-stone-100 rounded-lg p-4">
+        <div className="container-gamestats">
           <PointDisplay
             network={network.network}
             activePiece={game.activePiece}

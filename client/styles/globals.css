@@ -52,3 +52,15 @@
     @apply bg-gray-50 border-gray-50 text-gray-800 hover:border-gray-600;
   }
 }
+
+/* Game UI components */
+.container-gamestats {
+  @apply flex bg-yellow-50 text-yellow-800 bg-opacity-90 rounded-lg px-4 py-3 my-1;
+}
+
+@layer utilities {
+  .text-outline-1 {
+    text-shadow: -2px -2px 0 #c08d35, 2px -2px 0 #c08d35, -2px 2px 0 #c08d35,
+      2px 2px 0 #c08d35;
+  }
+}
