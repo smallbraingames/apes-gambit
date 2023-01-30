@@ -101,7 +101,7 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   };
 
   // Setup game components
-  setupHoveredPieceComponent(network, context);
+  //setupHoveredPieceComponent(network, context);
   setupActivePieceComponent(network, context);
   setupPiecePositionContextComponent(network, context);
   setupBRRechargeTimerComponent(network, context);
