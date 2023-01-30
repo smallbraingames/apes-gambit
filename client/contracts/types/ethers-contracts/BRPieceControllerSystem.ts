@@ -27,10 +27,9 @@ import type {
   PromiseOrValue,
 } from "./common";
 
-export interface BRSetPieceTypeSystemInterface extends utils.Interface {
+export interface BRPieceControllerSystemInterface extends utils.Interface {
   functions: {
     "execute(bytes)": FunctionFragment;
-    "executeTyped(uint256,uint256,uint8)": FunctionFragment;
     "owner()": FunctionFragment;
     "revokeController(uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
@@ -39,7 +38,6 @@ export interface BRSetPieceTypeSystemInterface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "execute"
-      | "executeTyped"
       | "owner"
       | "revokeController"
       | "transferOwnership"
@@ -48,14 +46,6 @@ export interface BRSetPieceTypeSystemInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "execute",
     values: [PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "executeTyped",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
@@ -68,10 +58,6 @@ export interface BRSetPieceTypeSystemInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(functionFragment: "execute", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "executeTyped",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "revokeController",
@@ -101,12 +87,12 @@ export type OwnershipTransferredEvent = TypedEvent<
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
 
-export interface BRSetPieceTypeSystem extends BaseContract {
+export interface BRPieceControllerSystem extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: BRSetPieceTypeSystemInterface;
+  interface: BRPieceControllerSystemInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -129,14 +115,7 @@ export interface BRSetPieceTypeSystem extends BaseContract {
 
   functions: {
     execute(
-      arguments: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    executeTyped(
-      piece: PromiseOrValue<BigNumberish>,
-      game: PromiseOrValue<BigNumberish>,
-      pieceType: PromiseOrValue<BigNumberish>,
+      args: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -154,14 +133,7 @@ export interface BRSetPieceTypeSystem extends BaseContract {
   };
 
   execute(
-    arguments: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  executeTyped(
-    piece: PromiseOrValue<BigNumberish>,
-    game: PromiseOrValue<BigNumberish>,
-    pieceType: PromiseOrValue<BigNumberish>,
+    args: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -179,14 +151,7 @@ export interface BRSetPieceTypeSystem extends BaseContract {
 
   callStatic: {
     execute(
-      arguments: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    executeTyped(
-      piece: PromiseOrValue<BigNumberish>,
-      game: PromiseOrValue<BigNumberish>,
-      pieceType: PromiseOrValue<BigNumberish>,
+      args: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -216,14 +181,7 @@ export interface BRSetPieceTypeSystem extends BaseContract {
 
   estimateGas: {
     execute(
-      arguments: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    executeTyped(
-      piece: PromiseOrValue<BigNumberish>,
-      game: PromiseOrValue<BigNumberish>,
-      pieceType: PromiseOrValue<BigNumberish>,
+      args: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -242,14 +200,7 @@ export interface BRSetPieceTypeSystem extends BaseContract {
 
   populateTransaction: {
     execute(
-      arguments: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    executeTyped(
-      piece: PromiseOrValue<BigNumberish>,
-      game: PromiseOrValue<BigNumberish>,
-      pieceType: PromiseOrValue<BigNumberish>,
+      args: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

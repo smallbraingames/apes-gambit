@@ -2,6 +2,7 @@
 import BRCreateGameSystem from "../abi/BRCreateGameSystem.json";
 import BRJoinGameSystem from "../abi/BRJoinGameSystem.json";
 import BRMovePieceSystem from "../abi/BRMovePieceSystem.json";
+import BRRevokeControllerSystem from "../abi/BRRevokeControllerSystem.json";
 import BRSetPieceTypeSystem from "../abi/BRSetPieceTypeSystem.json";
 import BRStartGameSystem from "../abi/BRStartGameSystem.json";
 import MovePieceSystem from "../abi/MovePieceSystem.json";
@@ -15,6 +16,7 @@ export const SystemAbis = {
   "system.BRCreateGameSystem": BRCreateGameSystem.abi,
   "system.BRJoinGameSystem": BRJoinGameSystem.abi,
   "system.BRMovePieceSystem": BRMovePieceSystem.abi,
+  "system.BRRevokeControllerSystem": BRRevokeControllerSystem.abi,
   "system.BRSetPieceTypeSystem": BRSetPieceTypeSystem.abi,
   "system.BRStartGameSystem": BRStartGameSystem.abi,
   "system.MovePiece": MovePieceSystem.abi,

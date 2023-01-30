@@ -39,6 +39,7 @@ export interface BRMovePieceSystemInterface extends utils.Interface {
     "execute(bytes)": FunctionFragment;
     "executeTyped(uint256,uint256,(int32,int32))": FunctionFragment;
     "owner()": FunctionFragment;
+    "revokeController(uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
@@ -47,6 +48,7 @@ export interface BRMovePieceSystemInterface extends utils.Interface {
       | "execute"
       | "executeTyped"
       | "owner"
+      | "revokeController"
       | "transferOwnership"
   ): FunctionFragment;
 
@@ -64,6 +66,10 @@ export interface BRMovePieceSystemInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "revokeController",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [PromiseOrValue<string>]
   ): string;
@@ -74,6 +80,10 @@ export interface BRMovePieceSystemInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "revokeController",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
     data: BytesLike
@@ -139,6 +149,11 @@ export interface BRMovePieceSystem extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
+    revokeController(
+      piece: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -159,6 +174,11 @@ export interface BRMovePieceSystem extends BaseContract {
 
   owner(overrides?: CallOverrides): Promise<string>;
 
+  revokeController(
+    piece: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   transferOwnership(
     newOwner: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -178,6 +198,11 @@ export interface BRMovePieceSystem extends BaseContract {
     ): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
+
+    revokeController(
+      piece: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
@@ -211,6 +236,11 @@ export interface BRMovePieceSystem extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
+    revokeController(
+      piece: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -231,6 +261,11 @@ export interface BRMovePieceSystem extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    revokeController(
+      piece: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,

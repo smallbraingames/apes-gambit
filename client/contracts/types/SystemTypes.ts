@@ -2,6 +2,7 @@
 import { BRCreateGameSystem } from "./ethers-contracts/BRCreateGameSystem";
 import { BRJoinGameSystem } from "./ethers-contracts/BRJoinGameSystem";
 import { BRMovePieceSystem } from "./ethers-contracts/BRMovePieceSystem";
+import { BRRevokeControllerSystem } from "./ethers-contracts/BRRevokeControllerSystem";
 import { BRSetPieceTypeSystem } from "./ethers-contracts/BRSetPieceTypeSystem";
 import { BRStartGameSystem } from "./ethers-contracts/BRStartGameSystem";
 import { MovePieceSystem } from "./ethers-contracts/MovePieceSystem";
@@ -15,6 +16,7 @@ export type SystemTypes = {
   "system.BRCreateGameSystem": BRCreateGameSystem;
   "system.BRJoinGameSystem": BRJoinGameSystem;
   "system.BRMovePieceSystem": BRMovePieceSystem;
+  "system.BRRevokeControllerSystem": BRRevokeControllerSystem;
   "system.BRSetPieceTypeSystem": BRSetPieceTypeSystem;
   "system.BRStartGameSystem": BRStartGameSystem;
   "system.MovePiece": MovePieceSystem;
