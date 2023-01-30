@@ -27,12 +27,11 @@ import type {
   PromiseOrValue,
 } from "./common";
 
-export interface BRSetPieceTypeSystemInterface extends utils.Interface {
+export interface BRRevokeControllerSystemInterface extends utils.Interface {
   functions: {
     "execute(bytes)": FunctionFragment;
-    "executeTyped(uint256,uint256,uint8)": FunctionFragment;
+    "executeTyped(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
-    "revokeController(uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
@@ -41,7 +40,6 @@ export interface BRSetPieceTypeSystemInterface extends utils.Interface {
       | "execute"
       | "executeTyped"
       | "owner"
-      | "revokeController"
       | "transferOwnership"
   ): FunctionFragment;
 
@@ -51,17 +49,9 @@ export interface BRSetPieceTypeSystemInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "executeTyped",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "revokeController",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [PromiseOrValue<string>]
@@ -73,10 +63,6 @@ export interface BRSetPieceTypeSystemInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "revokeController",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
     data: BytesLike
@@ -101,12 +87,12 @@ export type OwnershipTransferredEvent = TypedEvent<
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
 
-export interface BRSetPieceTypeSystem extends BaseContract {
+export interface BRRevokeControllerSystem extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: BRSetPieceTypeSystemInterface;
+  interface: BRRevokeControllerSystemInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -135,17 +121,10 @@ export interface BRSetPieceTypeSystem extends BaseContract {
 
     executeTyped(
       piece: PromiseOrValue<BigNumberish>,
-      game: PromiseOrValue<BigNumberish>,
-      pieceType: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
-
-    revokeController(
-      piece: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
@@ -160,17 +139,10 @@ export interface BRSetPieceTypeSystem extends BaseContract {
 
   executeTyped(
     piece: PromiseOrValue<BigNumberish>,
-    game: PromiseOrValue<BigNumberish>,
-    pieceType: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
-
-  revokeController(
-    piece: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   transferOwnership(
     newOwner: PromiseOrValue<string>,
@@ -185,17 +157,10 @@ export interface BRSetPieceTypeSystem extends BaseContract {
 
     executeTyped(
       piece: PromiseOrValue<BigNumberish>,
-      game: PromiseOrValue<BigNumberish>,
-      pieceType: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
-
-    revokeController(
-      piece: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
@@ -222,17 +187,10 @@ export interface BRSetPieceTypeSystem extends BaseContract {
 
     executeTyped(
       piece: PromiseOrValue<BigNumberish>,
-      game: PromiseOrValue<BigNumberish>,
-      pieceType: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
-
-    revokeController(
-      piece: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
@@ -248,17 +206,10 @@ export interface BRSetPieceTypeSystem extends BaseContract {
 
     executeTyped(
       piece: PromiseOrValue<BigNumberish>,
-      game: PromiseOrValue<BigNumberish>,
-      pieceType: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    revokeController(
-      piece: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,

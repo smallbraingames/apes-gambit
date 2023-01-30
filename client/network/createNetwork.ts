@@ -146,6 +146,12 @@ export async function createNetwork(config: GameConfig) {
     );
   };
 
+  const revokeBRControllers = (
+    pieceEntity: EntityID
+  ): Promise<ContractTransaction> => {
+    return systems["system.BRRevokeControllerSystem"].executeTyped(pieceEntity);
+  };
+
   const context = {
     config,
     world,
@@ -168,6 +174,7 @@ export async function createNetwork(config: GameConfig) {
         joinBRGame,
         startBRGame,
         setBRPieceType,
+        revokeBRControllers,
       },
     },
   };
