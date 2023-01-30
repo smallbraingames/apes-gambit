@@ -18,7 +18,7 @@
     { "name": "SetPieceTypeSystem", "writeAccess": ["PieceTypeComponent"] },
     { "name": "MovePieceSystem", "writeAccess": ["PiecePositionComponent"] },
     { "name": "BRCreateGameSystem", "writeAccess": ["BRGameComponent"] },
-    { "name": "BRJoinGameSystem", "writeAccess": ["BRInGameComponent", "BRIsAliveComponent"] },
+    { "name": "BRJoinGameSystem", "writeAccess": ["BRInGameComponent", "BRIsAliveComponent", "BRPointsComponent"] },
     { "name": "BRStartGameSystem", "writeAccess": ["BRGameComponent"] },
     {
       "name": "BRMovePieceSystem",
