@@ -2,6 +2,7 @@
 pragma solidity >=0.8.0;
 import { PieceType } from "common/PieceType.sol";
 import { System, IWorld } from "solecs/System.sol";
+import { BRPieceControllerSystem } from "systems/BRPieceControllerSystem.sol";
 import { getAddressById, getSystemAddressById } from "solecs/utils.sol";
 import { OwnerComponent, ID as OwnerComponentID } from "components/OwnerComponent.sol";
 import { ControllerComponent, ID as ControllerComponentID } from "components/ControllerComponent.sol";
@@ -14,7 +15,7 @@ import { BRLibPiece } from "libraries/BRLibPiece.sol";
 
 uint256 constant ID = uint256(keccak256("system.BRSetPieceTypeSystem"));
 
-contract BRSetPieceTypeSystem is System {
+contract BRSetPieceTypeSystem is BRPieceControllerSystem {
   constructor(IWorld _world, address _components) System(_world, _components) {}
 
   /// @notice Spawns a new piece with msg.sender as owner

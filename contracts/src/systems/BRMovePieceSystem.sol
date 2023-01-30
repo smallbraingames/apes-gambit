@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 import { System, IWorld } from "solecs/System.sol";
+import { BRPieceControllerSystem } from "systems/BRPieceControllerSystem.sol";
 import { getAddressById, getSystemAddressById } from "solecs/utils.sol";
 import { BRGame, BRGameStatus } from "common/BRGame.sol";
 import { Coord } from "std-contracts/components/CoordComponent.sol";
@@ -21,7 +22,7 @@ import { BRLibGame } from "libraries/BRLibGame.sol";
 
 uint256 constant ID = uint256(keccak256("system.BRMovePieceSystem"));
 
-contract BRMovePieceSystem is System {
+contract BRMovePieceSystem is BRPieceControllerSystem {
   constructor(IWorld _world, address _components) System(_world, _components) {}
 
   function execute(bytes memory arguments) public returns (bytes memory) {

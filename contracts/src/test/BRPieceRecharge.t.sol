@@ -16,7 +16,7 @@ import { Deploy } from "./Deploy.sol";
 import "std-contracts/test/MudTest.t.sol";
 import { console } from "forge-std/console.sol";
 
-contract BRPieceRechageTest is MudTest {
+contract BRPieceRechargeTest is MudTest {
   constructor() MudTest(new Deploy()) {}
 
   function testBRPieceRecharge() public {
