@@ -1,13 +1,20 @@
 import {
   EntityIndex,
+  Has,
+  HasValue,
+  defineEnterSystem,
+  defineUpdateSystem,
   getComponentValue,
   getComponentValueStrict,
 } from "@latticexyz/recs";
 import { Game, PieceState } from "../../types";
 import { Network, PieceType } from "../../../network/types";
+import {
+  clearValidMoveOverlays,
+  setValidMoveOverlays,
+} from "../../utils/tileOverlays";
 
 import { Subscription } from "rxjs";
-import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
 import isLiveGamePiece from "../../utils/isLiveGamePiece";
 import setPieceSprite from "../../utils/setPieceSprite";
@@ -19,7 +26,7 @@ const createBRPieceTypeSystem = (
   const {
     godEntityIndex,
     world,
-    components: { PieceType },
+    components: { PieceType, BRInGame, BRIsAlive },
   } = network;
 
   const {
@@ -29,34 +36,44 @@ const createBRPieceTypeSystem = (
     scenes: { Main },
   } = game;
 
-  const subscription = defineComponentSystemUnsubscribable(
+  const updatePieceSprite = (entity: EntityIndex) => {
+    if (!isLiveGamePiece(entity, network, gameEntity!)) return;
+    const activePiece = getComponentValue(ActivePiece, godEntityIndex)
+      ?.value as EntityIndex | undefined;
+    const pieceType: PieceType = getComponentValueStrict(
+      PieceType,
+      entity
+    ).value;
+    const sprite = getPieceSpriteGameObject(entity, objectRegistry, Main);
+    setPieceSprite(sprite, pieceType, PieceState.IDLE, activePiece !== entity);
+  };
+
+  defineEnterSystem(
     world,
-    PieceType,
+    // @ts-ignore
+    [Has(PieceType), HasValue(BRInGame, { value: gameEntity }), Has(BRIsAlive)],
     (update) => {
-      if (!isLiveGamePiece(update.entity, network, gameEntity!)) return;
-      const activePiece = getComponentValue(ActivePiece, godEntityIndex)
-        ?.value as EntityIndex | undefined;
-      const pieceType: PieceType | undefined = update.value[0]?.value;
-      if (pieceType === undefined)
-        throw Error("No piece type component for active game piece");
+      console.log(update.entity);
 
-      const sprite = getPieceSpriteGameObject(
-        update.entity,
-        objectRegistry,
-        Main
-      );
-
-      setPieceSprite(
-        sprite,
-        pieceType,
-        PieceState.IDLE,
-        activePiece !== update.entity
-      );
-    },
-    { runOnInit: true }
+      updatePieceSprite(update.entity);
+      setValidMoveOverlays(network, game);
+    }
   );
 
-  return [subscription];
+  defineUpdateSystem(
+    world,
+    // @ts-ignore
+    [Has(PieceType), HasValue(BRInGame, { value: gameEntity }), Has(BRIsAlive)],
+    (update) => {
+      console.log(update.entity);
+
+      clearValidMoveOverlays(objectRegistry, godEntityIndex);
+      updatePieceSprite(update.entity);
+      setValidMoveOverlays(network, game);
+    }
+  );
+
+  return [];
 };
 
 export default createBRPieceTypeSystem;

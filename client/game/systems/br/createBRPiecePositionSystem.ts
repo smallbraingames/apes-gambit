@@ -1,6 +1,19 @@
-import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
+import {
+  EntityIndex,
+  Has,
+  HasValue,
+  defineEnterSystem,
+  defineExitSystem,
+  defineQuery,
+  defineUpdateSystem,
+  getComponentValueStrict,
+} from "@latticexyz/recs";
 import { Network, PieceType } from "../../../network/types";
 import { PIECE_SPRITE_ID, TILE_HEIGHT, TILE_WIDTH } from "../../constants";
+import {
+  clearValidMoveOverlays,
+  setValidMoveOverlays,
+} from "../../utils/tileOverlays";
 import {
   loopPieceIdleAnimation,
   playMovePieceAnimation,
@@ -21,7 +34,7 @@ const createBRPiecePositionSystem = (
   const {
     world,
     godEntityIndex,
-    components: { PieceType },
+    components: { PieceType, BRInGame, BRIsAlive },
   } = network;
 
   const {
@@ -31,17 +44,52 @@ const createBRPiecePositionSystem = (
     scenes: { Main },
   } = game;
 
-  const subscription = defineComponentSystemUnsubscribable(
+  defineEnterSystem(
     world,
-    PiecePositionContext,
+    [
+      Has(PiecePositionContext),
+      // @ts-ignore
+      HasValue(BRInGame, { value: gameEntity }),
+      Has(BRIsAlive),
+    ],
+    async (update) => {
+      console.log(update.entity);
+      const positionContext = getComponentValueStrict(
+        PiecePositionContext,
+        update.entity
+      );
+      const sprite = getPieceSpriteGameObject(
+        update.entity,
+        objectRegistry,
+        Main
+      );
+      const { x, y } = tileCoordToPixelCoord(
+        positionContext,
+        TILE_WIDTH,
+        TILE_HEIGHT
+      );
+      sprite.setPosition(x, y);
+      loopPieceIdleAnimation(sprite, x, y);
+      setValidMoveOverlays(network, game);
+    }
+  );
+
+  defineUpdateSystem(
+    world,
+    [
+      Has(PiecePositionContext),
+      // @ts-ignore
+      HasValue(BRInGame, { value: gameEntity }),
+      Has(BRIsAlive),
+    ],
     async (update) => {
       if (!isLiveGamePiece(update.entity, network, gameEntity!)) return;
-      const positionContext = update.value[0];
+      console.log(update.entity);
+      const positionContext = getComponentValueStrict(
+        PiecePositionContext,
+        update.entity
+      );
 
-      if (!positionContext) {
-        objectRegistry.remove(update.entity, PIECE_SPRITE_ID);
-        return;
-      }
       const sprite = getPieceSpriteGameObject(
         update.entity,
         objectRegistry,
@@ -62,6 +110,8 @@ const createBRPiecePositionSystem = (
       ).value;
 
       const isEnemy = activePiece !== update.entity;
+
+      clearValidMoveOverlays(objectRegistry, godEntityIndex);
 
       let moveAnimation;
       if (positionContext.pieceTaken !== undefined) {
@@ -97,11 +147,15 @@ const createBRPiecePositionSystem = (
       sprite.setPosition(x, y);
       sprite.setAngle(0);
       loopPieceIdleAnimation(sprite, x, y);
-    },
-    { runOnInit: true }
+      setValidMoveOverlays(network, game);
+    }
   );
 
-  return [subscription];
+  defineExitSystem(world, [Has(PiecePositionContext)], (update) => {
+    objectRegistry.remove(update.entity, PIECE_SPRITE_ID);
+  });
+
+  return [];
 };
 
 export default createBRPiecePositionSystem;
