@@ -11,6 +11,8 @@ import { BRIsAliveComponent, ID as BRIsAliveComponentID } from "components/BRIsA
 import { BRLibPiece } from "libraries/BRLibPiece.sol";
 import { BRLibGame } from "libraries/BRLibGame.sol";
 
+import { BRPointsComponent, ID as BRPointsComponentID } from "components/BRPointsComponent.sol";
+
 uint256 constant ID = uint256(keccak256("system.BRJoinGameSystem"));
 
 contract BRJoinGameSystem is System {
@@ -36,6 +38,9 @@ contract BRJoinGameSystem is System {
     // If so, set in game component and alive component
     brInGameComponent.set(piece, game);
     brIsAliveComponent.set(piece);
+
+    BRPointsComponent brPointsComponent = BRPointsComponent(getAddressById(components, BRPointsComponentID));
+    //brPointsComponent.set(piece, 8);
   }
 
   function executeTyped(uint256 piece, uint256 game) public returns (bytes memory) {

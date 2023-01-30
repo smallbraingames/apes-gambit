@@ -2,7 +2,7 @@
 pragma solidity >=0.8.0;
 import { PieceType } from "common/PieceType.sol";
 import { System, IWorld } from "solecs/System.sol";
-import { BRPieceControllerSystem } from "systems/BRPieceControllerSystem.sol";
+import { BRPieceControllerSystem } from "common/BRPieceControllerSystem.sol";
 import { getAddressById, getSystemAddressById } from "solecs/utils.sol";
 import { OwnerComponent, ID as OwnerComponentID } from "components/OwnerComponent.sol";
 import { ControllerComponent, ID as ControllerComponentID } from "components/ControllerComponent.sol";
