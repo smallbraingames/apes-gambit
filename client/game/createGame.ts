@@ -24,7 +24,6 @@ import setupActivePieceComponent from "./components/setupActivePieceComponent";
 import setupBRRechargeTimerComponent from "./components/setupBRRechargeTimerComponent";
 import setupHoveredPieceComponent from "./components/setupHoveredPieceComponent";
 import setupSystems from "./systems/setupSystems";
-import tweenCamera from "./utils/tweenCamera";
 
 export async function createGame(network: Network, gameEntity?: EntityID) {
   const sceneConstructors = Object.keys(config.scenes).map((key) => {
@@ -101,7 +100,7 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   };
 
   // Setup game components
-  //setupHoveredPieceComponent(network, context);
+  // setupHoveredPieceComponent(network, context);
   setupActivePieceComponent(network, context);
   setupPiecePositionContextComponent(network, context);
   setupBRRechargeTimerComponent(network, context);
