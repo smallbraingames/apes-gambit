@@ -11,6 +11,7 @@ import { Network } from "../../../network/types";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
+import { setValidMoveOverlays } from "../../utils/tileOverlays";
 import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
 
 const createPiecePositionSystem = (
@@ -43,6 +44,7 @@ const createPiecePositionSystem = (
       );
       const { x, y } = tileCoordToPixelCoord(position, TILE_WIDTH, TILE_HEIGHT);
       sprite.setPosition(x, y);
+      setValidMoveOverlays(network, game);
     },
     { runOnInit: true }
   );

@@ -75,12 +75,12 @@ export const setValidMoveOverlays = (network: Network, game: Game) => {
   validMoves.forEach((potentialMove) => {
     const pieceAtPosition = getEntitiesWithValue(PiecePosition, potentialMove);
     let color = TILE_OVERLAY_COLOR;
-    if (!gameEntity)
-      throw Error("Cannot set valid move overlays without a game entity ID");
-    const pieceAtPositionInGame = [...pieceAtPosition].filter((piece) =>
-      isLiveGamePiece(piece, network, gameEntity)
-    );
-    if (pieceAtPositionInGame.length > 0) color = TILE_OVERLAY_TAKE_COLOR;
+    if (gameEntity) {
+      const pieceAtPositionInGame = [...pieceAtPosition].filter((piece) =>
+        isLiveGamePiece(piece, network, gameEntity)
+      );
+      if (pieceAtPositionInGame.length > 0) color = TILE_OVERLAY_TAKE_COLOR;
+    }
     validMoveGroup!.add(
       addTileOverlay(potentialMove, Main, TILE_WIDTH, TILE_HEIGHT, color)
     );

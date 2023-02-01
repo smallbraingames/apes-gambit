@@ -9,7 +9,7 @@ import createHoveredPieceSystem from "./lobby/createHoveredPieceSystem";
 import createMovementInputSystem from "./lobby/input/createMovementInputSystem";
 import createPiecePositionSystem from "./lobby/createPiecePositionSystem";
 import createPieceTypeSystem from "./lobby/createPieceTypeSystem";
-import createValidMoveSystem from "./lobby/createValidMoveSystem";
+import { getEntityIndexFromEntity } from "../utils/resolveEntity";
 
 const createSystems = (
   network: Network,
@@ -32,8 +32,6 @@ const setupLobbySystems = (network: Network, game: Game) => {
     createMovementInputSystem,
     createPiecePositionSystem,
     createPieceTypeSystem,
-    createHoveredPieceSystem,
-    createValidMoveSystem,
   ]);
 };
 
@@ -52,9 +50,10 @@ const setupSystems = (network: Network, game: Game) => {
 
   const { gameEntity } = game;
 
-  const gameEntityIndex = gameEntity
-    ? world.entityToIndex.get(gameEntity)
-    : undefined;
+  let gameEntityIndex = undefined;
+  if (gameEntity) {
+    gameEntityIndex = getEntityIndexFromEntity(gameEntity, world);
+  }
 
   if (!gameEntityIndex) {
     console.warn(`Game entity ${gameEntity} could not be resolved to index`);

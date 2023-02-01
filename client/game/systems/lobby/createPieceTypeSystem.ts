@@ -11,6 +11,7 @@ import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
 import setPieceSprite from "../../utils/setPieceSprite";
+import { setValidMoveOverlays } from "../../utils/tileOverlays";
 
 const createPieceTypeSystem = (
   network: Network,
@@ -55,6 +56,7 @@ const createPieceTypeSystem = (
       );
 
       objectRegistry.set(update.entity, PIECE_SPRITE_ID, sprite);
+      setValidMoveOverlays(network, game);
     }
   );
 
