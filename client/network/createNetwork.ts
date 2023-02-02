@@ -150,6 +150,10 @@ export async function createNetwork(config: GameConfig) {
     return systems["system.BRLeaveGameSystem"].executeTyped(pieceEntity);
   };
 
+  const endBRGame = (gameEntity: EntityID): Promise<ContractTransaction> => {
+    return systems["system.BREndGameSystem"].executeTyped(gameEntity);
+  };
+
   const context = {
     config,
     world,
@@ -173,7 +177,8 @@ export async function createNetwork(config: GameConfig) {
         joinBRGame,
         startBRGame,
         setBRPieceType,
-        leaveBRGame: leaveBRGame,
+        leaveBRGame,
+        endBRGame,
       },
     },
   };

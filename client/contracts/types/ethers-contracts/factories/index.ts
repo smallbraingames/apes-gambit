@@ -3,6 +3,7 @@
 /* eslint-disable */
 export { AddressComponent__factory } from "./AddressComponent__factory";
 export { BRCreateGameSystem__factory } from "./BRCreateGameSystem__factory";
+export { BREndGameSystem__factory } from "./BREndGameSystem__factory";
 export { BRGameComponent__factory } from "./BRGameComponent__factory";
 export { BRInGameComponent__factory } from "./BRInGameComponent__factory";
 export { BRIsAliveComponent__factory } from "./BRIsAliveComponent__factory";

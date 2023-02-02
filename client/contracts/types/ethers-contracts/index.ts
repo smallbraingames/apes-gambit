@@ -3,6 +3,7 @@
 /* eslint-disable */
 export type { AddressComponent } from "./AddressComponent";
 export type { BRCreateGameSystem } from "./BRCreateGameSystem";
+export type { BREndGameSystem } from "./BREndGameSystem";
 export type { BRGameComponent } from "./BRGameComponent";
 export type { BRInGameComponent } from "./BRInGameComponent";
 export type { BRIsAliveComponent } from "./BRIsAliveComponent";
@@ -41,6 +42,7 @@ export { AddressComponent__factory } from "./factories/AddressComponent__factory
 export { BareComponent__factory } from "./factories/BareComponent__factory";
 export { BoolComponent__factory } from "./factories/BoolComponent__factory";
 export { BRCreateGameSystem__factory } from "./factories/BRCreateGameSystem__factory";
+export { BREndGameSystem__factory } from "./factories/BREndGameSystem__factory";
 export { BRGameComponent__factory } from "./factories/BRGameComponent__factory";
 export { BRInGameComponent__factory } from "./factories/BRInGameComponent__factory";
 export { BRIsAliveComponent__factory } from "./factories/BRIsAliveComponent__factory";

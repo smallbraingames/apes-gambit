@@ -41,7 +41,7 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
     physics: {
       default: "arcade",
       arcade: {
-        debug: true,
+        debug: false,
       },
     },
     render: {
