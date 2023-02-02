@@ -53,7 +53,6 @@ const createBRPiecePositionSystem = (
       Has(BRIsAlive),
     ],
     async (update) => {
-      console.log(update.entity);
       const positionContext = getComponentValueStrict(
         PiecePositionContext,
         update.entity
@@ -70,7 +69,6 @@ const createBRPiecePositionSystem = (
       );
       sprite.setPosition(x, y);
       loopPieceIdleAnimation(sprite, x, y);
-      setValidMoveOverlays(network, game);
     }
   );
 
@@ -109,10 +107,9 @@ const createBRPiecePositionSystem = (
         update.entity
       ).value;
 
-      const isEnemy = activePiece !== update.entity;
-
       clearValidMoveOverlays(objectRegistry, godEntityIndex);
 
+      const isEnemy = activePiece !== update.entity;
       let moveAnimation;
       if (positionContext.pieceTaken !== undefined) {
         moveAnimation = playPieceAttackAnimation(
@@ -147,7 +144,6 @@ const createBRPiecePositionSystem = (
       sprite.setPosition(x, y);
       sprite.setAngle(0);
       loopPieceIdleAnimation(sprite, x, y);
-      setValidMoveOverlays(network, game);
     }
   );
 

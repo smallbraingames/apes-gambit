@@ -4,10 +4,9 @@ import {
 } from "../../utils/disableControllers";
 import { useContext, useEffect } from "react";
 
+import ActivityStream from "./ActivityStream";
 import { GameContext } from "../../context/GameContext";
-import JoinGame from "./JoinGame";
 import Points from "./Points";
-import RechargeTimer from "./RechargeTimer";
 import UpgradePiece from "./UpgradePiece";
 
 const BRControls = () => {
@@ -21,12 +20,15 @@ const BRControls = () => {
     <>
       <div className={CONTROLLER_COMPONENT_CLASS_NAME}>
         {game.game && (
-          <div>
-            <div className="mb-2">
+          <div className="h-screen py-4 px-4 flex flex-col gap-2">
+            <div>
               <Points />
             </div>
             <div>
               <UpgradePiece />
+            </div>
+            <div className="flex h-full flex-col flex-col-reverse">
+              <ActivityStream />
             </div>
           </div>
         )}

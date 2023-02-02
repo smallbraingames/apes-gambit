@@ -1,8 +1,6 @@
-import ActivityStream from "./ActivityStream";
 import BRControls from "./BRControls";
 import { EntityID } from "@latticexyz/recs";
 import GameProvider from "../../context/GameContext";
-import RevokeControllers from "./RevokeControllers";
 
 const BRGame = () => {
   const params = new URLSearchParams(window.location.search);
@@ -19,11 +17,8 @@ const BRGame = () => {
   return (
     <>
       <GameProvider brGameEntity={gameEntity}>
-        <div className="absolute p-6 h-full">
+        <div className="absolute h-full">
           <BRControls />
-          <div className="absolute bottom-6">
-            <ActivityStream />
-          </div>
         </div>
       </GameProvider>
     </>

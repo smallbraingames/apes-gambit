@@ -9,10 +9,6 @@ import {
 } from "@latticexyz/recs";
 import { Game, PieceState } from "../../types";
 import { Network, PieceType } from "../../../network/types";
-import {
-  clearValidMoveOverlays,
-  setValidMoveOverlays,
-} from "../../utils/tileOverlays";
 
 import { Subscription } from "rxjs";
 import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
@@ -53,10 +49,7 @@ const createBRPieceTypeSystem = (
     // @ts-ignore
     [Has(PieceType), HasValue(BRInGame, { value: gameEntity }), Has(BRIsAlive)],
     (update) => {
-      console.log(update.entity);
-
       updatePieceSprite(update.entity);
-      setValidMoveOverlays(network, game);
     }
   );
 
@@ -65,11 +58,7 @@ const createBRPieceTypeSystem = (
     // @ts-ignore
     [Has(PieceType), HasValue(BRInGame, { value: gameEntity }), Has(BRIsAlive)],
     (update) => {
-      console.log(update.entity);
-
-      clearValidMoveOverlays(objectRegistry, godEntityIndex);
       updatePieceSprite(update.entity);
-      setValidMoveOverlays(network, game);
     }
   );
 
