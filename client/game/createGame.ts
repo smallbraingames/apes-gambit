@@ -122,7 +122,5 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   // Set zoom
   camera.setZoom(INITIAL_ZOOM);
 
-  network.startSync();
-
   return context;
 }
