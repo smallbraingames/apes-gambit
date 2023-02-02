@@ -25,6 +25,7 @@
       "writeAccess": ["BRIsAliveComponent", "BRPointsComponent", "BRPreviousMoveTimestampComponent"]
     },
     { "name": "BRSetPieceTypeSystem", "writeAccess": ["BRPointsComponent"] },
-    { "name": "BRRevokeControllerSystem", "writeAccess": [] }
+    { "name": "BRLeaveGameSystem", "writeAccess": ["BRInGameComponent", "BRIsAliveComponent", "BRPointsComponent"] },
+    { "name": "BREndGameSystem", "writeAccess": ["BRGameComponent"] }
   ]
 }
