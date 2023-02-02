@@ -13,6 +13,7 @@ export { BRMovePieceSystem__factory } from "./BRMovePieceSystem__factory";
 export { BRPieceControllerSystem__factory } from "./BRPieceControllerSystem__factory";
 export { BRPointsComponent__factory } from "./BRPointsComponent__factory";
 export { BRPreviousMoveTimestampComponent__factory } from "./BRPreviousMoveTimestampComponent__factory";
+export { BRRevokeControllerSystem__factory } from "./BRRevokeControllerSystem__factory";
 export { BRSetPieceTypeSystem__factory } from "./BRSetPieceTypeSystem__factory";
 export { BRStartGameSystem__factory } from "./BRStartGameSystem__factory";
 export { BareComponent__factory } from "./BareComponent__factory";

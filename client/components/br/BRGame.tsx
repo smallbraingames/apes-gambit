@@ -20,7 +20,6 @@ const BRGame = () => {
     <>
       <GameProvider brGameEntity={gameEntity}>
         <div className="absolute p-6 h-full">
-          <RevokeControllers />
           <BRControls />
           <div className="absolute bottom-6">
             <ActivityStream />

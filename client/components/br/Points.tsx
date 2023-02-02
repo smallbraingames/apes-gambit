@@ -16,7 +16,7 @@ const PointDisplay = (props: {
 
   return (
     <div>
-      <div className="flex">
+      <div className="flex items-center">
         <div className="h-10 w-10">
           <img
             alt="Banana"
@@ -41,7 +41,7 @@ const Points = () => {
   return (
     <>
       {network.network && game.activePiece && (
-        <div className="container-gamestats">
+        <div className="bg-yellow-50 px-2 py-3 rounded-lg text-yellow-900 border border-b-4 border-r-2 border-yellow-900">
           <PointDisplay
             network={network.network}
             activePiece={game.activePiece}
