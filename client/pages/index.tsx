@@ -1,8 +1,7 @@
 import GameProvider from "../context/GameContext";
 import Head from "next/head";
-import LoadingProvider from "../context/LoadingContext";
 import Lobby from "../components/lobby/Lobby";
-import Title from "../components/Title";
+import LobbyLoader from "../components/lobby/LobbyLoader";
 
 export default function Home() {
   return (
@@ -16,9 +15,7 @@ export default function Home() {
       <main>
         <GameProvider brGameEntity={undefined}>
           <Lobby />
-          <LoadingProvider>
-            <Title />
-          </LoadingProvider>
+          <LobbyLoader />
         </GameProvider>
       </main>
     </>

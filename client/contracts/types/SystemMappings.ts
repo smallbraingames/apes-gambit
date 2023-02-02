@@ -2,8 +2,8 @@
 export const systemToId = {
   BRCreateGameSystem: "system.BRCreateGameSystem",
   BRJoinGameSystem: "system.BRJoinGameSystem",
+  BRLeaveGameSystem: "system.BRLeaveGameSystem",
   BRMovePieceSystem: "system.BRMovePieceSystem",
-  BRRevokeControllerSystem: "system.BRRevokeControllerSystem",
   BRSetPieceTypeSystem: "system.BRSetPieceTypeSystem",
   BRStartGameSystem: "system.BRStartGameSystem",
   MovePieceSystem: "system.MovePiece",
@@ -17,8 +17,8 @@ export const systemToId = {
 export const idToSystem = {
   "system.BRCreateGameSystem": "BRCreateGameSystem",
   "system.BRJoinGameSystem": "BRJoinGameSystem",
+  "system.BRLeaveGameSystem": "BRLeaveGameSystem",
   "system.BRMovePieceSystem": "BRMovePieceSystem",
-  "system.BRRevokeControllerSystem": "BRRevokeControllerSystem",
   "system.BRSetPieceTypeSystem": "BRSetPieceTypeSystem",
   "system.BRStartGameSystem": "BRStartGameSystem",
   "system.MovePiece": "MovePieceSystem",

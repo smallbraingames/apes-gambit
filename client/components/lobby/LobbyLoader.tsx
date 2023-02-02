@@ -1,11 +1,17 @@
 import {
   CONTROLLER_COMPONENT_CLASS_NAME,
   disableClickthroughs,
-} from "../utils/disableControllers";
-import { useContext, useEffect } from "react";
+} from "../../utils/disableControllers";
+import { useContext, useEffect, useState } from "react";
 
+import { EntityIndex } from "@latticexyz/recs";
+import { Game } from "../../game/types";
+import { GameContext } from "../../context/GameContext";
 import Image from "next/image";
-import { LoadingContext } from "../context/LoadingContext";
+import { Network } from "../../network/types";
+import { NetworkContext } from "../../context/NetworkContext";
+import joinMainGame from "../../game/utils/setup/joinMainGame";
+import spawnPiece from "../../game/utils/setup/spawnPiece";
 
 enum LoadingState {
   // Loading game and network
@@ -16,12 +22,35 @@ enum LoadingState {
   IN_GAME,
 }
 
-const Title = () => {
-  const { loadingState, setLoadingState } = useContext(LoadingContext);
+const LobbyLoader = () => {
+  const { network } = useContext(NetworkContext);
+  const { game, activePiece } = useContext(GameContext);
+  const [loadingState, setLoadingState] = useState(LoadingState.GAME_LOADED);
+
+  const loadLobby = async (
+    network: Network | undefined,
+    game: Game | undefined,
+    activePiece: EntityIndex | undefined
+  ) => {
+    if (network !== undefined && game !== undefined) {
+      if (activePiece === undefined) {
+        await spawnPiece(network, game);
+        return;
+      }
+      await joinMainGame(network, activePiece);
+      setLoadingState(LoadingState.GAME_LOADED);
+    } else {
+      setLoadingState(LoadingState.GAME_LOADING);
+    }
+  };
 
   useEffect(() => {
     disableClickthroughs();
   }, []);
+
+  useEffect(() => {
+    loadLobby(network, game, activePiece);
+  }, [network, game, activePiece]);
 
   if (loadingState === LoadingState.IN_GAME) {
     return <></>;
@@ -88,4 +117,4 @@ const Title = () => {
   );
 };
 
-export default Title;
+export default LobbyLoader;
