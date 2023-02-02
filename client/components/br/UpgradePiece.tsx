@@ -29,7 +29,8 @@ const UpgradePieceButton = (props: {
   };
 
   const pieceInfo = getPieceInfo(props.pieceType);
-  const enabled = points?.value ? points.value >= pieceInfo.points : false;
+  const enabled = true;
+  //const enabled = points?.value ? points.value >= pieceInfo.points : false;
 
   return (
     <div
@@ -81,9 +82,9 @@ const UpgradePiece = () => {
       {network.network !== undefined &&
         game.game !== undefined &&
         game.activePiece && (
-          <div className="p-4 bg-yellow-50 text-yellow-800 rounded-lg max-w-xs">
-            <h1 className="label mb-2 ml-1"> SELECT A PIECE </h1>
-            <div className="grid grid-cols-2 gap-2">
+          <div className="p-4 bg-yellow-50 text-yellow-900 rounded-lg border border-b-4 border-r-2 border-yellow-900">
+            <h1 className="mb-3 ml-1"> SELECT A PIECE </h1>
+            <div className="grid grid-cols-2 gap-3">
               {pieceTypes.map((pieceType) => (
                 <div className="group upgrade-piece" key={pieceType}>
                   <UpgradePieceButton
