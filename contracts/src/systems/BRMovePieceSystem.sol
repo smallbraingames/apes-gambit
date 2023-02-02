@@ -38,6 +38,12 @@ contract BRMovePieceSystem is BRPieceControllerSystem {
 
     MovePieceSystem movePieceSystem = MovePieceSystem(getSystemAddressById(components, MovePieceSystemID));
 
+    // If the game has not started, just move the piece and return
+    if (BRLibGame.getGame(brGameComponent, game).status == BRGameStatus.NOT_STARTED) {
+      movePieceSystem.executeTyped(piece, position);
+      return abi.encode();
+    }
+
     // Check that this piece can play
     BRLibPiece.checkCanPlay(
       ownerComponent,
