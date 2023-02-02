@@ -19,7 +19,9 @@ const ActivityStream = () => {
       components: { PieceType, BRIsAlive, PiecePosition },
     } = network.network;
 
-    systemCallStreams["system.BRSetPieceTypeSystem"].subscribe((systemCall) => {
+    const switchSubscription = systemCallStreams[
+      "system.BRSetPieceTypeSystem"
+    ].subscribe((systemCall) => {
       const pieceTypeUpdates = systemCall.updates.filter(
         (update) => update.component.id === PieceType.id
       );
@@ -40,7 +42,9 @@ const ActivityStream = () => {
       });
     });
 
-    systemCallStreams["system.BRMovePieceSystem"].subscribe((systemCall) => {
+    const moveSubscription = systemCallStreams[
+      "system.BRMovePieceSystem"
+    ].subscribe((systemCall) => {
       const piecePositionUpdates = systemCall.updates.filter(
         (update) => update.component.id === PiecePosition.id
       );
@@ -74,14 +78,23 @@ const ActivityStream = () => {
         ),
       ]);
     });
+    return () => {
+      moveSubscription.unsubscribe();
+      switchSubscription.unsubscribe();
+    };
   }, [network]);
 
   return (
-    <div className="h-48 w- bg-green-200">
-      <div>
-        {activity.map((element, i) => (
-          <div key={i}>{element}</div>
-        ))}
+    <div className="bg-yellow-50 h-48 p-4 border flex flex-col border-b-4 border-r-2 border-yellow-900 text-yellow-900 rounded-lg">
+      <p className="mb-3 ml-1">ACTIVITY</p>
+      <div className="h-full">
+        <div className="flex flex-col flex-col-reverse h-32 overflow-scroll scrollbar-hide mb-9">
+          {activity.reverse().map((element, i) => (
+            <div key={i}>
+              <div className="font-bold">{element}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
