@@ -1,4 +1,8 @@
-import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
+import {
+  EntityIndex,
+  getComponentValue,
+  getComponentValueStrict,
+} from "@latticexyz/recs";
 import { TILE_HEIGHT, TILE_WIDTH } from "../../../constants";
 import { createInput, pixelCoordToTileCoord } from "@latticexyz/phaserx";
 
@@ -11,7 +15,10 @@ const createMovementInputSystem = (
   network: Network,
   game: Game
 ): Subscription[] => {
-  const { godEntityIndex } = network;
+  const {
+    godEntityIndex,
+    components: { BRInGame },
+  } = network;
 
   const {
     components: { ActivePiece },
@@ -30,10 +37,15 @@ const createMovementInputSystem = (
       TILE_HEIGHT
     );
 
-    network.api.movePiece(
-      getEntityFromEntityIndex(entityIndex, network.world),
-      tilePosition
-    );
+    // If piece is in a game, try to move within that game
+    // If not, use base system
+    const pieceGameID = getComponentValue(BRInGame, entityIndex);
+    const pieceEntity = getEntityFromEntityIndex(entityIndex, network.world);
+    if (!pieceGameID) {
+      network.api.movePiece(pieceEntity, tilePosition);
+      return;
+    }
+    network.api.br.moveBRPiece(pieceEntity, pieceGameID.value, tilePosition);
   });
 
   return [subscription];
