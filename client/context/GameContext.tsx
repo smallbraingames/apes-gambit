@@ -36,13 +36,18 @@ const GameProvider = (props: {
   const setupGame = async (network: Network) => {
     const createGame = (await import("../game/createGame")).createGame;
     const game: PhaserGame = await createGame(network, props.brGameEntity);
-    setGame(game);
+    setGame((prevGame) => {
+      if (prevGame) prevGame.game.destroy(true);
+      return game;
+    });
   };
 
   useEffect(() => {
-    if (network.network) setupGame(network.network);
+    if (network.network) {
+      setupGame(network.network);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [network.network]);
+  }, [network.network, props.brGameEntity]);
 
   useEffect(() => {
     if (!network.network) return;

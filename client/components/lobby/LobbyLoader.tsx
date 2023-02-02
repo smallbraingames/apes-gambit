@@ -2,14 +2,15 @@ import {
   CONTROLLER_COMPONENT_CLASS_NAME,
   disableClickthroughs,
 } from "../../utils/disableControllers";
+import { EntityIndex, getComponentValue } from "@latticexyz/recs";
 import { useContext, useEffect, useState } from "react";
 
-import { EntityIndex } from "@latticexyz/recs";
 import { Game } from "../../game/types";
 import { GameContext } from "../../context/GameContext";
 import Image from "next/image";
 import { Network } from "../../network/types";
 import { NetworkContext } from "../../context/NetworkContext";
+import isGameActive from "../../game/utils/isGameActive";
 import joinMainGame from "../../game/utils/setup/joinMainGame";
 import spawnPiece from "../../game/utils/setup/spawnPiece";
 
@@ -52,6 +53,21 @@ const LobbyLoader = () => {
     loadLobby(network, game, activePiece);
   }, [network, game, activePiece]);
 
+  const handlePlay = () => {
+    // If game has started, redirect to correct page
+    if (network && activePiece && game) {
+      const pieceGame = getComponentValue(
+        network.components.BRInGame,
+        activePiece
+      );
+      // @ts-ignore
+      if (pieceGame && isGameActive(pieceGame.value, network)) {
+        (window as any).location = `/br?gameEntity=${pieceGame.value}`;
+      }
+    }
+    setLoadingState(LoadingState.IN_GAME);
+  };
+
   if (loadingState === LoadingState.IN_GAME) {
     return <></>;
   }
@@ -81,7 +97,7 @@ const LobbyLoader = () => {
               {loadingState === LoadingState.GAME_LOADED ? (
                 <button
                   className="w-48 h-16 rounded-xl p-4 text-yellow-800 border border-yellow-900 bg-opacity-10 bg-yellow-600 hover:bg-opacity-40 cursor-pointer border-yellow-900 border-b-4 border-r-2 active:border-0 active:translate-y-0.5"
-                  onClick={() => setLoadingState(LoadingState.IN_GAME)}
+                  onClick={handlePlay}
                 >
                   PLAY
                 </button>
