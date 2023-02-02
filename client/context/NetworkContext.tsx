@@ -5,6 +5,20 @@ import { Subscription } from "rxjs";
 import { getFaucetFundsIfNecessary } from "../network/getFaucetFunds";
 import getGameConfig from "../utils/getGameConfig";
 
+const NETWORK_POLL = 500;
+
+// Await till we can use network layer
+const awaitNetworkLoad = async (network: Network) => {
+  return new Promise<void>((resolve, reject) => {
+    const interval = setInterval(() => {
+      if (network.systems["system.Spawn"]) {
+        clearInterval(interval);
+        resolve();
+      }
+    }, NETWORK_POLL);
+  });
+};
+
 interface NetworkContextInterface {
   network?: Network;
 }
@@ -23,6 +37,7 @@ const NetworkProvider = (props: { children: ReactNode }) => {
         .createNetwork;
       const network: Network = await createNetwork(config);
       network.startSync();
+      await awaitNetworkLoad(network);
       setNetwork(network);
     }
   };

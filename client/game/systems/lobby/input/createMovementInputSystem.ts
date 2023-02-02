@@ -45,6 +45,7 @@ const createMovementInputSystem = (
       network.api.movePiece(pieceEntity, tilePosition);
       return;
     }
+    // @ts-ignore
     network.api.br.moveBRPiece(pieceEntity, pieceGameID.value, tilePosition);
   });
 
