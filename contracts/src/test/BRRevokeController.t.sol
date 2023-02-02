@@ -9,7 +9,7 @@ import { BRJoinGameSystem, ID as BRJoinGameSystemID } from "systems/BRJoinGameSy
 import { BRStartGameSystem, ID as BRStartGameSystemID } from "systems/BRStartGameSystem.sol";
 import { BRMovePieceSystem, ID as BRMovePieceSystemID } from "systems/BRMovePieceSystem.sol";
 import { BRSetPieceTypeSystem, ID as BRSetPieceTypeSystemID } from "systems/BRSetPieceTypeSystem.sol";
-import { BRRevokeControllerSystem, ID as BRRevokeControllerSystemID } from "systems/BRRevokeControllerSystem.sol";
+import { BRLeaveGameSystem, ID as BRLeaveGameSystemID } from "systems/BRLeaveGameSystem.sol";
 import { ControllerComponent, ID as ControllerComponentID } from "components/ControllerComponent.sol";
 import { BRAlreadyInGame } from "common/BRErrors.sol";
 import { BRLibPiece } from "libraries/BRLibPiece.sol";
@@ -25,7 +25,7 @@ contract BRRevokeControllerTest is MudTest {
     BRCreateGameSystem brCreateGameSystem = BRCreateGameSystem(system(BRCreateGameSystemID));
     BRJoinGameSystem brJoinGameSystem = BRJoinGameSystem(system(BRJoinGameSystemID));
     SetControllerSystem setControllerSystem = SetControllerSystem(system(SetControllerSystemID));
-    BRRevokeControllerSystem brRevokeControllerSystem = BRRevokeControllerSystem(system(BRRevokeControllerSystemID));
+    BRLeaveGameSystem brLeaveGameSystem = BRLeaveGameSystem(system(BRLeaveGameSystemID));
 
     // Spawn a new piece
     uint256 piece = spawnSystem.executeTyped();
@@ -44,7 +44,7 @@ contract BRRevokeControllerTest is MudTest {
     brJoinGameSystem.executeTyped(piece, game);
 
     // Revoke controllership and check
-    brRevokeControllerSystem.executeTyped(piece);
+    brLeaveGameSystem.executeTyped(piece);
     ControllerComponent controllerComponent = ControllerComponent(getAddressById(components, ControllerComponentID));
     // Piece should have no controllers
     assertTrue(!controllerComponent.has(piece) || controllerComponent.getValue(piece).length == 0);

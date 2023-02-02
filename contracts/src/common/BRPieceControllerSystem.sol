@@ -5,7 +5,7 @@ import { getSystemAddressById } from "solecs/utils.sol";
 import { RevokeControllerSystem, ID as RevokeControllerSystemID } from "systems/RevokeControllerSystem.sol";
 import { BRNotRevokeSystem } from "common/BRErrors.sol";
 
-uint256 constant BR_REVOKE_SYSTEM_ID = uint256(keccak256("system.BRRevokeControllerSystem"));
+uint256 constant BR_REVOKE_SYSTEM_ID = uint256(keccak256("system.BRLeaveGameSystem"));
 
 abstract contract BRPieceControllerSystem is System {
   function revokeController(uint256 piece) public {
