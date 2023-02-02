@@ -7,7 +7,7 @@ const RevokeControllers = () => {
   const { network } = useContext(NetworkContext);
   const { activePiece } = useContext(GameContext);
   const handleRevokeControllers = () => {
-    network?.api.br.revokeBRControllers(
+    network?.api.br.leaveBRGame(
       getEntityFromEntityIndex(activePiece!, network.world)
     );
   };

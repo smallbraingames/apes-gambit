@@ -1,3 +1,4 @@
+import { ContractTransaction, getDefaultProvider } from "ethers";
 import { EntityID, EntityIndex, createWorld } from "@latticexyz/recs";
 import { GameConfig, getNetworkConfig } from "./config";
 import {
@@ -9,7 +10,6 @@ import {
   setupMUDNetwork,
 } from "@latticexyz/std-client";
 
-import { ContractTransaction } from "ethers";
 import { Coord } from "@latticexyz/utils";
 import { GodID } from "@latticexyz/network";
 import { PieceType } from "./types";
@@ -146,10 +146,8 @@ export async function createNetwork(config: GameConfig) {
     );
   };
 
-  const revokeBRControllers = (
-    pieceEntity: EntityID
-  ): Promise<ContractTransaction> => {
-    return systems["system.BRRevokeControllerSystem"].executeTyped(pieceEntity);
+  const leaveBRGame = (pieceEntity: EntityID): Promise<ContractTransaction> => {
+    return systems["system.BRLeaveGameSystem"].executeTyped(pieceEntity);
   };
 
   const context = {
@@ -159,6 +157,7 @@ export async function createNetwork(config: GameConfig) {
     components,
     txQueue,
     systems,
+    provider: getDefaultProvider(config.jsonRpc),
     txReduced$,
     startSync,
     network,
@@ -174,7 +173,7 @@ export async function createNetwork(config: GameConfig) {
         joinBRGame,
         startBRGame,
         setBRPieceType,
-        revokeBRControllers,
+        leaveBRGame: leaveBRGame,
       },
     },
   };

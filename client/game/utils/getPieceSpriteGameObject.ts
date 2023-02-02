@@ -10,7 +10,6 @@ const getPieceSpriteGameObject = (
   objectRegistry: ObjectRegistry,
   scene: Phaser.Scene
 ) => {
-  console.log("calling for", entityIndex);
   if (!objectRegistry.has(entityIndex, PIECE_SPRITE_ID)) {
     // Create dummy sprite
     const sprite = scene.physics.add.sprite(
