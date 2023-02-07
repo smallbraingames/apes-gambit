@@ -16,7 +16,13 @@ contract BREndGameSystem is System {
     BRGame memory game = brGameComponent.getValue(gameEntity);
     brGameComponent.set(
       gameEntity,
-      BRGame({ startTime: game.startTime, rechargeTime: game.rechargeTime, status: BRGameStatus.OVER })
+      BRGame({
+        startTime: game.startTime,
+        rechargeTime: game.rechargeTime,
+        initialGridDim: game.initialGridDim,
+        secondsPerGridShrink: game.secondsPerGridShrink,
+        status: BRGameStatus.OVER
+      })
     );
   }
 

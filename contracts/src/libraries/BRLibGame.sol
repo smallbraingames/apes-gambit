@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
+import { Coord } from "std-contracts/components/CoordComponent.sol";
 import { BRGame, BRGameStatus } from "common/BRGame.sol";
 import { BRGameComponent } from "components/BRGameComponent.sol";
 import { BRInGameComponent } from "components/BRInGameComponent.sol";
@@ -38,6 +39,15 @@ library BRLibGame {
     if (brGame.status != BRGameStatus.NOT_STARTED) {
       revert BRGameAlreadyStarted();
     }
+  }
+
+  /// @notice Gets whether a position is within bounds
+  function isPositionInBounds(
+    BRGameComponent brGameComponent,
+    uint256 game,
+    Coord memory position
+  ) internal view returns (bool) {
+    BRGame memory brGame = getGame(brGameComponent, game);
   }
 
   /// @notice Gets the game at an entity

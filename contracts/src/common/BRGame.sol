@@ -10,5 +10,7 @@ enum BRGameStatus {
 struct BRGame {
   uint256 startTime;
   uint32 rechargeTime;
+  uint32 initialGridDim;
+  uint32 secondsPerGridShrink;
   BRGameStatus status;
 }
