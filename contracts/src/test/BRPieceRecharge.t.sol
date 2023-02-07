@@ -37,7 +37,7 @@ contract BRPieceRechargeTest is MudTest {
 
     // Create a new game
     uint256 startTime = block.timestamp;
-    uint256 game = brCreateGameSystem.executeTyped(startTime, 5);
+    uint256 game = brCreateGameSystem.executeTyped(startTime, 5, 100, 100);
 
     // Join the game
     brJoinGameSystem.executeTyped(piece, game);
