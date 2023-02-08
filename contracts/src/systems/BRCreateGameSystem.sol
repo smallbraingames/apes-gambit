@@ -12,9 +12,9 @@ contract BRCreateGameSystem is System {
 
   /// @notice Spawns a new piece with msg.sender as owner
   function execute(bytes memory arguments) public returns (bytes memory) {
-    (uint256 startTime, uint32 rechargeTime, uint32 initialGridDim, uint32 secondsPerGridShrink) = abi.decode(
+    (uint256 startTime, uint32 rechargeTime, uint16 initialGridDim, uint16 secondsPerGridShrink) = abi.decode(
       arguments,
-      (uint256, uint32, uint32, uint32)
+      (uint256, uint32, uint16, uint16)
     );
 
     // Unique entity

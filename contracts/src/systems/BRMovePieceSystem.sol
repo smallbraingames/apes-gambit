@@ -2,6 +2,7 @@
 pragma solidity >=0.8.0;
 import { System, IWorld } from "solecs/System.sol";
 import { BRPieceControllerSystem } from "common/BRPieceControllerSystem.sol";
+import { BRLazyUpdater } from "common/BRLazyUpdater.sol";
 import { getAddressById, getSystemAddressById } from "solecs/utils.sol";
 import { BRGame, BRGameStatus } from "common/BRGame.sol";
 import { Coord } from "std-contracts/components/CoordComponent.sol";
@@ -12,7 +13,6 @@ import { BRGameComponent, ID as BRGameComponentID } from "components/BRGameCompo
 import { BRInGameComponent, ID as BRInGameComponentID } from "components/BRInGameComponent.sol";
 import { BRIsAliveComponent, ID as BRIsAliveComponentID } from "components/BRIsAliveComponent.sol";
 import { BRPointsComponent, ID as BRPointsComponentID } from "components/BRPointsComponent.sol";
-import { BRPointsComponent, ID as BRPointsComponentID } from "components/BRPointsComponent.sol";
 import { BRPreviousMoveTimestampComponent, ID as BRPreviousMoveTimestampComponentID } from "components/BRPreviousMoveTimestampComponent.sol";
 import { PieceTypeComponent, ID as PieceTypeComponentID } from "components/PieceTypeComponent.sol";
 import { PiecePositionComponent, ID as PiecePositionComponentID } from "components/PiecePositionComponent.sol";
@@ -22,11 +22,15 @@ import { BRLibGame } from "libraries/BRLibGame.sol";
 
 uint256 constant ID = uint256(keccak256("system.BRMovePieceSystem"));
 
-contract BRMovePieceSystem is BRPieceControllerSystem {
+contract BRMovePieceSystem is BRPieceControllerSystem, BRLazyUpdater {
   constructor(IWorld _world, address _components) System(_world, _components) {}
 
   function execute(bytes memory arguments) public returns (bytes memory) {
     (uint256 piece, uint256 game, Coord memory position) = abi.decode(arguments, (uint256, uint256, Coord));
+
+    // Lazy update the game state
+    updateGameState(world, game, components);
+
     OwnerComponent ownerComponent = OwnerComponent(getAddressById(components, OwnerComponentID));
     ControllerComponent controllerComponent = ControllerComponent(getAddressById(components, ControllerComponentID));
     BRGameComponent brGameComponent = BRGameComponent(getAddressById(components, BRGameComponentID));
@@ -56,7 +60,7 @@ contract BRMovePieceSystem is BRPieceControllerSystem {
       msg.sender
     );
 
-    // Check if we can move, if so, update the previous move timestamp
+    // Check if we are recharged enough to move, if so, update the previous move timestamp
     BRLibPiece.checkIsRecharged(brPreviousMoveTimestampComponent, brGameComponent, piece, game);
     brPreviousMoveTimestampComponent.set(piece, block.timestamp);
 
