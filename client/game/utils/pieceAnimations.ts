@@ -1,5 +1,5 @@
+import { Assets, MOVE_ANIMATION_DURATION, TILE_HEIGHT } from "../constants";
 import { Coord, tween } from "@latticexyz/phaserx";
-import { MOVE_ANIMATION_DURATION, TILE_HEIGHT } from "../constants";
 
 import { PieceState } from "../types";
 import { PieceType } from "../../network/types";
@@ -32,12 +32,25 @@ export const getMoveAnimationDuration = (
   MOVE_ANIMATION_DURATION;
 
 export const playMovePieceAnimation = async (
+  scene: Phaser.Scene,
   gameObject: Phaser.GameObjects.Sprite,
   position: Coord,
   pieceType: PieceType,
   isEnemy: boolean
 ) => {
   console.log("move piece");
+
+  const particles = scene.add.particles(Assets.ChessTileset, undefined, {
+    speed: { min: 20, max: 100 },
+    angle: { min: 0, max: 360 },
+    scale: { start: 1, end: 0 },
+    alpha: { start: 0, end: 0.1 },
+    lifespan: 2000,
+  });
+
+  const emitter = particles.emitters.first;
+  emitter.startFollow(gameObject);
+
   gameObject.setTexture(
     getAssetKeyForPiece(pieceType, PieceState.MOVE, isEnemy)
   );
@@ -71,6 +84,9 @@ export const playMovePieceAnimation = async (
   gameObject.setTexture(
     getAssetKeyForPiece(pieceType, PieceState.IDLE, isEnemy)
   );
+
+  emitter.stopFollow();
+  emitter.stop();
 };
 
 export const playPieceAttackAnimation = async (

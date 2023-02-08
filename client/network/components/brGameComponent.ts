@@ -6,6 +6,8 @@ export function defineBRGameComponent(world: World) {
     {
       startTime: Type.Number,
       rechargeTime: Type.Number,
+      initialGridDim: Type.Number,
+      secondsPerGridShrink: Type.Number,
       status: Type.Number,
     },
     {

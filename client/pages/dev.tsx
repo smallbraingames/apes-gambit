@@ -1,4 +1,4 @@
-import { EntityID, EntityIndex } from "@latticexyz/recs";
+import { EntityID, EntityIndex, defineComponentSystem } from "@latticexyz/recs";
 import { useContext, useEffect, useState } from "react";
 
 import { GameConfig } from "../game/types";
@@ -7,6 +7,8 @@ import { getEntityFromEntityIndex } from "../game/utils/resolveEntity";
 
 const GAME_START_TIME = Math.floor(new Date().getTime() / 1000);
 const GAME_RECHARGE_TIME = 5;
+const GAME_INITIAL_GRID_DIM = 100;
+const GAME_SECONDS_PER_GRID_SHRINK = 10;
 
 export default function Dev() {
   const network = useContext(NetworkContext);
@@ -14,11 +16,15 @@ export default function Dev() {
 
   useEffect(() => {
     if (network.network) {
-      network.network.components.BRGame.update$.subscribe((update) => {
-        setGames(
-          new Map(games.set(update.entity, update.value[0] as GameConfig))
-        );
-      });
+      defineComponentSystem(
+        network.network.world,
+        network.network.components.BRGame,
+        (update) => {
+          setGames(
+            new Map(games.set(update.entity, update.value[0] as GameConfig))
+          );
+        }
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [network.network]);
@@ -36,7 +42,9 @@ export default function Dev() {
               onClick={() => {
                 network.network?.api.br.createBRGame(
                   GAME_START_TIME,
-                  GAME_RECHARGE_TIME
+                  GAME_RECHARGE_TIME,
+                  GAME_INITIAL_GRID_DIM,
+                  GAME_SECONDS_PER_GRID_SHRINK
                 );
               }}
             >
@@ -59,7 +67,9 @@ export default function Dev() {
                     Start time:{" "}
                     {new Date(game[1].startTime * 1000).toLocaleTimeString()},
                     Status: {game[1].status}, Entity: {entity}, EntityIndex:{" "}
-                    {entityIndex}, Recharge time: {game[1].rechargeTime}
+                    {entityIndex}, Recharge time: {game[1].rechargeTime}, Grid
+                    initial size: {game[1].initialGridDim}, Seconds per grid
+                    shrink: {game[1].secondsPerGridShrink}
                     <button
                       onClick={() => {
                         network.network?.api.br.startBRGame(entity as EntityID);

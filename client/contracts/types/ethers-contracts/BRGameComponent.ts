@@ -30,12 +30,16 @@ import type {
 export type BRGameStruct = {
   startTime: PromiseOrValue<BigNumberish>;
   rechargeTime: PromiseOrValue<BigNumberish>;
+  initialGridDim: PromiseOrValue<BigNumberish>;
+  secondsPerGridShrink: PromiseOrValue<BigNumberish>;
   status: PromiseOrValue<BigNumberish>;
 };
 
-export type BRGameStructOutput = [BigNumber, number, number] & {
+export type BRGameStructOutput = [BigNumber, number, number, number, number] & {
   startTime: BigNumber;
   rechargeTime: number;
+  initialGridDim: number;
+  secondsPerGridShrink: number;
   status: number;
 };
 
@@ -43,7 +47,7 @@ export interface BRGameComponentInterface extends utils.Interface {
   functions: {
     "authorizeWriter(address)": FunctionFragment;
     "getEntities()": FunctionFragment;
-    "getEntitiesWithValue((uint256,uint32,uint8))": FunctionFragment;
+    "getEntitiesWithValue((uint256,uint32,uint16,uint16,uint8))": FunctionFragment;
     "getEntitiesWithValue(bytes)": FunctionFragment;
     "getRawValue(uint256)": FunctionFragment;
     "getSchema()": FunctionFragment;
@@ -54,8 +58,8 @@ export interface BRGameComponentInterface extends utils.Interface {
     "registerIndexer(address)": FunctionFragment;
     "registerWorld(address)": FunctionFragment;
     "remove(uint256)": FunctionFragment;
-    "set(uint256,(uint256,uint32,uint8))": FunctionFragment;
     "set(uint256,bytes)": FunctionFragment;
+    "set(uint256,(uint256,uint32,uint16,uint16,uint8))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "unauthorizeWriter(address)": FunctionFragment;
     "world()": FunctionFragment;
@@ -66,7 +70,7 @@ export interface BRGameComponentInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "authorizeWriter"
       | "getEntities"
-      | "getEntitiesWithValue((uint256,uint32,uint8))"
+      | "getEntitiesWithValue((uint256,uint32,uint16,uint16,uint8))"
       | "getEntitiesWithValue(bytes)"
       | "getRawValue"
       | "getSchema"
@@ -77,8 +81,8 @@ export interface BRGameComponentInterface extends utils.Interface {
       | "registerIndexer"
       | "registerWorld"
       | "remove"
-      | "set(uint256,(uint256,uint32,uint8))"
       | "set(uint256,bytes)"
+      | "set(uint256,(uint256,uint32,uint16,uint16,uint8))"
       | "transferOwnership"
       | "unauthorizeWriter"
       | "world"
@@ -94,7 +98,7 @@ export interface BRGameComponentInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "getEntitiesWithValue((uint256,uint32,uint8))",
+    functionFragment: "getEntitiesWithValue((uint256,uint32,uint16,uint16,uint8))",
     values: [BRGameStruct]
   ): string;
   encodeFunctionData(
@@ -129,12 +133,12 @@ export interface BRGameComponentInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "set(uint256,(uint256,uint32,uint8))",
-    values: [PromiseOrValue<BigNumberish>, BRGameStruct]
-  ): string;
-  encodeFunctionData(
     functionFragment: "set(uint256,bytes)",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "set(uint256,(uint256,uint32,uint16,uint16,uint8))",
+    values: [PromiseOrValue<BigNumberish>, BRGameStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
@@ -159,7 +163,7 @@ export interface BRGameComponentInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getEntitiesWithValue((uint256,uint32,uint8))",
+    functionFragment: "getEntitiesWithValue((uint256,uint32,uint16,uint16,uint8))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -185,11 +189,11 @@ export interface BRGameComponentInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "remove", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "set(uint256,(uint256,uint32,uint8))",
+    functionFragment: "set(uint256,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "set(uint256,bytes)",
+    functionFragment: "set(uint256,(uint256,uint32,uint16,uint16,uint8))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -259,7 +263,7 @@ export interface BRGameComponent extends BaseContract {
 
     getEntities(overrides?: CallOverrides): Promise<[BigNumber[]]>;
 
-    "getEntitiesWithValue((uint256,uint32,uint8))"(
+    "getEntitiesWithValue((uint256,uint32,uint16,uint16,uint8))"(
       value: BRGameStruct,
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
@@ -307,15 +311,15 @@ export interface BRGameComponent extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "set(uint256,(uint256,uint32,uint8))"(
-      entity: PromiseOrValue<BigNumberish>,
-      value: BRGameStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     "set(uint256,bytes)"(
       entity: PromiseOrValue<BigNumberish>,
       value: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "set(uint256,(uint256,uint32,uint16,uint16,uint8))"(
+      entity: PromiseOrValue<BigNumberish>,
+      value: BRGameStruct,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -344,7 +348,7 @@ export interface BRGameComponent extends BaseContract {
 
   getEntities(overrides?: CallOverrides): Promise<BigNumber[]>;
 
-  "getEntitiesWithValue((uint256,uint32,uint8))"(
+  "getEntitiesWithValue((uint256,uint32,uint16,uint16,uint8))"(
     value: BRGameStruct,
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
@@ -392,15 +396,15 @@ export interface BRGameComponent extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "set(uint256,(uint256,uint32,uint8))"(
-    entity: PromiseOrValue<BigNumberish>,
-    value: BRGameStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   "set(uint256,bytes)"(
     entity: PromiseOrValue<BigNumberish>,
     value: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "set(uint256,(uint256,uint32,uint16,uint16,uint8))"(
+    entity: PromiseOrValue<BigNumberish>,
+    value: BRGameStruct,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -429,7 +433,7 @@ export interface BRGameComponent extends BaseContract {
 
     getEntities(overrides?: CallOverrides): Promise<BigNumber[]>;
 
-    "getEntitiesWithValue((uint256,uint32,uint8))"(
+    "getEntitiesWithValue((uint256,uint32,uint16,uint16,uint8))"(
       value: BRGameStruct,
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
@@ -477,15 +481,15 @@ export interface BRGameComponent extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "set(uint256,(uint256,uint32,uint8))"(
-      entity: PromiseOrValue<BigNumberish>,
-      value: BRGameStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     "set(uint256,bytes)"(
       entity: PromiseOrValue<BigNumberish>,
       value: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "set(uint256,(uint256,uint32,uint16,uint16,uint8))"(
+      entity: PromiseOrValue<BigNumberish>,
+      value: BRGameStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -526,7 +530,7 @@ export interface BRGameComponent extends BaseContract {
 
     getEntities(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "getEntitiesWithValue((uint256,uint32,uint8))"(
+    "getEntitiesWithValue((uint256,uint32,uint16,uint16,uint8))"(
       value: BRGameStruct,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -572,15 +576,15 @@ export interface BRGameComponent extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "set(uint256,(uint256,uint32,uint8))"(
-      entity: PromiseOrValue<BigNumberish>,
-      value: BRGameStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     "set(uint256,bytes)"(
       entity: PromiseOrValue<BigNumberish>,
       value: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "set(uint256,(uint256,uint32,uint16,uint16,uint8))"(
+      entity: PromiseOrValue<BigNumberish>,
+      value: BRGameStruct,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -610,7 +614,7 @@ export interface BRGameComponent extends BaseContract {
 
     getEntities(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "getEntitiesWithValue((uint256,uint32,uint8))"(
+    "getEntitiesWithValue((uint256,uint32,uint16,uint16,uint8))"(
       value: BRGameStruct,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -656,15 +660,15 @@ export interface BRGameComponent extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "set(uint256,(uint256,uint32,uint8))"(
-      entity: PromiseOrValue<BigNumberish>,
-      value: BRGameStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     "set(uint256,bytes)"(
       entity: PromiseOrValue<BigNumberish>,
       value: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "set(uint256,(uint256,uint32,uint16,uint16,uint8))"(
+      entity: PromiseOrValue<BigNumberish>,
+      value: BRGameStruct,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

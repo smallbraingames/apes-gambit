@@ -104,11 +104,15 @@ export async function createNetwork(config: GameConfig) {
 
   const createBRGame = (
     startTime: number,
-    rechargeTime: number
+    rechargeTime: number,
+    initialGridDim: number,
+    secondsPerGridShrink: number
   ): Promise<ContractTransaction> => {
     return systems["system.BRCreateGameSystem"].executeTyped(
       startTime,
-      rechargeTime
+      rechargeTime,
+      initialGridDim,
+      secondsPerGridShrink
     );
   };
 
