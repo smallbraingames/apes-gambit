@@ -120,6 +120,7 @@ const createBRPiecePositionSystem = (
         );
       } else {
         moveAnimation = playMovePieceAnimation(
+          Main,
           sprite,
           { x, y },
           pieceType,
