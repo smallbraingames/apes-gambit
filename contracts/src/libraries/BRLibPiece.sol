@@ -1,16 +1,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
+import { IWorld, WorldQueryFragment } from "solecs/World.sol";
+import { QueryType } from "solecs/LibQuery.sol";
 import { Coord } from "std-contracts/components/CoordComponent.sol";
 import { PieceType } from "common/PieceType.sol";
 import { OwnerComponent } from "components/OwnerComponent.sol";
 import { ControllerComponent } from "components/ControllerComponent.sol";
 import { BRGameComponent } from "components/BRGameComponent.sol";
-import { BRInGameComponent } from "components/BRInGameComponent.sol";
+import { BRInGameComponent, ID as BRInGameComponentID } from "components/BRInGameComponent.sol";
 import { BRIsAliveComponent } from "components/BRIsAliveComponent.sol";
 import { BRPointsComponent } from "components/BRPointsComponent.sol";
 import { BRPreviousMoveTimestampComponent } from "components/BRPreviousMoveTimestampComponent.sol";
-import { PiecePositionComponent } from "components/PiecePositionComponent.sol";
+import { PiecePositionComponent, ID as PiecePositionComponentID } from "components/PiecePositionComponent.sol";
 import { BRPieceDead, BRNotEnoughPoints, BRNotRecharged } from "common/BRErrors.sol";
 import { UnimplementedPieceType } from "common/Errors.sol";
 import { BRLibGame } from "libraries/BRLibGame.sol";
@@ -39,6 +41,52 @@ library BRLibPiece {
       }
     }
     return (false, 0);
+  }
+
+  /// @notice Kills all pieces that are out of bounds
+  function killPiecesOutOfBounds(
+    IWorld world,
+    BRGameComponent brGameComponent,
+    BRIsAliveComponent brIsAliveComponent,
+    PiecePositionComponent piecePositionComponent,
+    uint256 game
+  ) internal {
+    (uint256[] memory pieces, uint256 numPiecesOutOfBounds) = getPiecesOutOfBounds(
+      world,
+      brGameComponent,
+      piecePositionComponent,
+      game
+    );
+    for (uint256 i = 0; i < numPiecesOutOfBounds; i++) {
+      brIsAliveComponent.remove(pieces[i]);
+    }
+  }
+
+  /// @notice Get pieces that are not in bounds
+  function getPiecesOutOfBounds(
+    IWorld world,
+    BRGameComponent brGameComponent,
+    PiecePositionComponent piecePositionComponent,
+    uint256 game
+  ) internal view returns (uint256[] memory, uint256) {
+    uint256[] memory pieces = getPiecesInGame(world, game);
+    uint256[] memory outOfBoundsPieces = new uint256[](pieces.length);
+    uint256 numPiecesOutOfBounds = 0;
+    for (uint256 i = 0; i < pieces.length; i++) {
+      if (!BRLibGame.isPositionInBounds(brGameComponent, game, piecePositionComponent.getValue(pieces[i]))) {
+        outOfBoundsPieces[numPiecesOutOfBounds] = pieces[i];
+        numPiecesOutOfBounds++;
+      }
+    }
+    return (outOfBoundsPieces, numPiecesOutOfBounds);
+  }
+
+  /// @notice Gets all the pieces in a game
+  function getPiecesInGame(IWorld world, uint256 game) internal view returns (uint256[] memory) {
+    WorldQueryFragment[] memory fragments = new WorldQueryFragment[](2);
+    fragments[0] = WorldQueryFragment(QueryType.HasValue, BRInGameComponentID, abi.encode(game));
+    fragments[1] = WorldQueryFragment(QueryType.Has, PiecePositionComponentID, new bytes(0));
+    return world.query(fragments);
   }
 
   /// @notice Checks whether a piece has enough charge to make a move

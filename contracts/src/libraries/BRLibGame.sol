@@ -47,7 +47,28 @@ library BRLibGame {
     uint256 game,
     Coord memory position
   ) internal view returns (bool) {
+    checkGameInProgress(brGameComponent, game);
     BRGame memory brGame = getGame(brGameComponent, game);
+    int32 currentGridDim = int32(
+      getCurrentGridDim(brGame.initialGridDim, brGame.secondsPerGridShrink, brGame.startTime)
+    );
+    bool isXInBounds = (position.x <= currentGridDim) && (position.x >= (-1 * currentGridDim));
+    bool isYInBounds = (position.y <= currentGridDim) && (position.y >= (-1 * currentGridDim));
+    return isXInBounds && isYInBounds;
+  }
+
+  /// @notice Gets the current gridDim (which is half the side length of a grid)
+  function getCurrentGridDim(
+    uint16 initialGridDim,
+    uint16 secondsPerGridShrink,
+    uint256 startTime
+  ) internal view returns (uint32) {
+    uint16 secondsSinceStart = uint16(block.timestamp - startTime);
+    uint16 gridDimSubtractor = secondsSinceStart / secondsPerGridShrink;
+    if (gridDimSubtractor >= initialGridDim) {
+      return 0;
+    }
+    return initialGridDim - gridDimSubtractor;
   }
 
   /// @notice Gets the game at an entity

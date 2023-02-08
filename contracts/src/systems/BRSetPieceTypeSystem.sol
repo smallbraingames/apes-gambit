@@ -3,6 +3,7 @@ pragma solidity >=0.8.0;
 import { PieceType } from "common/PieceType.sol";
 import { System, IWorld } from "solecs/System.sol";
 import { BRPieceControllerSystem } from "common/BRPieceControllerSystem.sol";
+import { BRLazyUpdater } from "common/BRLazyUpdater.sol";
 import { getAddressById, getSystemAddressById } from "solecs/utils.sol";
 import { OwnerComponent, ID as OwnerComponentID } from "components/OwnerComponent.sol";
 import { ControllerComponent, ID as ControllerComponentID } from "components/ControllerComponent.sol";
@@ -15,12 +16,14 @@ import { BRLibPiece } from "libraries/BRLibPiece.sol";
 
 uint256 constant ID = uint256(keccak256("system.BRSetPieceTypeSystem"));
 
-contract BRSetPieceTypeSystem is BRPieceControllerSystem {
+contract BRSetPieceTypeSystem is BRPieceControllerSystem, BRLazyUpdater {
   constructor(IWorld _world, address _components) System(_world, _components) {}
 
   /// @notice Spawns a new piece with msg.sender as owner
   function execute(bytes memory arguments) public returns (bytes memory) {
     (uint256 piece, uint256 game, PieceType pieceType) = abi.decode(arguments, (uint256, uint256, PieceType));
+
+    updateGameState(world, game, components);
 
     OwnerComponent ownerComponent = OwnerComponent(getAddressById(components, OwnerComponentID));
     ControllerComponent controllerComponent = ControllerComponent(getAddressById(components, ControllerComponentID));
