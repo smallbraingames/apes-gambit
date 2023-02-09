@@ -1,4 +1,4 @@
-import createObjectRegistry from "./createObjectRegistry";
+import createObjectRegistry from "./createPhaserObjectRegistry";
 import { deferred } from "@latticexyz/utils";
 
 const createPhaserGame = async (config: Phaser.Types.Core.GameConfig) => {

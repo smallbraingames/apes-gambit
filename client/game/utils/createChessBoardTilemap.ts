@@ -1,15 +1,5 @@
 import { AnimatedTilemap, pixelCoordToTileCoord } from "@latticexyz/phaserx";
-import {
-  Assets,
-  TILE_HEIGHT,
-  TILE_OVERLAY_COLOR,
-  TILE_OVERLAY_RENDER_MULTIPLE,
-  TILE_WIDTH,
-} from "../constants";
-import { Coord, tile } from "@latticexyz/utils";
-
-import { Game } from "../types";
-import { Subscription } from "rxjs";
+import { Assets, TILE_HEIGHT, TILE_WIDTH } from "../constants";
 
 const MAP_WIDTH_TILES = 1000;
 const MAP_HEIGHT_TILES = 1000;
