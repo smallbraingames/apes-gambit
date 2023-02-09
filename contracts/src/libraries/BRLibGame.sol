@@ -99,6 +99,11 @@ library BRLibGame {
     }
   }
 
+  /// @notice Get position-indexed entity ID for a component
+  function createEntityIDFromPosition(Coord memory position, uint256 componentID) internal pure returns (uint256) {
+    return uint256(keccak256(abi.encode(position, componentID)));
+  }
+
   /// @notice Returns whether a piece is in a game
   function isPieceInGame(
     BRInGameComponent brInGameComponent,
