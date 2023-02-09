@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { AddressComponent } from "./AddressComponent";
+export type { BRBananasPickedUpComponent } from "./BRBananasPickedUpComponent";
 export type { BRCreateGameSystem } from "./BRCreateGameSystem";
 export type { BREndGameSystem } from "./BREndGameSystem";
 export type { BRGameComponent } from "./BRGameComponent";
@@ -33,6 +34,7 @@ export type { SetControllerSystem } from "./SetControllerSystem";
 export type { SetPieceTypeSystem } from "./SetPieceTypeSystem";
 export type { SpawnSystem } from "./SpawnSystem";
 export type { System } from "./System";
+export type { SystemStorage } from "./SystemStorage";
 export type { TransferOwnerSystem } from "./TransferOwnerSystem";
 export type { Uint256ArrayComponent } from "./Uint256ArrayComponent";
 export type { Uint32Component } from "./Uint32Component";
@@ -41,6 +43,7 @@ export * as factories from "./factories";
 export { AddressComponent__factory } from "./factories/AddressComponent__factory";
 export { BareComponent__factory } from "./factories/BareComponent__factory";
 export { BoolComponent__factory } from "./factories/BoolComponent__factory";
+export { BRBananasPickedUpComponent__factory } from "./factories/BRBananasPickedUpComponent__factory";
 export { BRCreateGameSystem__factory } from "./factories/BRCreateGameSystem__factory";
 export { BREndGameSystem__factory } from "./factories/BREndGameSystem__factory";
 export { BRGameComponent__factory } from "./factories/BRGameComponent__factory";
@@ -70,6 +73,7 @@ export { SetControllerSystem__factory } from "./factories/SetControllerSystem__f
 export { SetPieceTypeSystem__factory } from "./factories/SetPieceTypeSystem__factory";
 export { SpawnSystem__factory } from "./factories/SpawnSystem__factory";
 export { System__factory } from "./factories/System__factory";
+export { SystemStorage__factory } from "./factories/SystemStorage__factory";
 export { TransferOwnerSystem__factory } from "./factories/TransferOwnerSystem__factory";
 export { Uint256ArrayComponent__factory } from "./factories/Uint256ArrayComponent__factory";
 export { Uint32Component__factory } from "./factories/Uint32Component__factory";

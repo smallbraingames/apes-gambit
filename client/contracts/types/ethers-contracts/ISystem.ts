@@ -108,7 +108,7 @@ export interface ISystem extends BaseContract {
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
@@ -121,7 +121,7 @@ export interface ISystem extends BaseContract {
   owner(overrides?: CallOverrides): Promise<string>;
 
   transferOwnership(
-    _newOwner: PromiseOrValue<string>,
+    account: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -134,7 +134,7 @@ export interface ISystem extends BaseContract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -159,7 +159,7 @@ export interface ISystem extends BaseContract {
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
@@ -173,7 +173,7 @@ export interface ISystem extends BaseContract {
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

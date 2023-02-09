@@ -16,6 +16,16 @@ const _abi = [
     type: "error",
   },
   {
+    inputs: [],
+    name: "Ownable__NotOwner",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "Ownable__NotTransitiveOwner",
+    type: "error",
+  },
+  {
     anonymous: false,
     inputs: [
       {
@@ -83,7 +93,7 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
-        name: "newOwner",
+        name: "account",
         type: "address",
       },
     ],

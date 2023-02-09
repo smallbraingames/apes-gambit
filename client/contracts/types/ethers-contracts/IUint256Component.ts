@@ -277,7 +277,7 @@ export interface IUint256Component extends BaseContract {
     ): Promise<ContractTransaction>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -350,7 +350,7 @@ export interface IUint256Component extends BaseContract {
   ): Promise<ContractTransaction>;
 
   transferOwnership(
-    _newOwner: PromiseOrValue<string>,
+    account: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -423,7 +423,7 @@ export interface IUint256Component extends BaseContract {
     ): Promise<void>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -506,7 +506,7 @@ export interface IUint256Component extends BaseContract {
     ): Promise<BigNumber>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -578,7 +578,7 @@ export interface IUint256Component extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
