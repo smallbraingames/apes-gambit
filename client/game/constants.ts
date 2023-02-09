@@ -10,6 +10,8 @@ export const TILE_OVERLAY_COLOR = 0x86efac;
 export const TILE_OVERLAY_TAKE_COLOR = 0xfca5a5;
 export const TILE_OVERLAY_RENDER_MULTIPLE = 1.5;
 export const PIECE_SPRITE_ID = "piece-sprite";
+export const LOBBY_DISPLAY_GRID_SIZE = 200;
+export const CHESS_TILEMAP_ID = "chesstilemap";
 
 export enum Scenes {
   Main = "Main",
@@ -31,6 +33,7 @@ export enum Animations {
 export enum Assets {
   ChessTileset = "ChessTileset",
   Shadow = "Shadow",
+  Boundary = "Boundary",
 }
 
 export enum Sprites {}

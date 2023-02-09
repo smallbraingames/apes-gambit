@@ -24,10 +24,10 @@ export const clearValidMoveOverlays = (
   objectRegistry: ObjectRegistry,
   godEntityIndex: EntityIndex
 ) => {
-  if (!objectRegistry.has(godEntityIndex, BR_VALID_MOVE_GROUP)) {
+  if (!objectRegistry.groupRegistry.has(godEntityIndex, BR_VALID_MOVE_GROUP)) {
     return;
   }
-  const validMoveGroup = objectRegistry.get(
+  const validMoveGroup = objectRegistry.groupRegistry.get(
     godEntityIndex,
     BR_VALID_MOVE_GROUP
   ) as Phaser.GameObjects.Group;
@@ -47,10 +47,10 @@ export const setValidMoveOverlays = (network: Network, game: Game) => {
   } = game;
 
   let validMoveGroup: Phaser.GameObjects.Group;
-  if (!objectRegistry.has(godEntityIndex, BR_VALID_MOVE_GROUP)) {
+  if (!objectRegistry.groupRegistry.has(godEntityIndex, BR_VALID_MOVE_GROUP)) {
     validMoveGroup = Main.add.group();
   } else {
-    validMoveGroup = objectRegistry.get(
+    validMoveGroup = objectRegistry.groupRegistry.get(
       godEntityIndex,
       BR_VALID_MOVE_GROUP
     ) as Phaser.GameObjects.Group;
@@ -85,5 +85,9 @@ export const setValidMoveOverlays = (network: Network, game: Game) => {
       addTileOverlay(potentialMove, Main, TILE_WIDTH, TILE_HEIGHT, color)
     );
   });
-  objectRegistry.set(godEntityIndex, BR_VALID_MOVE_GROUP, validMoveGroup);
+  objectRegistry.groupRegistry.set(
+    godEntityIndex,
+    BR_VALID_MOVE_GROUP,
+    validMoveGroup
+  );
 };

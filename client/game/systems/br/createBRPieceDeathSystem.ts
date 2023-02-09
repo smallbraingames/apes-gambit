@@ -30,7 +30,10 @@ const createBRPieceDeathSystem = (
 
       const isAlive = update.value[0];
       if (!isAlive) {
-        objectRegistry.remove(update.entity, PIECE_SPRITE_ID);
+        objectRegistry.gameObjectRegistry.remove(
+          update.entity,
+          PIECE_SPRITE_ID
+        );
         return;
       }
     },

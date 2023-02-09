@@ -10,17 +10,17 @@ const getPieceSpriteGameObject = (
   objectRegistry: ObjectRegistry,
   scene: Phaser.Scene
 ) => {
-  if (!objectRegistry.has(entityIndex, PIECE_SPRITE_ID)) {
+  if (!objectRegistry.gameObjectRegistry.has(entityIndex, PIECE_SPRITE_ID)) {
     // Create dummy sprite
     const sprite = scene.physics.add.sprite(
       0,
       0,
       getAssetKeyForPiece(PieceType.PAWN, PieceState.IDLE, false)
     );
-    objectRegistry.set(entityIndex, PIECE_SPRITE_ID, sprite);
+    objectRegistry.gameObjectRegistry.set(entityIndex, PIECE_SPRITE_ID, sprite);
     return sprite;
   }
-  return objectRegistry.get(
+  return objectRegistry.gameObjectRegistry.get(
     entityIndex,
     PIECE_SPRITE_ID
   ) as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;

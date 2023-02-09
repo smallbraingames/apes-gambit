@@ -34,7 +34,10 @@ const createPiecePositionSystem = (
     (update) => {
       const position = update.value[0];
       if (!position) {
-        objectRegistry.remove(update.entity, PIECE_SPRITE_ID);
+        objectRegistry.gameObjectRegistry.remove(
+          update.entity,
+          PIECE_SPRITE_ID
+        );
         return;
       }
       const sprite = getPieceSpriteGameObject(

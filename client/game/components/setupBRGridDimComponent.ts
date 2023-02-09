@@ -37,21 +37,21 @@ const setupBRGridDimComponent = (network: Network, game: Game) => {
   }
 
   clock.time$.subscribe((now) => {
-    const secondsSinceStart = Math.floor(now / 1000) - gameConfig.startTime;
+    const secondsSinceStart =
+      // @ts-ignore
+      Math.floor(now / 1000) - parseInt(gameConfig.startTime);
     const gridDimShrinkAmount = Math.floor(
       secondsSinceStart / gameConfig.secondsPerGridShrink
     );
-
     const currentGridDim = getComponentValue(
       BRGridDimComponent,
       godEntityIndex
-    );
+    )?.value;
     const newGridDim = Math.max(
       gameConfig.initialGridDim - gridDimShrinkAmount,
       0
     );
-
-    if (currentGridDim === undefined || currentGridDim.value !== newGridDim) {
+    if (currentGridDim === undefined || currentGridDim !== newGridDim) {
       setComponent(BRGridDimComponent, godEntityIndex, {
         value: newGridDim,
       });
