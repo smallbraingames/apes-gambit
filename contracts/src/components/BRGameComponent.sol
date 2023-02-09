@@ -9,8 +9,8 @@ contract BRGameComponent is Component {
   constructor(address world) Component(world, ID) {}
 
   function getSchema() public pure override returns (string[] memory keys, LibTypes.SchemaValue[] memory values) {
-    keys = new string[](5);
-    values = new LibTypes.SchemaValue[](5);
+    keys = new string[](9);
+    values = new LibTypes.SchemaValue[](9);
 
     keys[0] = "startTime";
     values[0] = LibTypes.SchemaValue.UINT256;
@@ -24,8 +24,20 @@ contract BRGameComponent is Component {
     keys[3] = "secondsPerGridShrink";
     values[3] = LibTypes.SchemaValue.UINT16;
 
-    keys[4] = "status";
-    values[4] = LibTypes.SchemaValue.UINT8;
+    keys[4] = "perlinDenom";
+    values[4] = LibTypes.SchemaValue.INT256;
+
+    keys[5] = "perlinThresholdBanana";
+    values[5] = LibTypes.SchemaValue.INT128;
+
+    keys[6] = "perlinSeed";
+    values[6] = LibTypes.SchemaValue.UINT16;
+
+    keys[7] = "perlinPrecision";
+    values[7] = LibTypes.SchemaValue.UINT8;
+
+    keys[8] = "status";
+    values[8] = LibTypes.SchemaValue.UINT8;
   }
 
   function set(uint256 entity, BRGame memory value) public virtual {

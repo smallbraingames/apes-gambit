@@ -5,8 +5,11 @@ import { Coord } from "std-contracts/components/CoordComponent.sol";
 import { BRGame, BRGameStatus } from "common/BRGame.sol";
 import { BRGameComponent } from "components/BRGameComponent.sol";
 import { BRInGameComponent } from "components/BRInGameComponent.sol";
+import { BRGameComponent } from "components/BRGameComponent.sol";
+import { BRBananasPickedUpComponent, ID as BRBananasPickedUpComponentID } from "components/BRBananasPickedUpComponent.sol";
 import { PiecePositionComponent } from "components/PiecePositionComponent.sol";
 import { BRBeforeStartTime, BRGameNotInProgress, BRGameAlreadyStarted, BREntityNotGame, BRNotInGame, BRAlreadyInGame } from "common/BRErrors.sol";
+import { Perlin } from "noise/Perlin.sol";
 
 library BRLibGame {
   /// @notice Starts the game if it can be started, specifically if we are past the startTime

@@ -40,7 +40,7 @@ contract BRMovePieceTest is MudTest {
 
     // Create a new game
     uint256 startTime = block.timestamp;
-    uint256 game = brCreateGameSystem.executeTyped(startTime, 0, 100, 100);
+    uint256 game = brCreateGameSystem.executeTyped(startTime, 0, 100, 100, 50, 1000, 0, 64);
 
     // Join the game
     brJoinGameSystem.executeTyped(piece, game);
@@ -74,7 +74,7 @@ contract BRMovePieceTest is MudTest {
 
     // Create a new game
     uint256 startTime = block.timestamp;
-    uint256 game = brCreateGameSystem.executeTyped(startTime, 0, 100, 100);
+    uint256 game = brCreateGameSystem.executeTyped(startTime, 0, 100, 100, 50, 1000, 0, 64);
 
     // Join the game
     brJoinGameSystem.executeTyped(piece, game);

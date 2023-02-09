@@ -12,10 +12,16 @@ contract BRCreateGameSystem is System {
 
   /// @notice Spawns a new piece with msg.sender as owner
   function execute(bytes memory arguments) public returns (bytes memory) {
-    (uint256 startTime, uint32 rechargeTime, uint16 initialGridDim, uint16 secondsPerGridShrink) = abi.decode(
-      arguments,
-      (uint256, uint32, uint16, uint16)
-    );
+    (
+      uint256 startTime,
+      uint32 rechargeTime,
+      uint16 initialGridDim,
+      uint16 secondsPerGridShrink,
+      int256 perlinDenom,
+      int128 perlinThresholdBanana,
+      uint16 perlinSeed,
+      uint8 perlinPrecision
+    ) = abi.decode(arguments, (uint256, uint32, uint16, uint16, int256, int128, uint16, uint8));
 
     // Unique entity
     uint256 entityId = world.getUniqueEntityId();
@@ -29,6 +35,10 @@ contract BRCreateGameSystem is System {
         rechargeTime: rechargeTime,
         initialGridDim: initialGridDim,
         secondsPerGridShrink: secondsPerGridShrink,
+        perlinDenom: perlinDenom,
+        perlinThresholdBanana: perlinThresholdBanana,
+        perlinSeed: perlinSeed,
+        perlinPrecision: perlinPrecision,
         status: BRGameStatus.NOT_STARTED
       })
     );
@@ -40,10 +50,25 @@ contract BRCreateGameSystem is System {
     uint256 startTime,
     uint32 rechargeTime,
     uint32 initialGridDim,
-    uint32 secondsPerGridShrink
+    uint32 secondsPerGridShrink,
+    int256 perlinDenom,
+    int128 perlinThresholdBanana,
+    uint16 perlinSeed,
+    uint8 perlinPrecision
   ) public returns (uint256) {
     uint256 entityId = abi.decode(
-      execute(abi.encode(startTime, rechargeTime, initialGridDim, secondsPerGridShrink)),
+      execute(
+        abi.encode(
+          startTime,
+          rechargeTime,
+          initialGridDim,
+          secondsPerGridShrink,
+          perlinDenom,
+          perlinThresholdBanana,
+          perlinSeed,
+          perlinPrecision
+        )
+      ),
       (uint256)
     );
     return entityId;

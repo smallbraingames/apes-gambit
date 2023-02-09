@@ -12,5 +12,9 @@ struct BRGame {
   uint32 rechargeTime;
   uint16 initialGridDim;
   uint16 secondsPerGridShrink;
+  int256 perlinDenom;
+  int128 perlinThresholdBanana;
+  uint16 perlinSeed;
+  uint8 perlinPrecision;
   BRGameStatus status;
 }

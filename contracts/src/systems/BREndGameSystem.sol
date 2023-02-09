@@ -21,6 +21,10 @@ contract BREndGameSystem is System {
         rechargeTime: game.rechargeTime,
         initialGridDim: game.initialGridDim,
         secondsPerGridShrink: game.secondsPerGridShrink,
+        perlinDenom: game.perlinDenom,
+        perlinThresholdBanana: game.perlinThresholdBanana,
+        perlinSeed: game.perlinSeed,
+        perlinPrecision: game.perlinPrecision,
         status: BRGameStatus.OVER
       })
     );
