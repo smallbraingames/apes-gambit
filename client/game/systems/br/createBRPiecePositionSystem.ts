@@ -149,7 +149,10 @@ const createBRPiecePositionSystem = (
   );
 
   defineExitSystem(world, [Has(PiecePositionContext)], (update) => {
-    objectRegistry.remove(update.entity, PIECE_SPRITE_ID);
+    objectRegistry.gameObjectRegistry
+      .get(update.entity, PIECE_SPRITE_ID)
+      .destroy();
+    objectRegistry.gameObjectRegistry.remove(update.entity, PIECE_SPRITE_ID);
   });
 
   return [];

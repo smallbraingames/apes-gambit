@@ -1,6 +1,7 @@
 import { Game } from "../types";
 import { Network } from "../../network/types";
 import { Subscription } from "rxjs";
+import createBRGridShrinkSystem from "./br/createBRGridShrinkSystem";
 import createBRMovementInputSystem from "./br/input/createBRMovementInputSystem";
 import createBRPieceDeathSystem from "./br/createBRPieceDeathSystem";
 import createBRPiecePositionSystem from "./br/createBRPiecePositionSystem";
@@ -44,6 +45,7 @@ const setupBRSystems = (network: Network, game: Game) => {
     createBRPiecePositionSystem,
     createBRPieceTypeSystem,
     createBRValidMoveOverlaySystem,
+    createBRGridShrinkSystem,
   ]);
 };
 

@@ -55,7 +55,11 @@ const createPieceTypeSystem = (
         update.entity !== activePiece
       );
 
-      objectRegistry.set(update.entity, PIECE_SPRITE_ID, sprite);
+      objectRegistry.gameObjectRegistry.set(
+        update.entity,
+        PIECE_SPRITE_ID,
+        sprite
+      );
       setValidMoveOverlays(network, game);
     }
   );
