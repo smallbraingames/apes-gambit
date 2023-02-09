@@ -8,6 +8,10 @@ export function defineBRGameComponent(world: World) {
       rechargeTime: Type.Number,
       initialGridDim: Type.Number,
       secondsPerGridShrink: Type.Number,
+      perlinDenom: Type.Number,
+      perlinThresholdBanana: Type.Number,
+      perlinSeed: Type.Number,
+      perlinPrecision: Type.Number,
       status: Type.Number,
     },
     {

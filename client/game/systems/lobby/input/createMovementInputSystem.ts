@@ -22,10 +22,12 @@ const createMovementInputSystem = (
 
   const {
     components: { ActivePiece },
-    scenes: { Main },
+    scenes: {
+      Lobby: { scene },
+    },
   } = game;
 
-  const input = createInput(Main.input);
+  const input = createInput(scene.input);
 
   const subscription = input.click$.subscribe((p) => {
     const entityIndex = getComponentValueStrict(ActivePiece, godEntityIndex)

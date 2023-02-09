@@ -6,10 +6,7 @@ const createPhaserGame = async (config: Phaser.Types.Core.GameConfig) => {
   const [resolve, , promise] = deferred();
   game.events.on("ready", resolve);
   await promise;
-
-  const objectRegistry = createObjectRegistry();
-
-  return { game, objectRegistry };
+  return game;
 };
 
 export default createPhaserGame;

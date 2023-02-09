@@ -24,8 +24,9 @@ const createPiecePositionSystem = (
   } = network;
 
   const {
-    objectRegistry,
-    scenes: { Main },
+    scenes: {
+      Lobby: { scene, objectRegistry },
+    },
   } = game;
 
   const subscription = defineComponentSystemUnsubscribable(
@@ -43,11 +44,11 @@ const createPiecePositionSystem = (
       const sprite = getPieceSpriteGameObject(
         update.entity,
         objectRegistry,
-        Main
+        scene
       );
       const { x, y } = tileCoordToPixelCoord(position, TILE_WIDTH, TILE_HEIGHT);
       sprite.setPosition(x, y);
-      setValidMoveOverlays(network, game);
+      setValidMoveOverlays(network, game, game.scenes.Lobby);
     },
     { runOnInit: true }
   );

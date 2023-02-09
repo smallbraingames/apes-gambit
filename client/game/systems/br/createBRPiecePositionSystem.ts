@@ -38,10 +38,11 @@ const createBRPiecePositionSystem = (
   } = network;
 
   const {
-    objectRegistry,
     gameEntity,
     components: { ActivePiece, PiecePositionContext },
-    scenes: { Main },
+    scenes: {
+      BR: { objectRegistry, scene },
+    },
   } = game;
 
   defineEnterSystem(
@@ -60,7 +61,7 @@ const createBRPiecePositionSystem = (
       const sprite = getPieceSpriteGameObject(
         update.entity,
         objectRegistry,
-        Main
+        scene
       );
       const { x, y } = tileCoordToPixelCoord(
         positionContext,
@@ -91,7 +92,7 @@ const createBRPiecePositionSystem = (
       const sprite = getPieceSpriteGameObject(
         update.entity,
         objectRegistry,
-        Main
+        scene
       );
       const { x, y } = tileCoordToPixelCoord(
         positionContext,
@@ -120,7 +121,7 @@ const createBRPiecePositionSystem = (
         );
       } else {
         moveAnimation = playMovePieceAnimation(
-          Main,
+          scene,
           sprite,
           { x, y },
           pieceType,

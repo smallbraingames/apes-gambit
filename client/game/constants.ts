@@ -14,7 +14,8 @@ export const LOBBY_DISPLAY_GRID_SIZE = 200;
 export const CHESS_TILEMAP_ID = "chesstilemap";
 
 export enum Scenes {
-  Main = "Main",
+  Lobby = "Lobby",
+  BR = "BR",
 }
 
 export enum Maps {

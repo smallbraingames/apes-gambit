@@ -16,10 +16,12 @@ const createBRMovementInputSystem = (
   const {
     gameEntity,
     components: { ActivePiece },
-    scenes: { Main },
+    scenes: {
+      BR: { scene },
+    },
   } = game;
 
-  const input = createInput(Main.input);
+  const input = createInput(scene.input);
 
   const subscription = input.click$.subscribe((p) => {
     const entityIndex = getComponentValueStrict(ActivePiece, godEntityIndex)

@@ -1,6 +1,16 @@
+import { Component, World } from "@latticexyz/recs";
+
+import { Camera } from "@latticexyz/phaserx";
+import { ObjectRegistry } from "../phaser/types";
 import { createGame } from "./createGame";
 
 export type Game = Awaited<ReturnType<typeof createGame>>;
+
+export type Scene = {
+  scene: Phaser.Scene;
+  camera: Camera;
+  objectRegistry: ObjectRegistry;
+};
 
 export enum GameStatus {
   NOT_STARTED = 0,
@@ -25,5 +35,9 @@ export type GameConfig = {
   rechargeTime: number;
   initialGridDim: number;
   secondsPerGridShrink: number;
+  perlinDenom: number;
+  perlinThresholdBanana: number;
+  perlinSeed: number;
+  perlinPrecision: number;
   status: GameStatus;
 };
