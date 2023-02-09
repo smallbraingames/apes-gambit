@@ -551,6 +551,11 @@
   resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.7.2.tgz#6c2324641cc4ba050a8c710b2b251b377581fbf0"
   integrity sha512-KufADq8uQqo1pYKVIYzfKbJfBAc0sOeXqGbFaSpv8MRmC/zXgowNZmFcbngndGk922QDmOASEXUZCaY48gs4cg==
 
+abdk-libraries-solidity@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/abdk-libraries-solidity/-/abdk-libraries-solidity-3.1.0.tgz#c8823288c9af7ae5c8f07d6de7093e08b7b909b7"
+  integrity sha512-9URM6JxICeEiOZJXHaSvlinWb4CinreIIY3UdWFg2RpGWICOWg2ijWujpk2wwWNTIesCabkGkDYj2ABKjd80nQ==
+
 abort-controller-x@^0.4.0:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/abort-controller-x/-/abort-controller-x-0.4.1.tgz#b2eefab8503897e0bbdf3dd7a4d33e05ea1ffce9"
