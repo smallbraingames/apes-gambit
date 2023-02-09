@@ -27,9 +27,10 @@ const createBRPieceTypeSystem = (
 
   const {
     gameEntity,
-    objectRegistry,
     components: { ActivePiece },
-    scenes: { Main },
+    scenes: {
+      BR: { objectRegistry, scene },
+    },
   } = game;
 
   const updatePieceSprite = (entity: EntityIndex) => {
@@ -40,7 +41,7 @@ const createBRPieceTypeSystem = (
       PieceType,
       entity
     ).value;
-    const sprite = getPieceSpriteGameObject(entity, objectRegistry, Main);
+    const sprite = getPieceSpriteGameObject(entity, objectRegistry, scene);
     setPieceSprite(sprite, pieceType, PieceState.IDLE, activePiece !== entity);
   };
 

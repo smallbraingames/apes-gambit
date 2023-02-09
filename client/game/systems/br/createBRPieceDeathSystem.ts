@@ -15,7 +15,10 @@ const createBRPieceDeathSystem = (
     components: { BRIsAlive: IsAlive },
   } = network;
 
-  const { objectRegistry, gameEntity } = game;
+  const {
+    gameEntity,
+    scenes: { BR },
+  } = game;
 
   const subscription = defineComponentSystemUnsubscribable(
     world,
@@ -30,7 +33,7 @@ const createBRPieceDeathSystem = (
 
       const isAlive = update.value[0];
       if (!isAlive) {
-        objectRegistry.gameObjectRegistry.remove(
+        BR.objectRegistry.gameObjectRegistry.remove(
           update.entity,
           PIECE_SPRITE_ID
         );

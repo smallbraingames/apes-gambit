@@ -14,7 +14,9 @@ const createBRValidMoveOverlaySystem = (
 ): Subscription[] => {
   const { world, godEntityIndex } = network;
   const {
-    objectRegistry,
+    scenes: {
+      BR: { objectRegistry },
+    },
     components: { BRRechargeTimerComponent },
   } = game;
 
@@ -24,7 +26,7 @@ const createBRValidMoveOverlaySystem = (
     (update) => {
       const time = update.value[0]?.value;
       if (!time) {
-        setValidMoveOverlays(network, game);
+        setValidMoveOverlays(network, game, game.scenes.BR);
       } else {
         clearValidMoveOverlays(objectRegistry, godEntityIndex);
       }

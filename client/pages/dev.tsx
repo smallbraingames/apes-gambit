@@ -9,6 +9,10 @@ const GAME_START_TIME = Math.floor(new Date().getTime() / 1000);
 const GAME_RECHARGE_TIME = 5;
 const GAME_INITIAL_GRID_DIM = 100;
 const GAME_SECONDS_PER_GRID_SHRINK = 10;
+const PERLIN_DENOM = 50;
+const PERLIN_THRESHOLD_BANANA = 20;
+const PERLIN_SEED = 0;
+const PERLIN_PRECISION = 64;
 
 export default function Dev() {
   const network = useContext(NetworkContext);
@@ -44,7 +48,11 @@ export default function Dev() {
                   GAME_START_TIME,
                   GAME_RECHARGE_TIME,
                   GAME_INITIAL_GRID_DIM,
-                  GAME_SECONDS_PER_GRID_SHRINK
+                  GAME_SECONDS_PER_GRID_SHRINK,
+                  PERLIN_DENOM,
+                  PERLIN_THRESHOLD_BANANA,
+                  PERLIN_SEED,
+                  PERLIN_PRECISION
                 );
               }}
             >
@@ -69,7 +77,11 @@ export default function Dev() {
                     Status: {game[1].status}, Entity: {entity}, EntityIndex:{" "}
                     {entityIndex}, Recharge time: {game[1].rechargeTime}, Grid
                     initial size: {game[1].initialGridDim}, Seconds per grid
-                    shrink: {game[1].secondsPerGridShrink}
+                    shrink: {game[1].secondsPerGridShrink}, perlin denom:{" "}
+                    {parseInt(game[1].perlinDenom.toString())}, perlin banana:{" "}
+                    {parseInt(game[1].perlinThresholdBanana.toString())}, perlin
+                    seed: {game[1].perlinSeed}, perlin precision:{" "}
+                    {game[1].perlinPrecision},
                     <button
                       onClick={() => {
                         network.network?.api.br.startBRGame(entity as EntityID);

@@ -21,7 +21,11 @@ const CenterActivePieceOnLoad = () => {
         activePiece
       );
       if (piecePosition) {
-        game.camera.centerOnCoord(piecePosition, TILE_WIDTH, TILE_HEIGHT);
+        game.scenes.Lobby.camera.centerOnCoord(
+          piecePosition,
+          TILE_WIDTH,
+          TILE_HEIGHT
+        );
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

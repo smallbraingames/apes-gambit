@@ -11,8 +11,7 @@ const createBRGridShrinkSystem = (
   const { godEntityIndex } = network;
   const {
     gameWorld,
-    scenes: { Main },
-    objectRegistry,
+    scenes: { BR },
     components: { BRGridDimComponent },
   } = game;
 
@@ -25,7 +24,7 @@ const createBRGridShrinkSystem = (
       if (gridDim === undefined) {
         return;
       }
-      overlayShrinkingGridTiles(godEntityIndex, gridDim, objectRegistry);
+      overlayShrinkingGridTiles(godEntityIndex, gridDim, BR.objectRegistry);
     },
     { runOnInit: true }
   );

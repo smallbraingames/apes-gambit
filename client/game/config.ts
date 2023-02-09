@@ -4,7 +4,10 @@ import assets from "./utils/config/assets";
 
 export const config: GameConfig = {
   scenes: {
-    [Scenes.Main]: {
+    [Scenes.Lobby]: {
+      assets,
+    },
+    [Scenes.BR]: {
       assets,
     },
   },

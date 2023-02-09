@@ -25,8 +25,9 @@ const createPieceTypeSystem = (
 
   const {
     components: { ActivePiece },
-    scenes: { Main },
-    objectRegistry,
+    scenes: {
+      Lobby: { scene, objectRegistry },
+    },
   } = game;
 
   const subscription = defineComponentSystemUnsubscribable(
@@ -45,7 +46,7 @@ const createPieceTypeSystem = (
       const sprite = getPieceSpriteGameObject(
         update.entity,
         objectRegistry,
-        Main
+        scene
       );
 
       setPieceSprite(
@@ -60,7 +61,7 @@ const createPieceTypeSystem = (
         PIECE_SPRITE_ID,
         sprite
       );
-      setValidMoveOverlays(network, game);
+      setValidMoveOverlays(network, game, game.scenes.Lobby);
     }
   );
 

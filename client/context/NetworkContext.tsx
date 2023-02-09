@@ -37,9 +37,7 @@ const NetworkProvider = (props: { children: ReactNode }) => {
         .createNetwork;
       const network: Network = await createNetwork(config);
       network.startSync();
-      console.log("here");
       await awaitNetworkLoad(network);
-      console.log("awaiting load");
       setNetwork(network);
     }
   };

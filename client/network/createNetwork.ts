@@ -106,13 +106,21 @@ export async function createNetwork(config: GameConfig) {
     startTime: number,
     rechargeTime: number,
     initialGridDim: number,
-    secondsPerGridShrink: number
+    secondsPerGridShrink: number,
+    perlinDenom: number,
+    perlinThresholdBanana: number,
+    perlinSeed: number,
+    perlinPrecision: number
   ): Promise<ContractTransaction> => {
     return systems["system.BRCreateGameSystem"].executeTyped(
       startTime,
       rechargeTime,
       initialGridDim,
-      secondsPerGridShrink
+      secondsPerGridShrink,
+      perlinDenom,
+      perlinThresholdBanana,
+      perlinSeed,
+      perlinPrecision
     );
   };
 

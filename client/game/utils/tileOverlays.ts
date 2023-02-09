@@ -3,6 +3,7 @@ import {
   getComponentValueStrict,
   getEntitiesWithValue,
 } from "@latticexyz/recs";
+import { Game, Scene } from "../types";
 import { Network, PieceType } from "../../network/types";
 import {
   TILE_HEIGHT,
@@ -12,7 +13,6 @@ import {
 } from "../constants";
 
 import { Coord } from "@latticexyz/utils";
-import { Game } from "../types";
 import { ObjectRegistry } from "../../phaser/types";
 import addTileOverlay from "./addTileOverlay";
 import getValidMoves from "./getValidMoves";
@@ -34,21 +34,25 @@ export const clearValidMoveOverlays = (
   validMoveGroup.clear(true, true);
 };
 
-export const setValidMoveOverlays = (network: Network, game: Game) => {
+export const setValidMoveOverlays = (
+  network: Network,
+  game: Game,
+  scene: Scene
+) => {
   const {
     godEntityIndex,
     components: { PieceType, PiecePosition },
   } = network;
   const {
     gameEntity,
-    objectRegistry,
     components: { ActivePiece },
-    scenes: { Main },
   } = game;
+
+  const { objectRegistry, scene: gameScene } = scene;
 
   let validMoveGroup: Phaser.GameObjects.Group;
   if (!objectRegistry.groupRegistry.has(godEntityIndex, BR_VALID_MOVE_GROUP)) {
-    validMoveGroup = Main.add.group();
+    validMoveGroup = gameScene.add.group();
   } else {
     validMoveGroup = objectRegistry.groupRegistry.get(
       godEntityIndex,
@@ -82,7 +86,7 @@ export const setValidMoveOverlays = (network: Network, game: Game) => {
       if (pieceAtPositionInGame.length > 0) color = TILE_OVERLAY_TAKE_COLOR;
     }
     validMoveGroup!.add(
-      addTileOverlay(potentialMove, Main, TILE_WIDTH, TILE_HEIGHT, color)
+      addTileOverlay(potentialMove, gameScene, TILE_WIDTH, TILE_HEIGHT, color)
     );
   });
   objectRegistry.groupRegistry.set(
