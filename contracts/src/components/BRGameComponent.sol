@@ -19,10 +19,10 @@ contract BRGameComponent is Component {
     values[1] = LibTypes.SchemaValue.UINT32;
 
     keys[2] = "initialGridDim";
-    values[2] = LibTypes.SchemaValue.UINT32;
+    values[2] = LibTypes.SchemaValue.UINT16;
 
     keys[3] = "secondsPerGridShrink";
-    values[3] = LibTypes.SchemaValue.UINT32;
+    values[3] = LibTypes.SchemaValue.UINT16;
 
     keys[4] = "status";
     values[4] = LibTypes.SchemaValue.UINT8;

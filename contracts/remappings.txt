@@ -4,6 +4,7 @@ libraries/=./src/libraries
 common/=./src/common
 std-contracts/=./node_modules/@latticexyz/std-contracts/src/
 solecs/=./node_modules/@latticexyz/solecs/src/
+noise/=./node_modules/@latticexyz/noise/src/
 memmove/=./node_modules/memmove/src/
 ds-test/=./node_modules/ds-test/src/
 solmate/=./node_modules/@rari-capital/solmate/src/
