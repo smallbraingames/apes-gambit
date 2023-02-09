@@ -13,12 +13,14 @@ import { BRGameComponent, ID as BRGameComponentID } from "components/BRGameCompo
 import { BRInGameComponent, ID as BRInGameComponentID } from "components/BRInGameComponent.sol";
 import { BRIsAliveComponent, ID as BRIsAliveComponentID } from "components/BRIsAliveComponent.sol";
 import { BRPointsComponent, ID as BRPointsComponentID } from "components/BRPointsComponent.sol";
+import { BRBananasPickedUpComponent, ID as BRBananasPickedUpComponentID } from "components/BRBananasPickedUpComponent.sol";
 import { BRPreviousMoveTimestampComponent, ID as BRPreviousMoveTimestampComponentID } from "components/BRPreviousMoveTimestampComponent.sol";
 import { PieceTypeComponent, ID as PieceTypeComponentID } from "components/PieceTypeComponent.sol";
 import { PiecePositionComponent, ID as PiecePositionComponentID } from "components/PiecePositionComponent.sol";
 import { MovePieceSystem, ID as MovePieceSystemID } from "systems/MovePieceSystem.sol";
 import { BRLibPiece } from "libraries/BRLibPiece.sol";
 import { BRLibGame } from "libraries/BRLibGame.sol";
+import { BRLibMap } from "libraries/BRLibMap.sol";
 
 uint256 constant ID = uint256(keccak256("system.BRMovePieceSystem"));
 
@@ -67,6 +69,9 @@ contract BRMovePieceSystem is BRPieceControllerSystem, BRLazyUpdater {
     // If there is a piece at this position, take it
     takePieceAtPosition(piece, game, position);
 
+    // If there is a banana at this position, take it
+    takeBananaAtPosition(piece, game, position);
+
     // Move piece
     movePieceSystem.executeTyped(piece, position);
   }
@@ -107,6 +112,31 @@ contract BRMovePieceSystem is BRPieceControllerSystem, BRLazyUpdater {
       PieceType pieceType = pieceTypeComponent.getValue(collidedPiece);
       uint32 pointsGained = BRLibPiece.getPointsFromPieceType(pieceType);
       BRLibPiece.incrementPoints(brPointsComponent, piece, pointsGained);
+    }
+  }
+
+  /// @notice Picks up a banana at position (if there is one there), and increments points
+  function takeBananaAtPosition(
+    uint256 piece,
+    uint256 game,
+    Coord memory position
+  ) private {
+    BRBananasPickedUpComponent brBananasPickedUpComponent = BRBananasPickedUpComponent(
+      getAddressById(components, BRBananasPickedUpComponentID)
+    );
+    BRGameComponent brGameComponent = BRGameComponent(getAddressById(components, BRGameComponentID));
+    BRPointsComponent brPointsComponent = BRPointsComponent(getAddressById(components, BRPointsComponentID));
+
+    if (BRLibMap.isBananaAtPosition(brGameComponent, brBananasPickedUpComponent, game, position)) {
+      // Pick up banana
+      uint256 positionEntity = BRLibMap.createBananaPickedUpComponentEntityFromPosition(position, game);
+      uint32 pickedUpBananas = 1;
+      if (brBananasPickedUpComponent.has(positionEntity)) {
+        pickedUpBananas += brBananasPickedUpComponent.getValue(positionEntity);
+      }
+      brBananasPickedUpComponent.set(positionEntity, pickedUpBananas);
+      // Increment points
+      BRLibPiece.incrementPoints(brPointsComponent, piece, 1);
     }
   }
 }

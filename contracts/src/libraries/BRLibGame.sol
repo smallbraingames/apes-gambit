@@ -9,7 +9,6 @@ import { BRGameComponent } from "components/BRGameComponent.sol";
 import { BRBananasPickedUpComponent, ID as BRBananasPickedUpComponentID } from "components/BRBananasPickedUpComponent.sol";
 import { PiecePositionComponent } from "components/PiecePositionComponent.sol";
 import { BRBeforeStartTime, BRGameNotInProgress, BRGameAlreadyStarted, BREntityNotGame, BRNotInGame, BRAlreadyInGame } from "common/BRErrors.sol";
-import { Perlin } from "noise/Perlin.sol";
 
 library BRLibGame {
   /// @notice Starts the game if it can be started, specifically if we are past the startTime
@@ -100,11 +99,6 @@ library BRLibGame {
     if (brInGameComponent.has(piece)) {
       revert BRAlreadyInGame();
     }
-  }
-
-  /// @notice Get position-indexed entity ID for a component
-  function createEntityIDFromPosition(Coord memory position, uint256 componentID) internal pure returns (uint256) {
-    return uint256(keccak256(abi.encode(position, componentID)));
   }
 
   /// @notice Returns whether a piece is in a game

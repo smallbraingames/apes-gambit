@@ -8,7 +8,8 @@
     "BRInGameComponent",
     "BRIsAliveComponent",
     "BRPointsComponent",
-    "BRPreviousMoveTimestampComponent"
+    "BRPreviousMoveTimestampComponent",
+    "BRBananasPickedUpComponent"
   ],
   "systems": [
     { "name": "RevokeControllerSystem", "writeAccess": ["ControllerComponent"] },
@@ -22,7 +23,12 @@
     { "name": "BRStartGameSystem", "writeAccess": ["BRGameComponent"] },
     {
       "name": "BRMovePieceSystem",
-      "writeAccess": ["BRIsAliveComponent", "BRPointsComponent", "BRPreviousMoveTimestampComponent"]
+      "writeAccess": [
+        "BRIsAliveComponent",
+        "BRPointsComponent",
+        "BRPreviousMoveTimestampComponent",
+        "BRBananasPickedUpComponent"
+      ]
     },
     { "name": "BRSetPieceTypeSystem", "writeAccess": ["BRPointsComponent"] },
     { "name": "BRLeaveGameSystem", "writeAccess": ["BRInGameComponent", "BRIsAliveComponent", "BRPointsComponent"] },

@@ -12,8 +12,10 @@ import { BRMovePieceSystem, ID as BRMovePieceSystemID } from "systems/BRMovePiec
 import { BRGameComponent, ID as BRGameComponentID } from "components/BRGameComponent.sol";
 import { BRIsAliveComponent, ID as BRIsAliveComponentID } from "components/BRIsAliveComponent.sol";
 import { BRPointsComponent, ID as BRPointsComponentID } from "components/BRPointsComponent.sol";
+import { BRBananasPickedUpComponent, ID as BRBananasPickedUpComponentID } from "components/BRBananasPickedUpComponent.sol";
 import { BRAlreadyInGame } from "common/BRErrors.sol";
 import { BRLibPiece } from "libraries/BRLibPiece.sol";
+import { BRLibMap } from "libraries/BRLibMap.sol";
 import { Deploy } from "./Deploy.sol";
 import "std-contracts/test/MudTest.t.sol";
 import { console } from "forge-std/console.sol";
@@ -74,7 +76,7 @@ contract BRMovePieceTest is MudTest {
 
     // Create a new game
     uint256 startTime = block.timestamp;
-    uint256 game = brCreateGameSystem.executeTyped(startTime, 0, 100, 100, 50, 1000, 0, 64);
+    uint256 game = brCreateGameSystem.executeTyped(startTime, 0, 100, 100, 50, 100000, 0, 2);
 
     // Join the game
     brJoinGameSystem.executeTyped(piece, game);
@@ -100,5 +102,62 @@ contract BRMovePieceTest is MudTest {
     assertTrue(!BRLibPiece.isPieceAlive(brIsAliveComponent, piece));
     // Took a pawn, so check value
     assertEq(brPointsComponent.getValue(takerPiece), 1);
+  }
+
+  function testBRTakeBanana() public {
+    SpawnSystem spawnSystem = SpawnSystem(system(SpawnSystemID));
+    BRCreateGameSystem brCreateGameSystem = BRCreateGameSystem(system(BRCreateGameSystemID));
+    BRJoinGameSystem brJoinGameSystem = BRJoinGameSystem(system(BRJoinGameSystemID));
+    BRStartGameSystem brStartGameSystem = BRStartGameSystem(system(BRStartGameSystemID));
+    BRMovePieceSystem brMovePieceSystem = BRMovePieceSystem(system(BRMovePieceSystemID));
+    SetControllerSystem setControllerSystem = SetControllerSystem(system(SetControllerSystemID));
+    BRPointsComponent brPointsComponent = BRPointsComponent(getAddressById(components, BRPointsComponentID));
+    BRGameComponent brGameComponent = BRGameComponent(getAddressById(components, BRGameComponentID));
+    BRBananasPickedUpComponent brBananasPickedUpComponent = BRBananasPickedUpComponent(
+      getAddressById(components, BRBananasPickedUpComponentID)
+    );
+
+    // Setup
+    uint256 piece = spawnSystem.executeTyped();
+
+    // Set the piece's controller to the BRMoveSystem
+    address[] memory controllers = new address[](1);
+    controllers[0] = system(BRMovePieceSystemID);
+    setControllerSystem.executeTyped(piece, controllers);
+
+    // Create a new game
+    uint256 startTime = block.timestamp;
+    uint256 game = brCreateGameSystem.executeTyped(startTime, 0, 100, 100, 3, 3, 0, 3);
+
+    // Join the game
+    brJoinGameSystem.executeTyped(piece, game);
+
+    // Start the game
+    brStartGameSystem.executeTyped(game);
+
+    // Check if bananas are picked up
+    // Perlin at positions (0, 1): 3, (0,2): 2, (0, 3): 4
+    brMovePieceSystem.executeTyped(piece, game, Coord({ x: 0, y: 1 }));
+    assertEq(brPointsComponent.getValue(piece), 1);
+    uint256 positionEntity = BRLibMap.createBananaPickedUpComponentEntityFromPosition(Coord({ x: 0, y: 1 }), game);
+    assertEq(brBananasPickedUpComponent.getValue(positionEntity), 1);
+
+    // Go back and forth, and make sure only one more banana was picked up (we start at a banana)
+    brMovePieceSystem.executeTyped(piece, game, Coord({ x: 0, y: 0 }));
+    brMovePieceSystem.executeTyped(piece, game, Coord({ x: 0, y: 1 }));
+    assertEq(brPointsComponent.getValue(piece), 2);
+    assertEq(brBananasPickedUpComponent.getValue(positionEntity), 1);
+
+    // Go two forward, and ensure just one banana picked up
+    brMovePieceSystem.executeTyped(piece, game, Coord({ x: 0, y: 2 }));
+    brMovePieceSystem.executeTyped(piece, game, Coord({ x: 0, y: 3 }));
+    assertEq(brPointsComponent.getValue(piece), 3);
+    uint256 secondPositionEntity = BRLibMap.createBananaPickedUpComponentEntityFromPosition(
+      Coord({ x: 0, y: 2 }),
+      game
+    );
+    uint256 thirdPositionEntity = BRLibMap.createBananaPickedUpComponentEntityFromPosition(Coord({ x: 0, y: 3 }), game);
+    assertTrue(!brBananasPickedUpComponent.has(secondPositionEntity));
+    assertEq(brBananasPickedUpComponent.getValue(thirdPositionEntity), 1);
   }
 }
