@@ -6,6 +6,16 @@
       "type": "error"
     },
     {
+      "inputs": [],
+      "name": "Ownable__NotOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Ownable__NotTransitiveOwner",
+      "type": "error"
+    },
+    {
       "anonymous": false,
       "inputs": [
         {
@@ -73,7 +83,7 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "newOwner",
+          "name": "account",
           "type": "address"
         }
       ],
@@ -99,7 +109,7 @@
     "revokeController(uint256)": "6318c82d",
     "transferOwnership(address)": "f2fde38b"
   },
-  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"BRNotRevokeSystem\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"args\",\"type\":\"bytes\"}],\"name\":\"execute\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"piece\",\"type\":\"uint256\"}],\"name\":\"revokeController\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"owner()\":{\"returns\":{\"_0\":\"The address of the owner.\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"owner()\":{\"notice\":\"Get the address of the owner\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/common/BRPieceControllerSystem.sol\":\"BRPieceControllerSystem\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":1000000},\"remappings\":[\":common/=src/common/\",\":components/=src/components/\",\":ds-test/=node_modules/ds-test/src/\",\":forge-std/=node_modules/forge-std/src/\",\":libraries/=src/libraries/\",\":memmove/=node_modules/memmove/src/\",\":solecs/=node_modules/@latticexyz/solecs/src/\",\":solmate/=node_modules/@rari-capital/solmate/src/\",\":std-contracts/=node_modules/@latticexyz/std-contracts/src/\",\":systems/=src/systems/\"]},\"sources\":{\"node_modules/@latticexyz/solecs/src/BareComponent.sol\":{\"keccak256\":\"0xba9ac6f0758cc098046c74ad02b520e0e45c27e35aa6865b4ec806981c6be786\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0f53e408345b49f552468bb3958e7699898595856effb1355e053abe9b77f671\",\"dweb:/ipfs/QmcP9DPKdc97Si8CvymPz6bUfjcNmhiQytAdQ7xPF5EV9g\"]},\"node_modules/@latticexyz/solecs/src/Component.sol\":{\"keccak256\":\"0x40085c2f86bf6be7a756015025477aa46308b1618083ece93ae13093881a6874\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ca8653540b5674e50abfd4b4898009b472fc7fd2fba456146c1a1c44b615d83a\",\"dweb:/ipfs/QmSqbRng5fHuGUKgkFuNw3BfoefNteYU95sYi4g9QjCCNh\"]},\"node_modules/@latticexyz/solecs/src/LibTypes.sol\":{\"keccak256\":\"0xa3898035fd9fa865bcfc9861e3b5ecce36be3196fb27705e50a02fed9831f102\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://273284a35a950f6d0bc4223d345cf46c59972a00510ddbc4ba695ede38714798\",\"dweb:/ipfs/QmdqzKMaAfKWfBzUsrzsDMWnyxSKJRuEvrc6VTR5VarQaH\"]},\"node_modules/@latticexyz/solecs/src/MapSet.sol\":{\"keccak256\":\"0x903c895b873785da7c3f8e17ebe0c176bb4a0987ff2f70f7b4df8872a7d1bd99\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://37a91b47ec383af7462368a29e8c01532e87eaa3c56077dab1f73e00c2fe25d5\",\"dweb:/ipfs/QmaukFM1GkNxMhK4LiCCWouJxzHpq2mznM8jLvr19o8ukr\"]},\"node_modules/@latticexyz/solecs/src/Set.sol\":{\"keccak256\":\"0xd4e1ac0608efb071ee64b15cdaec8c83e684d305d673702cacab98a2721d210d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1f083400292163c7b0c717d66f2d200ac38995019d695ba5c0568547f7f96051\",\"dweb:/ipfs/QmSGp7TeKHi5eb2ELU1qH7Qfjs4kjyMGfTTXUw9iPaq6UE\"]},\"node_modules/@latticexyz/solecs/src/System.sol\":{\"keccak256\":\"0x5ff430169885d31cb4d41ccf5ba8ac1f0815d3bb1b9dc9afcf9afd6a7203e7c7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://59892068a9b62d8c01d272ea5de2e8f2932a7ea87acce9b6eaccfae00dad8e66\",\"dweb:/ipfs/QmfEdTjYkdHfueS527ibx3Ni8X3yqgQHtbRB1anDTsMGBN\"]},\"node_modules/@latticexyz/solecs/src/constants.sol\":{\"keccak256\":\"0x024a3ff3077a272339b7baa96b826fd75f040d7cd2c6e13b9c8cf7ad16f789b8\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1ddcb26a7703e9b03b34d5465010a4ae5ced137021c94987053544ad1156a644\",\"dweb:/ipfs/QmYue4gnb8noyoxxTchs5chZji7DKynKMp2x33RgRW6xqZ\"]},\"node_modules/@latticexyz/solecs/src/interfaces/IComponent.sol\":{\"keccak256\":\"0x4513448bb0d45050f8af0a2ead426b27a5d5ca73d38c6874e909f852ad2232e6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e5c215b87500c80ffb525142b753a4f3454a69cf11b9b68f6a29f1a4dd4a2ced\",\"dweb:/ipfs/Qmd4YYoYJTrgyQU8zcfJFDdYQA29DarkdL8k5obyGgbp2K\"]},\"node_modules/@latticexyz/solecs/src/interfaces/IERC173.sol\":{\"keccak256\":\"0xc8fa875a59c2010265d7fc5663d9d37e6b5f9b556b6bfdeeb7ec9355ee3169c7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://33d944c6ff71c7afe4d21db8f4077e419f165100bbfd8b6c8d4b975015ec6c82\",\"dweb:/ipfs/QmY461W1TtyjkkcUuxPHUtJ3LxzD1iaU422FkFhtHHuRQh\"]},\"node_modules/@latticexyz/solecs/src/interfaces/IEntityContainer.sol\":{\"keccak256\":\"0x4506db1dcbdbe68a397107a57bfa3da888a889f14181a90eb728cfecc60700b8\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://23f5c02d110f5abf6340a08a2a8b7e0b5668f211fe6baf41213e6c4f69dece10\",\"dweb:/ipfs/QmYfKeZMeEUNExsxjkCF5nGdw8KRyPe1t5tcGFTEkP7CkV\"]},\"node_modules/@latticexyz/solecs/src/interfaces/IEntityIndexer.sol\":{\"keccak256\":\"0xd89023b2a5e9961be3c9d49d9f7f9ac7dcc416e3f43a8758dc058d1db2eea6b5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3266ea1dd5a7f372f8814db24ac4981730f66fba8e6f90f614246ca5cec529b4\",\"dweb:/ipfs/QmQ71BtaBsDjfke46dndaTBVhyXAHxs5qs7d9GHJwVXuvw\"]},\"node_modules/@latticexyz/solecs/src/interfaces/ISystem.sol\":{\"keccak256\":\"0x62af78f49b90c7c23ad677e4090c5c916e1c2e36b13be07887b371ba732294c9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c8c0849bc60d65a4578a66b8d0052b584e8b43838b78bc2c2579113f625cd05a\",\"dweb:/ipfs/Qma8pxGUAupCkTJYjXeHV9i4qvjnMP9s8zi5rs6FDrDuy7\"]},\"node_modules/@latticexyz/solecs/src/interfaces/IUint256Component.sol\":{\"keccak256\":\"0x12e2eaa4c5663048343e43a1994c446baacb16a4aacbe314ed5202d878751be9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2d78184a1b1868773f2d5a7cf54bb42bccc666dc75cea14eeed15b8573fd000f\",\"dweb:/ipfs/QmemXPHPB7V8StWR8kZcKt3eDxB78sZFZW4Dp7TcEFTxx9\"]},\"node_modules/@latticexyz/solecs/src/interfaces/IWorld.sol\":{\"keccak256\":\"0x319806cf4ed67acdd9f444ac581486e157ea06bceb8e727c6d745c165e0d9aae\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9b2cb8ec879279c74b384f169595e50fd1850ce63275447748d9150dfa9a85be\",\"dweb:/ipfs/QmNPQBfqVg3iDF2qE8KTJWx1zbpJjnzteNYiqGxtBye2q2\"]},\"node_modules/@latticexyz/solecs/src/interfaces/Query.sol\":{\"keccak256\":\"0xd11a3268514fceac97995d481017e49b18835e31ce3540e5f21c24df33e4bc2c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://841dd95a4f5e89f0451a72544a47eb16be41b8005dadfe98a82054db3eb41ab7\",\"dweb:/ipfs/QmScv2neVyCeoCmMZyRyYcqD5QwauuoWmkixyxw4qftEeR\"]},\"node_modules/@latticexyz/solecs/src/utils.sol\":{\"keccak256\":\"0x17f7831c03bdd77f0c7d98c94931d830fbbfa1878c365f54b12841c85611e24e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6ae566ee03c5050b239277ef4184b9e5dcb332c8cc65b032f8e0d9e46408ea6d\",\"dweb:/ipfs/QmetdhxahRf7FJk1kn8KgDmizU2zYk3jjt9qo6Gwz2M5YP\"]},\"node_modules/@latticexyz/std-contracts/src/components/AddressComponent.sol\":{\"keccak256\":\"0x89e047abf13d2924fcbe13f3fd4a421c7d63ff1533d7c46418ba6f4188d3a5b0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5dac16608b64fc5d2ae51a6066683eff6c17c5ed4615049e6721394a1e7ac628\",\"dweb:/ipfs/QmXk9X9KhkAnPayniNTxquou5pnNXpGxkKCY69ESZQFT6j\"]},\"node_modules/@latticexyz/std-contracts/src/components/Uint256ArrayComponent.sol\":{\"keccak256\":\"0x916ee817b96b61ca795012e747e9fd719abb0b93cf7b6350ede4081553c2d153\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cafb3c05e0f9c01a989678dea04a1874f73d261049e59cbe869bde43bbaf3e24\",\"dweb:/ipfs/QmeDz1UyCdBvbNtPq8DiMHDep3ZBd6PsjYvvBq6vEZPPSC\"]},\"node_modules/memmove/src/Array.sol\":{\"keccak256\":\"0x0d7681d3392c34f811cebc9598c5e8f4eef6aba431dca9e1fa87267ba51a4515\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0ffb5179dd40ccacadc2cb26ac99e9ea5148796f6d21413d7e0f37913831bea1\",\"dweb:/ipfs/QmfJogaoqook5JgnUZKib6w6khzViUag3EQb1EZ8aUEasQ\"]},\"node_modules/memmove/src/LinkedList.sol\":{\"keccak256\":\"0x2374863d39689178dda92b841e77b835ba8fa550561be23b7861d2e52c0fe8c1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8538ec6ca6be4e1b25b74dfd2139586fa2b9dab8d49d91428ed64dc683884598\",\"dweb:/ipfs/Qma7Z6urenqG5Dzqwe8ouGiFH37mbsJEX83tqjSq1PTnRc\"]},\"src/common/BRErrors.sol\":{\"keccak256\":\"0x4781af69d18c65c5df5fc861f6aec68765a50bf1b2b664be584c8ddc9c08e1c1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://dc7b13975688a7cab845fbbc7ce0d3ff8907b8ccc38753fde07c74d41f84abfc\",\"dweb:/ipfs/QmRLuGYac5rqkTRC64mQuHqBewn6vWucpmCzQePUxnzENi\"]},\"src/common/BRPieceControllerSystem.sol\":{\"keccak256\":\"0x03000c397d70dc7d4c867e888ed55f8db3d0a753e80f619570dfa6a5ed3feef3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d56cc1cc3e4d2b2205f258fd56aff249264a7d8adeb7303dcfd65b07714dc753\",\"dweb:/ipfs/QmXGYN7p18Gp6yuUyxx4xyp39TkTsdSKNaH2xBr29aLGNp\"]},\"src/common/Errors.sol\":{\"keccak256\":\"0x85fe6c5b15f8df8b5b9e48e91c96c7ea33ccc56a788bb169763db4412410357e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1dc12bea55debd390a5934cbd00ebcdc9c52d95b3ae758a78b75ea4a182a4f97\",\"dweb:/ipfs/Qma62GaTK1Q3NgW3KvkfZ56S2euz7dAD2bUh5C1BviAEr3\"]},\"src/components/ControllerComponent.sol\":{\"keccak256\":\"0x5937765a4a5ec265a33ac9ab56604d62fbb744830a7b08ba6ab7c5949e14ccda\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://70c96fd10ea0f2236e2e23c6ee6bf8e2acfb9ea162ce5bbe410f8437b2801dea\",\"dweb:/ipfs/QmbU1Do2sdzNm3k9c9XaQ4TcP2ax7TiGDAkuFwo2jGi4Le\"]},\"src/components/OwnerComponent.sol\":{\"keccak256\":\"0xd97ff9076016b5c312b230e2ab02908f03df6fe2a441a38df8b58bae21965e6f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://30e9158ad016d12e2b35d266069cac34ec4e171ef7b91e815cad2bbdbe00d13f\",\"dweb:/ipfs/QmapNdhwQvHN7Ss6dzKiqMcE1Xm1F6KEMGMhfCPEtP4CdQ\"]},\"src/libraries/LibController.sol\":{\"keccak256\":\"0x3e48291c0f5e526cf21611d1f5cd59bfedbeed26a3a6d0109e3629e8099873c7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9246bd3e621ed7601c442c74b9d917e9402833cad9c07bce316aaacf7aaf7119\",\"dweb:/ipfs/QmTgqnef8t8VQjkjbgmv8G7cQCqciM3Mu4ygkxvGLPLGso\"]},\"src/libraries/LibOwner.sol\":{\"keccak256\":\"0x6b80fe6da4a9bd623cc56bf0b61fc8095326d11d205b69bcac2d9203b400e0f7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://10060a39f880b169678dead38b8cbface6f3bd94f66cfdfcf08c0822f371d45a\",\"dweb:/ipfs/QmTbTJiYfC7YfZsY4ZPWpUQGSeNL6uGSWfAYK3RZW37DLE\"]},\"src/systems/RevokeControllerSystem.sol\":{\"keccak256\":\"0xe3aeabc9a56e674ba8e6008aff102f102de4b6a5f577d6bc4a33932f45165652\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7ca73deff6facf0cb4d3598b214339f7e7f8e4b960196bd21dd9c5df157de93e\",\"dweb:/ipfs/Qme7EDjtm4wEzRfdzTQaMXpd31MaQmvHp5TabS5LYREDdg\"]}},\"version\":1}",
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"BRNotRevokeSystem\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Ownable__NotOwner\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Ownable__NotTransitiveOwner\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"args\",\"type\":\"bytes\"}],\"name\":\"execute\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"piece\",\"type\":\"uint256\"}],\"name\":\"revokeController\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"owner()\":{\"returns\":{\"_0\":\"conrtact owner\"}},\"transferOwnership(address)\":{\"params\":{\"account\":\"address of new owner\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"owner()\":{\"notice\":\"get the ERC173 contract owner\"},\"transferOwnership(address)\":{\"notice\":\"transfer contract ownership to new account\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/common/BRPieceControllerSystem.sol\":\"BRPieceControllerSystem\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":1000000},\"remappings\":[\":@solidstate/=node_modules/@solidstate/\",\":abdk-libraries-solidity/=node_modules/abdk-libraries-solidity/\",\":common/=src/common/\",\":components/=src/components/\",\":ds-test/=node_modules/ds-test/src/\",\":forge-std/=node_modules/forge-std/src/\",\":libraries/=src/libraries/\",\":memmove/=node_modules/memmove/src/\",\":noise/=node_modules/@latticexyz/noise/contracts/\",\":packages/=../../../mud/packages/\",\":solecs/=node_modules/@latticexyz/solecs/src/\",\":solmate/=node_modules/@rari-capital/solmate/src/\",\":std-contracts/=node_modules/@latticexyz/std-contracts/src/\",\":systems/=src/systems/\"]},\"sources\":{\"node_modules/@latticexyz/solecs/src/BareComponent.sol\":{\"keccak256\":\"0x2cd722acd3cad5a9318bd5907a3d9f3849756727a5b2303eaf76aa7ea8caa65a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://890e17cd1f2f2ed87c99ca7b9383f7eabb31570989247a81e268a636b163a89a\",\"dweb:/ipfs/QmXJEKkMBQniSwHvC9aqHjRCaMohwkpPT7ssCtkL31j4FA\"]},\"node_modules/@latticexyz/solecs/src/Component.sol\":{\"keccak256\":\"0x40085c2f86bf6be7a756015025477aa46308b1618083ece93ae13093881a6874\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ca8653540b5674e50abfd4b4898009b472fc7fd2fba456146c1a1c44b615d83a\",\"dweb:/ipfs/QmSqbRng5fHuGUKgkFuNw3BfoefNteYU95sYi4g9QjCCNh\"]},\"node_modules/@latticexyz/solecs/src/LibTypes.sol\":{\"keccak256\":\"0xa3898035fd9fa865bcfc9861e3b5ecce36be3196fb27705e50a02fed9831f102\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://273284a35a950f6d0bc4223d345cf46c59972a00510ddbc4ba695ede38714798\",\"dweb:/ipfs/QmdqzKMaAfKWfBzUsrzsDMWnyxSKJRuEvrc6VTR5VarQaH\"]},\"node_modules/@latticexyz/solecs/src/MapSet.sol\":{\"keccak256\":\"0xe1a1f412b22d586c01a3e9e0e0af40893b880260f6765b9a5e23e56154dae1db\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f8aeddb1af783e43e8ca8a004954016c9f00d9d217d86454b3a3839ef0981288\",\"dweb:/ipfs/QmegHggcpmgGgL9xbZKqnWMwNMSqvs622MuhyEhR9bVfb9\"]},\"node_modules/@latticexyz/solecs/src/Ownable.sol\":{\"keccak256\":\"0x7572ffd98860b2539eacdbb2112ce3d25ad8521c5d95f91e21ea5588a6904209\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3516b95146224d3fc04c5cc2818161fa9504a048894f6dd905b1e42307494fc4\",\"dweb:/ipfs/QmTqvvAs1fSLzXVWjAgSt3TtE3MM3M1DFXRzkkSsixtVza\"]},\"node_modules/@latticexyz/solecs/src/OwnableWritable.sol\":{\"keccak256\":\"0x44e1afa8b4b2132122255943deb1ba8787693cd5893876a06643deed3052b859\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3761f562ad1a9fae0abf914e4e15592fb8b7dd231039448d20ad7dcfabf6de41\",\"dweb:/ipfs/QmbLN1mfNXYyrc4qxQauvBYTyJu9nR18t9xb54GY8xP3T7\"]},\"node_modules/@latticexyz/solecs/src/OwnableWritableStorage.sol\":{\"keccak256\":\"0x9f99bbacdfd6c5b0779bd18d3900dd4f957c5a0d89d5986815fae2eff8254df5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3ee736ebade674846118859290603b8ad2cc91efbe13e3621aa52fb4987cb0b4\",\"dweb:/ipfs/QmNUzZS4LPhBCacrPNjbQXLV4anrvNxQ2yPEPETj3sgbzW\"]},\"node_modules/@latticexyz/solecs/src/Set.sol\":{\"keccak256\":\"0xcddfd88e4fd1c183470f470dbe5e6fdd48ed0d26bd1ccefb8070a476bc8ba344\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e81ffd8a5b104abd04876a42d613378181009bae9368779223fabc1b1d514e46\",\"dweb:/ipfs/QmUywR2WzJfzPn1bRkd7e6Sy6jo3q9AjuQWU55BHKUiNME\"]},\"node_modules/@latticexyz/solecs/src/System.sol\":{\"keccak256\":\"0xa26b5061fdcbb516111cebd798db1ac8d7733cbf562700aa9892276f3e40e1e7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://471b323faa1baf8b14f3c0a4acf539643ac2fba105b13314066452ebaa228281\",\"dweb:/ipfs/QmRmTjgggZcziB9FH2oPyQGQAAnxEsubiY1gDC1vQz6uWW\"]},\"node_modules/@latticexyz/solecs/src/SystemStorage.sol\":{\"keccak256\":\"0x3adf624854f860099d0911cdc51b29e6690e413f2c260e3536552d223fe77b2b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9fa473135604adb13a95583e6cc8092bc82be534bdcdd915e1f344eb78fc645d\",\"dweb:/ipfs/QmYvRKgZ2iRVmSykLAtrrdsr27Eyg6QorhHGL5ZLE8wTTW\"]},\"node_modules/@latticexyz/solecs/src/constants.sol\":{\"keccak256\":\"0x024a3ff3077a272339b7baa96b826fd75f040d7cd2c6e13b9c8cf7ad16f789b8\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1ddcb26a7703e9b03b34d5465010a4ae5ced137021c94987053544ad1156a644\",\"dweb:/ipfs/QmYue4gnb8noyoxxTchs5chZji7DKynKMp2x33RgRW6xqZ\"]},\"node_modules/@latticexyz/solecs/src/interfaces/IComponent.sol\":{\"keccak256\":\"0xc25ab58cac1449fcd501ddcc56dade0653a7946adcd9eee2931bc095eda2a6b4\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c9505da36322f3b3de4dc0aaf0aec911e76be6cbd091f4d142070a7316df4629\",\"dweb:/ipfs/QmY5aGhwzBV5fXeLRDuzWMUfbPZGGdggbLdARhrkjmPBYW\"]},\"node_modules/@latticexyz/solecs/src/interfaces/IERC173.sol\":{\"keccak256\":\"0x2bd9a729a3bfcfc445bc557a914aee17fcaf1c0f74b909b6a91a5d3755a699e9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://203741d681a686fb75f0715332e554083733f349100dfe11252c17fbe9cd094e\",\"dweb:/ipfs/QmaBXDHiU4ZdJ8K5jQZ3FfswMpWEqSPsBWGFkJMU2qmmWi\"]},\"node_modules/@latticexyz/solecs/src/interfaces/IEntityContainer.sol\":{\"keccak256\":\"0x4506db1dcbdbe68a397107a57bfa3da888a889f14181a90eb728cfecc60700b8\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://23f5c02d110f5abf6340a08a2a8b7e0b5668f211fe6baf41213e6c4f69dece10\",\"dweb:/ipfs/QmYfKeZMeEUNExsxjkCF5nGdw8KRyPe1t5tcGFTEkP7CkV\"]},\"node_modules/@latticexyz/solecs/src/interfaces/IEntityIndexer.sol\":{\"keccak256\":\"0xd89023b2a5e9961be3c9d49d9f7f9ac7dcc416e3f43a8758dc058d1db2eea6b5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3266ea1dd5a7f372f8814db24ac4981730f66fba8e6f90f614246ca5cec529b4\",\"dweb:/ipfs/QmQ71BtaBsDjfke46dndaTBVhyXAHxs5qs7d9GHJwVXuvw\"]},\"node_modules/@latticexyz/solecs/src/interfaces/IOwnableWritable.sol\":{\"keccak256\":\"0x804db2685d65f5d4029431c47276b6ac43d3c329ea4ce75358928dbd4d11ee77\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a1d85dfe46f678ce4cf3a788092519251a24c2c015f9e858a81111b506b0ee78\",\"dweb:/ipfs/QmVmE4f8axCeh8V2kcs8nxYd27rSiwvXJbDbNCg3VZHSXY\"]},\"node_modules/@latticexyz/solecs/src/interfaces/ISystem.sol\":{\"keccak256\":\"0xbc1c0b0c72ab5e20ff7eae3cf53627aac367a2f9a65d2e87451a0313869d3bed\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b2a7c4c30beb9b96c4e8112b9864f7bac5c761e61765e0dc359d926572feaa5a\",\"dweb:/ipfs/QmVNJbky7itfqBBdDCh8anSWMaHhXs2mKhzuW7hbCVWgj3\"]},\"node_modules/@latticexyz/solecs/src/interfaces/IUint256Component.sol\":{\"keccak256\":\"0x12e2eaa4c5663048343e43a1994c446baacb16a4aacbe314ed5202d878751be9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2d78184a1b1868773f2d5a7cf54bb42bccc666dc75cea14eeed15b8573fd000f\",\"dweb:/ipfs/QmemXPHPB7V8StWR8kZcKt3eDxB78sZFZW4Dp7TcEFTxx9\"]},\"node_modules/@latticexyz/solecs/src/interfaces/IWorld.sol\":{\"keccak256\":\"0x3ac1853f4cade8f432f5b3144e0c914b93f110ea3eabd85438cde39160716114\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1f0ba421b481b66d43c9da4de63171a79ffadc708956893bddf10eec666a0f4a\",\"dweb:/ipfs/QmdSyzQUDrP3MXt8JjgXt1QUgraUKBUPHE2CVzJiEwfMAK\"]},\"node_modules/@latticexyz/solecs/src/interfaces/Query.sol\":{\"keccak256\":\"0x987e47a4d3f076910382b4e8619f607ea15abdedd786d6095bd27126ff6f941c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8c3d57f9da85917b77e1043a179d3b516bc8c00a8880fdcb1bffca7e53169059\",\"dweb:/ipfs/QmaHxqsT1ZpS8toN88qxgbeaDSMvnhYv9J9FMjVnKrMgoP\"]},\"node_modules/@latticexyz/solecs/src/utils.sol\":{\"keccak256\":\"0x17f7831c03bdd77f0c7d98c94931d830fbbfa1878c365f54b12841c85611e24e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6ae566ee03c5050b239277ef4184b9e5dcb332c8cc65b032f8e0d9e46408ea6d\",\"dweb:/ipfs/QmetdhxahRf7FJk1kn8KgDmizU2zYk3jjt9qo6Gwz2M5YP\"]},\"node_modules/@latticexyz/std-contracts/src/components/AddressComponent.sol\":{\"keccak256\":\"0x89e047abf13d2924fcbe13f3fd4a421c7d63ff1533d7c46418ba6f4188d3a5b0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5dac16608b64fc5d2ae51a6066683eff6c17c5ed4615049e6721394a1e7ac628\",\"dweb:/ipfs/QmXk9X9KhkAnPayniNTxquou5pnNXpGxkKCY69ESZQFT6j\"]},\"node_modules/@latticexyz/std-contracts/src/components/Uint256ArrayComponent.sol\":{\"keccak256\":\"0x916ee817b96b61ca795012e747e9fd719abb0b93cf7b6350ede4081553c2d153\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cafb3c05e0f9c01a989678dea04a1874f73d261049e59cbe869bde43bbaf3e24\",\"dweb:/ipfs/QmeDz1UyCdBvbNtPq8DiMHDep3ZBd6PsjYvvBq6vEZPPSC\"]},\"node_modules/@solidstate/contracts/access/ownable/IOwnable.sol\":{\"keccak256\":\"0xd2d21c507ed587cd5de6cc016d4b9c7e956e468108b784455a400301707031c1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://091a98176309554295f1d471f888b1567d07e0250b11e23fa540739b6dfdce38\",\"dweb:/ipfs/Qme69DrKhhtwkSBMU456C3NxzXNMC7AJ4sVNMg5rKcrtPn\"]},\"node_modules/@solidstate/contracts/access/ownable/IOwnableInternal.sol\":{\"keccak256\":\"0x6237a634712261bd82d5c7753780d35f77af215406d1e59512052f743f8f1c60\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8e54ac6cd1b376224b8d148c704693ff3f7ac9f69954fd30ee3d949fa17210c3\",\"dweb:/ipfs/QmWjq37K3gg29XhFbepg5GbmmFYoyXb81sh2K1MnVZqG6y\"]},\"node_modules/@solidstate/contracts/access/ownable/Ownable.sol\":{\"keccak256\":\"0xe16b09090c1251f8cc97fb2cc10c86675e0d0d9f0fc0032b417c37c8dba2db5f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8482effd630de3e3eb3c66ce6bc5ddd12838381e6e585df42116b4fd7764e4bc\",\"dweb:/ipfs/Qma9ga6QS2SooCYKyB7J5EHE8uUGiAv49kosEyjHt9Zg79\"]},\"node_modules/@solidstate/contracts/access/ownable/OwnableInternal.sol\":{\"keccak256\":\"0x0185d24250a5e6fbafce443b9ba19bba761803e3e5d91ba423bfb1f5f0bbdbf9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://547fadeaec559ee824f4dd37b2ef972a061ca59576f5733cf643e00d88a4db52\",\"dweb:/ipfs/QmYx6rmRmZZQkoS8TykMVsz9ZvfQ8MfSPt6UzWJ8pyj8qF\"]},\"node_modules/@solidstate/contracts/access/ownable/OwnableStorage.sol\":{\"keccak256\":\"0x7385e2020de914f75cabdc83c6adf88ed21e9de14669a89b3832b80f4f8c7b73\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a367c512bf29fb4923ed5d2454783e3dae88e5e03dec216e65c3986f3c3a8995\",\"dweb:/ipfs/QmfYkD6osr6SQzod6wc7WPae6YvVnYbn2BjJuHrYL3ERXM\"]},\"node_modules/@solidstate/contracts/interfaces/IERC173.sol\":{\"keccak256\":\"0x9b18a5ad66323c65a81ecd62c3536db99115fe69a30b56a04409de941da7deb6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a93684363c5bfd4e31fa2cc2d3402e9451ba61c7dbb404e8e50658610fb2a555\",\"dweb:/ipfs/QmanFgF5v5GjBBrAEYCpaZyXRFRvzLGgB8SQcSEf9Dkj5Q\"]},\"node_modules/@solidstate/contracts/interfaces/IERC173Internal.sol\":{\"keccak256\":\"0x9644c3e56c9ecd1763f8aaa437d5d573a7f64a8d93ad7bea1a9c44beb5911b89\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c32cfda38b44878ab196d32eeb72823a9f9904e8193286c787caccfb2e5bfa75\",\"dweb:/ipfs/QmfBNKWUSKaJtYL3JJ3YFioXCVFeeakqQ4cR5XzAxxZkCx\"]},\"node_modules/@solidstate/contracts/utils/AddressUtils.sol\":{\"keccak256\":\"0x7d924db4dbd9210923ab08db77db3c77438014c255fd49fa208ebce283d991bf\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5189eebdf91899224a14b4cd5184fa9e67a9b8904e6d88ff9610944d06c63929\",\"dweb:/ipfs/QmRwNhfcp98pPgbzK4i9hbypHLTWPGYpuRCtEJRCTNASRm\"]},\"node_modules/@solidstate/contracts/utils/UintUtils.sol\":{\"keccak256\":\"0x5aaeaea22a0800402c6f2d8ce6185293bc64f74f6c390c1b1c53b624b43972f8\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8b1c95c745da8ca4de7b68e65ef9122dab4e748c3ae3c9f5fd5aa7c65887c9d2\",\"dweb:/ipfs/QmX2KURY4JbM4NVFp5KPYsNxoJGA8n8w6SdAFdD5Pasgza\"]},\"node_modules/memmove/src/Array.sol\":{\"keccak256\":\"0x0d7681d3392c34f811cebc9598c5e8f4eef6aba431dca9e1fa87267ba51a4515\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0ffb5179dd40ccacadc2cb26ac99e9ea5148796f6d21413d7e0f37913831bea1\",\"dweb:/ipfs/QmfJogaoqook5JgnUZKib6w6khzViUag3EQb1EZ8aUEasQ\"]},\"node_modules/memmove/src/LinkedList.sol\":{\"keccak256\":\"0x2374863d39689178dda92b841e77b835ba8fa550561be23b7861d2e52c0fe8c1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8538ec6ca6be4e1b25b74dfd2139586fa2b9dab8d49d91428ed64dc683884598\",\"dweb:/ipfs/Qma7Z6urenqG5Dzqwe8ouGiFH37mbsJEX83tqjSq1PTnRc\"]},\"src/common/BRErrors.sol\":{\"keccak256\":\"0x4781af69d18c65c5df5fc861f6aec68765a50bf1b2b664be584c8ddc9c08e1c1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://dc7b13975688a7cab845fbbc7ce0d3ff8907b8ccc38753fde07c74d41f84abfc\",\"dweb:/ipfs/QmRLuGYac5rqkTRC64mQuHqBewn6vWucpmCzQePUxnzENi\"]},\"src/common/BRPieceControllerSystem.sol\":{\"keccak256\":\"0x03000c397d70dc7d4c867e888ed55f8db3d0a753e80f619570dfa6a5ed3feef3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d56cc1cc3e4d2b2205f258fd56aff249264a7d8adeb7303dcfd65b07714dc753\",\"dweb:/ipfs/QmXGYN7p18Gp6yuUyxx4xyp39TkTsdSKNaH2xBr29aLGNp\"]},\"src/common/Errors.sol\":{\"keccak256\":\"0x85fe6c5b15f8df8b5b9e48e91c96c7ea33ccc56a788bb169763db4412410357e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1dc12bea55debd390a5934cbd00ebcdc9c52d95b3ae758a78b75ea4a182a4f97\",\"dweb:/ipfs/Qma62GaTK1Q3NgW3KvkfZ56S2euz7dAD2bUh5C1BviAEr3\"]},\"src/components/ControllerComponent.sol\":{\"keccak256\":\"0x5937765a4a5ec265a33ac9ab56604d62fbb744830a7b08ba6ab7c5949e14ccda\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://70c96fd10ea0f2236e2e23c6ee6bf8e2acfb9ea162ce5bbe410f8437b2801dea\",\"dweb:/ipfs/QmbU1Do2sdzNm3k9c9XaQ4TcP2ax7TiGDAkuFwo2jGi4Le\"]},\"src/components/OwnerComponent.sol\":{\"keccak256\":\"0xd97ff9076016b5c312b230e2ab02908f03df6fe2a441a38df8b58bae21965e6f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://30e9158ad016d12e2b35d266069cac34ec4e171ef7b91e815cad2bbdbe00d13f\",\"dweb:/ipfs/QmapNdhwQvHN7Ss6dzKiqMcE1Xm1F6KEMGMhfCPEtP4CdQ\"]},\"src/libraries/LibController.sol\":{\"keccak256\":\"0x3e48291c0f5e526cf21611d1f5cd59bfedbeed26a3a6d0109e3629e8099873c7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9246bd3e621ed7601c442c74b9d917e9402833cad9c07bce316aaacf7aaf7119\",\"dweb:/ipfs/QmTgqnef8t8VQjkjbgmv8G7cQCqciM3Mu4ygkxvGLPLGso\"]},\"src/libraries/LibOwner.sol\":{\"keccak256\":\"0x6b80fe6da4a9bd623cc56bf0b61fc8095326d11d205b69bcac2d9203b400e0f7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://10060a39f880b169678dead38b8cbface6f3bd94f66cfdfcf08c0822f371d45a\",\"dweb:/ipfs/QmTbTJiYfC7YfZsY4ZPWpUQGSeNL6uGSWfAYK3RZW37DLE\"]},\"src/systems/RevokeControllerSystem.sol\":{\"keccak256\":\"0xe3aeabc9a56e674ba8e6008aff102f102de4b6a5f577d6bc4a33932f45165652\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7ca73deff6facf0cb4d3598b214339f7e7f8e4b960196bd21dd9c5df157de93e\",\"dweb:/ipfs/Qme7EDjtm4wEzRfdzTQaMXpd31MaQmvHp5TabS5LYREDdg\"]}},\"version\":1}",
   "metadata": {
     "compiler": {
       "version": "0.8.17+commit.8df45f5f"
@@ -111,6 +121,16 @@
           "inputs": [],
           "type": "error",
           "name": "BRNotRevokeSystem"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "Ownable__NotOwner"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "Ownable__NotTransitiveOwner"
         },
         {
           "inputs": [
@@ -179,7 +199,7 @@
           "inputs": [
             {
               "internalType": "address",
-              "name": "newOwner",
+              "name": "account",
               "type": "address"
             }
           ],
@@ -193,7 +213,12 @@
         "methods": {
           "owner()": {
             "returns": {
-              "_0": "The address of the owner."
+              "_0": "conrtact owner"
+            }
+          },
+          "transferOwnership(address)": {
+            "params": {
+              "account": "address of new owner"
             }
           }
         },
@@ -203,7 +228,10 @@
         "kind": "user",
         "methods": {
           "owner()": {
-            "notice": "Get the address of the owner"
+            "notice": "get the ERC173 contract owner"
+          },
+          "transferOwnership(address)": {
+            "notice": "transfer contract ownership to new account"
           }
         },
         "version": 1
@@ -211,12 +239,16 @@
     },
     "settings": {
       "remappings": [
+        ":@solidstate/=node_modules/@solidstate/",
+        ":abdk-libraries-solidity/=node_modules/abdk-libraries-solidity/",
         ":common/=src/common/",
         ":components/=src/components/",
         ":ds-test/=node_modules/ds-test/src/",
         ":forge-std/=node_modules/forge-std/src/",
         ":libraries/=src/libraries/",
         ":memmove/=node_modules/memmove/src/",
+        ":noise/=node_modules/@latticexyz/noise/contracts/",
+        ":packages/=../../../mud/packages/",
         ":solecs/=node_modules/@latticexyz/solecs/src/",
         ":solmate/=node_modules/@rari-capital/solmate/src/",
         ":std-contracts/=node_modules/@latticexyz/std-contracts/src/",
@@ -236,10 +268,10 @@
     },
     "sources": {
       "node_modules/@latticexyz/solecs/src/BareComponent.sol": {
-        "keccak256": "0xba9ac6f0758cc098046c74ad02b520e0e45c27e35aa6865b4ec806981c6be786",
+        "keccak256": "0x2cd722acd3cad5a9318bd5907a3d9f3849756727a5b2303eaf76aa7ea8caa65a",
         "urls": [
-          "bzz-raw://0f53e408345b49f552468bb3958e7699898595856effb1355e053abe9b77f671",
-          "dweb:/ipfs/QmcP9DPKdc97Si8CvymPz6bUfjcNmhiQytAdQ7xPF5EV9g"
+          "bzz-raw://890e17cd1f2f2ed87c99ca7b9383f7eabb31570989247a81e268a636b163a89a",
+          "dweb:/ipfs/QmXJEKkMBQniSwHvC9aqHjRCaMohwkpPT7ssCtkL31j4FA"
         ],
         "license": "MIT"
       },
@@ -260,26 +292,58 @@
         "license": "MIT"
       },
       "node_modules/@latticexyz/solecs/src/MapSet.sol": {
-        "keccak256": "0x903c895b873785da7c3f8e17ebe0c176bb4a0987ff2f70f7b4df8872a7d1bd99",
+        "keccak256": "0xe1a1f412b22d586c01a3e9e0e0af40893b880260f6765b9a5e23e56154dae1db",
         "urls": [
-          "bzz-raw://37a91b47ec383af7462368a29e8c01532e87eaa3c56077dab1f73e00c2fe25d5",
-          "dweb:/ipfs/QmaukFM1GkNxMhK4LiCCWouJxzHpq2mznM8jLvr19o8ukr"
+          "bzz-raw://f8aeddb1af783e43e8ca8a004954016c9f00d9d217d86454b3a3839ef0981288",
+          "dweb:/ipfs/QmegHggcpmgGgL9xbZKqnWMwNMSqvs622MuhyEhR9bVfb9"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@latticexyz/solecs/src/Ownable.sol": {
+        "keccak256": "0x7572ffd98860b2539eacdbb2112ce3d25ad8521c5d95f91e21ea5588a6904209",
+        "urls": [
+          "bzz-raw://3516b95146224d3fc04c5cc2818161fa9504a048894f6dd905b1e42307494fc4",
+          "dweb:/ipfs/QmTqvvAs1fSLzXVWjAgSt3TtE3MM3M1DFXRzkkSsixtVza"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@latticexyz/solecs/src/OwnableWritable.sol": {
+        "keccak256": "0x44e1afa8b4b2132122255943deb1ba8787693cd5893876a06643deed3052b859",
+        "urls": [
+          "bzz-raw://3761f562ad1a9fae0abf914e4e15592fb8b7dd231039448d20ad7dcfabf6de41",
+          "dweb:/ipfs/QmbLN1mfNXYyrc4qxQauvBYTyJu9nR18t9xb54GY8xP3T7"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@latticexyz/solecs/src/OwnableWritableStorage.sol": {
+        "keccak256": "0x9f99bbacdfd6c5b0779bd18d3900dd4f957c5a0d89d5986815fae2eff8254df5",
+        "urls": [
+          "bzz-raw://3ee736ebade674846118859290603b8ad2cc91efbe13e3621aa52fb4987cb0b4",
+          "dweb:/ipfs/QmNUzZS4LPhBCacrPNjbQXLV4anrvNxQ2yPEPETj3sgbzW"
         ],
         "license": "MIT"
       },
       "node_modules/@latticexyz/solecs/src/Set.sol": {
-        "keccak256": "0xd4e1ac0608efb071ee64b15cdaec8c83e684d305d673702cacab98a2721d210d",
+        "keccak256": "0xcddfd88e4fd1c183470f470dbe5e6fdd48ed0d26bd1ccefb8070a476bc8ba344",
         "urls": [
-          "bzz-raw://1f083400292163c7b0c717d66f2d200ac38995019d695ba5c0568547f7f96051",
-          "dweb:/ipfs/QmSGp7TeKHi5eb2ELU1qH7Qfjs4kjyMGfTTXUw9iPaq6UE"
+          "bzz-raw://e81ffd8a5b104abd04876a42d613378181009bae9368779223fabc1b1d514e46",
+          "dweb:/ipfs/QmUywR2WzJfzPn1bRkd7e6Sy6jo3q9AjuQWU55BHKUiNME"
         ],
         "license": "MIT"
       },
       "node_modules/@latticexyz/solecs/src/System.sol": {
-        "keccak256": "0x5ff430169885d31cb4d41ccf5ba8ac1f0815d3bb1b9dc9afcf9afd6a7203e7c7",
+        "keccak256": "0xa26b5061fdcbb516111cebd798db1ac8d7733cbf562700aa9892276f3e40e1e7",
         "urls": [
-          "bzz-raw://59892068a9b62d8c01d272ea5de2e8f2932a7ea87acce9b6eaccfae00dad8e66",
-          "dweb:/ipfs/QmfEdTjYkdHfueS527ibx3Ni8X3yqgQHtbRB1anDTsMGBN"
+          "bzz-raw://471b323faa1baf8b14f3c0a4acf539643ac2fba105b13314066452ebaa228281",
+          "dweb:/ipfs/QmRmTjgggZcziB9FH2oPyQGQAAnxEsubiY1gDC1vQz6uWW"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@latticexyz/solecs/src/SystemStorage.sol": {
+        "keccak256": "0x3adf624854f860099d0911cdc51b29e6690e413f2c260e3536552d223fe77b2b",
+        "urls": [
+          "bzz-raw://9fa473135604adb13a95583e6cc8092bc82be534bdcdd915e1f344eb78fc645d",
+          "dweb:/ipfs/QmYvRKgZ2iRVmSykLAtrrdsr27Eyg6QorhHGL5ZLE8wTTW"
         ],
         "license": "MIT"
       },
@@ -292,18 +356,18 @@
         "license": "MIT"
       },
       "node_modules/@latticexyz/solecs/src/interfaces/IComponent.sol": {
-        "keccak256": "0x4513448bb0d45050f8af0a2ead426b27a5d5ca73d38c6874e909f852ad2232e6",
+        "keccak256": "0xc25ab58cac1449fcd501ddcc56dade0653a7946adcd9eee2931bc095eda2a6b4",
         "urls": [
-          "bzz-raw://e5c215b87500c80ffb525142b753a4f3454a69cf11b9b68f6a29f1a4dd4a2ced",
-          "dweb:/ipfs/Qmd4YYoYJTrgyQU8zcfJFDdYQA29DarkdL8k5obyGgbp2K"
+          "bzz-raw://c9505da36322f3b3de4dc0aaf0aec911e76be6cbd091f4d142070a7316df4629",
+          "dweb:/ipfs/QmY5aGhwzBV5fXeLRDuzWMUfbPZGGdggbLdARhrkjmPBYW"
         ],
         "license": "MIT"
       },
       "node_modules/@latticexyz/solecs/src/interfaces/IERC173.sol": {
-        "keccak256": "0xc8fa875a59c2010265d7fc5663d9d37e6b5f9b556b6bfdeeb7ec9355ee3169c7",
+        "keccak256": "0x2bd9a729a3bfcfc445bc557a914aee17fcaf1c0f74b909b6a91a5d3755a699e9",
         "urls": [
-          "bzz-raw://33d944c6ff71c7afe4d21db8f4077e419f165100bbfd8b6c8d4b975015ec6c82",
-          "dweb:/ipfs/QmY461W1TtyjkkcUuxPHUtJ3LxzD1iaU422FkFhtHHuRQh"
+          "bzz-raw://203741d681a686fb75f0715332e554083733f349100dfe11252c17fbe9cd094e",
+          "dweb:/ipfs/QmaBXDHiU4ZdJ8K5jQZ3FfswMpWEqSPsBWGFkJMU2qmmWi"
         ],
         "license": "MIT"
       },
@@ -323,11 +387,19 @@
         ],
         "license": "MIT"
       },
-      "node_modules/@latticexyz/solecs/src/interfaces/ISystem.sol": {
-        "keccak256": "0x62af78f49b90c7c23ad677e4090c5c916e1c2e36b13be07887b371ba732294c9",
+      "node_modules/@latticexyz/solecs/src/interfaces/IOwnableWritable.sol": {
+        "keccak256": "0x804db2685d65f5d4029431c47276b6ac43d3c329ea4ce75358928dbd4d11ee77",
         "urls": [
-          "bzz-raw://c8c0849bc60d65a4578a66b8d0052b584e8b43838b78bc2c2579113f625cd05a",
-          "dweb:/ipfs/Qma8pxGUAupCkTJYjXeHV9i4qvjnMP9s8zi5rs6FDrDuy7"
+          "bzz-raw://a1d85dfe46f678ce4cf3a788092519251a24c2c015f9e858a81111b506b0ee78",
+          "dweb:/ipfs/QmVmE4f8axCeh8V2kcs8nxYd27rSiwvXJbDbNCg3VZHSXY"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@latticexyz/solecs/src/interfaces/ISystem.sol": {
+        "keccak256": "0xbc1c0b0c72ab5e20ff7eae3cf53627aac367a2f9a65d2e87451a0313869d3bed",
+        "urls": [
+          "bzz-raw://b2a7c4c30beb9b96c4e8112b9864f7bac5c761e61765e0dc359d926572feaa5a",
+          "dweb:/ipfs/QmVNJbky7itfqBBdDCh8anSWMaHhXs2mKhzuW7hbCVWgj3"
         ],
         "license": "MIT"
       },
@@ -340,18 +412,18 @@
         "license": "MIT"
       },
       "node_modules/@latticexyz/solecs/src/interfaces/IWorld.sol": {
-        "keccak256": "0x319806cf4ed67acdd9f444ac581486e157ea06bceb8e727c6d745c165e0d9aae",
+        "keccak256": "0x3ac1853f4cade8f432f5b3144e0c914b93f110ea3eabd85438cde39160716114",
         "urls": [
-          "bzz-raw://9b2cb8ec879279c74b384f169595e50fd1850ce63275447748d9150dfa9a85be",
-          "dweb:/ipfs/QmNPQBfqVg3iDF2qE8KTJWx1zbpJjnzteNYiqGxtBye2q2"
+          "bzz-raw://1f0ba421b481b66d43c9da4de63171a79ffadc708956893bddf10eec666a0f4a",
+          "dweb:/ipfs/QmdSyzQUDrP3MXt8JjgXt1QUgraUKBUPHE2CVzJiEwfMAK"
         ],
         "license": "MIT"
       },
       "node_modules/@latticexyz/solecs/src/interfaces/Query.sol": {
-        "keccak256": "0xd11a3268514fceac97995d481017e49b18835e31ce3540e5f21c24df33e4bc2c",
+        "keccak256": "0x987e47a4d3f076910382b4e8619f607ea15abdedd786d6095bd27126ff6f941c",
         "urls": [
-          "bzz-raw://841dd95a4f5e89f0451a72544a47eb16be41b8005dadfe98a82054db3eb41ab7",
-          "dweb:/ipfs/QmScv2neVyCeoCmMZyRyYcqD5QwauuoWmkixyxw4qftEeR"
+          "bzz-raw://8c3d57f9da85917b77e1043a179d3b516bc8c00a8880fdcb1bffca7e53169059",
+          "dweb:/ipfs/QmaHxqsT1ZpS8toN88qxgbeaDSMvnhYv9J9FMjVnKrMgoP"
         ],
         "license": "MIT"
       },
@@ -376,6 +448,78 @@
         "urls": [
           "bzz-raw://cafb3c05e0f9c01a989678dea04a1874f73d261049e59cbe869bde43bbaf3e24",
           "dweb:/ipfs/QmeDz1UyCdBvbNtPq8DiMHDep3ZBd6PsjYvvBq6vEZPPSC"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@solidstate/contracts/access/ownable/IOwnable.sol": {
+        "keccak256": "0xd2d21c507ed587cd5de6cc016d4b9c7e956e468108b784455a400301707031c1",
+        "urls": [
+          "bzz-raw://091a98176309554295f1d471f888b1567d07e0250b11e23fa540739b6dfdce38",
+          "dweb:/ipfs/Qme69DrKhhtwkSBMU456C3NxzXNMC7AJ4sVNMg5rKcrtPn"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@solidstate/contracts/access/ownable/IOwnableInternal.sol": {
+        "keccak256": "0x6237a634712261bd82d5c7753780d35f77af215406d1e59512052f743f8f1c60",
+        "urls": [
+          "bzz-raw://8e54ac6cd1b376224b8d148c704693ff3f7ac9f69954fd30ee3d949fa17210c3",
+          "dweb:/ipfs/QmWjq37K3gg29XhFbepg5GbmmFYoyXb81sh2K1MnVZqG6y"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@solidstate/contracts/access/ownable/Ownable.sol": {
+        "keccak256": "0xe16b09090c1251f8cc97fb2cc10c86675e0d0d9f0fc0032b417c37c8dba2db5f",
+        "urls": [
+          "bzz-raw://8482effd630de3e3eb3c66ce6bc5ddd12838381e6e585df42116b4fd7764e4bc",
+          "dweb:/ipfs/Qma9ga6QS2SooCYKyB7J5EHE8uUGiAv49kosEyjHt9Zg79"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@solidstate/contracts/access/ownable/OwnableInternal.sol": {
+        "keccak256": "0x0185d24250a5e6fbafce443b9ba19bba761803e3e5d91ba423bfb1f5f0bbdbf9",
+        "urls": [
+          "bzz-raw://547fadeaec559ee824f4dd37b2ef972a061ca59576f5733cf643e00d88a4db52",
+          "dweb:/ipfs/QmYx6rmRmZZQkoS8TykMVsz9ZvfQ8MfSPt6UzWJ8pyj8qF"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@solidstate/contracts/access/ownable/OwnableStorage.sol": {
+        "keccak256": "0x7385e2020de914f75cabdc83c6adf88ed21e9de14669a89b3832b80f4f8c7b73",
+        "urls": [
+          "bzz-raw://a367c512bf29fb4923ed5d2454783e3dae88e5e03dec216e65c3986f3c3a8995",
+          "dweb:/ipfs/QmfYkD6osr6SQzod6wc7WPae6YvVnYbn2BjJuHrYL3ERXM"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@solidstate/contracts/interfaces/IERC173.sol": {
+        "keccak256": "0x9b18a5ad66323c65a81ecd62c3536db99115fe69a30b56a04409de941da7deb6",
+        "urls": [
+          "bzz-raw://a93684363c5bfd4e31fa2cc2d3402e9451ba61c7dbb404e8e50658610fb2a555",
+          "dweb:/ipfs/QmanFgF5v5GjBBrAEYCpaZyXRFRvzLGgB8SQcSEf9Dkj5Q"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@solidstate/contracts/interfaces/IERC173Internal.sol": {
+        "keccak256": "0x9644c3e56c9ecd1763f8aaa437d5d573a7f64a8d93ad7bea1a9c44beb5911b89",
+        "urls": [
+          "bzz-raw://c32cfda38b44878ab196d32eeb72823a9f9904e8193286c787caccfb2e5bfa75",
+          "dweb:/ipfs/QmfBNKWUSKaJtYL3JJ3YFioXCVFeeakqQ4cR5XzAxxZkCx"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@solidstate/contracts/utils/AddressUtils.sol": {
+        "keccak256": "0x7d924db4dbd9210923ab08db77db3c77438014c255fd49fa208ebce283d991bf",
+        "urls": [
+          "bzz-raw://5189eebdf91899224a14b4cd5184fa9e67a9b8904e6d88ff9610944d06c63929",
+          "dweb:/ipfs/QmRwNhfcp98pPgbzK4i9hbypHLTWPGYpuRCtEJRCTNASRm"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@solidstate/contracts/utils/UintUtils.sol": {
+        "keccak256": "0x5aaeaea22a0800402c6f2d8ce6185293bc64f74f6c390c1b1c53b624b43972f8",
+        "urls": [
+          "bzz-raw://8b1c95c745da8ca4de7b68e65ef9122dab4e748c3ae3c9f5fd5aa7c65887c9d2",
+          "dweb:/ipfs/QmX2KURY4JbM4NVFp5KPYsNxoJGA8n8w6SdAFdD5Pasgza"
         ],
         "license": "MIT"
       },
@@ -464,37 +608,38 @@
   },
   "ast": {
     "absolutePath": "src/common/BRPieceControllerSystem.sol",
-    "id": 15752,
+    "id": 22883,
     "exportedSymbols": {
       "BRNotRevokeSystem": [
-        15605
+        22728
       ],
       "BRPieceControllerSystem": [
-        15751
+        22882
       ],
       "BR_REVOKE_SYSTEM_ID": [
-        15714
+        22845
       ],
       "RevokeControllerSystem": [
-        19483
+        27007
       ],
       "RevokeControllerSystemID": [
-        19406
+        26930
       ],
       "System": [
-        2413
+        5875
       ],
       "getSystemAddressById": [
-        3804
+        7381
       ]
     },
     "nodeType": "SourceUnit",
-    "src": "32:808:36",
+    "src": "32:808:52",
     "nodes": [
       {
-        "id": 15697,
+        "id": 22828,
         "nodeType": "PragmaDirective",
-        "src": "32:24:36",
+        "src": "32:24:52",
+        "nodes": [],
         "literals": [
           "solidity",
           ">=",
@@ -503,23 +648,24 @@
         ]
       },
       {
-        "id": 15699,
+        "id": 22830,
         "nodeType": "ImportDirective",
-        "src": "57:43:36",
+        "src": "57:43:52",
+        "nodes": [],
         "absolutePath": "node_modules/@latticexyz/solecs/src/System.sol",
         "file": "solecs/System.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 15752,
-        "sourceUnit": 2414,
+        "scope": 22883,
+        "sourceUnit": 5876,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 15698,
+              "id": 22829,
               "name": "System",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 2413,
-              "src": "66:6:36",
+              "referencedDeclaration": 5875,
+              "src": "66:6:52",
               "typeDescriptions": {}
             },
             "nameLocation": "-1:-1:-1"
@@ -528,23 +674,24 @@
         "unitAlias": ""
       },
       {
-        "id": 15701,
+        "id": 22832,
         "nodeType": "ImportDirective",
-        "src": "101:56:36",
+        "src": "101:56:52",
+        "nodes": [],
         "absolutePath": "node_modules/@latticexyz/solecs/src/utils.sol",
         "file": "solecs/utils.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 15752,
-        "sourceUnit": 3916,
+        "scope": 22883,
+        "sourceUnit": 7493,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 15700,
+              "id": 22831,
               "name": "getSystemAddressById",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 3804,
-              "src": "110:20:36",
+              "referencedDeclaration": 7381,
+              "src": "110:20:52",
               "typeDescriptions": {}
             },
             "nameLocation": "-1:-1:-1"
@@ -553,35 +700,36 @@
         "unitAlias": ""
       },
       {
-        "id": 15704,
+        "id": 22835,
         "nodeType": "ImportDirective",
-        "src": "158:108:36",
+        "src": "158:108:52",
+        "nodes": [],
         "absolutePath": "src/systems/RevokeControllerSystem.sol",
         "file": "systems/RevokeControllerSystem.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 15752,
-        "sourceUnit": 19484,
+        "scope": 22883,
+        "sourceUnit": 27008,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 15702,
+              "id": 22833,
               "name": "RevokeControllerSystem",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 19483,
-              "src": "167:22:36",
+              "referencedDeclaration": 27007,
+              "src": "167:22:52",
               "typeDescriptions": {}
             },
             "nameLocation": "-1:-1:-1"
           },
           {
             "foreign": {
-              "id": 15703,
+              "id": 22834,
               "name": "ID",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 19406,
-              "src": "191:2:36",
+              "referencedDeclaration": 26930,
+              "src": "191:2:52",
               "typeDescriptions": {}
             },
             "local": "RevokeControllerSystemID",
@@ -591,23 +739,24 @@
         "unitAlias": ""
       },
       {
-        "id": 15706,
+        "id": 22837,
         "nodeType": "ImportDirective",
-        "src": "267:56:36",
+        "src": "267:56:52",
+        "nodes": [],
         "absolutePath": "src/common/BRErrors.sol",
         "file": "common/BRErrors.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 15752,
-        "sourceUnit": 15606,
+        "scope": 22883,
+        "sourceUnit": 22729,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 15705,
+              "id": 22836,
               "name": "BRNotRevokeSystem",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 15605,
-              "src": "276:17:36",
+              "referencedDeclaration": 22728,
+              "src": "276:17:52",
               "typeDescriptions": {}
             },
             "nameLocation": "-1:-1:-1"
@@ -616,14 +765,15 @@
         "unitAlias": ""
       },
       {
-        "id": 15714,
+        "id": 22845,
         "nodeType": "VariableDeclaration",
-        "src": "325:85:36",
+        "src": "325:85:52",
+        "nodes": [],
         "constant": true,
         "mutability": "constant",
         "name": "BR_REVOKE_SYSTEM_ID",
-        "nameLocation": "342:19:36",
-        "scope": 15752,
+        "nameLocation": "342:19:52",
+        "scope": 22883,
         "stateVariable": false,
         "storageLocation": "default",
         "typeDescriptions": {
@@ -631,10 +781,10 @@
           "typeString": "uint256"
         },
         "typeName": {
-          "id": 15707,
+          "id": 22838,
           "name": "uint256",
           "nodeType": "ElementaryTypeName",
-          "src": "325:7:36",
+          "src": "325:7:52",
           "typeDescriptions": {
             "typeIdentifier": "t_uint256",
             "typeString": "uint256"
@@ -646,14 +796,14 @@
               "arguments": [
                 {
                   "hexValue": "73797374656d2e42524c6561766547616d6553797374656d",
-                  "id": 15711,
+                  "id": 22842,
                   "isConstant": false,
                   "isLValue": false,
                   "isPure": true,
                   "kind": "string",
                   "lValueRequested": false,
                   "nodeType": "Literal",
-                  "src": "382:26:36",
+                  "src": "382:26:52",
                   "typeDescriptions": {
                     "typeIdentifier": "t_stringliteral_c460a39063d43ec0746708579b6d331f5d24b3fd0a5b1ec179dd09d5c0daa6ac",
                     "typeString": "literal_string \"system.BRLeaveGameSystem\""
@@ -668,18 +818,18 @@
                     "typeString": "literal_string \"system.BRLeaveGameSystem\""
                   }
                 ],
-                "id": 15710,
+                "id": 22841,
                 "name": "keccak256",
                 "nodeType": "Identifier",
                 "overloadedDeclarations": [],
                 "referencedDeclaration": -8,
-                "src": "372:9:36",
+                "src": "372:9:52",
                 "typeDescriptions": {
                   "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
                   "typeString": "function (bytes memory) pure returns (bytes32)"
                 }
               },
-              "id": 15712,
+              "id": 22843,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -688,7 +838,7 @@
               "nameLocations": [],
               "names": [],
               "nodeType": "FunctionCall",
-              "src": "372:37:36",
+              "src": "372:37:52",
               "tryCall": false,
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes32",
@@ -703,26 +853,26 @@
                 "typeString": "bytes32"
               }
             ],
-            "id": 15709,
+            "id": 22840,
             "isConstant": false,
             "isLValue": false,
             "isPure": true,
             "lValueRequested": false,
             "nodeType": "ElementaryTypeNameExpression",
-            "src": "364:7:36",
+            "src": "364:7:52",
             "typeDescriptions": {
               "typeIdentifier": "t_type$_t_uint256_$",
               "typeString": "type(uint256)"
             },
             "typeName": {
-              "id": 15708,
+              "id": 22839,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "364:7:36",
+              "src": "364:7:52",
               "typeDescriptions": {}
             }
           },
-          "id": 15713,
+          "id": 22844,
           "isConstant": false,
           "isLValue": false,
           "isPure": true,
@@ -731,7 +881,7 @@
           "nameLocations": [],
           "names": [],
           "nodeType": "FunctionCall",
-          "src": "364:46:36",
+          "src": "364:46:52",
           "tryCall": false,
           "typeDescriptions": {
             "typeIdentifier": "t_uint256",
@@ -741,18 +891,20 @@
         "visibility": "internal"
       },
       {
-        "id": 15751,
+        "id": 22882,
         "nodeType": "ContractDefinition",
-        "src": "413:426:36",
+        "src": "413:426:52",
         "nodes": [
           {
-            "id": 15750,
+            "id": 22881,
             "nodeType": "FunctionDefinition",
-            "src": "469:368:36",
+            "src": "469:368:52",
+            "nodes": [],
             "body": {
-              "id": 15749,
+              "id": 22880,
               "nodeType": "Block",
-              "src": "517:320:36",
+              "src": "517:320:52",
+              "nodes": [],
               "statements": [
                 {
                   "condition": {
@@ -760,33 +912,33 @@
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     },
-                    "id": 15727,
+                    "id": 22858,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
                       "expression": {
-                        "id": 15721,
+                        "id": 22852,
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": -15,
-                        "src": "527:3:36",
+                        "src": "527:3:52",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
                           "typeString": "msg"
                         }
                       },
-                      "id": 15722,
+                      "id": 22853,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberLocation": "531:6:36",
+                      "memberLocation": "531:6:52",
                       "memberName": "sender",
                       "nodeType": "MemberAccess",
-                      "src": "527:10:36",
+                      "src": "527:10:52",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
@@ -797,24 +949,24 @@
                     "rightExpression": {
                       "arguments": [
                         {
-                          "id": 15724,
+                          "id": 22855,
                           "name": "components",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2334,
-                          "src": "562:10:36",
+                          "referencedDeclaration": 5835,
+                          "src": "562:10:52",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_IUint256Component_$3276",
+                            "typeIdentifier": "t_contract$_IUint256Component_$6853",
                             "typeString": "contract IUint256Component"
                           }
                         },
                         {
-                          "id": 15725,
+                          "id": 22856,
                           "name": "BR_REVOKE_SYSTEM_ID",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 15714,
-                          "src": "574:19:36",
+                          "referencedDeclaration": 22845,
+                          "src": "574:19:52",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
@@ -824,7 +976,7 @@
                       "expression": {
                         "argumentTypes": [
                           {
-                            "typeIdentifier": "t_contract$_IUint256Component_$3276",
+                            "typeIdentifier": "t_contract$_IUint256Component_$6853",
                             "typeString": "contract IUint256Component"
                           },
                           {
@@ -832,18 +984,18 @@
                             "typeString": "uint256"
                           }
                         ],
-                        "id": 15723,
+                        "id": 22854,
                         "name": "getSystemAddressById",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3804,
-                        "src": "541:20:36",
+                        "referencedDeclaration": 7381,
+                        "src": "541:20:52",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_function_internal_view$_t_contract$_IUint256Component_$3276_$_t_uint256_$returns$_t_address_$",
+                          "typeIdentifier": "t_function_internal_view$_t_contract$_IUint256Component_$6853_$_t_uint256_$returns$_t_address_$",
                           "typeString": "function (contract IUint256Component,uint256) view returns (address)"
                         }
                       },
-                      "id": 15726,
+                      "id": 22857,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -852,44 +1004,44 @@
                       "nameLocations": [],
                       "names": [],
                       "nodeType": "FunctionCall",
-                      "src": "541:53:36",
+                      "src": "541:53:52",
                       "tryCall": false,
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
                       }
                     },
-                    "src": "527:67:36",
+                    "src": "527:67:52",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
-                  "id": 15732,
+                  "id": 22863,
                   "nodeType": "IfStatement",
-                  "src": "523:114:36",
+                  "src": "523:114:52",
                   "trueBody": {
-                    "id": 15731,
+                    "id": 22862,
                     "nodeType": "Block",
-                    "src": "596:41:36",
+                    "src": "596:41:52",
                     "statements": [
                       {
                         "errorCall": {
                           "arguments": [],
                           "expression": {
                             "argumentTypes": [],
-                            "id": 15728,
+                            "id": 22859,
                             "name": "BRNotRevokeSystem",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 15605,
-                            "src": "611:17:36",
+                            "referencedDeclaration": 22728,
+                            "src": "611:17:52",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_error_pure$__$returns$__$",
                               "typeString": "function () pure"
                             }
                           },
-                          "id": 15729,
+                          "id": 22860,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -898,87 +1050,87 @@
                           "nameLocations": [],
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "611:19:36",
+                          "src": "611:19:52",
                           "tryCall": false,
                           "typeDescriptions": {
                             "typeIdentifier": "t_tuple$__$",
                             "typeString": "tuple()"
                           }
                         },
-                        "id": 15730,
+                        "id": 22861,
                         "nodeType": "RevertStatement",
-                        "src": "604:26:36"
+                        "src": "604:26:52"
                       }
                     ]
                   }
                 },
                 {
                   "assignments": [
-                    15735
+                    22866
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 15735,
+                      "id": 22866,
                       "mutability": "mutable",
                       "name": "revokeControllerSystem",
-                      "nameLocation": "665:22:36",
+                      "nameLocation": "665:22:52",
                       "nodeType": "VariableDeclaration",
-                      "scope": 15749,
-                      "src": "642:45:36",
+                      "scope": 22880,
+                      "src": "642:45:52",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_RevokeControllerSystem_$19483",
+                        "typeIdentifier": "t_contract$_RevokeControllerSystem_$27007",
                         "typeString": "contract RevokeControllerSystem"
                       },
                       "typeName": {
-                        "id": 15734,
+                        "id": 22865,
                         "nodeType": "UserDefinedTypeName",
                         "pathNode": {
-                          "id": 15733,
+                          "id": 22864,
                           "name": "RevokeControllerSystem",
                           "nameLocations": [
-                            "642:22:36"
+                            "642:22:52"
                           ],
                           "nodeType": "IdentifierPath",
-                          "referencedDeclaration": 19483,
-                          "src": "642:22:36"
+                          "referencedDeclaration": 27007,
+                          "src": "642:22:52"
                         },
-                        "referencedDeclaration": 19483,
-                        "src": "642:22:36",
+                        "referencedDeclaration": 27007,
+                        "src": "642:22:52",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_RevokeControllerSystem_$19483",
+                          "typeIdentifier": "t_contract$_RevokeControllerSystem_$27007",
                           "typeString": "contract RevokeControllerSystem"
                         }
                       },
                       "visibility": "internal"
                     }
                   ],
-                  "id": 15742,
+                  "id": 22873,
                   "initialValue": {
                     "arguments": [
                       {
                         "arguments": [
                           {
-                            "id": 15738,
+                            "id": 22869,
                             "name": "components",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2334,
-                            "src": "741:10:36",
+                            "referencedDeclaration": 5835,
+                            "src": "741:10:52",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_IUint256Component_$3276",
+                              "typeIdentifier": "t_contract$_IUint256Component_$6853",
                               "typeString": "contract IUint256Component"
                             }
                           },
                           {
-                            "id": 15739,
+                            "id": 22870,
                             "name": "RevokeControllerSystemID",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 19406,
-                            "src": "753:24:36",
+                            "referencedDeclaration": 26930,
+                            "src": "753:24:52",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
@@ -988,7 +1140,7 @@
                         "expression": {
                           "argumentTypes": [
                             {
-                              "typeIdentifier": "t_contract$_IUint256Component_$3276",
+                              "typeIdentifier": "t_contract$_IUint256Component_$6853",
                               "typeString": "contract IUint256Component"
                             },
                             {
@@ -996,18 +1148,18 @@
                               "typeString": "uint256"
                             }
                           ],
-                          "id": 15737,
+                          "id": 22868,
                           "name": "getSystemAddressById",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 3804,
-                          "src": "720:20:36",
+                          "referencedDeclaration": 7381,
+                          "src": "720:20:52",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_function_internal_view$_t_contract$_IUint256Component_$3276_$_t_uint256_$returns$_t_address_$",
+                            "typeIdentifier": "t_function_internal_view$_t_contract$_IUint256Component_$6853_$_t_uint256_$returns$_t_address_$",
                             "typeString": "function (contract IUint256Component,uint256) view returns (address)"
                           }
                         },
-                        "id": 15740,
+                        "id": 22871,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1016,7 +1168,7 @@
                         "nameLocations": [],
                         "names": [],
                         "nodeType": "FunctionCall",
-                        "src": "720:58:36",
+                        "src": "720:58:52",
                         "tryCall": false,
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -1031,18 +1183,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 15736,
+                      "id": 22867,
                       "name": "RevokeControllerSystem",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 19483,
-                      "src": "690:22:36",
+                      "referencedDeclaration": 27007,
+                      "src": "690:22:52",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_contract$_RevokeControllerSystem_$19483_$",
+                        "typeIdentifier": "t_type$_t_contract$_RevokeControllerSystem_$27007_$",
                         "typeString": "type(contract RevokeControllerSystem)"
                       }
                     },
-                    "id": 15741,
+                    "id": 22872,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1051,26 +1203,26 @@
                     "nameLocations": [],
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "690:94:36",
+                    "src": "690:94:52",
                     "tryCall": false,
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_RevokeControllerSystem_$19483",
+                      "typeIdentifier": "t_contract$_RevokeControllerSystem_$27007",
                       "typeString": "contract RevokeControllerSystem"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "642:142:36"
+                  "src": "642:142:52"
                 },
                 {
                   "expression": {
                     "arguments": [
                       {
-                        "id": 15746,
+                        "id": 22877,
                         "name": "piece",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 15718,
-                        "src": "826:5:36",
+                        "referencedDeclaration": 22849,
+                        "src": "826:5:52",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1085,33 +1237,33 @@
                         }
                       ],
                       "expression": {
-                        "id": 15743,
+                        "id": 22874,
                         "name": "revokeControllerSystem",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 15735,
-                        "src": "790:22:36",
+                        "referencedDeclaration": 22866,
+                        "src": "790:22:52",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_RevokeControllerSystem_$19483",
+                          "typeIdentifier": "t_contract$_RevokeControllerSystem_$27007",
                           "typeString": "contract RevokeControllerSystem"
                         }
                       },
-                      "id": 15745,
+                      "id": 22876,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberLocation": "813:12:36",
+                      "memberLocation": "813:12:52",
                       "memberName": "executeTyped",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 19482,
-                      "src": "790:35:36",
+                      "referencedDeclaration": 27006,
+                      "src": "790:35:52",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$returns$_t_bytes_memory_ptr_$",
                         "typeString": "function (uint256) external returns (bytes memory)"
                       }
                     },
-                    "id": 15747,
+                    "id": 22878,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1120,16 +1272,16 @@
                     "nameLocations": [],
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "790:42:36",
+                    "src": "790:42:52",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_memory_ptr",
                       "typeString": "bytes memory"
                     }
                   },
-                  "id": 15748,
+                  "id": 22879,
                   "nodeType": "ExpressionStatement",
-                  "src": "790:42:36"
+                  "src": "790:42:52"
                 }
               ]
             },
@@ -1138,20 +1290,20 @@
             "kind": "function",
             "modifiers": [],
             "name": "revokeController",
-            "nameLocation": "478:16:36",
+            "nameLocation": "478:16:52",
             "parameters": {
-              "id": 15719,
+              "id": 22850,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 15718,
+                  "id": 22849,
                   "mutability": "mutable",
                   "name": "piece",
-                  "nameLocation": "503:5:36",
+                  "nameLocation": "503:5:52",
                   "nodeType": "VariableDeclaration",
-                  "scope": 15750,
-                  "src": "495:13:36",
+                  "scope": 22881,
+                  "src": "495:13:52",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1159,10 +1311,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 15717,
+                    "id": 22848,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "495:7:36",
+                    "src": "495:7:52",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1171,15 +1323,15 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "494:15:36"
+              "src": "494:15:52"
             },
             "returnParameters": {
-              "id": 15720,
+              "id": 22851,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "517:0:36"
+              "src": "517:0:52"
             },
-            "scope": 15751,
+            "scope": 22882,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
@@ -1189,18 +1341,18 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 15715,
+              "id": 22846,
               "name": "System",
               "nameLocations": [
-                "458:6:36"
+                "458:6:52"
               ],
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 2413,
-              "src": "458:6:36"
+              "referencedDeclaration": 5875,
+              "src": "458:6:52"
             },
-            "id": 15716,
+            "id": 22847,
             "nodeType": "InheritanceSpecifier",
-            "src": "458:6:36"
+            "src": "458:6:52"
           }
         ],
         "canonicalName": "BRPieceControllerSystem",
@@ -1208,20 +1360,28 @@
         "contractKind": "contract",
         "fullyImplemented": false,
         "linearizedBaseContracts": [
-          15751,
-          2413,
-          3247,
-          3191
+          22882,
+          5875,
+          5535,
+          8431,
+          8555,
+          8394,
+          8383,
+          6824,
+          8598,
+          8608
         ],
         "name": "BRPieceControllerSystem",
-        "nameLocation": "431:23:36",
-        "scope": 15752,
+        "nameLocation": "431:23:52",
+        "scope": 22883,
         "usedErrors": [
-          15605
+          8391,
+          8393,
+          22728
         ]
       }
     ],
     "license": "MIT"
   },
-  "id": 36
+  "id": 52
 }

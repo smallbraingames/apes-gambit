@@ -6,6 +6,7 @@ import { BRGame } from "common/BRGame.sol";
 import { BRGameComponent } from "components/BRGameComponent.sol";
 import { BRBananasPickedUpComponent, ID as BRBananasPickedUpComponentID } from "components/BRBananasPickedUpComponent.sol";
 import { BRLibGame } from "libraries/BRLibGame.sol";
+
 import { Perlin } from "noise/Perlin.sol";
 
 library BRLibMap {

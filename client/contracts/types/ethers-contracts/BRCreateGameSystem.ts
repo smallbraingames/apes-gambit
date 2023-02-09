@@ -30,7 +30,7 @@ import type {
 export interface BRCreateGameSystemInterface extends utils.Interface {
   functions: {
     "execute(bytes)": FunctionFragment;
-    "executeTyped(uint256,uint32,uint32,uint32)": FunctionFragment;
+    "executeTyped(uint256,uint32,uint32,uint32,int256,int128,uint16,uint8)": FunctionFragment;
     "owner()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
@@ -50,6 +50,10 @@ export interface BRCreateGameSystemInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "executeTyped",
     values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
@@ -129,13 +133,17 @@ export interface BRCreateGameSystem extends BaseContract {
       rechargeTime: PromiseOrValue<BigNumberish>,
       initialGridDim: PromiseOrValue<BigNumberish>,
       secondsPerGridShrink: PromiseOrValue<BigNumberish>,
+      perlinDenom: PromiseOrValue<BigNumberish>,
+      perlinThresholdBanana: PromiseOrValue<BigNumberish>,
+      perlinSeed: PromiseOrValue<BigNumberish>,
+      perlinPrecision: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
@@ -150,13 +158,17 @@ export interface BRCreateGameSystem extends BaseContract {
     rechargeTime: PromiseOrValue<BigNumberish>,
     initialGridDim: PromiseOrValue<BigNumberish>,
     secondsPerGridShrink: PromiseOrValue<BigNumberish>,
+    perlinDenom: PromiseOrValue<BigNumberish>,
+    perlinThresholdBanana: PromiseOrValue<BigNumberish>,
+    perlinSeed: PromiseOrValue<BigNumberish>,
+    perlinPrecision: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
   transferOwnership(
-    newOwner: PromiseOrValue<string>,
+    account: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -171,13 +183,17 @@ export interface BRCreateGameSystem extends BaseContract {
       rechargeTime: PromiseOrValue<BigNumberish>,
       initialGridDim: PromiseOrValue<BigNumberish>,
       secondsPerGridShrink: PromiseOrValue<BigNumberish>,
+      perlinDenom: PromiseOrValue<BigNumberish>,
+      perlinThresholdBanana: PromiseOrValue<BigNumberish>,
+      perlinSeed: PromiseOrValue<BigNumberish>,
+      perlinPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -204,13 +220,17 @@ export interface BRCreateGameSystem extends BaseContract {
       rechargeTime: PromiseOrValue<BigNumberish>,
       initialGridDim: PromiseOrValue<BigNumberish>,
       secondsPerGridShrink: PromiseOrValue<BigNumberish>,
+      perlinDenom: PromiseOrValue<BigNumberish>,
+      perlinThresholdBanana: PromiseOrValue<BigNumberish>,
+      perlinSeed: PromiseOrValue<BigNumberish>,
+      perlinPrecision: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
@@ -226,13 +246,17 @@ export interface BRCreateGameSystem extends BaseContract {
       rechargeTime: PromiseOrValue<BigNumberish>,
       initialGridDim: PromiseOrValue<BigNumberish>,
       secondsPerGridShrink: PromiseOrValue<BigNumberish>,
+      perlinDenom: PromiseOrValue<BigNumberish>,
+      perlinThresholdBanana: PromiseOrValue<BigNumberish>,
+      perlinSeed: PromiseOrValue<BigNumberish>,
+      perlinPrecision: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

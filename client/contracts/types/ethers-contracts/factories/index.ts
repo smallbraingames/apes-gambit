@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export { AddressComponent__factory } from "./AddressComponent__factory";
+export { BRBananasPickedUpComponent__factory } from "./BRBananasPickedUpComponent__factory";
 export { BRCreateGameSystem__factory } from "./BRCreateGameSystem__factory";
 export { BREndGameSystem__factory } from "./BREndGameSystem__factory";
 export { BRGameComponent__factory } from "./BRGameComponent__factory";
@@ -33,6 +34,7 @@ export { SetControllerSystem__factory } from "./SetControllerSystem__factory";
 export { SetPieceTypeSystem__factory } from "./SetPieceTypeSystem__factory";
 export { SpawnSystem__factory } from "./SpawnSystem__factory";
 export { System__factory } from "./System__factory";
+export { SystemStorage__factory } from "./SystemStorage__factory";
 export { TransferOwnerSystem__factory } from "./TransferOwnerSystem__factory";
 export { Uint256ArrayComponent__factory } from "./Uint256ArrayComponent__factory";
 export { Uint32Component__factory } from "./Uint32Component__factory";

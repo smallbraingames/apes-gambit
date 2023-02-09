@@ -153,7 +153,7 @@ export interface RegisterSystem extends BaseContract {
     ): Promise<[string]>;
 
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
@@ -179,7 +179,7 @@ export interface RegisterSystem extends BaseContract {
   ): Promise<string>;
 
   transferOwnership(
-    newOwner: PromiseOrValue<string>,
+    account: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -205,7 +205,7 @@ export interface RegisterSystem extends BaseContract {
     ): Promise<string>;
 
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -243,7 +243,7 @@ export interface RegisterSystem extends BaseContract {
     ): Promise<BigNumber>;
 
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
@@ -270,7 +270,7 @@ export interface RegisterSystem extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

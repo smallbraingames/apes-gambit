@@ -125,7 +125,7 @@ export interface SpawnSystem extends BaseContract {
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
@@ -142,7 +142,7 @@ export interface SpawnSystem extends BaseContract {
   owner(overrides?: CallOverrides): Promise<string>;
 
   transferOwnership(
-    newOwner: PromiseOrValue<string>,
+    account: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -157,7 +157,7 @@ export interface SpawnSystem extends BaseContract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -186,7 +186,7 @@ export interface SpawnSystem extends BaseContract {
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
@@ -204,7 +204,7 @@ export interface SpawnSystem extends BaseContract {
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
