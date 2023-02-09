@@ -1,4 +1,4 @@
-import createObjectRegistry from "./createObjectRegistry";
+import createObjectRegistry from "./createPhaserObjectRegistry";
 
 export enum AssetType {
   IMAGE,

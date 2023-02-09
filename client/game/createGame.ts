@@ -21,6 +21,7 @@ import createScene from "../phaser/createScene";
 import { defineNumberComponent } from "@latticexyz/std-client";
 import load from "../phaser/load";
 import setupActivePieceComponent from "./components/setupActivePieceComponent";
+import setupBRGridDimComponent from "./components/setupBRGridDimComponent";
 import setupBRRechargeTimerComponent from "./components/setupBRRechargeTimerComponent";
 import setupHoveredPieceComponent from "./components/setupHoveredPieceComponent";
 import setupSystems from "./systems/setupSystems";
@@ -86,6 +87,9 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
     BRRechargeTimerComponent: defineNumberComponent(gameWorld, {
       id: "BRRechargeTimer",
     }),
+    BRGridDimComponent: defineNumberComponent(gameWorld, {
+      id: "BRGridDim",
+    }),
   };
 
   const context = {
@@ -104,6 +108,7 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   setupActivePieceComponent(network, context);
   setupPiecePositionContextComponent(network, context);
   setupBRRechargeTimerComponent(network, context);
+  setupBRGridDimComponent(network, context);
 
   // Setup chessboard
   createChessBoardTilemap(
