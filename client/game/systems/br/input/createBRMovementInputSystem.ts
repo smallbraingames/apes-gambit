@@ -14,6 +14,7 @@ const createBRMovementInputSystem = (
 ): Subscription[] => {
   const { godEntityIndex } = network;
   const {
+    game: phaserGame,
     gameEntity,
     components: { ActivePiece },
     scenes: {
@@ -24,6 +25,7 @@ const createBRMovementInputSystem = (
   const input = createInput(scene.input);
 
   const subscription = input.click$.subscribe((p) => {
+    if (!phaserGame.scene.isActive(scene)) return;
     const entityIndex = getComponentValueStrict(ActivePiece, godEntityIndex)
       .value as EntityIndex;
     // Check if is active game piece (alive, in right game, piece entity)

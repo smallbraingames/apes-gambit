@@ -15,27 +15,32 @@ import { defineComponentSystemUnsubscribable } from "../game/utils/defineCompone
 
 interface GameContextInterface {
   game?: Game;
-  activePiece: EntityIndex | undefined;
+  activePiece?: EntityIndex;
+  gameEntity?: EntityID;
 }
 
 export const GameContext = createContext<GameContextInterface>({
   game: undefined,
   activePiece: undefined,
+  gameEntity: undefined,
 });
 
-const GameProvider = (props: {
-  brGameEntity: EntityID | undefined;
-  children: ReactNode;
-}) => {
+const GameProvider = (props: { children: ReactNode }) => {
   const network = useContext(NetworkContext);
   const [game, setGame] = useState<PhaserGame | undefined>(undefined);
   const [activePiece, setActivePiece] = useState<EntityIndex | undefined>(
     undefined
   );
+  const [gameEntity, setGameEntity] = useState<EntityID | undefined>(undefined);
 
   const setupGame = async (network: Network) => {
+    const params = new URLSearchParams(window.location.search);
+    const gameEntity = params.get("gameEntity") as EntityID | undefined;
+    setGameEntity(gameEntity);
+
     const createGame = (await import("../game/createGame")).createGame;
-    const game: PhaserGame = await createGame(network, props.brGameEntity);
+    const game: PhaserGame = await createGame(network, gameEntity);
+
     setGame((prevGame) => {
       if (prevGame) prevGame.game.destroy(true);
       return game;
@@ -47,7 +52,7 @@ const GameProvider = (props: {
       setupGame(network.network);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [network.network, props.brGameEntity]);
+  }, [network.network]);
 
   useEffect(() => {
     if (!network.network) return;
@@ -65,7 +70,7 @@ const GameProvider = (props: {
   }, [game]);
 
   return (
-    <GameContext.Provider value={{ game, activePiece }}>
+    <GameContext.Provider value={{ game, activePiece, gameEntity }}>
       {props.children}
     </GameContext.Provider>
   );

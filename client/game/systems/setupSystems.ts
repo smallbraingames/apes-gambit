@@ -27,7 +27,7 @@ const clearSystems = (game: Game) => {
   game.subscribedSystems.map((sub) => sub.unsubscribe());
 };
 
-const setupLobbySystems = (network: Network, game: Game) => {
+export const setupLobbySystems = (network: Network, game: Game) => {
   console.log("Setting up lobby systems");
   createSystems(network, game, [
     createMovementInputSystem,
@@ -36,7 +36,7 @@ const setupLobbySystems = (network: Network, game: Game) => {
   ]);
 };
 
-const setupBRSystems = (network: Network, game: Game) => {
+export const setupBRSystems = (network: Network, game: Game) => {
   console.log("Setting up BR systems");
   createSystems(network, game, [
     createBRMovementInputSystem,

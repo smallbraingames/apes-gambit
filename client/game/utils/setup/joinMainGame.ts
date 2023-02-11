@@ -1,23 +1,25 @@
-import { EntityIndex, getComponentValue } from "@latticexyz/recs";
+import { EntityID, EntityIndex, getComponentValue } from "@latticexyz/recs";
 
 import { Network } from "../../../network/types";
-import getMainGame from "./getMainGame";
 import joinGame from "../joinGame";
 import revokeGameControllersIfNecessary from "./revokeGameControllersIfNecessary";
 
-const joinMainGame = async (network: Network, activePiece: EntityIndex) => {
+const joinMainGame = async (
+  network: Network,
+  gameEntity: EntityID,
+  activePiece: EntityIndex
+) => {
   const {
-    world,
     components: { BRInGame },
   } = network;
   await revokeGameControllersIfNecessary(network, activePiece);
-  const mainGame = getMainGame(network);
-  if (!mainGame) return;
-  const playerGame = getComponentValue(BRInGame, activePiece);
+  const playerGame = getComponentValue(BRInGame, activePiece)?.value;
   // @ts-ignore
-  if (playerGame && world.entityToIndex.get(playerGame.value) === mainGame)
+  if (playerGame && playerGame === gameEntity) {
+    console.log("Already in game");
     return;
-  await joinGame(activePiece, world.entities[mainGame], network);
+  }
+  await joinGame(activePiece, gameEntity, network);
 };
 
 export default joinMainGame;

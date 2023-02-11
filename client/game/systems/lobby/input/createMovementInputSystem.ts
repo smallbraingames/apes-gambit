@@ -21,6 +21,7 @@ const createMovementInputSystem = (
   } = network;
 
   const {
+    game: phaserGame,
     components: { ActivePiece },
     scenes: {
       Lobby: { scene },
@@ -30,6 +31,7 @@ const createMovementInputSystem = (
   const input = createInput(scene.input);
 
   const subscription = input.click$.subscribe((p) => {
+    if (!phaserGame.scene.isActive(scene)) return;
     const entityIndex = getComponentValueStrict(ActivePiece, godEntityIndex)
       .value as EntityIndex;
     const pointer = p as Phaser.Input.Pointer;

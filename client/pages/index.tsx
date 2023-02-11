@@ -1,7 +1,10 @@
+import { useEffect, useState } from "react";
+
+import { EntityID } from "@latticexyz/recs";
+import GameLoader from "../components/GameLoader";
+import GameManager from "../components/GameManager";
 import GameProvider from "../context/GameContext";
 import Head from "next/head";
-import Lobby from "../components/lobby/Lobby";
-import LobbyLoader from "../components/lobby/LobbyLoader";
 
 export default function Home() {
   return (
@@ -13,9 +16,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <GameProvider brGameEntity={undefined}>
-          <Lobby />
-          <LobbyLoader />
+        <GameProvider>
+          <GameManager />
+          <GameLoader />
         </GameProvider>
       </main>
     </>

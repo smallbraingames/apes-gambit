@@ -27,8 +27,11 @@ const revokeGameControllersIfNecessary = async (
     // @ts-ignore
     world.entityToIndex.get(pieceGameEntity.value as EntityID)!
   );
-  if (game.status !== GameStatus.OVER) return;
-  // In a game that is over, so revoke controllers
+  if (game.status !== GameStatus.OVER) {
+    return;
+  }
+  // In a game that is over, revoke controllers
+  console.log("Revoking controllers...");
   const tx = await leaveBRGame(world.entities[piece]);
   await provider.waitForTransaction(tx.hash);
 };

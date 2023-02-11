@@ -16,7 +16,6 @@ const spawnPiece = async (network: Network, game: Game) => {
     return activePiece.value as EntityIndex;
   }
   console.log("Spawning new piece");
-  console.log(network);
   const tx = await network.api.spawnPiece();
   await provider.waitForTransaction(tx.hash);
 };

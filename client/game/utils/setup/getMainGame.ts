@@ -22,17 +22,17 @@ const getMainGame = (network: Network): EntityIndex | undefined => {
   if (gameEntityIndex) {
     return gameEntityIndex;
   } else {
-    console.warn("No game entity in url, defaulting to earliest game");
+    console.warn("No game entity in url, returning undefined");
   }
-  const gameEntities = getComponentEntities(BRGame);
-  const games = [...gameEntities]
-    .map((gameEntity) => ({
-      entity: gameEntity,
-      game: getComponentValueStrict(BRGame, gameEntity),
-    }))
-    .filter((game) => game.game.status !== GameStatus.OVER)
-    .sort((a, b) => a.game.startTime - b.game.startTime);
-  if (games.length > 0) return games[0].entity;
+  // const gameEntities = getComponentEntities(BRGame);
+  // const games = [...gameEntities]
+  //   .map((gameEntity) => ({
+  //     entity: gameEntity,
+  //     game: getComponentValueStrict(BRGame, gameEntity),
+  //   }))
+  //   .filter((game) => game.game.status !== GameStatus.OVER)
+  //   .sort((a, b) => a.game.startTime - b.game.startTime);
+  // if (games.length > 0) return games[0].entity;
   return undefined;
 };
 

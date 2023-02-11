@@ -16,6 +16,7 @@ import { PieceType } from "./types";
 import { SystemAbis } from "../contracts/types/SystemAbis.mjs";
 import { SystemTypes } from "../contracts/types/SystemTypes";
 import { defineBRGameComponent } from "./components/brGameComponent";
+import { defineControllerComponent } from "./components/controllerComponent";
 import { defineLoadingStateComponent } from "./components/loadingStateComponent";
 
 export async function createNetwork(config: GameConfig) {
@@ -29,6 +30,7 @@ export async function createNetwork(config: GameConfig) {
       id: "Owner",
       metadata: { contractId: "component.Owner" },
     }),
+    Controller: defineControllerComponent(world),
     PiecePosition: defineCoordComponent(world, {
       id: "PiecePosition",
       metadata: { contractId: "component.PiecePosition" },
@@ -124,12 +126,16 @@ export async function createNetwork(config: GameConfig) {
     );
   };
 
-  const setBRControllers = (entity: EntityID): Promise<ContractTransaction> => {
-    const controllers = [
+  const getBRControllers = () => {
+    return [
       systems["system.BRMovePieceSystem"].address as string,
       systems["system.BRSetPieceTypeSystem"].address as string,
     ];
-    return systems["system.SetController"].executeTyped(entity, controllers);
+  };
+
+  const setBRControllers = (entity: EntityID): Promise<ContractTransaction> => {
+    const brControllers = getBRControllers();
+    return systems["system.SetController"].executeTyped(entity, brControllers);
   };
 
   const joinBRGame = (
@@ -183,6 +189,7 @@ export async function createNetwork(config: GameConfig) {
       spawnPiece,
       movePiece,
       br: {
+        getBRControllers,
         moveBRPiece,
         createBRGame,
         setBRControllers,
