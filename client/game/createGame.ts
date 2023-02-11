@@ -20,7 +20,6 @@ import setupBRGame from "./systems/br/setupBRGame";
 import setupBRGridDimComponent from "./components/setupBRGridDimComponent";
 import setupBRRechargeTimerComponent from "./components/setupBRRechargeTimerComponent";
 import setupLobbyGame from "./systems/lobby/setupLobbyGame";
-import setupSystems from "./systems/setupSystems";
 
 export async function createGame(network: Network, gameEntity?: EntityID) {
   const sceneConstructors = Object.keys(config.scenes).map((key) => {
@@ -75,7 +74,6 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
 
       // Set zoom
       camera.setZoom(INITIAL_ZOOM);
-
       // Add scene
       scenes[key] = {
         scene,
@@ -112,7 +110,7 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   };
 
   // Setup scenes
-  setupLobbyGame(network, scenes.Lobby);
+  setupLobbyGame(network, scenes.Lobby, context);
   setupBRGame(network, scenes.BR, context);
 
   // Setup game components
@@ -120,9 +118,6 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   setupPiecePositionContextComponent(network, context);
   setupBRRechargeTimerComponent(network, context);
   setupBRGridDimComponent(network, context);
-
-  // Setup correct systems
-  setupSystems(network, context);
 
   (window as any).game = context;
 

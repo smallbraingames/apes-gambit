@@ -5,12 +5,13 @@ import {
   TILE_HEIGHT,
   TILE_WIDTH,
 } from "../../constants";
+import { Game, Scene } from "../../types";
 
 import { Network } from "../../../network/types";
-import { Scene } from "../../types";
 import createChessBoardTilemap from "../../utils/createChessBoardTilemap";
+import { setupLobbySystems } from "../setupSystems";
 
-const setupLobbyGame = (network: Network, scene: Scene) => {
+const setupLobbyGame = (network: Network, scene: Scene, game: Game) => {
   const { godEntityIndex } = network;
 
   // Setup chessboard
@@ -27,6 +28,8 @@ const setupLobbyGame = (network: Network, scene: Scene) => {
     CHESS_TILEMAP_ID,
     tilemap
   );
+
+  setupLobbySystems(network, game);
 };
 
 export default setupLobbyGame;

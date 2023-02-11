@@ -87,14 +87,14 @@ const ActivityStream = () => {
   return (
     <div className="bg-yellow-50 h-48 p-4 border flex flex-col border-b-4 border-r-2 border-yellow-900 text-yellow-900 rounded-lg">
       <p className="mb-3 ml-1">ACTIVITY</p>
-      <div className="h-full">
-        <div className="flex flex-col flex-col-reverse h-32 overflow-scroll scrollbar-hide mb-9">
+      <div>
+        {/* <div className="flex flex-col flex-col-reverse h-32 overflow-scroll scrollbar-hide mb-9">
           {activity.reverse().map((element, i) => (
             <div key={i}>
               <div className="font-bold">{element}</div>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

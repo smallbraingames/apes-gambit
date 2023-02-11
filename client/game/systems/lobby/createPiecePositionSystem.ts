@@ -11,6 +11,7 @@ import { Network } from "../../../network/types";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
+import isActivePiece from "../../utils/isActivePiece";
 import { setValidMoveOverlays } from "../../utils/tileOverlays";
 import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
 
@@ -19,6 +20,7 @@ const createPiecePositionSystem = (
   game: Game
 ): Subscription[] => {
   const {
+    godEntityIndex,
     world,
     components: { PiecePosition },
   } = network;
@@ -48,7 +50,9 @@ const createPiecePositionSystem = (
       );
       const { x, y } = tileCoordToPixelCoord(position, TILE_WIDTH, TILE_HEIGHT);
       sprite.setPosition(x, y);
-      setValidMoveOverlays(network, game, game.scenes.Lobby);
+      if (isActivePiece(game, godEntityIndex, update.entity)) {
+        setValidMoveOverlays(network, game, game.scenes.Lobby);
+      }
     },
     { runOnInit: true }
   );

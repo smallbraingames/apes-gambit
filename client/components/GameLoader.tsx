@@ -1,18 +1,13 @@
 import {
   CONTROLLER_COMPONENT_CLASS_NAME,
   disableClickthroughs,
-} from "../../utils/disableControllers";
-import { EntityIndex, getComponentValue } from "@latticexyz/recs";
+} from "../utils/disableControllers";
 import { useContext, useEffect, useState } from "react";
 
-import { Game } from "../../game/types";
-import { GameContext } from "../../context/GameContext";
+import { GameContext } from "../context/GameContext";
 import Image from "next/image";
-import { Network } from "../../network/types";
-import { NetworkContext } from "../../context/NetworkContext";
-import isGameActive from "../../game/utils/isGameActive";
-import joinMainGame from "../../game/utils/setup/joinMainGame";
-import spawnPiece from "../../game/utils/setup/spawnPiece";
+import { NetworkContext } from "../context/NetworkContext";
+import spawnPiece from "../game/utils/setup/spawnPiece";
 
 enum LoadingState {
   // Loading game and network
@@ -23,48 +18,29 @@ enum LoadingState {
   IN_GAME,
 }
 
-const LobbyLoader = () => {
+const GameLoader = () => {
   const { network } = useContext(NetworkContext);
   const { game, activePiece } = useContext(GameContext);
-  const [loadingState, setLoadingState] = useState(LoadingState.GAME_LOADED);
-
-  const loadLobby = async (
-    network: Network | undefined,
-    game: Game | undefined,
-    activePiece: EntityIndex | undefined
-  ) => {
-    if (network !== undefined && game !== undefined) {
-      if (activePiece === undefined) {
-        await spawnPiece(network, game);
-        return;
-      }
-      await joinMainGame(network, activePiece);
-      setLoadingState(LoadingState.GAME_LOADED);
-    } else {
-      setLoadingState(LoadingState.GAME_LOADING);
-    }
-  };
+  const [loadingState, setLoadingState] = useState(LoadingState.GAME_LOADING);
 
   useEffect(() => {
     disableClickthroughs();
   }, []);
 
   useEffect(() => {
-    loadLobby(network, game, activePiece);
+    if (network && game) {
+      // If there is no active piece, spawn one
+      if (!activePiece) {
+        spawnPiece(network, game);
+        return;
+      }
+      if (network && game && activePiece) {
+        setLoadingState(LoadingState.GAME_LOADED);
+      }
+    }
   }, [network, game, activePiece]);
 
   const handlePlay = () => {
-    // If game has started, redirect to correct page
-    if (network && activePiece && game) {
-      const pieceGame = getComponentValue(
-        network.components.BRInGame,
-        activePiece
-      );
-      // @ts-ignore
-      if (pieceGame && isGameActive(pieceGame.value, network)) {
-        (window as any).location = `/br?gameEntity=${pieceGame.value}`;
-      }
-    }
     setLoadingState(LoadingState.IN_GAME);
   };
 
@@ -133,4 +109,4 @@ const LobbyLoader = () => {
   );
 };
 
-export default LobbyLoader;
+export default GameLoader;

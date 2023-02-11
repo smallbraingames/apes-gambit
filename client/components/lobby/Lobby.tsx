@@ -4,12 +4,13 @@ import {
 } from "../../utils/disableControllers";
 import { useContext, useEffect } from "react";
 
+import BRGameIndicator from "./BRGameIndicator";
 import CenterActivePieceOnLoad from "../CenterActivePieceOnLoad";
 import { GameContext } from "../../context/GameContext";
-import MainGame from "./MainGame";
 import { NetworkContext } from "../../context/NetworkContext";
+import { SwitchGameState } from "../GameManager";
 
-const Lobby = () => {
+const Lobby = (props: { switchFromLobbyToBR: SwitchGameState }) => {
   const { network } = useContext(NetworkContext);
   const { game, activePiece } = useContext(GameContext);
 
@@ -22,10 +23,13 @@ const Lobby = () => {
       <div className={CONTROLLER_COMPONENT_CLASS_NAME}>
         <div className="absolute p-6">
           <CenterActivePieceOnLoad />
-
           {network && game && activePiece && (
             <>
-              <MainGame network={network} activePiece={activePiece} />
+              <BRGameIndicator
+                network={network}
+                activePiece={activePiece}
+                switchFromLobbyToBR={props.switchFromLobbyToBR}
+              />
             </>
           )}
         </div>

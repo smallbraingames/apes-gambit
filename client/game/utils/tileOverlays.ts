@@ -1,5 +1,6 @@
 import {
   EntityIndex,
+  getComponentValue,
   getComponentValueStrict,
   getEntitiesWithValue,
 } from "@latticexyz/recs";
@@ -61,8 +62,13 @@ export const setValidMoveOverlays = (
   }
 
   // Get active piece
-  const activePiece = getComponentValueStrict(ActivePiece, godEntityIndex)
-    .value as EntityIndex;
+  const activePiece = getComponentValue(ActivePiece, godEntityIndex)?.value as
+    | EntityIndex
+    | undefined;
+  if (!activePiece) {
+    console.warn("Cannot set valid tile overlays without an active piece");
+    return;
+  }
   const pieceType: PieceType = getComponentValueStrict(
     PieceType,
     activePiece

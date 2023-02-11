@@ -11,6 +11,7 @@ import createBananaMananger from "../../utils/createBananaManager";
 import createChessBoardTilemap from "../../utils/createChessBoardTilemap";
 import { getComponentValueStrict } from "@latticexyz/recs";
 import { getEntityIndexFromEntity } from "../../utils/resolveEntity";
+import { setupBRSystems } from "../setupSystems";
 
 const setupBRGame = (network: Network, scene: Scene, game: Game) => {
   const { gameEntity } = game;
@@ -54,6 +55,8 @@ const setupBRGame = (network: Network, scene: Scene, game: Game) => {
     await b.setup();
     b.isBananaOnTile({ x: 0, y: 0 });
   };
+
+  setupBRSystems(network, game);
 };
 
 export default setupBRGame;
