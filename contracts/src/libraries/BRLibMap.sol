@@ -6,8 +6,11 @@ import { BRGame } from "common/BRGame.sol";
 import { BRGameComponent } from "components/BRGameComponent.sol";
 import { BRBananasPickedUpComponent, ID as BRBananasPickedUpComponentID } from "components/BRBananasPickedUpComponent.sol";
 import { BRLibGame } from "libraries/BRLibGame.sol";
+import { ABDKMath64x64 as Math } from "abdk-libraries-solidity/ABDKMath64x64.sol";
 
 import { Perlin } from "noise/Perlin.sol";
+
+uint8 constant PERLIN_DIGITS = 3;
 
 library BRLibMap {
   /// @notice Returns whether there is banana at a given location
@@ -18,8 +21,8 @@ library BRLibMap {
     Coord memory position
   ) internal view returns (bool) {
     BRGame memory brGame = BRLibGame.getGame(brGameComponent, game);
-    int128 perlin = getPerlinAtPosition(brGameComponent, game, position);
-    if (perlin >= brGame.perlinThresholdBanana) {
+    int256 perlin = getPerlinAtPosition(brGameComponent, game, position);
+    if (perlin >= int256(uint256(brGame.perlinThresholdBanana))) {
       uint256 positionEntity = createBananaPickedUpComponentEntityFromPosition(position, game);
       if (!brBananasPickedUpComponent.has(positionEntity)) {
         return true;
@@ -38,14 +41,17 @@ library BRLibMap {
     BRGameComponent brGameComponent,
     uint256 game,
     Coord memory position
-  ) internal view returns (int128) {
+  ) internal view returns (int256) {
     BRGame memory brGame = BRLibGame.getGame(brGameComponent, game);
     return
-      Perlin.noise2d(
-        position.x + int32(uint32(brGame.perlinSeed)),
-        position.y + int32(uint32(brGame.perlinSeed)),
-        brGame.perlinDenom,
-        brGame.perlinPrecision
+      Math.muli(
+        Perlin.noise2d(
+          position.x + int32(uint32(brGame.perlinSeed)),
+          position.y + int32(uint32(brGame.perlinSeed)),
+          brGame.perlinDenom,
+          brGame.perlinPrecision
+        ),
+        int256(10)**PERLIN_DIGITS
       );
   }
 

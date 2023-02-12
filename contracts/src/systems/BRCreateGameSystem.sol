@@ -18,10 +18,10 @@ contract BRCreateGameSystem is System {
       uint16 initialGridDim,
       uint16 secondsPerGridShrink,
       int256 perlinDenom,
-      int128 perlinThresholdBanana,
+      uint16 perlinThresholdBanana,
       uint16 perlinSeed,
       uint8 perlinPrecision
-    ) = abi.decode(arguments, (uint256, uint32, uint16, uint16, int256, int128, uint16, uint8));
+    ) = abi.decode(arguments, (uint256, uint32, uint16, uint16, int256, uint16, uint16, uint8));
 
     // Unique entity
     uint256 entityId = world.getUniqueEntityId();
@@ -52,7 +52,7 @@ contract BRCreateGameSystem is System {
     uint32 initialGridDim,
     uint32 secondsPerGridShrink,
     int256 perlinDenom,
-    int128 perlinThresholdBanana,
+    uint16 perlinThresholdBanana,
     uint16 perlinSeed,
     uint8 perlinPrecision
   ) public returns (uint256) {
