@@ -7,13 +7,14 @@ enum BRGameStatus {
   OVER
 }
 
+// TODO: better struct packing
 struct BRGame {
   uint256 startTime;
   uint32 rechargeTime;
   uint16 initialGridDim;
   uint16 secondsPerGridShrink;
   int256 perlinDenom;
-  int128 perlinThresholdBanana;
+  uint16 perlinThresholdBanana;
   uint16 perlinSeed;
   uint8 perlinPrecision;
   BRGameStatus status;

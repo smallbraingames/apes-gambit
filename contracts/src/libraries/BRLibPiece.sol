@@ -13,7 +13,7 @@ import { BRIsAliveComponent } from "components/BRIsAliveComponent.sol";
 import { BRPointsComponent } from "components/BRPointsComponent.sol";
 import { BRPreviousMoveTimestampComponent } from "components/BRPreviousMoveTimestampComponent.sol";
 import { PiecePositionComponent, ID as PiecePositionComponentID } from "components/PiecePositionComponent.sol";
-import { BRPieceDead, BRNotEnoughPoints, BRNotRecharged } from "common/BRErrors.sol";
+import { BRPieceDead, BRNotEnoughPoints, BRNotRecharged, BRIncorrectControllers } from "common/BRErrors.sol";
 import { UnimplementedPieceType } from "common/Errors.sol";
 import { BRLibGame } from "libraries/BRLibGame.sol";
 import { LibOwner } from "libraries/LibOwner.sol";
@@ -147,7 +147,12 @@ library BRLibPiece {
   }
 
   /// @notice Checks whether a piece has the correct associated controllers
-  function checkPieceControllers(ControllerComponent controllerComponent, uint256 entity) internal view {}
+  function checkPieceControllers(ControllerComponent controllerComponent, uint256 entity) internal view {
+    uint256[] memory controllers = controllerComponent.getValue(entity);
+    if (controllers.length != 2) {
+      revert BRIncorrectControllers();
+    }
+  }
 
   /// @notice Checks if a piece is alive in a game
   function checkPieceIsAlive(BRIsAliveComponent brIsAliveComponent, uint256 piece) internal view {

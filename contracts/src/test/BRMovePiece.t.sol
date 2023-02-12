@@ -76,7 +76,7 @@ contract BRMovePieceTest is MudTest {
 
     // Create a new game
     uint256 startTime = block.timestamp;
-    uint256 game = brCreateGameSystem.executeTyped(startTime, 0, 100, 100, 50, 100000, 0, 2);
+    uint256 game = brCreateGameSystem.executeTyped(startTime, 0, 100, 100, 50, 2000, 0, 2);
 
     // Join the game
     brJoinGameSystem.executeTyped(piece, game);
@@ -127,7 +127,7 @@ contract BRMovePieceTest is MudTest {
 
     // Create a new game
     uint256 startTime = block.timestamp;
-    uint256 game = brCreateGameSystem.executeTyped(startTime, 0, 100, 100, 3, 3, 0, 3);
+    uint256 game = brCreateGameSystem.executeTyped(startTime, 0, 100, 100, 3, 380, 0, 64);
 
     // Join the game
     brJoinGameSystem.executeTyped(piece, game);
@@ -136,7 +136,7 @@ contract BRMovePieceTest is MudTest {
     brStartGameSystem.executeTyped(game);
 
     // Check if bananas are picked up
-    // Perlin at positions (0, 1): 3, (0,2): 2, (0, 3): 4
+    // Perlin at positions (0, 1): 430, (0,2): 368, (0, 3): 500
     brMovePieceSystem.executeTyped(piece, game, Coord({ x: 0, y: 1 }));
     assertEq(brPointsComponent.getValue(piece), 1);
     uint256 positionEntity = BRLibMap.createBananaPickedUpComponentEntityFromPosition(Coord({ x: 0, y: 1 }), game);
