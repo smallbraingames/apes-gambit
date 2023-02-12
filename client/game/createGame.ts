@@ -1,5 +1,9 @@
 import { EntityID, namespaceWorld } from "@latticexyz/recs";
 import { GAME_WORLD_NAMESPACE, INITIAL_ZOOM } from "./constants";
+import {
+  defineCoordComponent,
+  defineNumberComponent,
+} from "@latticexyz/std-client";
 import setupPiecePositionContextComponent, {
   definePiecePositionContextComponent,
 } from "./components/setupPiecePositionContextComponent";
@@ -9,11 +13,11 @@ import { Scene } from "./types";
 import { Subscription } from "rxjs";
 import assets from "./utils/config/assets";
 import { config } from "./config";
+import createBananaMananger from "./utils/createBananaManager";
 import { createCamera } from "@latticexyz/phaserx";
 import createPhaserGame from "../phaser/createPhaserGame";
 import createPhaserObjectRegistry from "../phaser/createPhaserObjectRegistry";
 import createScene from "../phaser/createScene";
-import { defineNumberComponent } from "@latticexyz/std-client";
 import load from "../phaser/load";
 import setupActivePieceComponent from "./components/setupActivePieceComponent";
 import setupBRGame from "./systems/br/setupBRGame";
@@ -97,6 +101,9 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
     }),
     BRGridDimComponent: defineNumberComponent(gameWorld, {
       id: "BRGridDim",
+    }),
+    BRBananaComponent: defineCoordComponent(gameWorld, {
+      id: "BRBananaComponent",
     }),
   };
 

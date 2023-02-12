@@ -20,7 +20,6 @@ import { SystemTypes } from "../contracts/types/SystemTypes";
 import { defineBRGameComponent } from "./components/brGameComponent";
 import { defineControllerComponent } from "./components/controllerComponent";
 import { defineLoadingStateComponent } from "./components/loadingStateComponent";
-import { parse } from "path";
 
 export async function createNetwork(config: GameConfig) {
   console.log("Network config", config);
@@ -41,6 +40,10 @@ export async function createNetwork(config: GameConfig) {
     PieceType: defineNumberComponent(world, {
       id: "PieceType",
       metadata: { contractId: "component.PieceType" },
+    }),
+    BRBananasPickedUp: defineNumberComponent(world, {
+      id: "component.BRBananasPickedUp", // Important that this is the same, used to hash
+      metadata: { contractId: "component.BRBananasPickedUp" },
     }),
     BRGame: defineBRGameComponent(world),
     BRInGame: defineNumberComponent(world, {

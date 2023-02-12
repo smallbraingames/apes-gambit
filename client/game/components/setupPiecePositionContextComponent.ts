@@ -19,6 +19,7 @@ export function definePiecePositionContextComponent(world: World) {
       x: Type.Number,
       y: Type.Number,
       pieceTaken: Type.OptionalNumber,
+      bananaPickedUp: Type.Boolean,
     },
     {
       id: "PiecePositionContext",
@@ -33,7 +34,7 @@ const setupPiecePositionContextComponent = (network: Network, game: Game) => {
 
   const {
     systemCallStreams,
-    components: { PiecePosition, BRIsAlive },
+    components: { PiecePosition, BRIsAlive, BRBananasPickedUp },
   } = network;
 
   // Setup with initial piece position
@@ -42,6 +43,7 @@ const setupPiecePositionContextComponent = (network: Network, game: Game) => {
     setComponent(PiecePositionContext, entity, {
       ...position,
       pieceTaken: undefined,
+      bananaPickedUp: false,
     });
   });
 
@@ -51,6 +53,9 @@ const setupPiecePositionContextComponent = (network: Network, game: Game) => {
     );
     const isAliveUpdates = call.updates.filter(
       (update) => update.component.id === BRIsAlive.id
+    );
+    const bananasPickedUpUpdates = call.updates.filter(
+      (update) => update.component.id === BRBananasPickedUp.id
     );
 
     if (positionUpdates.length === 0) {
@@ -73,10 +78,17 @@ const setupPiecePositionContextComponent = (network: Network, game: Game) => {
       pieceTaken = isAliveUpdates[0].entity;
     }
 
+    let bananaPickedUp = false;
+    console.log(bananasPickedUpUpdates);
+    if (bananasPickedUpUpdates.length > 0) {
+      bananaPickedUp = true;
+    }
+
     setComponent(PiecePositionContext, pieceEntity, {
       x: position.x,
       y: position.y,
       pieceTaken,
+      bananaPickedUp,
     });
   });
 };
