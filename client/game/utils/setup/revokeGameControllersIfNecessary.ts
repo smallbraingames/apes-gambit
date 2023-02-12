@@ -7,6 +7,7 @@ import {
 
 import { GameStatus } from "../../types";
 import { Network } from "../../../network/types";
+import { getEntityFromEntityIndex } from "../resolveEntity";
 
 const revokeGameControllersIfNecessary = async (
   network: Network,
@@ -30,10 +31,12 @@ const revokeGameControllersIfNecessary = async (
   if (game.status !== GameStatus.OVER) {
     return;
   }
+  console.log("revoke data", game, pieceGameEntity.value);
   // In a game that is over, revoke controllers
   console.log("Revoking controllers...");
-  const tx = await leaveBRGame(world.entities[piece]);
-  await provider.waitForTransaction(tx.hash);
+  // @ts-ignore
+  const tx = await leaveBRGame(getEntityFromEntityIndex(piece, world));
+  await provider.waitForTransaction(tx!.hash);
 };
 
 export default revokeGameControllersIfNecessary;

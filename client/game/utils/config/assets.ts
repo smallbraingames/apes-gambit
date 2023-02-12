@@ -67,6 +67,11 @@ const assets: { [key: string]: Asset } = {
     key: Assets.Boundary,
     path: "assets/sprites/boundary.svg",
   },
+  [Assets.Banana]: {
+    type: AssetType.IMAGE,
+    key: Assets.Banana,
+    path: "assets/sprites/banana.svg",
+  },
   ...getPieceAssets(),
 };
 

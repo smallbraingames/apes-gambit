@@ -35,6 +35,7 @@ export enum Assets {
   ChessTileset = "ChessTileset",
   Shadow = "Shadow",
   Boundary = "Boundary",
+  Banana = "Banana",
 }
 
 export enum Sprites {}

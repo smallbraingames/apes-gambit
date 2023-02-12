@@ -39,6 +39,7 @@ const createBRMovementInputSystem = (
     );
 
     console.log("moving br piece");
+    console.log(entityIndex, game);
     network.api.br.moveBRPiece(
       getEntityFromEntityIndex(entityIndex, network.world),
       game.gameEntity!,
