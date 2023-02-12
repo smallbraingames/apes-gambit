@@ -21,12 +21,22 @@ const joinGame = async (
   );
   // Check controllers
   const controllers = getComponentValue(Controller, pieceEntityIndex)?.value;
-  if (
-    !controllers ||
-    !controllers
-      .map((n) => n.toString())
-      .every((n) => getBRControllers().includes(n))
-  ) {
+  let needsSetControllers = false;
+  if (!controllers) {
+    needsSetControllers = true;
+  } else {
+    // @ts-ignore
+    const controllersSet = new Set<string>(controllers);
+    const brControllers = new Set(getBRControllers());
+    const isEqual =
+      controllersSet.size === brControllers.size &&
+      [...controllersSet].every((s) => brControllers.has(s));
+    if (!isEqual) {
+      needsSetControllers = true;
+    }
+  }
+
+  if (needsSetControllers) {
     // Set correct controller components
     console.log(`Setting controllers for entity ${pieceEntityIndex}`);
     const setControllersTx = await setBRControllers(pieceEntity);
