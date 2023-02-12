@@ -61,6 +61,6 @@ library BRLibMap {
     pure
     returns (uint256)
   {
-    return uint256(keccak256(abi.encode(position, game, BRBananasPickedUpComponentID)));
+    return uint256(keccak256(abi.encodePacked(position.x, position.y, game, BRBananasPickedUpComponentID)));
   }
 }
