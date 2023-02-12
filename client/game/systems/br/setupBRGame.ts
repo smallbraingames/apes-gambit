@@ -13,7 +13,7 @@ import { getComponentValueStrict } from "@latticexyz/recs";
 import { getEntityIndexFromEntity } from "../../utils/resolveEntity";
 import { setupBRSystems } from "../setupSystems";
 
-const setupBRGame = (network: Network, scene: Scene, game: Game) => {
+const setupBRGame = async (network: Network, scene: Scene, game: Game) => {
   const { gameEntity } = game;
 
   const {
@@ -50,16 +50,17 @@ const setupBRGame = (network: Network, scene: Scene, game: Game) => {
   );
 
   // Setup banana manager
-  const test = async () => {
-    const b = createBananaMananger();
-    await b.setup(gameConfig);
-    b.isBananaOnTile({ x: 0, y: 0 });
-    b.placeBananas(scene, tilemap);
+  const bananaManager = createBananaMananger();
+  await bananaManager.setup(network, game, gameConfig, scene);
+  bananaManager.placeBananas(tilemap);
+
+  const brContext = {
+    bananaManager,
   };
 
-  test();
+  setupBRSystems(network, game, brContext);
 
-  setupBRSystems(network, game);
+  return brContext;
 };
 
 export default setupBRGame;

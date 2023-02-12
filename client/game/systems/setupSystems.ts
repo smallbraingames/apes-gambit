@@ -1,4 +1,5 @@
-import { Game } from "../types";
+import { BR, Game } from "../types";
+
 import { Network } from "../../network/types";
 import { Subscription } from "rxjs";
 import createBRGridShrinkSystem from "./br/createBRGridShrinkSystem";
@@ -10,15 +11,15 @@ import createBRValidMoveOverlaySystem from "./br/createBRValidMoveOverlaySystem"
 import createMovementInputSystem from "./lobby/input/createMovementInputSystem";
 import createPiecePositionSystem from "./lobby/createPiecePositionSystem";
 import createPieceTypeSystem from "./lobby/createPieceTypeSystem";
-import { getEntityIndexFromEntity } from "../utils/resolveEntity";
 
-const createSystems = (
+const createSystems = <A extends any[]>(
   network: Network,
   game: Game,
-  systems: ((network: Network, game: Game) => Subscription[])[]
+  systems: ((network: Network, game: Game, br?: BR) => Subscription[])[],
+  ...args: A
 ) => {
   systems.forEach((system) => {
-    game.subscribedSystems.push(...system(network, game));
+    game.subscribedSystems.push(...system(network, game, ...args));
   });
 };
 
@@ -36,40 +37,19 @@ export const setupLobbySystems = (network: Network, game: Game) => {
   ]);
 };
 
-export const setupBRSystems = (network: Network, game: Game) => {
+export const setupBRSystems = (network: Network, game: Game, br: BR) => {
   console.log("Setting up BR systems");
-  createSystems(network, game, [
-    createBRMovementInputSystem,
-    createBRPieceDeathSystem,
-    createBRPiecePositionSystem,
-    createBRPieceTypeSystem,
-    createBRValidMoveOverlaySystem,
-    createBRGridShrinkSystem,
-  ]);
+  createSystems(
+    network,
+    game,
+    [
+      createBRMovementInputSystem,
+      createBRPieceDeathSystem,
+      createBRPiecePositionSystem,
+      createBRPieceTypeSystem,
+      createBRValidMoveOverlaySystem,
+      createBRGridShrinkSystem,
+    ],
+    br
+  );
 };
-
-const setupSystems = (network: Network, game: Game) => {
-  const { world } = network;
-
-  const { gameEntity } = game;
-
-  let gameEntityIndex = undefined;
-  if (gameEntity) {
-    gameEntityIndex = getEntityIndexFromEntity(gameEntity, world);
-  }
-
-  if (!gameEntityIndex) {
-    console.warn(`Game entity ${gameEntity} could not be resolved to index`);
-  }
-
-  if (gameEntityIndex) {
-    // Set up a battle royale world
-    clearSystems(game);
-    setupBRSystems(network, game);
-  } else {
-    clearSystems(game);
-    setupLobbySystems(network, game);
-  }
-};
-
-export default setupSystems;

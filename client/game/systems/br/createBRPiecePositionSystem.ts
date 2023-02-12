@@ -1,3 +1,4 @@
+import { BR, Game } from "../../types";
 import {
   EntityIndex,
   Has,
@@ -20,7 +21,6 @@ import {
   playPieceAttackAnimation,
 } from "../../utils/pieceAnimations";
 
-import { Game } from "../../types";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
@@ -29,7 +29,8 @@ import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
 
 const createBRPiecePositionSystem = (
   network: Network,
-  game: Game
+  game: Game,
+  br: BR
 ): Subscription[] => {
   const {
     world,
@@ -146,6 +147,14 @@ const createBRPiecePositionSystem = (
       sprite.setPosition(x, y);
       sprite.setAngle(0);
       loopPieceIdleAnimation(sprite, x, y);
+
+      // Banana test
+      if (positionContext.bananaPickedUp) {
+        br!.bananaManager.removeBananaAtPosition({
+          x: positionContext.x,
+          y: positionContext.y,
+        });
+      }
     }
   );
 
