@@ -11,13 +11,16 @@ import {
 } from "@latticexyz/std-client";
 
 import { Coord } from "@latticexyz/utils";
+import { ERROR_ABI } from "./constants";
 import { GodID } from "@latticexyz/network";
+import { Interface } from "@ethersproject/abi";
 import { PieceType } from "./types";
 import { SystemAbis } from "../contracts/types/SystemAbis.mjs";
 import { SystemTypes } from "../contracts/types/SystemTypes";
 import { defineBRGameComponent } from "./components/brGameComponent";
 import { defineControllerComponent } from "./components/controllerComponent";
 import { defineLoadingStateComponent } from "./components/loadingStateComponent";
+import { parse } from "path";
 
 export async function createNetwork(config: GameConfig) {
   console.log("Network config", config);
@@ -78,6 +81,23 @@ export async function createNetwork(config: GameConfig) {
   );
 
   const actions = createActionSystem(world, txReduced$);
+
+  const parseTxErrors = <A extends any[]>(
+    api: (...args: A) => Promise<ContractTransaction>
+  ) => {
+    const errorInterface = new Interface(ERROR_ABI);
+    return async (...args: A) => {
+      try {
+        return await api(...args);
+      } catch (e: any) {
+        let errorReason = "unknown";
+        try {
+          errorReason = errorInterface.parseError(e.error.error.data).name;
+        } catch (_) {}
+        throw Error(errorReason, e);
+      }
+    };
+  };
 
   const spawnPiece = (): Promise<ContractTransaction> => {
     return systems["system.Spawn"].executeTyped();
@@ -164,7 +184,9 @@ export async function createNetwork(config: GameConfig) {
     );
   };
 
-  const leaveBRGame = (pieceEntity: EntityID): Promise<ContractTransaction> => {
+  const leaveBRGame = async (
+    pieceEntity: EntityID
+  ): Promise<ContractTransaction> => {
     return systems["system.BRLeaveGameSystem"].executeTyped(pieceEntity);
   };
 
@@ -189,15 +211,15 @@ export async function createNetwork(config: GameConfig) {
       spawnPiece,
       movePiece,
       br: {
-        getBRControllers,
-        moveBRPiece,
-        createBRGame,
-        setBRControllers,
-        joinBRGame,
-        startBRGame,
-        setBRPieceType,
-        leaveBRGame,
-        endBRGame,
+        getBRControllers: parseTxErrors(moveBRPiece),
+        moveBRPiece: parseTxErrors(moveBRPiece),
+        createBRGame: parseTxErrors(createBRGame),
+        setBRControllers: parseTxErrors(setBRControllers),
+        joinBRGame: parseTxErrors(joinBRGame),
+        startBRGame: parseTxErrors(startBRGame),
+        setBRPieceType: parseTxErrors(setBRPieceType),
+        leaveBRGame: parseTxErrors(leaveBRGame),
+        endBRGame: parseTxErrors(endBRGame),
       },
     },
   };
