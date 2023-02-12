@@ -15,10 +15,7 @@ const createMovementInputSystem = (
   network: Network,
   game: Game
 ): Subscription[] => {
-  const {
-    godEntityIndex,
-    components: { BRInGame },
-  } = network;
+  const { world, godEntityIndex } = network;
 
   const {
     game: phaserGame,
@@ -41,16 +38,10 @@ const createMovementInputSystem = (
       TILE_HEIGHT
     );
 
-    // If piece is in a game, try to move within that game
-    // If not, use base system
-    const pieceGameID = getComponentValue(BRInGame, entityIndex);
-    const pieceEntity = getEntityFromEntityIndex(entityIndex, network.world);
-    if (!pieceGameID) {
-      network.api.movePiece(pieceEntity, tilePosition);
-      return;
-    }
-    // @ts-ignore
-    network.api.br.moveBRPiece(pieceEntity, pieceGameID.value, tilePosition);
+    network.api.movePiece(
+      getEntityFromEntityIndex(entityIndex, world),
+      tilePosition
+    );
   });
 
   return [subscription];

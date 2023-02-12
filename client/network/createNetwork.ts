@@ -211,7 +211,7 @@ export async function createNetwork(config: GameConfig) {
       spawnPiece,
       movePiece,
       br: {
-        getBRControllers: parseTxErrors(moveBRPiece),
+        getBRControllers,
         moveBRPiece: parseTxErrors(moveBRPiece),
         createBRGame: parseTxErrors(createBRGame),
         setBRControllers: parseTxErrors(setBRControllers),

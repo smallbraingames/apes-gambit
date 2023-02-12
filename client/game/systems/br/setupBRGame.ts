@@ -52,9 +52,12 @@ const setupBRGame = (network: Network, scene: Scene, game: Game) => {
   // Setup banana manager
   const test = async () => {
     const b = createBananaMananger();
-    await b.setup();
+    await b.setup(gameConfig);
     b.isBananaOnTile({ x: 0, y: 0 });
+    b.placeBananas(scene, tilemap);
   };
+
+  test();
 
   setupBRSystems(network, game);
 };
