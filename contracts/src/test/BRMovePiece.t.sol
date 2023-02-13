@@ -8,6 +8,7 @@ import { SetControllerSystem, ID as SetControllerSystemID } from "systems/SetCon
 import { BRCreateGameSystem, ID as BRCreateGameSystemID } from "systems/BRCreateGameSystem.sol";
 import { BRJoinGameSystem, ID as BRJoinGameSystemID } from "systems/BRJoinGameSystem.sol";
 import { BRStartGameSystem, ID as BRStartGameSystemID } from "systems/BRStartGameSystem.sol";
+import { BRSetPieceTypeSystem, ID as BRSetPieceTypeSystemID } from "systems/BRSetPieceTypeSystem.sol";
 import { BRMovePieceSystem, ID as BRMovePieceSystemID } from "systems/BRMovePieceSystem.sol";
 import { BRGameComponent, ID as BRGameComponentID } from "components/BRGameComponent.sol";
 import { BRIsAliveComponent, ID as BRIsAliveComponentID } from "components/BRIsAliveComponent.sol";
@@ -36,8 +37,9 @@ contract BRMovePieceTest is MudTest {
     uint256 piece = spawnSystem.executeTyped();
 
     // Set the piece's controller to the BRMoveSystem
-    address[] memory controllers = new address[](1);
+    address[] memory controllers = new address[](2);
     controllers[0] = system(BRMovePieceSystemID);
+    controllers[1] = system(BRSetPieceTypeSystemID);
     setControllerSystem.executeTyped(piece, controllers);
 
     // Create a new game
@@ -70,8 +72,9 @@ contract BRMovePieceTest is MudTest {
     uint256 piece = spawnSystem.executeTyped();
 
     // Set the piece's controller to the BRMoveSystem
-    address[] memory controllers = new address[](1);
+    address[] memory controllers = new address[](2);
     controllers[0] = system(BRMovePieceSystemID);
+    controllers[1] = system(BRSetPieceTypeSystemID);
     setControllerSystem.executeTyped(piece, controllers);
 
     // Create a new game
@@ -121,8 +124,9 @@ contract BRMovePieceTest is MudTest {
     uint256 piece = spawnSystem.executeTyped();
 
     // Set the piece's controller to the BRMoveSystem
-    address[] memory controllers = new address[](1);
+    address[] memory controllers = new address[](2);
     controllers[0] = system(BRMovePieceSystemID);
+    controllers[1] = system(BRSetPieceTypeSystemID);
     setControllerSystem.executeTyped(piece, controllers);
 
     // Create a new game
