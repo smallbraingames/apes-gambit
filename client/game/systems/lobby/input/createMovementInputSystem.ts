@@ -3,19 +3,24 @@ import {
   getComponentValue,
   getComponentValueStrict,
 } from "@latticexyz/recs";
+import { Game, Lobby } from "../../../types";
+import { Network, PieceType } from "../../../../network/types";
 import { TILE_HEIGHT, TILE_WIDTH } from "../../../constants";
 import { createInput, pixelCoordToTileCoord } from "@latticexyz/phaserx";
 
-import { Game } from "../../../types";
-import { Network } from "../../../../network/types";
 import { Subscription } from "rxjs";
 import { getEntityFromEntityIndex } from "../../../utils/resolveEntity";
 
 const createMovementInputSystem = (
   network: Network,
-  game: Game
+  game: Game,
+  lobby: Lobby
 ): Subscription[] => {
-  const { world, godEntityIndex } = network;
+  const {
+    world,
+    godEntityIndex,
+    components: { PiecePosition, PieceType },
+  } = network;
 
   const {
     game: phaserGame,
@@ -37,6 +42,22 @@ const createMovementInputSystem = (
       TILE_WIDTH,
       TILE_HEIGHT
     );
+
+    // If move is invalid, don't make it
+    const currentPosition = getComponentValueStrict(PiecePosition, entityIndex);
+    const pieceType = getComponentValueStrict(PieceType, entityIndex)
+      .value as PieceType;
+    if (
+      !lobby.moveValidator.isMoveValid(currentPosition, tilePosition, pieceType)
+    ) {
+      console.warn(
+        "Not making invalid move",
+        currentPosition,
+        tilePosition,
+        pieceType
+      );
+      return;
+    }
 
     network.api.movePiece(
       getEntityFromEntityIndex(entityIndex, world),

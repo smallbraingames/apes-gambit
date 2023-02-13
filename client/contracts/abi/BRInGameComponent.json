@@ -1121,16 +1121,16 @@
   },
   "ast": {
     "absolutePath": "src/components/BRInGameComponent.sol",
-    "id": 23194,
+    "id": 23210,
     "exportedSymbols": {
       "BRInGameComponent": [
-        23193
+        23209
       ],
       "Component": [
         3996
       ],
       "ID": [
-        23180
+        23196
       ],
       "IUint256Component": [
         6853
@@ -1146,7 +1146,7 @@
     "src": "32:258:57",
     "nodes": [
       {
-        "id": 23171,
+        "id": 23187,
         "nodeType": "PragmaDirective",
         "src": "32:24:57",
         "nodes": [],
@@ -1158,20 +1158,20 @@
         ]
       },
       {
-        "id": 23172,
+        "id": 23188,
         "nodeType": "ImportDirective",
         "src": "57:55:57",
         "nodes": [],
         "absolutePath": "node_modules/@latticexyz/std-contracts/src/components/Uint256Component.sol",
         "file": "std-contracts/components/Uint256Component.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 23194,
+        "scope": 23210,
         "sourceUnit": 7982,
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "id": 23180,
+        "id": 23196,
         "nodeType": "VariableDeclaration",
         "src": "114:62:57",
         "nodes": [],
@@ -1179,7 +1179,7 @@
         "mutability": "constant",
         "name": "ID",
         "nameLocation": "131:2:57",
-        "scope": 23194,
+        "scope": 23210,
         "stateVariable": false,
         "storageLocation": "default",
         "typeDescriptions": {
@@ -1187,7 +1187,7 @@
           "typeString": "uint256"
         },
         "typeName": {
-          "id": 23173,
+          "id": 23189,
           "name": "uint256",
           "nodeType": "ElementaryTypeName",
           "src": "114:7:57",
@@ -1202,7 +1202,7 @@
               "arguments": [
                 {
                   "hexValue": "636f6d706f6e656e742e4252496e47616d65",
-                  "id": 23177,
+                  "id": 23193,
                   "isConstant": false,
                   "isLValue": false,
                   "isPure": true,
@@ -1224,7 +1224,7 @@
                     "typeString": "literal_string \"component.BRInGame\""
                   }
                 ],
-                "id": 23176,
+                "id": 23192,
                 "name": "keccak256",
                 "nodeType": "Identifier",
                 "overloadedDeclarations": [],
@@ -1235,7 +1235,7 @@
                   "typeString": "function (bytes memory) pure returns (bytes32)"
                 }
               },
-              "id": 23178,
+              "id": 23194,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -1259,7 +1259,7 @@
                 "typeString": "bytes32"
               }
             ],
-            "id": 23175,
+            "id": 23191,
             "isConstant": false,
             "isLValue": false,
             "isPure": true,
@@ -1271,14 +1271,14 @@
               "typeString": "type(uint256)"
             },
             "typeName": {
-              "id": 23174,
+              "id": 23190,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "136:7:57",
               "typeDescriptions": {}
             }
           },
-          "id": 23179,
+          "id": 23195,
           "isConstant": false,
           "isLValue": false,
           "isPure": true,
@@ -1297,17 +1297,17 @@
         "visibility": "internal"
       },
       {
-        "id": 23193,
+        "id": 23209,
         "nodeType": "ContractDefinition",
         "src": "179:110:57",
         "nodes": [
           {
-            "id": 23192,
+            "id": 23208,
             "nodeType": "FunctionDefinition",
             "src": "230:57:57",
             "nodes": [],
             "body": {
-              "id": 23191,
+              "id": 23207,
               "nodeType": "Block",
               "src": "285:2:57",
               "nodes": [],
@@ -1319,11 +1319,11 @@
               {
                 "arguments": [
                   {
-                    "id": 23187,
+                    "id": 23203,
                     "name": "world",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 23184,
+                    "referencedDeclaration": 23200,
                     "src": "274:5:57",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1331,11 +1331,11 @@
                     }
                   },
                   {
-                    "id": 23188,
+                    "id": 23204,
                     "name": "ID",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 23180,
+                    "referencedDeclaration": 23196,
                     "src": "281:2:57",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
@@ -1343,10 +1343,10 @@
                     }
                   }
                 ],
-                "id": 23189,
+                "id": 23205,
                 "kind": "baseConstructorSpecifier",
                 "modifierName": {
-                  "id": 23186,
+                  "id": 23202,
                   "name": "Uint256Component",
                   "nameLocations": [
                     "257:16:57"
@@ -1362,17 +1362,17 @@
             "name": "",
             "nameLocation": "-1:-1:-1",
             "parameters": {
-              "id": 23185,
+              "id": 23201,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 23184,
+                  "id": 23200,
                   "mutability": "mutable",
                   "name": "world",
                   "nameLocation": "250:5:57",
                   "nodeType": "VariableDeclaration",
-                  "scope": 23192,
+                  "scope": 23208,
                   "src": "242:13:57",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1381,7 +1381,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 23183,
+                    "id": 23199,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "242:7:57",
@@ -1397,12 +1397,12 @@
               "src": "241:15:57"
             },
             "returnParameters": {
-              "id": 23190,
+              "id": 23206,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "285:0:57"
             },
-            "scope": 23193,
+            "scope": 23209,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
@@ -1412,7 +1412,7 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 23181,
+              "id": 23197,
               "name": "Uint256Component",
               "nameLocations": [
                 "209:16:57"
@@ -1421,7 +1421,7 @@
               "referencedDeclaration": 6658,
               "src": "209:16:57"
             },
-            "id": 23182,
+            "id": 23198,
             "nodeType": "InheritanceSpecifier",
             "src": "209:16:57"
           }
@@ -1434,7 +1434,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "linearizedBaseContracts": [
-          23193,
+          23209,
           6658,
           6853,
           3996,
@@ -1452,7 +1452,7 @@
         ],
         "name": "BRInGameComponent",
         "nameLocation": "188:17:57",
-        "scope": 23194,
+        "scope": 23210,
         "usedErrors": [
           3533,
           5550,

@@ -1,3 +1,4 @@
+import { BR, Game, PieceState } from "../../types";
 import {
   EntityIndex,
   Has,
@@ -7,7 +8,6 @@ import {
   getComponentValue,
   getComponentValueStrict,
 } from "@latticexyz/recs";
-import { Game, PieceState } from "../../types";
 import { Network, PieceType } from "../../../network/types";
 
 import { Subscription } from "rxjs";
@@ -17,7 +17,8 @@ import setPieceSprite from "../../utils/setPieceSprite";
 
 const createBRPieceTypeSystem = (
   network: Network,
-  game: Game
+  game: Game,
+  br: BR
 ): Subscription[] => {
   const {
     godEntityIndex,
@@ -43,6 +44,9 @@ const createBRPieceTypeSystem = (
     ).value;
     const sprite = getPieceSpriteGameObject(entity, objectRegistry, scene);
     setPieceSprite(sprite, pieceType, PieceState.IDLE, activePiece !== entity);
+    if (br!.tileOverlayManager.hasValidMoveOverlays()) {
+      br!.tileOverlayManager.setValidMoveOverlays();
+    }
   };
 
   defineEnterSystem(

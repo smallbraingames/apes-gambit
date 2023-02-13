@@ -1,4 +1,9 @@
-import { defineComponentSystem, setComponent } from "@latticexyz/recs";
+import {
+  Has,
+  defineEnterSystem,
+  defineUpdateSystem,
+  setComponent,
+} from "@latticexyz/recs";
 
 import { Game } from "../types";
 import { Network } from "../../network/types";
@@ -7,7 +12,6 @@ import getOwnedPieceEntityIndex from "../utils/getOwnedPieceEntityIndex";
 
 const setupActivePieceComponent = (network: Network, game: Game) => {
   const {
-    gameWorld,
     components: { ActivePiece },
   } = game;
 
@@ -17,7 +21,7 @@ const setupActivePieceComponent = (network: Network, game: Game) => {
     components: { Owner },
   } = network;
 
-  defineComponentSystem(gameWorld, Owner, () => {
+  const setActiveAddressFromBurnerWallet = () => {
     const activeAddress = getNetworkWallet(network).address;
     const ownedPieceEntityIndex = getOwnedPieceEntityIndex(
       activeAddress,
@@ -29,6 +33,13 @@ const setupActivePieceComponent = (network: Network, game: Game) => {
         value: ownedPieceEntityIndex,
       });
     }
+  };
+
+  defineEnterSystem(world, [Has(Owner)], () => {
+    setActiveAddressFromBurnerWallet();
+  });
+  defineUpdateSystem(world, [Has(Owner)], () => {
+    setActiveAddressFromBurnerWallet();
   });
 };
 

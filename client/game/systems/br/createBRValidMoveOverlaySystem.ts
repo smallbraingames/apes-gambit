@@ -1,39 +1,49 @@
+import { BR, Game } from "../../types";
 import {
-  clearValidMoveOverlays,
-  setValidMoveOverlays,
-} from "../../utils/tileOverlays";
+  Has,
+  defineEnterSystem,
+  defineUpdateSystem,
+  getComponentValueStrict,
+} from "@latticexyz/recs";
 
-import { Game } from "../../types";
 import { Network } from "../../../network/types";
 import { Subscription } from "rxjs";
-import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 
 const createBRValidMoveOverlaySystem = (
   network: Network,
-  game: Game
+  game: Game,
+  br: BR
 ): Subscription[] => {
-  const { world, godEntityIndex } = network;
   const {
-    scenes: {
-      BR: { objectRegistry },
-    },
+    godEntityIndex,
+    components: { PiecePosition, PieceType },
+  } = network;
+  const {
+    gameWorld,
     components: { BRRechargeTimerComponent },
   } = game;
 
-  const subscription = defineComponentSystemUnsubscribable(
-    world,
-    BRRechargeTimerComponent,
-    (update) => {
-      const time = update.value[0]?.value;
-      if (!time) {
-        setValidMoveOverlays(network, game, game.scenes.BR);
-      } else {
-        clearValidMoveOverlays(objectRegistry, godEntityIndex);
-      }
+  const toggleValidMoveOverlays = () => {
+    const time = getComponentValueStrict(
+      BRRechargeTimerComponent,
+      godEntityIndex
+    ).value;
+    if (time === 0 && !br!.tileOverlayManager.hasValidMoveOverlays()) {
+      br!.tileOverlayManager.setValidMoveOverlays();
+    } else if (time > 0) {
+      br!.tileOverlayManager.clearValidMoveOverlays();
     }
-  );
+  };
 
-  return [subscription];
+  defineEnterSystem(gameWorld, [Has(BRRechargeTimerComponent)], (update) => {
+    toggleValidMoveOverlays();
+  });
+
+  defineUpdateSystem(gameWorld, [Has(BRRechargeTimerComponent)], (update) => {
+    toggleValidMoveOverlays();
+  });
+
+  return [];
 };
 
 export default createBRValidMoveOverlaySystem;

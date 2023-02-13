@@ -1,6 +1,7 @@
 import {
   Assets,
   CHESS_TILEMAP_ID,
+  DEFAULT_MOVE_VALIDATOR_CONFIG,
   LOBBY_DISPLAY_GRID_SIZE,
   TILE_HEIGHT,
   TILE_WIDTH,
@@ -9,6 +10,8 @@ import { Game, Scene } from "../../types";
 
 import { Network } from "../../../network/types";
 import createChessBoardTilemap from "../../utils/createChessBoardTilemap";
+import createMoveValidator from "../../utils/createMoveValidator";
+import createTileOverlayManager from "../../utils/createTileOverlayManager";
 import { setupLobbySystems } from "../setupSystems";
 
 const setupLobbyGame = (network: Network, scene: Scene, game: Game) => {
@@ -29,7 +32,21 @@ const setupLobbyGame = (network: Network, scene: Scene, game: Game) => {
     tilemap
   );
 
-  setupLobbySystems(network, game);
+  const moveValidator = createMoveValidator(DEFAULT_MOVE_VALIDATOR_CONFIG);
+
+  const lobbyContext = {
+    moveValidator,
+    tileOverlayManager: createTileOverlayManager(
+      network,
+      game,
+      scene,
+      moveValidator
+    ),
+  };
+
+  setupLobbySystems(network, game, lobbyContext);
+
+  return lobbyContext;
 };
 
 export default setupLobbyGame;

@@ -5,9 +5,10 @@ const createPhaserObjectRegistry = () => {
     gameObjectRegistry: createObjectRegistry<Phaser.GameObjects.GameObject>(
       (object) => object.destroy()
     ),
-    groupRegistry: createObjectRegistry<Phaser.GameObjects.Group>((object) =>
-      object.destroy()
-    ),
+    groupRegistry: createObjectRegistry<Phaser.GameObjects.Group>((object) => {
+      object.clear(true, true);
+      object.destroy();
+    }),
     tilemapRegistry: createObjectRegistry<Phaser.Tilemaps.Tilemap>((object) =>
       object.destroy()
     ),

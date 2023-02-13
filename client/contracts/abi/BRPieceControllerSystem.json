@@ -608,22 +608,22 @@
   },
   "ast": {
     "absolutePath": "src/common/BRPieceControllerSystem.sol",
-    "id": 22883,
+    "id": 22899,
     "exportedSymbols": {
       "BRNotRevokeSystem": [
         22728
       ],
       "BRPieceControllerSystem": [
-        22882
+        22898
       ],
       "BR_REVOKE_SYSTEM_ID": [
-        22845
+        22861
       ],
       "RevokeControllerSystem": [
-        27027
+        27185
       ],
       "RevokeControllerSystemID": [
-        26950
+        27108
       ],
       "System": [
         5875
@@ -636,7 +636,7 @@
     "src": "32:808:52",
     "nodes": [
       {
-        "id": 22828,
+        "id": 22844,
         "nodeType": "PragmaDirective",
         "src": "32:24:52",
         "nodes": [],
@@ -648,19 +648,19 @@
         ]
       },
       {
-        "id": 22830,
+        "id": 22846,
         "nodeType": "ImportDirective",
         "src": "57:43:52",
         "nodes": [],
         "absolutePath": "node_modules/@latticexyz/solecs/src/System.sol",
         "file": "solecs/System.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 22883,
+        "scope": 22899,
         "sourceUnit": 5876,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 22829,
+              "id": 22845,
               "name": "System",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -674,19 +674,19 @@
         "unitAlias": ""
       },
       {
-        "id": 22832,
+        "id": 22848,
         "nodeType": "ImportDirective",
         "src": "101:56:52",
         "nodes": [],
         "absolutePath": "node_modules/@latticexyz/solecs/src/utils.sol",
         "file": "solecs/utils.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 22883,
+        "scope": 22899,
         "sourceUnit": 7493,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 22831,
+              "id": 22847,
               "name": "getSystemAddressById",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -700,23 +700,23 @@
         "unitAlias": ""
       },
       {
-        "id": 22835,
+        "id": 22851,
         "nodeType": "ImportDirective",
         "src": "158:108:52",
         "nodes": [],
         "absolutePath": "src/systems/RevokeControllerSystem.sol",
         "file": "systems/RevokeControllerSystem.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 22883,
-        "sourceUnit": 27028,
+        "scope": 22899,
+        "sourceUnit": 27186,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 22833,
+              "id": 22849,
               "name": "RevokeControllerSystem",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 27027,
+              "referencedDeclaration": 27185,
               "src": "167:22:52",
               "typeDescriptions": {}
             },
@@ -724,11 +724,11 @@
           },
           {
             "foreign": {
-              "id": 22834,
+              "id": 22850,
               "name": "ID",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 26950,
+              "referencedDeclaration": 27108,
               "src": "191:2:52",
               "typeDescriptions": {}
             },
@@ -739,19 +739,19 @@
         "unitAlias": ""
       },
       {
-        "id": 22837,
+        "id": 22853,
         "nodeType": "ImportDirective",
         "src": "267:56:52",
         "nodes": [],
         "absolutePath": "src/common/BRErrors.sol",
         "file": "common/BRErrors.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 22883,
+        "scope": 22899,
         "sourceUnit": 22729,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 22836,
+              "id": 22852,
               "name": "BRNotRevokeSystem",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -765,7 +765,7 @@
         "unitAlias": ""
       },
       {
-        "id": 22845,
+        "id": 22861,
         "nodeType": "VariableDeclaration",
         "src": "325:85:52",
         "nodes": [],
@@ -773,7 +773,7 @@
         "mutability": "constant",
         "name": "BR_REVOKE_SYSTEM_ID",
         "nameLocation": "342:19:52",
-        "scope": 22883,
+        "scope": 22899,
         "stateVariable": false,
         "storageLocation": "default",
         "typeDescriptions": {
@@ -781,7 +781,7 @@
           "typeString": "uint256"
         },
         "typeName": {
-          "id": 22838,
+          "id": 22854,
           "name": "uint256",
           "nodeType": "ElementaryTypeName",
           "src": "325:7:52",
@@ -796,7 +796,7 @@
               "arguments": [
                 {
                   "hexValue": "73797374656d2e42524c6561766547616d6553797374656d",
-                  "id": 22842,
+                  "id": 22858,
                   "isConstant": false,
                   "isLValue": false,
                   "isPure": true,
@@ -818,7 +818,7 @@
                     "typeString": "literal_string \"system.BRLeaveGameSystem\""
                   }
                 ],
-                "id": 22841,
+                "id": 22857,
                 "name": "keccak256",
                 "nodeType": "Identifier",
                 "overloadedDeclarations": [],
@@ -829,7 +829,7 @@
                   "typeString": "function (bytes memory) pure returns (bytes32)"
                 }
               },
-              "id": 22843,
+              "id": 22859,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -853,7 +853,7 @@
                 "typeString": "bytes32"
               }
             ],
-            "id": 22840,
+            "id": 22856,
             "isConstant": false,
             "isLValue": false,
             "isPure": true,
@@ -865,14 +865,14 @@
               "typeString": "type(uint256)"
             },
             "typeName": {
-              "id": 22839,
+              "id": 22855,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "364:7:52",
               "typeDescriptions": {}
             }
           },
-          "id": 22844,
+          "id": 22860,
           "isConstant": false,
           "isLValue": false,
           "isPure": true,
@@ -891,17 +891,17 @@
         "visibility": "internal"
       },
       {
-        "id": 22882,
+        "id": 22898,
         "nodeType": "ContractDefinition",
         "src": "413:426:52",
         "nodes": [
           {
-            "id": 22881,
+            "id": 22897,
             "nodeType": "FunctionDefinition",
             "src": "469:368:52",
             "nodes": [],
             "body": {
-              "id": 22880,
+              "id": 22896,
               "nodeType": "Block",
               "src": "517:320:52",
               "nodes": [],
@@ -912,14 +912,14 @@
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     },
-                    "id": 22858,
+                    "id": 22874,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
                       "expression": {
-                        "id": 22852,
+                        "id": 22868,
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -930,7 +930,7 @@
                           "typeString": "msg"
                         }
                       },
-                      "id": 22853,
+                      "id": 22869,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -949,7 +949,7 @@
                     "rightExpression": {
                       "arguments": [
                         {
-                          "id": 22855,
+                          "id": 22871,
                           "name": "components",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -961,11 +961,11 @@
                           }
                         },
                         {
-                          "id": 22856,
+                          "id": 22872,
                           "name": "BR_REVOKE_SYSTEM_ID",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 22845,
+                          "referencedDeclaration": 22861,
                           "src": "574:19:52",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -984,7 +984,7 @@
                             "typeString": "uint256"
                           }
                         ],
-                        "id": 22854,
+                        "id": 22870,
                         "name": "getSystemAddressById",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -995,7 +995,7 @@
                           "typeString": "function (contract IUint256Component,uint256) view returns (address)"
                         }
                       },
-                      "id": 22857,
+                      "id": 22873,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1017,11 +1017,11 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 22863,
+                  "id": 22879,
                   "nodeType": "IfStatement",
                   "src": "523:114:52",
                   "trueBody": {
-                    "id": 22862,
+                    "id": 22878,
                     "nodeType": "Block",
                     "src": "596:41:52",
                     "statements": [
@@ -1030,7 +1030,7 @@
                           "arguments": [],
                           "expression": {
                             "argumentTypes": [],
-                            "id": 22859,
+                            "id": 22875,
                             "name": "BRNotRevokeSystem",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -1041,7 +1041,7 @@
                               "typeString": "function () pure"
                             }
                           },
-                          "id": 22860,
+                          "id": 22876,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -1057,7 +1057,7 @@
                             "typeString": "tuple()"
                           }
                         },
-                        "id": 22861,
+                        "id": 22877,
                         "nodeType": "RevertStatement",
                         "src": "604:26:52"
                       }
@@ -1066,54 +1066,54 @@
                 },
                 {
                   "assignments": [
-                    22866
+                    22882
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 22866,
+                      "id": 22882,
                       "mutability": "mutable",
                       "name": "revokeControllerSystem",
                       "nameLocation": "665:22:52",
                       "nodeType": "VariableDeclaration",
-                      "scope": 22880,
+                      "scope": 22896,
                       "src": "642:45:52",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_RevokeControllerSystem_$27027",
+                        "typeIdentifier": "t_contract$_RevokeControllerSystem_$27185",
                         "typeString": "contract RevokeControllerSystem"
                       },
                       "typeName": {
-                        "id": 22865,
+                        "id": 22881,
                         "nodeType": "UserDefinedTypeName",
                         "pathNode": {
-                          "id": 22864,
+                          "id": 22880,
                           "name": "RevokeControllerSystem",
                           "nameLocations": [
                             "642:22:52"
                           ],
                           "nodeType": "IdentifierPath",
-                          "referencedDeclaration": 27027,
+                          "referencedDeclaration": 27185,
                           "src": "642:22:52"
                         },
-                        "referencedDeclaration": 27027,
+                        "referencedDeclaration": 27185,
                         "src": "642:22:52",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_RevokeControllerSystem_$27027",
+                          "typeIdentifier": "t_contract$_RevokeControllerSystem_$27185",
                           "typeString": "contract RevokeControllerSystem"
                         }
                       },
                       "visibility": "internal"
                     }
                   ],
-                  "id": 22873,
+                  "id": 22889,
                   "initialValue": {
                     "arguments": [
                       {
                         "arguments": [
                           {
-                            "id": 22869,
+                            "id": 22885,
                             "name": "components",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -1125,11 +1125,11 @@
                             }
                           },
                           {
-                            "id": 22870,
+                            "id": 22886,
                             "name": "RevokeControllerSystemID",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 26950,
+                            "referencedDeclaration": 27108,
                             "src": "753:24:52",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -1148,7 +1148,7 @@
                               "typeString": "uint256"
                             }
                           ],
-                          "id": 22868,
+                          "id": 22884,
                           "name": "getSystemAddressById",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -1159,7 +1159,7 @@
                             "typeString": "function (contract IUint256Component,uint256) view returns (address)"
                           }
                         },
-                        "id": 22871,
+                        "id": 22887,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1183,18 +1183,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 22867,
+                      "id": 22883,
                       "name": "RevokeControllerSystem",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 27027,
+                      "referencedDeclaration": 27185,
                       "src": "690:22:52",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_contract$_RevokeControllerSystem_$27027_$",
+                        "typeIdentifier": "t_type$_t_contract$_RevokeControllerSystem_$27185_$",
                         "typeString": "type(contract RevokeControllerSystem)"
                       }
                     },
-                    "id": 22872,
+                    "id": 22888,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1206,7 +1206,7 @@
                     "src": "690:94:52",
                     "tryCall": false,
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_RevokeControllerSystem_$27027",
+                      "typeIdentifier": "t_contract$_RevokeControllerSystem_$27185",
                       "typeString": "contract RevokeControllerSystem"
                     }
                   },
@@ -1217,11 +1217,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 22877,
+                        "id": 22893,
                         "name": "piece",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 22849,
+                        "referencedDeclaration": 22865,
                         "src": "826:5:52",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -1237,18 +1237,18 @@
                         }
                       ],
                       "expression": {
-                        "id": 22874,
+                        "id": 22890,
                         "name": "revokeControllerSystem",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 22866,
+                        "referencedDeclaration": 22882,
                         "src": "790:22:52",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_RevokeControllerSystem_$27027",
+                          "typeIdentifier": "t_contract$_RevokeControllerSystem_$27185",
                           "typeString": "contract RevokeControllerSystem"
                         }
                       },
-                      "id": 22876,
+                      "id": 22892,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1256,14 +1256,14 @@
                       "memberLocation": "813:12:52",
                       "memberName": "executeTyped",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 27026,
+                      "referencedDeclaration": 27184,
                       "src": "790:35:52",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$returns$_t_bytes_memory_ptr_$",
                         "typeString": "function (uint256) external returns (bytes memory)"
                       }
                     },
-                    "id": 22878,
+                    "id": 22894,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1279,7 +1279,7 @@
                       "typeString": "bytes memory"
                     }
                   },
-                  "id": 22879,
+                  "id": 22895,
                   "nodeType": "ExpressionStatement",
                   "src": "790:42:52"
                 }
@@ -1292,17 +1292,17 @@
             "name": "revokeController",
             "nameLocation": "478:16:52",
             "parameters": {
-              "id": 22850,
+              "id": 22866,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 22849,
+                  "id": 22865,
                   "mutability": "mutable",
                   "name": "piece",
                   "nameLocation": "503:5:52",
                   "nodeType": "VariableDeclaration",
-                  "scope": 22881,
+                  "scope": 22897,
                   "src": "495:13:52",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1311,7 +1311,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 22848,
+                    "id": 22864,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "495:7:52",
@@ -1326,12 +1326,12 @@
               "src": "494:15:52"
             },
             "returnParameters": {
-              "id": 22851,
+              "id": 22867,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "517:0:52"
             },
-            "scope": 22882,
+            "scope": 22898,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
@@ -1341,7 +1341,7 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 22846,
+              "id": 22862,
               "name": "System",
               "nameLocations": [
                 "458:6:52"
@@ -1350,7 +1350,7 @@
               "referencedDeclaration": 5875,
               "src": "458:6:52"
             },
-            "id": 22847,
+            "id": 22863,
             "nodeType": "InheritanceSpecifier",
             "src": "458:6:52"
           }
@@ -1360,7 +1360,7 @@
         "contractKind": "contract",
         "fullyImplemented": false,
         "linearizedBaseContracts": [
-          22882,
+          22898,
           5875,
           5535,
           8431,
@@ -1373,7 +1373,7 @@
         ],
         "name": "BRPieceControllerSystem",
         "nameLocation": "431:23:52",
-        "scope": 22883,
+        "scope": 22899,
         "usedErrors": [
           8391,
           8393,
