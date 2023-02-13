@@ -20,7 +20,6 @@ const createBRGridShrinkSystem = (
     BRGridDimComponent,
     (update) => {
       const gridDim = update.value[0]?.value;
-      console.log(update);
       if (gridDim === undefined) {
         return;
       }

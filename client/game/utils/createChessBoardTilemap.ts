@@ -7,7 +7,6 @@ const createChessBoardTilemap = (
   tilesetAssetKey: Assets,
   gridSize: number
 ): Phaser.Tilemaps.Tilemap => {
-  console.log("grid size", gridSize);
   const tilemap = scene.make.tilemap({
     tileWidth,
     tileHeight,

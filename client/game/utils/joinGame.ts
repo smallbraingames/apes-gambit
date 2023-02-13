@@ -14,7 +14,6 @@ const joinGame = async (
     },
     components: { Controller },
   } = network;
-  console.log("entity index", pieceEntityIndex, gameEntity, network);
   const pieceEntity = getEntityFromEntityIndex(pieceEntityIndex, network.world);
   console.log(
     `Joining game with piece: ${pieceEntity} and game: ${gameEntity}`

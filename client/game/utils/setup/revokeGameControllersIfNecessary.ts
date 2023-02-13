@@ -31,7 +31,7 @@ const revokeGameControllersIfNecessary = async (
   if (game.status !== GameStatus.OVER) {
     return;
   }
-  console.log("revoke data", game, pieceGameEntity.value);
+  console.log("Revoking with data", game, pieceGameEntity.value);
   // In a game that is over, revoke controllers
   console.log("Revoking controllers...");
   // @ts-ignore
