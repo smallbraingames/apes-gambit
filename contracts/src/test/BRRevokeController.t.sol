@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
+import { PieceType } from "common/PieceType.sol";
 import { Coord } from "std-contracts/components/CoordComponent.sol";
 import { SpawnSystem, ID as SpawnSystemID } from "systems/SpawnSystem.sol";
 import { SetControllerSystem, ID as SetControllerSystemID } from "systems/SetControllerSystem.sol";
@@ -11,6 +12,8 @@ import { BRMovePieceSystem, ID as BRMovePieceSystemID } from "systems/BRMovePiec
 import { BRSetPieceTypeSystem, ID as BRSetPieceTypeSystemID } from "systems/BRSetPieceTypeSystem.sol";
 import { BRLeaveGameSystem, ID as BRLeaveGameSystemID } from "systems/BRLeaveGameSystem.sol";
 import { ControllerComponent, ID as ControllerComponentID } from "components/ControllerComponent.sol";
+import { PieceTypeComponent, ID as PieceTypeComponentID } from "components/PieceTypeComponent.sol";
+
 import { BRAlreadyInGame } from "common/BRErrors.sol";
 import { BRLibPiece } from "libraries/BRLibPiece.sol";
 import { Deploy } from "./Deploy.sol";
@@ -46,7 +49,11 @@ contract BRRevokeControllerTest is MudTest {
     // Revoke controllership and check
     brLeaveGameSystem.executeTyped(piece);
     ControllerComponent controllerComponent = ControllerComponent(getAddressById(components, ControllerComponentID));
+    PieceTypeComponent pieceTypeComponent = PieceTypeComponent(getAddressById(components, PieceTypeComponentID));
+
     // Piece should have no controllers
     assertTrue(!controllerComponent.has(piece) || controllerComponent.getValue(piece).length == 0);
+    // Piece type should be pawn
+    assertTrue(pieceTypeComponent.getValue(piece) == PieceType.PAWN);
   }
 }
