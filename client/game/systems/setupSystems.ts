@@ -1,10 +1,9 @@
-import { BR, Game } from "../types";
+import { BR, Game, Lobby } from "../types";
 
 import { Network } from "../../network/types";
 import { Subscription } from "rxjs";
 import createBRGridShrinkSystem from "./br/createBRGridShrinkSystem";
 import createBRMovementInputSystem from "./br/input/createBRMovementInputSystem";
-import createBRPieceDeathSystem from "./br/createBRPieceDeathSystem";
 import createBRPiecePositionSystem from "./br/createBRPiecePositionSystem";
 import createBRPieceTypeSystem from "./br/createBRPieceTypeSystem";
 import createBRValidMoveOverlaySystem from "./br/createBRValidMoveOverlaySystem";
@@ -15,7 +14,7 @@ import createPieceTypeSystem from "./lobby/createPieceTypeSystem";
 const createSystems = <A extends any[]>(
   network: Network,
   game: Game,
-  systems: ((network: Network, game: Game, br?: BR) => Subscription[])[],
+  systems: ((network: Network, game: Game, ...args: A) => Subscription[])[],
   ...args: A
 ) => {
   systems.forEach((system) => {
@@ -28,13 +27,22 @@ const clearSystems = (game: Game) => {
   game.subscribedSystems.map((sub) => sub.unsubscribe());
 };
 
-export const setupLobbySystems = (network: Network, game: Game) => {
+export const setupLobbySystems = (
+  network: Network,
+  game: Game,
+  lobby: Lobby
+) => {
   console.log("Setting up lobby systems");
-  createSystems(network, game, [
-    createMovementInputSystem,
-    createPiecePositionSystem,
-    createPieceTypeSystem,
-  ]);
+  createSystems(
+    network,
+    game,
+    [
+      createMovementInputSystem,
+      createPiecePositionSystem,
+      createPieceTypeSystem,
+    ],
+    lobby
+  );
 };
 
 export const setupBRSystems = (network: Network, game: Game, br: BR) => {
@@ -44,7 +52,6 @@ export const setupBRSystems = (network: Network, game: Game, br: BR) => {
     game,
     [
       createBRMovementInputSystem,
-      createBRPieceDeathSystem,
       createBRPiecePositionSystem,
       createBRPieceTypeSystem,
       createBRValidMoveOverlaySystem,

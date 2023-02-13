@@ -40,16 +40,17 @@ export const playMovePieceAnimation = async (
 ) => {
   console.log("move piece");
 
-  const particles = scene.add.particles(Assets.ChessTileset, undefined, {
-    speed: { min: 20, max: 100 },
-    angle: { min: 0, max: 360 },
-    scale: { start: 1, end: 0 },
-    alpha: { start: 0, end: 0.1 },
-    lifespan: 2000,
-  });
+  // Don't emit trails for now
+  // const particles = scene.add.particles(Assets.ChessTileset, undefined, {
+  //   speed: { min: 20, max: 100 },
+  //   angle: { min: 0, max: 360 },
+  //   scale: { start: 1, end: 0 },
+  //   alpha: { start: 0, end: 0.1 },
+  //   lifespan: 2000,
+  // });
 
-  const emitter = particles.emitters.first;
-  emitter.startFollow(gameObject);
+  // const emitter = particles.emitters.first;
+  // emitter.startFollow(gameObject);
 
   gameObject.setTexture(
     getAssetKeyForPiece(pieceType, PieceState.MOVE, isEnemy)
@@ -85,8 +86,8 @@ export const playMovePieceAnimation = async (
     getAssetKeyForPiece(pieceType, PieceState.IDLE, isEnemy)
   );
 
-  emitter.stopFollow();
-  emitter.stop();
+  // emitter.stopFollow();
+  // emitter.stop();
 };
 
 export const playPieceAttackAnimation = async (

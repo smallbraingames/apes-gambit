@@ -1,6 +1,7 @@
 import {
   Assets,
   CHESS_TILEMAP_ID,
+  DEFAULT_MOVE_VALIDATOR_CONFIG,
   TILE_HEIGHT,
   TILE_WIDTH,
 } from "../../constants";
@@ -9,6 +10,8 @@ import { Game, Scene } from "../../types";
 import { Network } from "../../../network/types";
 import createBananaMananger from "../../utils/createBananaManager";
 import createChessBoardTilemap from "../../utils/createChessBoardTilemap";
+import createMoveValidator from "../../utils/createMoveValidator";
+import createTileOverlayManager from "../../utils/createTileOverlayManager";
 import { getComponentValueStrict } from "@latticexyz/recs";
 import { getEntityIndexFromEntity } from "../../utils/resolveEntity";
 import { setupBRSystems } from "../setupSystems";
@@ -54,8 +57,17 @@ const setupBRGame = async (network: Network, scene: Scene, game: Game) => {
   await bananaManager.setup(network, game, gameConfig, scene);
   bananaManager.placeBananas(tilemap);
 
+  const moveValidator = createMoveValidator(DEFAULT_MOVE_VALIDATOR_CONFIG);
   const brContext = {
     bananaManager,
+    moveValidator: createMoveValidator(DEFAULT_MOVE_VALIDATOR_CONFIG),
+    tileOverlayManager: createTileOverlayManager(
+      network,
+      game,
+      scene,
+      moveValidator,
+      gameEntity
+    ),
   };
 
   setupBRSystems(network, game, brContext);

@@ -1,5 +1,9 @@
+import {
+  DEFAULT_MOVE_VALIDATOR_CONFIG,
+  GAME_WORLD_NAMESPACE,
+  INITIAL_ZOOM,
+} from "./constants";
 import { EntityID, namespaceWorld } from "@latticexyz/recs";
-import { GAME_WORLD_NAMESPACE, INITIAL_ZOOM } from "./constants";
 import {
   defineCoordComponent,
   defineNumberComponent,
@@ -15,6 +19,7 @@ import assets from "./utils/config/assets";
 import { config } from "./config";
 import createBananaMananger from "./utils/createBananaManager";
 import { createCamera } from "@latticexyz/phaserx";
+import createMoveValidator from "./utils/createMoveValidator";
 import createPhaserGame from "../phaser/createPhaserGame";
 import createPhaserObjectRegistry from "../phaser/createPhaserObjectRegistry";
 import createScene from "../phaser/createScene";

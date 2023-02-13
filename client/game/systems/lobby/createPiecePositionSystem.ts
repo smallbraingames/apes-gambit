@@ -1,23 +1,17 @@
-import {
-  PIECE_SPRITE_ID,
-  PIECE_X_OFFSET,
-  PIECE_Y_OFFSET,
-  TILE_HEIGHT,
-  TILE_WIDTH,
-} from "../../constants";
+import { Game, Lobby } from "../../types";
+import { PIECE_SPRITE_ID, TILE_HEIGHT, TILE_WIDTH } from "../../constants";
 
-import { Game } from "../../types";
 import { Network } from "../../../network/types";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
 import isActivePiece from "../../utils/isActivePiece";
-import { setValidMoveOverlays } from "../../utils/tileOverlays";
 import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
 
 const createPiecePositionSystem = (
   network: Network,
-  game: Game
+  game: Game,
+  lobby: Lobby
 ): Subscription[] => {
   const {
     godEntityIndex,
@@ -51,7 +45,7 @@ const createPiecePositionSystem = (
       const { x, y } = tileCoordToPixelCoord(position, TILE_WIDTH, TILE_HEIGHT);
       sprite.setPosition(x, y);
       if (isActivePiece(game, godEntityIndex, update.entity)) {
-        setValidMoveOverlays(network, game, game.scenes.Lobby);
+        lobby.tileOverlayManager.setValidMoveOverlays();
       }
     },
     { runOnInit: true }

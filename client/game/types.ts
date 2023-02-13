@@ -3,10 +3,14 @@ import { Component, World } from "@latticexyz/recs";
 import { Camera } from "@latticexyz/phaserx";
 import { ObjectRegistry } from "../phaser/types";
 import { createGame } from "./createGame";
+import createMoveValidator from "./utils/createMoveValidator";
 import setupBRGame from "./systems/br/setupBRGame";
+import setupLobbyGame from "./systems/lobby/setupLobbyGame";
 
 export type Game = Awaited<ReturnType<typeof createGame>>;
 export type BR = Awaited<ReturnType<typeof setupBRGame>>;
+export type Lobby = Awaited<ReturnType<typeof setupLobbyGame>>;
+export type MoveValidator = Awaited<ReturnType<typeof createMoveValidator>>;
 
 export type Scene = {
   scene: Phaser.Scene;

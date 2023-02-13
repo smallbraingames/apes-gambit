@@ -1113,10 +1113,10 @@
   },
   "ast": {
     "absolutePath": "src/components/BRBananasPickedUpComponent.sol",
-    "id": 22932,
+    "id": 22948,
     "exportedSymbols": {
       "BRBananasPickedUpComponent": [
-        22931
+        22947
       ],
       "BareComponent": [
         3733
@@ -1125,7 +1125,7 @@
         3996
       ],
       "ID": [
-        22918
+        22934
       ],
       "IEntityIndexer": [
         6793
@@ -1150,7 +1150,7 @@
     "src": "32:273:55",
     "nodes": [
       {
-        "id": 22909,
+        "id": 22925,
         "nodeType": "PragmaDirective",
         "src": "32:24:55",
         "nodes": [],
@@ -1162,20 +1162,20 @@
         ]
       },
       {
-        "id": 22910,
+        "id": 22926,
         "nodeType": "ImportDirective",
         "src": "57:54:55",
         "nodes": [],
         "absolutePath": "node_modules/@latticexyz/std-contracts/src/components/Uint32Component.sol",
         "file": "std-contracts/components/Uint32Component.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 22932,
+        "scope": 22948,
         "sourceUnit": 8097,
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "id": 22918,
+        "id": 22934,
         "nodeType": "VariableDeclaration",
         "src": "113:71:55",
         "nodes": [],
@@ -1183,7 +1183,7 @@
         "mutability": "constant",
         "name": "ID",
         "nameLocation": "130:2:55",
-        "scope": 22932,
+        "scope": 22948,
         "stateVariable": false,
         "storageLocation": "default",
         "typeDescriptions": {
@@ -1191,7 +1191,7 @@
           "typeString": "uint256"
         },
         "typeName": {
-          "id": 22911,
+          "id": 22927,
           "name": "uint256",
           "nodeType": "ElementaryTypeName",
           "src": "113:7:55",
@@ -1206,7 +1206,7 @@
               "arguments": [
                 {
                   "hexValue": "636f6d706f6e656e742e425242616e616e61735069636b65645570",
-                  "id": 22915,
+                  "id": 22931,
                   "isConstant": false,
                   "isLValue": false,
                   "isPure": true,
@@ -1228,7 +1228,7 @@
                     "typeString": "literal_string \"component.BRBananasPickedUp\""
                   }
                 ],
-                "id": 22914,
+                "id": 22930,
                 "name": "keccak256",
                 "nodeType": "Identifier",
                 "overloadedDeclarations": [],
@@ -1239,7 +1239,7 @@
                   "typeString": "function (bytes memory) pure returns (bytes32)"
                 }
               },
-              "id": 22916,
+              "id": 22932,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -1263,7 +1263,7 @@
                 "typeString": "bytes32"
               }
             ],
-            "id": 22913,
+            "id": 22929,
             "isConstant": false,
             "isLValue": false,
             "isPure": true,
@@ -1275,14 +1275,14 @@
               "typeString": "type(uint256)"
             },
             "typeName": {
-              "id": 22912,
+              "id": 22928,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "135:7:55",
               "typeDescriptions": {}
             }
           },
-          "id": 22917,
+          "id": 22933,
           "isConstant": false,
           "isLValue": false,
           "isPure": true,
@@ -1301,17 +1301,17 @@
         "visibility": "internal"
       },
       {
-        "id": 22931,
+        "id": 22947,
         "nodeType": "ContractDefinition",
         "src": "187:117:55",
         "nodes": [
           {
-            "id": 22930,
+            "id": 22946,
             "nodeType": "FunctionDefinition",
             "src": "246:56:55",
             "nodes": [],
             "body": {
-              "id": 22929,
+              "id": 22945,
               "nodeType": "Block",
               "src": "300:2:55",
               "nodes": [],
@@ -1323,11 +1323,11 @@
               {
                 "arguments": [
                   {
-                    "id": 22925,
+                    "id": 22941,
                     "name": "world",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 22922,
+                    "referencedDeclaration": 22938,
                     "src": "289:5:55",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1335,11 +1335,11 @@
                     }
                   },
                   {
-                    "id": 22926,
+                    "id": 22942,
                     "name": "ID",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 22918,
+                    "referencedDeclaration": 22934,
                     "src": "296:2:55",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
@@ -1347,10 +1347,10 @@
                     }
                   }
                 ],
-                "id": 22927,
+                "id": 22943,
                 "kind": "baseConstructorSpecifier",
                 "modifierName": {
-                  "id": 22924,
+                  "id": 22940,
                   "name": "Uint32Component",
                   "nameLocations": [
                     "273:15:55"
@@ -1366,17 +1366,17 @@
             "name": "",
             "nameLocation": "-1:-1:-1",
             "parameters": {
-              "id": 22923,
+              "id": 22939,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 22922,
+                  "id": 22938,
                   "mutability": "mutable",
                   "name": "world",
                   "nameLocation": "266:5:55",
                   "nodeType": "VariableDeclaration",
-                  "scope": 22930,
+                  "scope": 22946,
                   "src": "258:13:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1385,7 +1385,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 22921,
+                    "id": 22937,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "258:7:55",
@@ -1401,12 +1401,12 @@
               "src": "257:15:55"
             },
             "returnParameters": {
-              "id": 22928,
+              "id": 22944,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "300:0:55"
             },
-            "scope": 22931,
+            "scope": 22947,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
@@ -1416,7 +1416,7 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 22919,
+              "id": 22935,
               "name": "Uint32Component",
               "nameLocations": [
                 "226:15:55"
@@ -1425,7 +1425,7 @@
               "referencedDeclaration": 8096,
               "src": "226:15:55"
             },
-            "id": 22920,
+            "id": 22936,
             "nodeType": "InheritanceSpecifier",
             "src": "226:15:55"
           }
@@ -1438,7 +1438,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "linearizedBaseContracts": [
-          22931,
+          22947,
           8096,
           3996,
           3733,
@@ -1455,7 +1455,7 @@
         ],
         "name": "BRBananasPickedUpComponent",
         "nameLocation": "196:26:55",
-        "scope": 22932,
+        "scope": 22948,
         "usedErrors": [
           3533,
           5550,

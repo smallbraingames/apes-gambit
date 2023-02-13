@@ -5,16 +5,11 @@ import {
   HasValue,
   defineEnterSystem,
   defineExitSystem,
-  defineQuery,
   defineUpdateSystem,
   getComponentValueStrict,
 } from "@latticexyz/recs";
 import { Network, PieceType } from "../../../network/types";
 import { PIECE_SPRITE_ID, TILE_HEIGHT, TILE_WIDTH } from "../../constants";
-import {
-  clearValidMoveOverlays,
-  setValidMoveOverlays,
-} from "../../utils/tileOverlays";
 import {
   loopPieceIdleAnimation,
   playMovePieceAnimation,
@@ -22,7 +17,6 @@ import {
 } from "../../utils/pieceAnimations";
 
 import { Subscription } from "rxjs";
-import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
 import isLiveGamePiece from "../../utils/isLiveGamePiece";
 import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
@@ -84,7 +78,6 @@ const createBRPiecePositionSystem = (
     ],
     async (update) => {
       if (!isLiveGamePiece(update.entity, network, gameEntity!)) return;
-      console.log(update.entity);
       const positionContext = getComponentValueStrict(
         PiecePositionContext,
         update.entity
@@ -109,9 +102,11 @@ const createBRPiecePositionSystem = (
         update.entity
       ).value;
 
-      clearValidMoveOverlays(objectRegistry, godEntityIndex);
-
       const isEnemy = activePiece !== update.entity;
+      if (!isEnemy) {
+        br!.tileOverlayManager.clearValidMoveOverlays();
+      }
+
       let moveAnimation;
       if (positionContext.pieceTaken !== undefined) {
         moveAnimation = playPieceAttackAnimation(
@@ -143,7 +138,6 @@ const createBRPiecePositionSystem = (
       //   : async () => true;
       await Promise.all([moveAnimation]);
 
-      //console.log("setting position", pieceX, pieceY);
       sprite.setPosition(x, y);
       sprite.setAngle(0);
       loopPieceIdleAnimation(sprite, x, y);
@@ -154,6 +148,9 @@ const createBRPiecePositionSystem = (
           x: positionContext.x,
           y: positionContext.y,
         });
+      }
+      if (br!.tileOverlayManager.hasValidMoveOverlays()) {
+        br!.tileOverlayManager.setValidMoveOverlays();
       }
     }
   );

@@ -1,18 +1,22 @@
+import { BR, Game } from "../../../types";
 import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
+import { Network, PieceType } from "../../../../network/types";
 import { TILE_HEIGHT, TILE_WIDTH } from "../../../constants";
 import { createInput, pixelCoordToTileCoord } from "@latticexyz/phaserx";
 
-import { Game } from "../../../types";
-import { Network } from "../../../../network/types";
 import { Subscription } from "rxjs";
 import { getEntityFromEntityIndex } from "../../../utils/resolveEntity";
 import isLiveGamePiece from "../../../utils/isLiveGamePiece";
 
 const createBRMovementInputSystem = (
   network: Network,
-  game: Game
+  game: Game,
+  br: BR
 ): Subscription[] => {
-  const { godEntityIndex } = network;
+  const {
+    godEntityIndex,
+    components: { PiecePosition, PieceType },
+  } = network;
   const {
     game: phaserGame,
     gameEntity,
@@ -38,8 +42,22 @@ const createBRMovementInputSystem = (
       TILE_HEIGHT
     );
 
-    console.log("moving br piece");
-    console.log(entityIndex, game);
+    // If move is invalid, don't make it
+    const currentPosition = getComponentValueStrict(PiecePosition, entityIndex);
+    const pieceType = getComponentValueStrict(PieceType, entityIndex)
+      .value as PieceType;
+    if (
+      !br!.moveValidator.isMoveValid(currentPosition, tilePosition, pieceType)
+    ) {
+      console.warn(
+        "Not making invalid move",
+        currentPosition,
+        tilePosition,
+        pieceType
+      );
+      return;
+    }
+
     network.api.br.moveBRPiece(
       getEntityFromEntityIndex(entityIndex, network.world),
       game.gameEntity!,

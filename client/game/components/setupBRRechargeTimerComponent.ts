@@ -64,7 +64,10 @@ const setupBRRechargeTimerComponent = (network: Network, game: Game) => {
           value: rechargeTime,
         });
       } else {
-        console.warn("Could not find previous move time");
+        console.warn("Could not find previous move time, setting to zero");
+        setComponent(BRRechargeTimerComponent, update.entity, {
+          value: 0,
+        });
       }
     });
   });
