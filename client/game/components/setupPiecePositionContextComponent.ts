@@ -47,6 +47,27 @@ const setupPiecePositionContextComponent = (network: Network, game: Game) => {
     });
   });
 
+  // Listen to calls directly to the move system and update the position automatically as well
+  systemCallStreams["system.MovePiece"].subscribe((call) => {
+    const positionUpdates = call.updates.filter(
+      (update) => update.component.id === PiecePosition.id
+    );
+    if (positionUpdates.length === 0) {
+      console.warn(
+        "System call stream for PiecePositionContext recieved call with empty position",
+        call
+      );
+      return;
+    }
+    const entity = positionUpdates[0].entity;
+    const position: Coord = positionUpdates[0].value as Coord;
+    setComponent(PiecePositionContext, entity, {
+      ...position,
+      pieceTaken: undefined,
+      bananaPickedUp: false,
+    });
+  });
+
   systemCallStreams["system.BRMovePieceSystem"].subscribe((call) => {
     const positionUpdates = call.updates.filter(
       (update) => update.component.id === PiecePosition.id
@@ -79,7 +100,6 @@ const setupPiecePositionContextComponent = (network: Network, game: Game) => {
     }
 
     let bananaPickedUp = false;
-    console.log(bananasPickedUpUpdates);
     if (bananasPickedUpUpdates.length > 0) {
       bananaPickedUp = true;
     }
