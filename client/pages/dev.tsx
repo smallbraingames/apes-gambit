@@ -5,7 +5,7 @@ import { GameConfig } from "../game/types";
 import { NetworkContext } from "../context/NetworkContext";
 import { getEntityFromEntityIndex } from "../game/utils/resolveEntity";
 
-const GAME_START_TIME = Math.floor(new Date().getTime() / 1000);
+const GAME_START_TIME = Math.floor(new Date().getTime() / 1000) + 30;
 const GAME_RECHARGE_TIME = 5;
 const GAME_INITIAL_GRID_DIM = 30;
 const GAME_SECONDS_PER_GRID_SHRINK = 100;

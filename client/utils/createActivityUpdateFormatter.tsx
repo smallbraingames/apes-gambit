@@ -77,11 +77,21 @@ const createActivityUpdateFormatter = (network: Network) => {
     );
   };
 
+  const getJoinedGameUpdate = (pieceEntity: EntityIndex): JSX.Element => {
+    return (
+      <div className="flex items-center">
+        <div>{getPieceDisplay(pieceEntity)}</div>
+        <div>joined the game</div>
+      </div>
+    );
+  };
+
   return {
     getPieceTypeUpdate,
     getPieceDeathUpdate,
     getPieceMoveUpdate,
     getGridDimUpdate,
+    getJoinedGameUpdate,
   };
 };
 

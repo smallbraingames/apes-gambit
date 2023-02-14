@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 
 import { Coord } from "@latticexyz/utils";
+import { EntityType } from "../../game/types";
 import { GameContext } from "../../context/GameContext";
 import { NetworkContext } from "../../context/NetworkContext";
 import { PieceType } from "../../network/types";
 import createActivityUpdateFormatter from "../../utils/createActivityUpdateFormatter";
 import { defineComponentSystemUnsubscribable } from "../../game/utils/defineComponentSystemUnsubscribable";
+import getEntityType from "../../game/utils/getEntityType";
 
 const ActivityStream = () => {
   const network = useContext(NetworkContext);
@@ -21,13 +23,18 @@ const ActivityStream = () => {
 
     const {
       systemCallStreams,
-      components: { PieceType, BRIsAlive, PiecePosition },
+      components: { PieceType, BRIsAlive, PiecePosition, BRInGame },
     } = network.network;
 
     const {
+      gameEntity,
       gameWorld,
       components: { BRGridDimComponent },
     } = game.game;
+
+    if (!gameEntity) {
+      return;
+    }
 
     const gridDimSubscription = defineComponentSystemUnsubscribable(
       gameWorld,
@@ -58,6 +65,17 @@ const ActivityStream = () => {
           );
           return;
         }
+        if (
+          !(
+            getEntityType(
+              pieceTypeUpdate.entity,
+              network.network!,
+              gameEntity
+            ) === EntityType.BR_PIECE
+          )
+        ) {
+          return;
+        }
         const pieceType = pieceTypeUpdate.value.value as PieceType;
         setActivity((a) => [
           ...a,
@@ -82,6 +100,18 @@ const ActivityStream = () => {
         pieceAliveUpdates.length > 0 ? pieceAliveUpdates[0] : undefined;
 
       if (piecePositionUpdate === undefined) {
+        return;
+      }
+
+      if (
+        !(
+          getEntityType(
+            piecePositionUpdate.entity,
+            network.network!,
+            gameEntity
+          ) === EntityType.BR_PIECE
+        )
+      ) {
         return;
       }
 
@@ -113,10 +143,37 @@ const ActivityStream = () => {
       }
     });
 
+    const joinGameSubscription = systemCallStreams[
+      "system.BRJoinGameSystem"
+    ].subscribe((systemCall) => {
+      const inGameUpdates = systemCall.updates.filter(
+        (update) => update.component.id === BRInGame.id
+      );
+      if (inGameUpdates.length === 0) {
+        return;
+      }
+      const inGameUpdate = inGameUpdates[0];
+
+      if (
+        !(
+          getEntityType(inGameUpdate.entity, network.network!, gameEntity) ===
+          EntityType.BR_PIECE
+        )
+      ) {
+        return;
+      }
+
+      setActivity((a) => [
+        ...a,
+        activityUpdateFormatter.getJoinedGameUpdate(inGameUpdate.entity),
+      ]);
+    });
+
     return () => {
       moveSubscription.unsubscribe();
       switchSubscription.unsubscribe();
       gridDimSubscription.unsubscribe();
+      joinGameSubscription.unsubscribe();
     };
   }, [network, game]);
 
