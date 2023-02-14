@@ -155,7 +155,7 @@ const createBRPiecePositionSystem = (
       // Take other piece
       if (positionContext.pieceTaken !== undefined) {
         objectRegistry.gameObjectRegistry.remove(
-          positionContext.pieceTaken,
+          positionContext.pieceTaken as EntityIndex,
           PIECE_SPRITE_ID
         );
       }
