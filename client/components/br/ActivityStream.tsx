@@ -121,12 +121,12 @@ const ActivityStream = () => {
   }, [network, game]);
 
   return (
-    <div className="bg-yellow-50 p-4 border flex flex-col border-b-4 border-r-2 border-yellow-900 text-yellow-900 rounded-lg w-full overflow-y-auto">
-      <p className="mb-2 mt-1 ml-1">ACTIVITY</p>
-      <div className="h-full ml-1">
-        <div className="flex flex-col h-full flex-col-reverse">
+    <div className="bg-yellow-50 py-4 pl-5 border border-b-4 border-r-2 border-yellow-900 text-yellow-900 rounded-lg w-full flex flex-col">
+      <p className="mt-1 mb-2">ACTIVITY</p>
+      <div className="h-full flex flex-col">
+        <div className="flex flex-col h-full flex-col-reverse overflow-y-auto mb-8">
           {[...activity].reverse().map((element, i) => (
-            <div key={i}>
+            <div className="py-0.5" key={i}>
               <div>{element}</div>
             </div>
           ))}
