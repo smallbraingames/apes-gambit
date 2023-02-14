@@ -13,7 +13,8 @@ import { BRInGameComponent, ID as BRInGameComponentID } from "components/BRInGam
 import { BRIsAliveComponent, ID as BRIsAliveComponentID } from "components/BRIsAliveComponent.sol";
 import { BRPointsComponent, ID as BRPointsComponentID } from "components/BRPointsComponent.sol";
 import { SetPieceTypeSystem, ID as SetPieceTypeSystemID } from "systems/SetPieceTypeSystem.sol";
-import { BRLeaveGameSystem, ID as BRLeaveGameSystemID } from "systems/BRLeaveGameSystem.sol";
+import { ID as BRJoinGameSystemID } from "systems/BRJoinGameSystem.sol";
+import { ID as BRLeaveGameSystemID } from "systems/BRLeaveGameSystem.sol";
 import { BRLibPiece } from "libraries/BRLibPiece.sol";
 import { BRLibGame } from "libraries/BRLibPiece.sol";
 
@@ -80,13 +81,13 @@ contract BRSetPieceTypeSystem is BRPieceControllerSystem, BRLazyUpdater {
   }
 
   function setPieceTypeToPawnIfEndGameSystem(uint256 piece, uint256 game) private returns (bool) {
-    if (msg.sender != getSystemAddressById(components, BRLeaveGameSystemID)) {
+    if (
+      msg.sender != getSystemAddressById(components, BRLeaveGameSystemID) &&
+      msg.sender != getSystemAddressById(components, BRJoinGameSystemID)
+    ) {
       return false;
     }
-    BRInGameComponent brInGameComponent = BRInGameComponent(getAddressById(components, BRInGameComponentID));
     SetPieceTypeSystem setPieceTypeSystem = SetPieceTypeSystem(getSystemAddressById(components, SetPieceTypeSystemID));
-    // If the piece is in this game, the game is over, allow piece to be set back to pawn
-    BRLibGame.checkPieceInGame(brInGameComponent, piece, game);
     setPieceTypeSystem.executeTyped(piece, PieceType.PAWN);
     return true;
   }
