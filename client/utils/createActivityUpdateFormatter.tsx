@@ -48,7 +48,7 @@ const createActivityUpdateFormatter = (network: Network) => {
   ): JSX.Element => {
     return (
       <div className="flex items-center">
-        <div></div>
+        <div>{getPieceDisplay(takerEntity)}</div>
         <div>took</div>
         <div>{getPieceDisplay(deadEntity)}</div>
       </div>
