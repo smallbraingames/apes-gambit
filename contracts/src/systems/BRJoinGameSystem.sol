@@ -1,13 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 import { System, IWorld } from "solecs/System.sol";
-import { getAddressById } from "solecs/utils.sol";
+import { getAddressById, getSystemAddressById } from "solecs/utils.sol";
 import { BRGame, BRGameStatus } from "common/BRGame.sol";
+import { PieceType } from "common/PieceType.sol";
 import { OwnerComponent, ID as OwnerComponentID } from "components/OwnerComponent.sol";
 import { ControllerComponent, ID as ControllerComponentID } from "components/ControllerComponent.sol";
 import { BRGameComponent, ID as BRGameComponentID } from "components/BRGameComponent.sol";
 import { BRInGameComponent, ID as BRInGameComponentID } from "components/BRInGameComponent.sol";
 import { BRIsAliveComponent, ID as BRIsAliveComponentID } from "components/BRIsAliveComponent.sol";
+import { BRSetPieceTypeSystem, ID as BRSetPieceSystemID } from "systems/BRSetPieceTypeSystem.sol";
 import { BRLibPiece } from "libraries/BRLibPiece.sol";
 import { BRLibGame } from "libraries/BRLibGame.sol";
 
@@ -25,6 +27,9 @@ contract BRJoinGameSystem is System {
     BRGameComponent brGameComponent = BRGameComponent(getAddressById(components, BRGameComponentID));
     BRInGameComponent brInGameComponent = BRInGameComponent(getAddressById(components, BRInGameComponentID));
     BRIsAliveComponent brIsAliveComponent = BRIsAliveComponent(getAddressById(components, BRIsAliveComponentID));
+    BRSetPieceTypeSystem brSetPieceTypeSystem = BRSetPieceTypeSystem(
+      getSystemAddressById(components, BRSetPieceSystemID)
+    );
 
     // Check that piece has the correct owner and controllers
     BRLibPiece.checkPieceOwnerAndControllers(ownerComponent, controllerComponent, piece, msg.sender);
@@ -40,7 +45,9 @@ contract BRJoinGameSystem is System {
     brIsAliveComponent.set(piece);
 
     BRPointsComponent brPointsComponent = BRPointsComponent(getAddressById(components, BRPointsComponentID));
-    //brPointsComponent.set(piece, 8);
+    brPointsComponent.set(piece, 0);
+
+    brSetPieceTypeSystem.executeTyped(piece, game, PieceType.PAWN);
   }
 
   function executeTyped(uint256 piece, uint256 game) public returns (bytes memory) {
