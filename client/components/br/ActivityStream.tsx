@@ -1,11 +1,9 @@
-import {
-  getFormattedPieceDeathUpdate,
-  getFormattedPieceTypeUpdate,
-} from "../../utils/getFormattedActivityUpdate";
 import { useContext, useEffect, useState } from "react";
 
+import { Coord } from "@latticexyz/utils";
 import { NetworkContext } from "../../context/NetworkContext";
 import { PieceType } from "../../network/types";
+import createActivityUpdateFormatter from "../../utils/createActivityUpdateFormatter";
 
 const ActivityStream = () => {
   const network = useContext(NetworkContext);
@@ -13,6 +11,10 @@ const ActivityStream = () => {
 
   useEffect(() => {
     if (!network.network) return;
+
+    const activityUpdateFormatter = createActivityUpdateFormatter(
+      network.network
+    );
 
     const {
       systemCallStreams,
@@ -37,7 +39,7 @@ const ActivityStream = () => {
         const pieceType = pieceTypeUpdate.value.value as PieceType;
         setActivity((a) => [
           ...a,
-          getFormattedPieceTypeUpdate(entity, pieceType),
+          activityUpdateFormatter.getPieceTypeUpdate(entity, pieceType),
         ]);
       });
     });
@@ -57,27 +59,38 @@ const ActivityStream = () => {
       const pieceAliveUpdate =
         pieceAliveUpdates.length > 0 ? pieceAliveUpdates[0] : undefined;
 
-      if (piecePositionUpdate === undefined || pieceAliveUpdate === undefined) {
+      if (piecePositionUpdate === undefined) {
         return;
-      }
-
-      // PieceAliveUpdates should always signify that the piece died
-      // since a piece cannot be set to alive from the BR movement system
-      if (pieceAliveUpdate.value && pieceAliveUpdate.value.value) {
-        console.warn(
-          "Received invalid piece alive update from BRMovePieceSystem",
-          pieceAliveUpdate
-        );
       }
 
       setActivity((a) => [
         ...a,
-        getFormattedPieceDeathUpdate(
+        activityUpdateFormatter.getPieceMoveUpdate(
           piecePositionUpdate.entity,
-          pieceAliveUpdate.entity
+          piecePositionUpdate.value as Coord
         ),
       ]);
+
+      if (pieceAliveUpdate) {
+        // PieceAliveUpdates should always signify that the piece died
+        // since a piece cannot be set to alive from the BR movement system
+        if (pieceAliveUpdate.value && pieceAliveUpdate.value.value) {
+          console.warn(
+            "Received invalid piece alive update from BRMovePieceSystem",
+            pieceAliveUpdate
+          );
+        }
+
+        setActivity((a) => [
+          ...a,
+          activityUpdateFormatter.getPieceDeathUpdate(
+            piecePositionUpdate.entity,
+            pieceAliveUpdate.entity
+          ),
+        ]);
+      }
     });
+
     return () => {
       moveSubscription.unsubscribe();
       switchSubscription.unsubscribe();
@@ -85,16 +98,16 @@ const ActivityStream = () => {
   }, [network]);
 
   return (
-    <div className="bg-yellow-50 h-48 p-4 border flex flex-col border-b-4 border-r-2 border-yellow-900 text-yellow-900 rounded-lg">
-      <p className="mb-3 ml-1">ACTIVITY</p>
-      <div>
-        {/* <div className="flex flex-col flex-col-reverse h-32 overflow-scroll scrollbar-hide mb-9">
-          {activity.reverse().map((element, i) => (
+    <div className="bg-yellow-50 p-4 border flex flex-col border-b-4 border-r-2 border-yellow-900 text-yellow-900 rounded-lg w-full overflow-y-auto">
+      <p className="mb-2 mt-1 ml-1">ACTIVITY</p>
+      <div className="h-full ml-1">
+        <div className="flex flex-col h-full flex-col-reverse">
+          {[...activity].reverse().map((element, i) => (
             <div key={i}>
-              <div className="font-bold">{element}</div>
+              <div>{element}</div>
             </div>
           ))}
-        </div> */}
+        </div>
       </div>
     </div>
   );
