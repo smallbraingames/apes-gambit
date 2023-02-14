@@ -69,7 +69,20 @@ const createActivityUpdateFormatter = (network: Network) => {
     );
   };
 
-  return { getPieceTypeUpdate, getPieceDeathUpdate, getPieceMoveUpdate };
+  const getGridDimUpdate = (gridDim: number): JSX.Element => {
+    return (
+      <div>
+        Board size shrunk to {gridDim * 2} x {gridDim * 2}
+      </div>
+    );
+  };
+
+  return {
+    getPieceTypeUpdate,
+    getPieceDeathUpdate,
+    getPieceMoveUpdate,
+    getGridDimUpdate,
+  };
 };
 
 export default createActivityUpdateFormatter;

@@ -1,16 +1,19 @@
 import { useContext, useEffect, useState } from "react";
 
 import { Coord } from "@latticexyz/utils";
+import { GameContext } from "../../context/GameContext";
 import { NetworkContext } from "../../context/NetworkContext";
 import { PieceType } from "../../network/types";
 import createActivityUpdateFormatter from "../../utils/createActivityUpdateFormatter";
+import { defineComponentSystemUnsubscribable } from "../../game/utils/defineComponentSystemUnsubscribable";
 
 const ActivityStream = () => {
   const network = useContext(NetworkContext);
+  const game = useContext(GameContext);
   const [activity, setActivity] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
-    if (!network.network) return;
+    if (!network.network || !game.game) return;
 
     const activityUpdateFormatter = createActivityUpdateFormatter(
       network.network
@@ -20,6 +23,25 @@ const ActivityStream = () => {
       systemCallStreams,
       components: { PieceType, BRIsAlive, PiecePosition },
     } = network.network;
+
+    const {
+      gameWorld,
+      components: { BRGridDimComponent },
+    } = game.game;
+
+    const gridDimSubscription = defineComponentSystemUnsubscribable(
+      gameWorld,
+      BRGridDimComponent,
+      (update) => {
+        const gridDim = update.value[0]?.value;
+        if (gridDim) {
+          setActivity((a) => [
+            ...a,
+            activityUpdateFormatter.getGridDimUpdate(gridDim),
+          ]);
+        }
+      }
+    );
 
     const switchSubscription = systemCallStreams[
       "system.BRSetPieceTypeSystem"
@@ -94,8 +116,9 @@ const ActivityStream = () => {
     return () => {
       moveSubscription.unsubscribe();
       switchSubscription.unsubscribe();
+      gridDimSubscription.unsubscribe();
     };
-  }, [network]);
+  }, [network, game]);
 
   return (
     <div className="bg-yellow-50 p-4 border flex flex-col border-b-4 border-r-2 border-yellow-900 text-yellow-900 rounded-lg w-full overflow-y-auto">
