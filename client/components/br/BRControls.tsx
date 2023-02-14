@@ -27,7 +27,7 @@ const BRControls = () => {
             <div>
               <UpgradePiece />
             </div>
-            <div className="flex h-full flex-col flex-col-reverse">
+            <div className="flex flex-1 overflow-hidden">
               <ActivityStream />
             </div>
           </div>

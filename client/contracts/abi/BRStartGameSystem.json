@@ -689,7 +689,7 @@
   },
   "ast": {
     "absolutePath": "src/systems/BRStartGameSystem.sol",
-    "id": 26911,
+    "id": 26934,
     "exportedSymbols": {
       "BRGameComponent": [
         23185
@@ -701,10 +701,10 @@
         23844
       ],
       "BRStartGameSystem": [
-        26910
+        26933
       ],
       "ID": [
-        26844
+        26867
       ],
       "IWorld": [
         6966
@@ -720,7 +720,7 @@
     "src": "32:914:77",
     "nodes": [
       {
-        "id": 26826,
+        "id": 26849,
         "nodeType": "PragmaDirective",
         "src": "32:24:77",
         "nodes": [],
@@ -732,19 +732,19 @@
         ]
       },
       {
-        "id": 26829,
+        "id": 26852,
         "nodeType": "ImportDirective",
         "src": "57:51:77",
         "nodes": [],
         "absolutePath": "node_modules/@latticexyz/solecs/src/System.sol",
         "file": "solecs/System.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 26911,
+        "scope": 26934,
         "sourceUnit": 5876,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 26827,
+              "id": 26850,
               "name": "System",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -756,7 +756,7 @@
           },
           {
             "foreign": {
-              "id": 26828,
+              "id": 26851,
               "name": "IWorld",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -770,19 +770,19 @@
         "unitAlias": ""
       },
       {
-        "id": 26831,
+        "id": 26854,
         "nodeType": "ImportDirective",
         "src": "109:50:77",
         "nodes": [],
         "absolutePath": "node_modules/@latticexyz/solecs/src/utils.sol",
         "file": "solecs/utils.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 26911,
+        "scope": 26934,
         "sourceUnit": 7493,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 26830,
+              "id": 26853,
               "name": "getAddressById",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -796,19 +796,19 @@
         "unitAlias": ""
       },
       {
-        "id": 26834,
+        "id": 26857,
         "nodeType": "ImportDirective",
         "src": "160:90:77",
         "nodes": [],
         "absolutePath": "src/components/BRGameComponent.sol",
         "file": "components/BRGameComponent.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 26911,
+        "scope": 26934,
         "sourceUnit": 23186,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 26832,
+              "id": 26855,
               "name": "BRGameComponent",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -820,7 +820,7 @@
           },
           {
             "foreign": {
-              "id": 26833,
+              "id": 26856,
               "name": "ID",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -835,19 +835,19 @@
         "unitAlias": ""
       },
       {
-        "id": 26836,
+        "id": 26859,
         "nodeType": "ImportDirective",
         "src": "251:52:77",
         "nodes": [],
         "absolutePath": "src/libraries/BRLibGame.sol",
         "file": "libraries/BRLibGame.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 26911,
+        "scope": 26934,
         "sourceUnit": 23845,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 26835,
+              "id": 26858,
               "name": "BRLibGame",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -861,7 +861,7 @@
         "unitAlias": ""
       },
       {
-        "id": 26844,
+        "id": 26867,
         "nodeType": "VariableDeclaration",
         "src": "305:68:77",
         "nodes": [],
@@ -869,7 +869,7 @@
         "mutability": "constant",
         "name": "ID",
         "nameLocation": "322:2:77",
-        "scope": 26911,
+        "scope": 26934,
         "stateVariable": false,
         "storageLocation": "default",
         "typeDescriptions": {
@@ -877,7 +877,7 @@
           "typeString": "uint256"
         },
         "typeName": {
-          "id": 26837,
+          "id": 26860,
           "name": "uint256",
           "nodeType": "ElementaryTypeName",
           "src": "305:7:77",
@@ -892,7 +892,7 @@
               "arguments": [
                 {
                   "hexValue": "73797374656d2e4252537461727447616d6553797374656d",
-                  "id": 26841,
+                  "id": 26864,
                   "isConstant": false,
                   "isLValue": false,
                   "isPure": true,
@@ -914,7 +914,7 @@
                     "typeString": "literal_string \"system.BRStartGameSystem\""
                   }
                 ],
-                "id": 26840,
+                "id": 26863,
                 "name": "keccak256",
                 "nodeType": "Identifier",
                 "overloadedDeclarations": [],
@@ -925,7 +925,7 @@
                   "typeString": "function (bytes memory) pure returns (bytes32)"
                 }
               },
-              "id": 26842,
+              "id": 26865,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -949,7 +949,7 @@
                 "typeString": "bytes32"
               }
             ],
-            "id": 26839,
+            "id": 26862,
             "isConstant": false,
             "isLValue": false,
             "isPure": true,
@@ -961,14 +961,14 @@
               "typeString": "type(uint256)"
             },
             "typeName": {
-              "id": 26838,
+              "id": 26861,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "327:7:77",
               "typeDescriptions": {}
             }
           },
-          "id": 26843,
+          "id": 26866,
           "isConstant": false,
           "isLValue": false,
           "isPure": true,
@@ -987,17 +987,17 @@
         "visibility": "internal"
       },
       {
-        "id": 26910,
+        "id": 26933,
         "nodeType": "ContractDefinition",
         "src": "376:569:77",
         "nodes": [
           {
-            "id": 26859,
+            "id": 26882,
             "nodeType": "FunctionDefinition",
             "src": "417:78:77",
             "nodes": [],
             "body": {
-              "id": 26858,
+              "id": 26881,
               "nodeType": "Block",
               "src": "493:2:77",
               "nodes": [],
@@ -1009,11 +1009,11 @@
               {
                 "arguments": [
                   {
-                    "id": 26854,
+                    "id": 26877,
                     "name": "_world",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 26849,
+                    "referencedDeclaration": 26872,
                     "src": "472:6:77",
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_IWorld_$6966",
@@ -1021,11 +1021,11 @@
                     }
                   },
                   {
-                    "id": 26855,
+                    "id": 26878,
                     "name": "_components",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 26851,
+                    "referencedDeclaration": 26874,
                     "src": "480:11:77",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1033,10 +1033,10 @@
                     }
                   }
                 ],
-                "id": 26856,
+                "id": 26879,
                 "kind": "baseConstructorSpecifier",
                 "modifierName": {
-                  "id": 26853,
+                  "id": 26876,
                   "name": "System",
                   "nameLocations": [
                     "465:6:77"
@@ -1052,17 +1052,17 @@
             "name": "",
             "nameLocation": "-1:-1:-1",
             "parameters": {
-              "id": 26852,
+              "id": 26875,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 26849,
+                  "id": 26872,
                   "mutability": "mutable",
                   "name": "_world",
                   "nameLocation": "436:6:77",
                   "nodeType": "VariableDeclaration",
-                  "scope": 26859,
+                  "scope": 26882,
                   "src": "429:13:77",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1071,10 +1071,10 @@
                     "typeString": "contract IWorld"
                   },
                   "typeName": {
-                    "id": 26848,
+                    "id": 26871,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 26847,
+                      "id": 26870,
                       "name": "IWorld",
                       "nameLocations": [
                         "429:6:77"
@@ -1094,12 +1094,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 26851,
+                  "id": 26874,
                   "mutability": "mutable",
                   "name": "_components",
                   "nameLocation": "452:11:77",
                   "nodeType": "VariableDeclaration",
-                  "scope": 26859,
+                  "scope": 26882,
                   "src": "444:19:77",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1108,7 +1108,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 26850,
+                    "id": 26873,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "444:7:77",
@@ -1124,40 +1124,40 @@
               "src": "428:36:77"
             },
             "returnParameters": {
-              "id": 26857,
+              "id": 26880,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "493:0:77"
             },
-            "scope": 26910,
+            "scope": 26933,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           },
           {
-            "id": 26894,
+            "id": 26917,
             "nodeType": "FunctionDefinition",
             "src": "499:331:77",
             "nodes": [],
             "body": {
-              "id": 26893,
+              "id": 26916,
               "nodeType": "Block",
               "src": "570:260:77",
               "nodes": [],
               "statements": [
                 {
                   "assignments": [
-                    26867
+                    26890
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 26867,
+                      "id": 26890,
                       "mutability": "mutable",
                       "name": "game",
                       "nameLocation": "584:4:77",
                       "nodeType": "VariableDeclaration",
-                      "scope": 26893,
+                      "scope": 26916,
                       "src": "576:12:77",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -1166,7 +1166,7 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 26866,
+                        "id": 26889,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
                         "src": "576:7:77",
@@ -1178,15 +1178,15 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 26875,
+                  "id": 26898,
                   "initialValue": {
                     "arguments": [
                       {
-                        "id": 26870,
+                        "id": 26893,
                         "name": "arguments",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 26861,
+                        "referencedDeclaration": 26884,
                         "src": "602:9:77",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes_memory_ptr",
@@ -1196,7 +1196,7 @@
                       {
                         "components": [
                           {
-                            "id": 26872,
+                            "id": 26895,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -1208,7 +1208,7 @@
                               "typeString": "type(uint256)"
                             },
                             "typeName": {
-                              "id": 26871,
+                              "id": 26894,
                               "name": "uint256",
                               "nodeType": "ElementaryTypeName",
                               "src": "614:7:77",
@@ -1216,7 +1216,7 @@
                             }
                           }
                         ],
-                        "id": 26873,
+                        "id": 26896,
                         "isConstant": false,
                         "isInlineArray": false,
                         "isLValue": false,
@@ -1242,7 +1242,7 @@
                         }
                       ],
                       "expression": {
-                        "id": 26868,
+                        "id": 26891,
                         "name": "abi",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -1253,7 +1253,7 @@
                           "typeString": "abi"
                         }
                       },
-                      "id": 26869,
+                      "id": 26892,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -1267,7 +1267,7 @@
                         "typeString": "function () pure"
                       }
                     },
-                    "id": 26874,
+                    "id": 26897,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1288,17 +1288,17 @@
                 },
                 {
                   "assignments": [
-                    26878
+                    26901
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 26878,
+                      "id": 26901,
                       "mutability": "mutable",
                       "name": "brGameComponent",
                       "nameLocation": "645:15:77",
                       "nodeType": "VariableDeclaration",
-                      "scope": 26893,
+                      "scope": 26916,
                       "src": "629:31:77",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -1307,10 +1307,10 @@
                         "typeString": "contract BRGameComponent"
                       },
                       "typeName": {
-                        "id": 26877,
+                        "id": 26900,
                         "nodeType": "UserDefinedTypeName",
                         "pathNode": {
-                          "id": 26876,
+                          "id": 26899,
                           "name": "BRGameComponent",
                           "nameLocations": [
                             "629:15:77"
@@ -1329,13 +1329,13 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 26885,
+                  "id": 26908,
                   "initialValue": {
                     "arguments": [
                       {
                         "arguments": [
                           {
-                            "id": 26881,
+                            "id": 26904,
                             "name": "components",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -1347,7 +1347,7 @@
                             }
                           },
                           {
-                            "id": 26882,
+                            "id": 26905,
                             "name": "BRGameComponentID",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -1370,7 +1370,7 @@
                               "typeString": "uint256"
                             }
                           ],
-                          "id": 26880,
+                          "id": 26903,
                           "name": "getAddressById",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -1381,7 +1381,7 @@
                             "typeString": "function (contract IUint256Component,uint256) view returns (address)"
                           }
                         },
-                        "id": 26883,
+                        "id": 26906,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1405,7 +1405,7 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 26879,
+                      "id": 26902,
                       "name": "BRGameComponent",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
@@ -1416,7 +1416,7 @@
                         "typeString": "type(contract BRGameComponent)"
                       }
                     },
-                    "id": 26884,
+                    "id": 26907,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1439,11 +1439,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 26889,
+                        "id": 26912,
                         "name": "brGameComponent",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 26878,
+                        "referencedDeclaration": 26901,
                         "src": "803:15:77",
                         "typeDescriptions": {
                           "typeIdentifier": "t_contract$_BRGameComponent_$23185",
@@ -1451,11 +1451,11 @@
                         }
                       },
                       {
-                        "id": 26890,
+                        "id": 26913,
                         "name": "game",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 26867,
+                        "referencedDeclaration": 26890,
                         "src": "820:4:77",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -1475,7 +1475,7 @@
                         }
                       ],
                       "expression": {
-                        "id": 26886,
+                        "id": 26909,
                         "name": "BRLibGame",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -1486,7 +1486,7 @@
                           "typeString": "type(library BRLibGame)"
                         }
                       },
-                      "id": 26888,
+                      "id": 26911,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1501,7 +1501,7 @@
                         "typeString": "function (contract BRGameComponent,uint256)"
                       }
                     },
-                    "id": 26891,
+                    "id": 26914,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1517,7 +1517,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 26892,
+                  "id": 26915,
                   "nodeType": "ExpressionStatement",
                   "src": "776:49:77"
                 }
@@ -1533,17 +1533,17 @@
             "name": "execute",
             "nameLocation": "508:7:77",
             "parameters": {
-              "id": 26862,
+              "id": 26885,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 26861,
+                  "id": 26884,
                   "mutability": "mutable",
                   "name": "arguments",
                   "nameLocation": "529:9:77",
                   "nodeType": "VariableDeclaration",
-                  "scope": 26894,
+                  "scope": 26917,
                   "src": "516:22:77",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -1552,7 +1552,7 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 26860,
+                    "id": 26883,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
                     "src": "516:5:77",
@@ -1567,17 +1567,17 @@
               "src": "515:24:77"
             },
             "returnParameters": {
-              "id": 26865,
+              "id": 26888,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 26864,
+                  "id": 26887,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 26894,
+                  "scope": 26917,
                   "src": "556:12:77",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -1586,7 +1586,7 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 26863,
+                    "id": 26886,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
                     "src": "556:5:77",
@@ -1600,18 +1600,18 @@
               ],
               "src": "555:14:77"
             },
-            "scope": 26910,
+            "scope": 26933,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           },
           {
-            "id": 26909,
+            "id": 26932,
             "nodeType": "FunctionDefinition",
             "src": "834:109:77",
             "nodes": [],
             "body": {
-              "id": 26908,
+              "id": 26931,
               "nodeType": "Block",
               "src": "900:43:77",
               "nodes": [],
@@ -1622,11 +1622,11 @@
                       {
                         "arguments": [
                           {
-                            "id": 26904,
+                            "id": 26927,
                             "name": "game",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 26896,
+                            "referencedDeclaration": 26919,
                             "src": "932:4:77",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -1642,7 +1642,7 @@
                             }
                           ],
                           "expression": {
-                            "id": 26902,
+                            "id": 26925,
                             "name": "abi",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -1653,7 +1653,7 @@
                               "typeString": "abi"
                             }
                           },
-                          "id": 26903,
+                          "id": 26926,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -1667,7 +1667,7 @@
                             "typeString": "function () pure returns (bytes memory)"
                           }
                         },
-                        "id": 26905,
+                        "id": 26928,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1691,18 +1691,18 @@
                           "typeString": "bytes memory"
                         }
                       ],
-                      "id": 26901,
+                      "id": 26924,
                       "name": "execute",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 26894,
+                      "referencedDeclaration": 26917,
                       "src": "913:7:77",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_bytes_memory_ptr_$returns$_t_bytes_memory_ptr_$",
                         "typeString": "function (bytes memory) returns (bytes memory)"
                       }
                     },
-                    "id": 26906,
+                    "id": 26929,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1718,8 +1718,8 @@
                       "typeString": "bytes memory"
                     }
                   },
-                  "functionReturnParameters": 26900,
-                  "id": 26907,
+                  "functionReturnParameters": 26923,
+                  "id": 26930,
                   "nodeType": "Return",
                   "src": "906:32:77"
                 }
@@ -1732,17 +1732,17 @@
             "name": "executeTyped",
             "nameLocation": "843:12:77",
             "parameters": {
-              "id": 26897,
+              "id": 26920,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 26896,
+                  "id": 26919,
                   "mutability": "mutable",
                   "name": "game",
                   "nameLocation": "864:4:77",
                   "nodeType": "VariableDeclaration",
-                  "scope": 26909,
+                  "scope": 26932,
                   "src": "856:12:77",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1751,7 +1751,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 26895,
+                    "id": 26918,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "856:7:77",
@@ -1766,17 +1766,17 @@
               "src": "855:14:77"
             },
             "returnParameters": {
-              "id": 26900,
+              "id": 26923,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 26899,
+                  "id": 26922,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 26909,
+                  "scope": 26932,
                   "src": "886:12:77",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -1785,7 +1785,7 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 26898,
+                    "id": 26921,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
                     "src": "886:5:77",
@@ -1799,7 +1799,7 @@
               ],
               "src": "885:14:77"
             },
-            "scope": 26910,
+            "scope": 26933,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
@@ -1809,7 +1809,7 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 26845,
+              "id": 26868,
               "name": "System",
               "nameLocations": [
                 "406:6:77"
@@ -1818,7 +1818,7 @@
               "referencedDeclaration": 5875,
               "src": "406:6:77"
             },
-            "id": 26846,
+            "id": 26869,
             "nodeType": "InheritanceSpecifier",
             "src": "406:6:77"
           }
@@ -1828,7 +1828,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "linearizedBaseContracts": [
-          26910,
+          26933,
           5875,
           5535,
           8431,
@@ -1841,7 +1841,7 @@
         ],
         "name": "BRStartGameSystem",
         "nameLocation": "385:17:77",
-        "scope": 26911,
+        "scope": 26934,
         "usedErrors": [
           8391,
           8393,

@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-
-import { EntityID } from "@latticexyz/recs";
 import GameLoader from "../components/GameLoader";
 import GameManager from "../components/GameManager";
 import GameProvider from "../context/GameContext";

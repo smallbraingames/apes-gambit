@@ -2,7 +2,7 @@ import BRControls from "./BRControls";
 
 const BRGame = () => {
   return (
-    <div className="absolute h-full">
+    <div className="absolute h-screen">
       <BRControls />
     </div>
   );
