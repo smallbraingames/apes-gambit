@@ -152,6 +152,13 @@ const createBRPiecePositionSystem = (
       if (br!.tileOverlayManager.hasValidMoveOverlays()) {
         br!.tileOverlayManager.setValidMoveOverlays();
       }
+      // Take other piece
+      if (positionContext.pieceTaken !== undefined) {
+        objectRegistry.gameObjectRegistry.remove(
+          positionContext.pieceTaken,
+          PIECE_SPRITE_ID
+        );
+      }
     }
   );
 
