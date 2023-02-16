@@ -48,7 +48,7 @@ const createPiecePositionSystem = (
         lobby.tileOverlayManager.setValidMoveOverlays();
         lobby.speechBubbleManager.displayChatBubbleForPieceSprite(
           sprite,
-          "hi shank a"
+          "hi shank a asdf adfds  really long"
         );
       }
     },
