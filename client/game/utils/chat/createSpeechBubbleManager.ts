@@ -1,11 +1,11 @@
-import { Assets, RenderDepth } from "../../constants";
-
 import { Coord } from "@latticexyz/utils";
+import { RenderDepth } from "../../constants";
 import { Scene } from "../../types";
 import { tween } from "@latticexyz/phaserx";
 
 const BUBBLE_PADDING = 50;
 const BUBBLE_HEIGHT = 500;
+const BUBBLE_ARROW_WIDTH = 50;
 
 type BubbleConfig = {
   height: number;
@@ -17,8 +17,6 @@ const BUBBLE_DISAPPEAR_TIME = 3000;
 const BUBBLE_ANIMATION_DURATION = 150;
 
 const createSpeechBubbleManager = (scene: Scene) => {
-  let bubblesCreated = 0;
-
   const displayChatBubbleForPieceSprite = async (
     pieceSprite: Phaser.GameObjects.Sprite,
     quote: string
@@ -33,9 +31,9 @@ const createSpeechBubbleManager = (scene: Scene) => {
 
     // Start tracking
     const updateSpeechBubblePosition = () => {
-      const bubbleX = pieceSprite.x - pieceSprite.width / 2;
-      const bubbleY =
-        pieceSprite.y - pieceSprite.height + bubbleConfig.height / 4;
+      const bubbleX =
+        pieceSprite.x + pieceSprite.width / 2 - bubbleConfig.width / 2;
+      const bubbleY = pieceSprite.y - bubbleConfig.height - BUBBLE_PADDING;
       bubble.setPosition(bubbleX, bubbleY);
       setContentPosition(content, { x: bubbleX, y: bubbleY }, bubbleConfig);
     };
@@ -79,14 +77,13 @@ const createSpeechBubbleManager = (scene: Scene) => {
     const bubblePadding = BUBBLE_PADDING;
     const bubbleWidth = config.width;
     const bubbleHeight = config.height;
-    const arrowHeight = bubbleHeight / 4;
+    const arrowHeight = BUBBLE_PADDING;
 
-    bubblesCreated++;
     const bubble = phaserScene.add.graphics();
 
     //  Bubble shadow
     bubble.fillStyle(0x222222, 0.5);
-    bubble.fillRoundedRect(6, 6, bubbleWidth, bubbleHeight, 16);
+    bubble.fillRoundedRect(0, 0, bubbleWidth, bubbleHeight, 20);
 
     //  Bubble color
     bubble.fillStyle(0xffffff, 1);
@@ -99,12 +96,12 @@ const createSpeechBubbleManager = (scene: Scene) => {
     bubble.fillRoundedRect(0, 0, bubbleWidth, bubbleHeight, 16);
 
     //  Calculate arrow coordinates
-    const point1X = Math.floor((bubbleWidth / 7) * 5);
-    const point1Y = bubbleHeight;
-    const point2X = Math.floor((bubbleWidth / 7) * 6);
-    const point2Y = bubbleHeight;
-    const point3X = Math.floor((bubbleWidth / 7) * 5);
-    const point3Y = Math.floor(bubbleHeight + arrowHeight);
+    var point1X = Math.floor(bubbleWidth / 2 - BUBBLE_ARROW_WIDTH / 2);
+    var point1Y = bubbleHeight;
+    var point2X = Math.floor(bubbleWidth / 2 + BUBBLE_ARROW_WIDTH / 2);
+    var point2Y = bubbleHeight;
+    var point3X = (point1X + point2X) / 2;
+    var point3Y = Math.floor(bubbleHeight + arrowHeight);
 
     //  Bubble arrow shadow
     bubble.lineStyle(4, 0x222222, 0.5);
@@ -130,8 +127,6 @@ const createSpeechBubbleManager = (scene: Scene) => {
 
     return { bubble, content };
   };
-
-  const getTextureKey = () => `speech#${bubblesCreated}`;
 
   const setContentPosition = (
     content: Phaser.GameObjects.Text,
