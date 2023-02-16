@@ -12,7 +12,7 @@ import { SwitchGameState } from "../GameManager";
 
 const Lobby = (props: { switchFromLobbyToBR: SwitchGameState }) => {
   const { network } = useContext(NetworkContext);
-  const { game, activePiece } = useContext(GameContext);
+  const { game, activePiece, gameEntity } = useContext(GameContext);
 
   useEffect(() => {
     disableClickthroughs();
@@ -26,6 +26,7 @@ const Lobby = (props: { switchFromLobbyToBR: SwitchGameState }) => {
           {network && game && activePiece && (
             <>
               <BRGameIndicator
+                gameEntity={gameEntity}
                 network={network}
                 activePiece={activePiece}
                 switchFromLobbyToBR={props.switchFromLobbyToBR}
