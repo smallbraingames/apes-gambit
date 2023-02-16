@@ -8,9 +8,13 @@ import { getAssetKeyForPiece } from "./config/assets";
 const getPieceSpriteGameObject = (
   entityIndex: EntityIndex,
   objectRegistry: ObjectRegistry,
-  scene: Phaser.Scene
+  scene: Phaser.Scene,
+  createIfNecessary: boolean = true
 ) => {
-  if (!objectRegistry.gameObjectRegistry.has(entityIndex, PIECE_SPRITE_ID)) {
+  if (
+    !objectRegistry.gameObjectRegistry.has(entityIndex, PIECE_SPRITE_ID) &&
+    createIfNecessary
+  ) {
     // Create dummy sprite
     const sprite = scene.physics.add.sprite(
       0,

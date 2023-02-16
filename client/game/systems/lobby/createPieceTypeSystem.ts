@@ -9,7 +9,6 @@ import { Network, PieceType } from "../../../network/types";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
-import isActivePiece from "../../utils/isActivePiece";
 import setPieceSprite from "../../utils/setPieceSprite";
 
 const createPieceTypeSystem = (
