@@ -7,6 +7,7 @@ import createBRMovementInputSystem from "./br/input/createBRMovementInputSystem"
 import createBRPiecePositionSystem from "./br/createBRPiecePositionSystem";
 import createBRPieceTypeSystem from "./br/createBRPieceTypeSystem";
 import createBRValidMoveOverlaySystem from "./br/createBRValidMoveOverlaySystem";
+import createChatSystem from "./lobby/createChatSystem";
 import createMovementInputSystem from "./lobby/input/createMovementInputSystem";
 import createPiecePositionSystem from "./lobby/createPiecePositionSystem";
 import createPieceTypeSystem from "./lobby/createPieceTypeSystem";
@@ -40,6 +41,7 @@ export const setupLobbySystems = (
       createMovementInputSystem,
       createPiecePositionSystem,
       createPieceTypeSystem,
+      createChatSystem,
     ],
     lobby
   );
