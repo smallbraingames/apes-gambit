@@ -17,6 +17,7 @@ const getPieceSpriteGameObject = (
       0,
       getAssetKeyForPiece(PieceType.PAWN, PieceState.IDLE, false)
     );
+
     objectRegistry.gameObjectRegistry.set(entityIndex, PIECE_SPRITE_ID, sprite);
     return sprite;
   }

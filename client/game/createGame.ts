@@ -42,7 +42,9 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
       zoom: 1,
       mode: Phaser.Scale.RESIZE,
     },
+    mipmapFilter: "LINEAR_MIPMAP_LINEAR",
     autoFocus: true,
+    autoResize: true,
     physics: {
       default: "arcade",
       arcade: {

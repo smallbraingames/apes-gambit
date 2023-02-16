@@ -11,6 +11,7 @@ import { Game, Scene } from "../../types";
 import { Network } from "../../../network/types";
 import createChessBoardTilemap from "../../utils/createChessBoardTilemap";
 import createMoveValidator from "../../utils/createMoveValidator";
+import createSpeechBubbleManager from "../../utils/chat/createSpeechBubbleManager";
 import createTileOverlayManager from "../../utils/createTileOverlayManager";
 import { setupLobbySystems } from "../setupSystems";
 
@@ -33,6 +34,7 @@ const setupLobbyGame = (network: Network, scene: Scene, game: Game) => {
   );
 
   const moveValidator = createMoveValidator(DEFAULT_MOVE_VALIDATOR_CONFIG);
+  const speechBubbleManager = createSpeechBubbleManager(scene);
 
   const lobbyContext = {
     moveValidator,
@@ -42,6 +44,7 @@ const setupLobbyGame = (network: Network, scene: Scene, game: Game) => {
       scene,
       moveValidator
     ),
+    speechBubbleManager,
   };
 
   setupLobbySystems(network, game, lobbyContext);
