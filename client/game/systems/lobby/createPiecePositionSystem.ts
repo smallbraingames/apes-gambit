@@ -46,10 +46,6 @@ const createPiecePositionSystem = (
       sprite.setPosition(x, y);
       if (isActivePiece(game, godEntityIndex, update.entity)) {
         lobby.tileOverlayManager.setValidMoveOverlays();
-        lobby.speechBubbleManager.displayChatBubbleForPieceSprite(
-          sprite,
-          "hi shank a asdf adfds  really long"
-        );
       }
     },
     { runOnInit: true }

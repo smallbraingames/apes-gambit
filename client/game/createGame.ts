@@ -3,7 +3,12 @@ import {
   GAME_WORLD_NAMESPACE,
   INITIAL_ZOOM,
 } from "./constants";
-import { EntityID, namespaceWorld } from "@latticexyz/recs";
+import {
+  EntityID,
+  Type,
+  defineComponent,
+  namespaceWorld,
+} from "@latticexyz/recs";
 import {
   defineCoordComponent,
   defineNumberComponent,
@@ -28,6 +33,7 @@ import setupActivePieceComponent from "./components/setupActivePieceComponent";
 import setupBRGame from "./systems/br/setupBRGame";
 import setupBRGridDimComponent from "./components/setupBRGridDimComponent";
 import setupBRRechargeTimerComponent from "./components/setupBRRechargeTimerComponent";
+import setupChatComponent from "./components/setupChatComponent";
 import setupLobbyGame from "./systems/lobby/setupLobbyGame";
 
 export async function createGame(network: Network, gameEntity?: EntityID) {
@@ -99,6 +105,15 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   const components = {
     HoveredPiece: defineNumberComponent(gameWorld, { id: "HoveredPiece" }),
     ActivePiece: defineNumberComponent(gameWorld, { id: "ActivePiece" }),
+    ChatComponent: defineComponent(
+      gameWorld,
+      {
+        value: Type.StringArray,
+      },
+      {
+        id: "Chat",
+      }
+    ),
     // Updates Piece Positions through a system call
     // In order to associate piece positions with point additions or other piece deaths
     // (this is done for animation purposes)
@@ -129,6 +144,7 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
 
   // Setup game components
   setupActivePieceComponent(network, context);
+  setupChatComponent(network, context);
   setupPiecePositionContextComponent(network, context);
   setupBRRechargeTimerComponent(network, context);
   setupBRGridDimComponent(network, context);

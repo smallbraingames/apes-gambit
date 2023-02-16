@@ -9,7 +9,7 @@ const supabase = createClient(
 
 const schema = z.object({
   wallet: z.string(),
-  pieceEntity: z.number(),
+  pieceEntity: z.string(),
   message: z.string(),
 });
 
@@ -31,7 +31,7 @@ const handler: NextApiHandler = async (req, res) => {
       throw new Error(error.message);
     }
 
-    res.status(200).send();
+    res.status(200).send({});
   } catch (error) {
     res.status(400).json({ message: "Invalid request body", error });
   }
