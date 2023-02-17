@@ -9,6 +9,7 @@ import CenterActivePieceOnLoad from "../CenterActivePieceOnLoad";
 import ChatInput from "./Chat";
 import { GameContext } from "../../context/GameContext";
 import { NetworkContext } from "../../context/NetworkContext";
+import { Scenes } from "../../game/constants";
 import { SwitchGameState } from "../GameManager";
 
 const Lobby = (props: { switchFromLobbyToBR: SwitchGameState }) => {
@@ -23,7 +24,7 @@ const Lobby = (props: { switchFromLobbyToBR: SwitchGameState }) => {
     <>
       <div className={CONTROLLER_COMPONENT_CLASS_NAME}>
         <div className="absolute p-6 h-full">
-          <CenterActivePieceOnLoad />
+          <CenterActivePieceOnLoad scene={Scenes.Lobby} />
           {network && game && activePiece && (
             <div className="h-full flex flex-col">
               <div>
