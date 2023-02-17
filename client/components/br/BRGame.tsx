@@ -1,7 +1,9 @@
 import BRControls from "./BRControls";
+import CenterActivePieceOnLoad from "../CenterActivePieceOnLoad";
 import { GameContext } from "../../context/GameContext";
 import { NetworkContext } from "../../context/NetworkContext";
 import Pieces from "./Pieces";
+import { Scenes } from "../../game/constants";
 import { useContext } from "react";
 
 const BRGame = () => {
@@ -10,6 +12,7 @@ const BRGame = () => {
 
   return (
     <>
+      <CenterActivePieceOnLoad scene={Scenes.BR} />
       <div className="absolute h-screen">
         <BRControls />
       </div>
