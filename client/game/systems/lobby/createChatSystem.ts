@@ -5,6 +5,7 @@ import { PIECE_SPRITE_ID } from "../../constants";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
+import { parseChatMessageFromKey } from "../../utils/chat/encodeChatMessage";
 
 const createChatSystem = (
   network: Network,
@@ -44,7 +45,7 @@ const createChatSystem = (
       );
       lobby.speechBubbleManager.displayChatBubbleForPieceSprite(
         sprite,
-        chat.value[chat.value.length - 1]
+        parseChatMessageFromKey(chat.value[chat.value.length - 1]).message
       );
     },
     { runOnInit: true }

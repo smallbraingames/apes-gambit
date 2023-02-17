@@ -6,6 +6,7 @@ import { useContext, useEffect } from "react";
 
 import BRGameIndicator from "./BRGameIndicator";
 import CenterActivePieceOnLoad from "../CenterActivePieceOnLoad";
+import ChatInput from "./Chat";
 import { GameContext } from "../../context/GameContext";
 import { NetworkContext } from "../../context/NetworkContext";
 import { SwitchGameState } from "../GameManager";
@@ -21,17 +22,22 @@ const Lobby = (props: { switchFromLobbyToBR: SwitchGameState }) => {
   return (
     <>
       <div className={CONTROLLER_COMPONENT_CLASS_NAME}>
-        <div className="absolute p-6">
+        <div className="absolute p-6 h-full">
           <CenterActivePieceOnLoad />
           {network && game && activePiece && (
-            <>
-              <BRGameIndicator
-                gameEntity={gameEntity}
-                network={network}
-                activePiece={activePiece}
-                switchFromLobbyToBR={props.switchFromLobbyToBR}
-              />
-            </>
+            <div className="h-full flex flex-col">
+              <div>
+                <BRGameIndicator
+                  gameEntity={gameEntity}
+                  network={network}
+                  activePiece={activePiece}
+                  switchFromLobbyToBR={props.switchFromLobbyToBR}
+                />
+              </div>
+              <div className="h-full flex flex-col-reverse">
+                <ChatInput />
+              </div>
+            </div>
           )}
         </div>
       </div>
