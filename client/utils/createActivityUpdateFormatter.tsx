@@ -1,7 +1,12 @@
-import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
+import {
+  EntityID,
+  EntityIndex,
+  getComponentValueStrict,
+} from "@latticexyz/recs";
 import { Network, PieceType } from "../network/types";
 
 import { Coord } from "@latticexyz/utils";
+import { getEntityIndexFromEntity } from "../game/utils/resolveEntity";
 import getPieceInfo from "./getPieceInfo";
 
 export const getPieceDisplay = (
@@ -72,6 +77,15 @@ const createActivityUpdateFormatter = (network: Network) => {
     );
   };
 
+  const getChatUpdate = (pieceEntity: EntityIndex, message: string) => {
+    return (
+      <div className="flex items-center">
+        <div>{getPieceDisplay(pieceEntity, network)}</div>
+        <div>said {message}</div>
+      </div>
+    );
+  };
+
   const getGridDimUpdate = (gridDim: number): JSX.Element => {
     return (
       <div>
@@ -95,6 +109,7 @@ const createActivityUpdateFormatter = (network: Network) => {
     getPieceMoveUpdate,
     getGridDimUpdate,
     getJoinedGameUpdate,
+    getChatUpdate,
   };
 };
 

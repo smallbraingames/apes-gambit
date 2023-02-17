@@ -1,5 +1,14 @@
+import {
+  EntityIndex,
+  Has,
+  HasValue,
+  defineEnterSystem,
+  defineUpdateSystem,
+  getComponentValueStrict,
+} from "@latticexyz/recs";
 import { useContext, useEffect, useState } from "react";
 
+import ChatInput from "../lobby/Chat";
 import { Coord } from "@latticexyz/utils";
 import { EntityType } from "../../game/types";
 import { GameContext } from "../../context/GameContext";
@@ -8,6 +17,7 @@ import { PieceType } from "../../network/types";
 import createActivityUpdateFormatter from "../../utils/createActivityUpdateFormatter";
 import { defineComponentSystemUnsubscribable } from "../../game/utils/defineComponentSystemUnsubscribable";
 import getEntityType from "../../game/utils/getEntityType";
+import { parseChatMessageFromKey } from "../../game/utils/chat/encodeChatMessage";
 
 const ActivityStream = () => {
   const network = useContext(NetworkContext);
@@ -29,12 +39,41 @@ const ActivityStream = () => {
     const {
       gameEntity,
       gameWorld,
-      components: { BRGridDimComponent },
+      components: { BRGridDimComponent, ChatComponent },
     } = game.game;
 
     if (!gameEntity) {
       return;
     }
+
+    const updateChatActivity = (pieceEntity: EntityIndex) => {
+      const chats = getComponentValueStrict(ChatComponent, pieceEntity);
+      const encodedChat = chats.value[chats.value.length - 1];
+      const message = parseChatMessageFromKey(encodedChat);
+      setActivity((a) => [
+        ...a,
+        activityUpdateFormatter.getChatUpdate(pieceEntity, message.message),
+      ]);
+    };
+
+    // Chat Activity
+    defineEnterSystem(
+      network.network.world,
+      // @ts-ignore
+      [Has(ChatComponent), HasValue(BRInGame, { value: game.gameEntity! })],
+      (update) => {
+        updateChatActivity(update.entity);
+      }
+    );
+
+    defineUpdateSystem(
+      network.network.world,
+      // @ts-ignore
+      [Has(ChatComponent), HasValue(BRInGame, { value: game.gameEntity! })],
+      (update) => {
+        updateChatActivity(update.entity);
+      }
+    );
 
     const gridDimSubscription = defineComponentSystemUnsubscribable(
       gameWorld,
@@ -174,6 +213,7 @@ const ActivityStream = () => {
       switchSubscription.unsubscribe();
       gridDimSubscription.unsubscribe();
       joinGameSubscription.unsubscribe();
+      //chatSubscription.unsubscribe();
     };
   }, [network, game]);
 
@@ -188,6 +228,9 @@ const ActivityStream = () => {
             </div>
           ))}
         </div>
+      </div>
+      <div className="my-2">
+        <ChatInput />
       </div>
     </div>
   );

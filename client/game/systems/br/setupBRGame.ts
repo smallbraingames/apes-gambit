@@ -11,6 +11,7 @@ import { Network } from "../../../network/types";
 import createBananaMananger from "../../utils/createBananaManager";
 import createChessBoardTilemap from "../../utils/createChessBoardTilemap";
 import createMoveValidator from "../../utils/createMoveValidator";
+import createSpeechBubbleManager from "../../utils/chat/createSpeechBubbleManager";
 import createTileOverlayManager from "../../utils/createTileOverlayManager";
 import { getComponentValueStrict } from "@latticexyz/recs";
 import { getEntityIndexFromEntity } from "../../utils/resolveEntity";
@@ -58,6 +59,8 @@ const setupBRGame = async (network: Network, scene: Scene, game: Game) => {
   bananaManager.placeBananas(tilemap);
 
   const moveValidator = createMoveValidator(DEFAULT_MOVE_VALIDATOR_CONFIG);
+  const speechBubbleManager = createSpeechBubbleManager(scene);
+
   const brContext = {
     bananaManager,
     moveValidator: createMoveValidator(DEFAULT_MOVE_VALIDATOR_CONFIG),
@@ -68,6 +71,7 @@ const setupBRGame = async (network: Network, scene: Scene, game: Game) => {
       moveValidator,
       gameEntity
     ),
+    speechBubbleManager,
   };
 
   setupBRSystems(network, game, brContext);
