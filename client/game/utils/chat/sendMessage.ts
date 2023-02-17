@@ -18,6 +18,4 @@ const sendMessage = async (
   }
 };
 
-(window as any).sendMessage = sendMessage;
-
 export default sendMessage;
