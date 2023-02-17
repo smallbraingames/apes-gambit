@@ -34,7 +34,7 @@ const Lobby = (props: { switchFromLobbyToBR: SwitchGameState }) => {
                   switchFromLobbyToBR={props.switchFromLobbyToBR}
                 />
               </div>
-              <div className="h-full flex flex-col-reverse">
+              <div className="h-full flex flex-col-reverse w-fit">
                 <ChatInput />
               </div>
             </div>
