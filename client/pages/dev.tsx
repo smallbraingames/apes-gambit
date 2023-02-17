@@ -5,9 +5,9 @@ import { GameConfig } from "../game/types";
 import { NetworkContext } from "../context/NetworkContext";
 import { getEntityFromEntityIndex } from "../game/utils/resolveEntity";
 
-const GAME_START_TIME = Math.floor(new Date().getTime() / 1000) + 60 * 6;
+const GAME_START_TIME = Math.floor(new Date().getTime() / 1000) + 60 * 7;
 const GAME_RECHARGE_TIME = 3;
-const GAME_INITIAL_GRID_DIM = 30;
+const GAME_INITIAL_GRID_DIM = 35;
 const GAME_SECONDS_PER_GRID_SHRINK = 13;
 const PERLIN_DENOM = 5;
 const PERLIN_THRESHOLD_BANANA = 700;

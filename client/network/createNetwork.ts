@@ -1,4 +1,4 @@
-import { ContractTransaction, getDefaultProvider } from "ethers";
+import { BigNumber, ContractTransaction, getDefaultProvider } from "ethers";
 import { EntityID, EntityIndex, createWorld } from "@latticexyz/recs";
 import { GameConfig, getNetworkConfig } from "./config";
 import {
@@ -183,7 +183,8 @@ export async function createNetwork(config: GameConfig) {
     return systems["system.BRSetPieceTypeSystem"].executeTyped(
       pieceEntity,
       gameEntity,
-      pieceType
+      pieceType,
+      { gasLimit: 8000000 }
     );
   };
 
