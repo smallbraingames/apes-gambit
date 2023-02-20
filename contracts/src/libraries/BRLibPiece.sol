@@ -62,6 +62,19 @@ library BRLibPiece {
     }
   }
 
+  /// @notice Check if piece is in bounds
+  function checkPieceInBounds(
+    BRGameComponent brGameComponent,
+    PiecePositionComponent piecePositionComponent,
+    uint256 piece,
+    uint256 game
+  ) internal view {
+    Coord memory piecePosition = piecePositionComponent.getValue(piece);
+    if (!BRLibGame.isPositionInBounds(brGameComponent, game, piecePosition)) {
+      revert BRPieceDead();
+    }
+  }
+
   /// @notice Get pieces that are not in bounds
   function getPiecesOutOfBounds(
     IWorld world,
@@ -113,6 +126,7 @@ library BRLibPiece {
   function checkCanPlay(
     OwnerComponent ownerComponent,
     ControllerComponent controllerComponent,
+    PiecePositionComponent piecePositionComponent,
     BRGameComponent brGameComponent,
     BRInGameComponent brInGameComponent,
     BRIsAliveComponent brIsAliveComponent,
@@ -131,6 +145,9 @@ library BRLibPiece {
 
     // Check that the piece is alive
     BRLibPiece.checkPieceIsAlive(brIsAliveComponent, piece);
+
+    // Check that the piece is in bounds
+    BRLibPiece.checkPieceInBounds(brGameComponent, piecePositionComponent, piece, game);
   }
 
   /// @notice Checks whether a piece has the correct associated controllers and that the passed owner
