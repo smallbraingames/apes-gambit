@@ -24,24 +24,15 @@ import { BRLibMap } from "libraries/BRLibMap.sol";
 
 uint256 constant ID = uint256(keccak256("system.BRMovePieceSystem"));
 
-contract BRMovePieceSystem is BRPieceControllerSystem, BRLazyUpdater {
+contract BRMovePieceSystem is BRPieceControllerSystem {
   constructor(IWorld _world, address _components) System(_world, _components) {}
 
   function execute(bytes memory arguments) public returns (bytes memory) {
     (uint256 piece, uint256 game, Coord memory position) = abi.decode(arguments, (uint256, uint256, Coord));
-
-    // Lazy update the game state
-    updateGameState(world, game, components);
-
-    OwnerComponent ownerComponent = OwnerComponent(getAddressById(components, OwnerComponentID));
-    ControllerComponent controllerComponent = ControllerComponent(getAddressById(components, ControllerComponentID));
     BRGameComponent brGameComponent = BRGameComponent(getAddressById(components, BRGameComponentID));
-    BRInGameComponent brInGameComponent = BRInGameComponent(getAddressById(components, BRInGameComponentID));
-    BRIsAliveComponent brIsAliveComponent = BRIsAliveComponent(getAddressById(components, BRIsAliveComponentID));
     BRPreviousMoveTimestampComponent brPreviousMoveTimestampComponent = BRPreviousMoveTimestampComponent(
       getAddressById(components, BRPreviousMoveTimestampComponentID)
     );
-
     MovePieceSystem movePieceSystem = MovePieceSystem(getSystemAddressById(components, MovePieceSystemID));
 
     // If the game has not started, just move the piece and return
@@ -51,16 +42,7 @@ contract BRMovePieceSystem is BRPieceControllerSystem, BRLazyUpdater {
     }
 
     // Check that this piece can play
-    BRLibPiece.checkCanPlay(
-      ownerComponent,
-      controllerComponent,
-      brGameComponent,
-      brInGameComponent,
-      brIsAliveComponent,
-      piece,
-      game,
-      msg.sender
-    );
+    checkCanPlay(piece, game);
 
     // Check if we are recharged enough to move, if so, update the previous move timestamp
     BRLibPiece.checkIsRecharged(brPreviousMoveTimestampComponent, brGameComponent, piece, game);
