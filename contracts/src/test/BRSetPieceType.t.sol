@@ -32,30 +32,9 @@ contract BRMovePieceTest is MudTest {
     uint256 game = brCreateGameSystem.executeTyped(startTime, 0, 100, 100, 50, 1000, 0, 64);
 
     // Setup players
-    address taker = address(123456);
     address one = address(223456);
     address two = address(323456);
     address three = address(43456);
-
-    // Players join game
-    vm.startPrank(taker);
-    uint256 takerPiece = spawnPieceAndJoinGame(game);
-    vm.stopPrank();
-
-    vm.startPrank(one);
-    uint256 onePiece = spawnPieceAndJoinGame(game);
-    vm.stopPrank();
-
-    vm.startPrank(two);
-    uint256 twoPiece = spawnPieceAndJoinGame(game);
-    vm.stopPrank();
-
-    vm.startPrank(three);
-    uint256 threePiece = spawnPieceAndJoinGame(game);
-    vm.stopPrank();
-
-    // Start game
-    brStartGameSystem.executeTyped(game);
 
     // Move pieces to locations
     Coord memory oneLocation = Coord({ x: -1, y: 0 });
@@ -63,19 +42,28 @@ contract BRMovePieceTest is MudTest {
     Coord memory threeLocation = Coord({ x: 1, y: 0 });
 
     vm.startPrank(one);
+    uint256 onePiece = spawnPieceAndJoinGame(game);
     brMovePieceSystem.executeTyped(onePiece, game, oneLocation);
     vm.stopPrank();
 
     vm.startPrank(two);
+    uint256 twoPiece = spawnPieceAndJoinGame(game);
     brMovePieceSystem.executeTyped(twoPiece, game, twoLocation);
     vm.stopPrank();
 
     vm.startPrank(three);
+    uint256 threePiece = spawnPieceAndJoinGame(game);
     brMovePieceSystem.executeTyped(threePiece, game, threeLocation);
     vm.stopPrank();
 
+    // Players join game
+    uint256 takerPiece = spawnPieceAndJoinGame(game);
+
+    // Start game
+    brStartGameSystem.executeTyped(game);
+
     // Take three pieces, upgrade, and check
-    vm.startPrank(taker);
+    brMovePieceSystem.executeTyped(takerPiece, game, Coord({ x: 0, y: 0 }));
     brMovePieceSystem.executeTyped(takerPiece, game, oneLocation);
     brMovePieceSystem.executeTyped(takerPiece, game, twoLocation);
     vm.expectRevert(BRNotEnoughPoints.selector);

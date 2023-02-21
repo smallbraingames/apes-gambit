@@ -13,3 +13,4 @@ error BRBeforeStartTime();
 error BRNotEnoughPoints();
 error BRNotRecharged();
 error BRNotRevokeSystem();
+error BRPieceAlreadyAtPosition();

@@ -83,6 +83,7 @@ contract BRMovePieceTest is MudTest {
 
     // Join the game
     brJoinGameSystem.executeTyped(piece, game);
+    brMovePieceSystem.executeTyped(piece, game, Coord({ x: 0, y: 1 }));
 
     // Switch to a new user
     address taker = address(123456);
@@ -96,11 +97,8 @@ contract BRMovePieceTest is MudTest {
     // Start the game
     brStartGameSystem.executeTyped(game);
 
-    // Move taker piece one forward
+    // Move taker piece one forward to take the original piece
     brMovePieceSystem.executeTyped(takerPiece, game, Coord({ x: 0, y: 1 }));
-
-    // Move taker piece one back to take original piece, and check
-    brMovePieceSystem.executeTyped(takerPiece, game, Coord({ x: 0, y: 0 }));
     assertTrue(!brIsAliveComponent.has(piece));
     assertTrue(!BRLibPiece.isPieceAlive(brIsAliveComponent, piece));
     // Took a pawn, so check value
