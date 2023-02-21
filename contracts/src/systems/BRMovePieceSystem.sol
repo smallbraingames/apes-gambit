@@ -2,7 +2,6 @@
 pragma solidity >=0.8.0;
 import { System, IWorld } from "solecs/System.sol";
 import { BRPieceControllerSystem } from "common/BRPieceControllerSystem.sol";
-import { BRLazyUpdater } from "common/BRLazyUpdater.sol";
 import { getAddressById, getSystemAddressById } from "solecs/utils.sol";
 import { BRGame, BRGameStatus } from "common/BRGame.sol";
 import { Coord } from "std-contracts/components/CoordComponent.sol";
