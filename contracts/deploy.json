@@ -40,6 +40,7 @@
       "name": "BRLeaveGameSystem",
       "writeAccess": ["BRInGameComponent", "BRIsAliveComponent", "BRPointsComponent", "BRPiecePositionTrackerComponent"]
     },
-    { "name": "BREndGameSystem", "writeAccess": ["BRGameComponent"] }
+    { "name": "BREndGameSystem", "writeAccess": ["BRGameComponent"] },
+    { "name": "BRKillOutOfBoundsPiecesSystem", "writeAccess": ["BRIsAliveComponent"] }
   ]
 }
