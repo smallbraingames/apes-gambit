@@ -15,6 +15,7 @@ import { BRIsAliveComponent, ID as BRIsAliveComponentID } from "components/BRIsA
 import { BRPointsComponent, ID as BRPointsComponentID } from "components/BRPointsComponent.sol";
 import { BRBananasPickedUpComponent, ID as BRBananasPickedUpComponentID } from "components/BRBananasPickedUpComponent.sol";
 import { BRPreviousMoveTimestampComponent, ID as BRPreviousMoveTimestampComponentID } from "components/BRPreviousMoveTimestampComponent.sol";
+import { BRPiecePositionTrackerComponent, ID as BRPiecePositionTrackerComponentID } from "components/BRPiecePositionTrackerComponent.sol";
 import { PieceTypeComponent, ID as PieceTypeComponentID } from "components/PieceTypeComponent.sol";
 import { PiecePositionComponent, ID as PiecePositionComponentID } from "components/PiecePositionComponent.sol";
 import { MovePieceSystem, ID as MovePieceSystemID } from "systems/MovePieceSystem.sol";
@@ -33,11 +34,25 @@ contract BRMovePieceSystem is BRPieceControllerSystem {
     BRPreviousMoveTimestampComponent brPreviousMoveTimestampComponent = BRPreviousMoveTimestampComponent(
       getAddressById(components, BRPreviousMoveTimestampComponentID)
     );
+    BRPiecePositionTrackerComponent brPiecePositionTrackerComponent = BRPiecePositionTrackerComponent(
+      getAddressById(components, BRPiecePositionTrackerComponentID)
+    );
+    PiecePositionComponent piecePositionComponent = PiecePositionComponent(
+      getAddressById(components, PiecePositionComponentID)
+    );
     MovePieceSystem movePieceSystem = MovePieceSystem(getSystemAddressById(components, MovePieceSystemID));
 
     // If the game has not started, just move the piece and return
     if (BRLibGame.getGame(brGameComponent, game).status == BRGameStatus.NOT_STARTED) {
-      movePieceSystem.executeTyped(piece, position);
+      BRLibPiece.movePiece(
+        movePieceSystem,
+        piecePositionComponent,
+        brPiecePositionTrackerComponent,
+        position,
+        piece,
+        game
+      );
+
       return abi.encode();
     }
 
@@ -55,36 +70,31 @@ contract BRMovePieceSystem is BRPieceControllerSystem {
     takeBananaAtPosition(piece, game, position);
 
     // Move piece
-    movePieceSystem.executeTyped(piece, position);
+    BRLibPiece.movePiece(
+      movePieceSystem,
+      piecePositionComponent,
+      brPiecePositionTrackerComponent,
+      position,
+      piece,
+      game
+    );
   }
 
-  function executeTyped(
-    uint256 piece,
-    uint256 game,
-    Coord memory position
-  ) public returns (bytes memory) {
+  function executeTyped(uint256 piece, uint256 game, Coord memory position) public returns (bytes memory) {
     return execute(abi.encode(piece, game, position));
   }
 
   /// @notice Takes a piece at the given position and increments points
-  function takePieceAtPosition(
-    uint256 piece,
-    uint256 game,
-    Coord memory position
-  ) private {
-    BRInGameComponent brInGameComponent = BRInGameComponent(getAddressById(components, BRInGameComponentID));
+  function takePieceAtPosition(uint256 piece, uint256 game, Coord memory position) private {
     BRIsAliveComponent brIsAliveComponent = BRIsAliveComponent(getAddressById(components, BRIsAliveComponentID));
     BRPointsComponent brPointsComponent = BRPointsComponent(getAddressById(components, BRPointsComponentID));
-    PiecePositionComponent piecePositionComponent = PiecePositionComponent(
-      getAddressById(components, PiecePositionComponentID)
-    );
     PieceTypeComponent pieceTypeComponent = PieceTypeComponent(getAddressById(components, PieceTypeComponentID));
-
+    BRPiecePositionTrackerComponent brPiecePositionTrackerComponent = BRPiecePositionTrackerComponent(
+      getAddressById(components, BRPiecePositionTrackerComponentID)
+    );
     // Kill collided piece
     (bool hasCollidedPiece, uint256 collidedPiece) = BRLibPiece.getPieceAt(
-      piecePositionComponent,
-      brInGameComponent,
-      brIsAliveComponent,
+      brPiecePositionTrackerComponent,
       position,
       game
     );
@@ -98,11 +108,7 @@ contract BRMovePieceSystem is BRPieceControllerSystem {
   }
 
   /// @notice Picks up a banana at position (if there is one there), and increments points
-  function takeBananaAtPosition(
-    uint256 piece,
-    uint256 game,
-    Coord memory position
-  ) private {
+  function takeBananaAtPosition(uint256 piece, uint256 game, Coord memory position) private {
     BRBananasPickedUpComponent brBananasPickedUpComponent = BRBananasPickedUpComponent(
       getAddressById(components, BRBananasPickedUpComponentID)
     );

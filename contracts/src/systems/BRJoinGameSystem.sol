@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 import { System, IWorld } from "solecs/System.sol";
+import { Coord } from "std-contracts/components/CoordComponent.sol";
 import { getAddressById, getSystemAddressById } from "solecs/utils.sol";
 import { BRGame, BRGameStatus } from "common/BRGame.sol";
 import { PieceType } from "common/PieceType.sol";
@@ -9,7 +10,9 @@ import { ControllerComponent, ID as ControllerComponentID } from "components/Con
 import { BRGameComponent, ID as BRGameComponentID } from "components/BRGameComponent.sol";
 import { BRInGameComponent, ID as BRInGameComponentID } from "components/BRInGameComponent.sol";
 import { BRIsAliveComponent, ID as BRIsAliveComponentID } from "components/BRIsAliveComponent.sol";
+import { BRPiecePositionTrackerComponent, ID as BRPiecePositionTrackerComponentID } from "components/BRPiecePositionTrackerComponent.sol";
 import { BRSetPieceTypeSystem, ID as BRSetPieceSystemID } from "systems/BRSetPieceTypeSystem.sol";
+import { PiecePositionComponent, ID as PiecePositionComponentID } from "components/PiecePositionComponent.sol";
 import { BRLibPiece } from "libraries/BRLibPiece.sol";
 import { BRLibGame } from "libraries/BRLibGame.sol";
 
@@ -30,6 +33,12 @@ contract BRJoinGameSystem is System {
     BRSetPieceTypeSystem brSetPieceTypeSystem = BRSetPieceTypeSystem(
       getSystemAddressById(components, BRSetPieceSystemID)
     );
+    BRPiecePositionTrackerComponent brPiecePositionTrackerComponent = BRPiecePositionTrackerComponent(
+      getAddressById(components, BRPiecePositionTrackerComponentID)
+    );
+    PiecePositionComponent piecePositionComponent = PiecePositionComponent(
+      getAddressById(components, PiecePositionComponentID)
+    );
 
     // Check that piece has the correct owner and controllers
     BRLibPiece.checkPieceOwnerAndControllers(ownerComponent, controllerComponent, piece, msg.sender);
@@ -44,10 +53,20 @@ contract BRJoinGameSystem is System {
     brInGameComponent.set(piece, game);
     brIsAliveComponent.set(piece);
 
+    // Set points to 0
     BRPointsComponent brPointsComponent = BRPointsComponent(getAddressById(components, BRPointsComponentID));
     brPointsComponent.set(piece, 0);
 
+    // Set piece type to pawn
     brSetPieceTypeSystem.executeTyped(piece, game, PieceType.PAWN);
+
+    // Set tracker to position piece is at
+    Coord memory piecePosition = piecePositionComponent.getValue(piece);
+    BRLibPiece.checkPositionIsEmpty(brPiecePositionTrackerComponent, piecePosition, game);
+    brPiecePositionTrackerComponent.set(
+      BRLibPiece.createPiecePositionTrackerComponentEntityFromPosition(piecePosition, game),
+      piece
+    );
   }
 
   function executeTyped(uint256 piece, uint256 game) public returns (bytes memory) {

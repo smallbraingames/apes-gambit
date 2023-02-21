@@ -47,6 +47,9 @@ contract BRGridShrinkTest is MudTest {
     // Join the game
     brJoinGameSystem.executeTyped(piece, game);
 
+    // Move this piece out of the way so next piece can join
+    brMovePieceSystem.executeTyped(piece, game, Coord({ x: 0, y: 1 }));
+
     address winner = address(12345);
     vm.startPrank(winner);
     uint256 winnerPiece = spawnSystem.executeTyped();
@@ -59,7 +62,6 @@ contract BRGridShrinkTest is MudTest {
 
     // Grid is 200 x 200 right now
     // Move the piece to (0, 5)
-    brMovePieceSystem.executeTyped(piece, game, Coord({ x: 0, y: 1 }));
     brMovePieceSystem.executeTyped(piece, game, Coord({ x: 0, y: 2 }));
     brMovePieceSystem.executeTyped(piece, game, Coord({ x: 0, y: 3 }));
     brMovePieceSystem.executeTyped(piece, game, Coord({ x: 0, y: 4 }));
