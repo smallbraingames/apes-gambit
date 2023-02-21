@@ -9,38 +9,73 @@ import { OwnerComponent } from "components/OwnerComponent.sol";
 import { ControllerComponent } from "components/ControllerComponent.sol";
 import { BRGameComponent } from "components/BRGameComponent.sol";
 import { BRInGameComponent, ID as BRInGameComponentID } from "components/BRInGameComponent.sol";
-import { BRIsAliveComponent } from "components/BRIsAliveComponent.sol";
+import { BRIsAliveComponent, ID as BRIsAliveComponentID } from "components/BRIsAliveComponent.sol";
 import { BRPointsComponent } from "components/BRPointsComponent.sol";
 import { BRPreviousMoveTimestampComponent } from "components/BRPreviousMoveTimestampComponent.sol";
 import { PiecePositionComponent, ID as PiecePositionComponentID } from "components/PiecePositionComponent.sol";
-import { BRPieceDead, BRNotEnoughPoints, BRNotRecharged, BRIncorrectControllers } from "common/BRErrors.sol";
+import { BRPiecePositionTrackerComponent, ID as BRPiecePositionTrackerComponentID } from "components/BRPiecePositionTrackerComponent.sol";
+import { BRPieceDead, BRNotEnoughPoints, BRNotRecharged, BRIncorrectControllers, BRPieceAlreadyAtPosition } from "common/BRErrors.sol";
+import { MovePieceSystem } from "systems/MovePieceSystem.sol";
 import { UnimplementedPieceType } from "common/Errors.sol";
 import { BRLibGame } from "libraries/BRLibGame.sol";
 import { LibOwner } from "libraries/LibOwner.sol";
 
 library BRLibPiece {
+  /// @notice Moves a piece, including updating necessary tracking components
+  function movePiece(
+    MovePieceSystem movePieceSystem,
+    PiecePositionComponent piecePositionComponent,
+    BRPiecePositionTrackerComponent brPiecePositionTrackerComponent,
+    Coord memory position,
+    uint256 piece,
+    uint256 game
+  ) internal {
+    removePositionTrackerComponent(piecePositionComponent, brPiecePositionTrackerComponent, piece, game);
+    uint256 positionEntity = BRLibPiece.createPiecePositionTrackerComponentEntityFromPosition(position, game);
+    brPiecePositionTrackerComponent.set(positionEntity, piece);
+    movePieceSystem.executeTyped(piece, position);
+  }
+
+  /// @notice Cleans up the position tracker component for a piece at a position
+  /// used when a piece is leaving a position (or the game)
+  function removePositionTrackerComponent(
+    PiecePositionComponent piecePositionComponent,
+    BRPiecePositionTrackerComponent brPiecePositionTrackerComponent,
+    uint256 piece,
+    uint256 game
+  ) internal {
+    uint256 previousPositionEntity = BRLibPiece.createPiecePositionTrackerComponentEntityFromPosition(
+      piecePositionComponent.getValue(piece),
+      game
+    );
+    brPiecePositionTrackerComponent.remove(previousPositionEntity);
+  }
+
   /// @notice Gets the piece alive in this game at a position if there is one
   /// If there is not, returns 0 for the piece and false for the hasPiece
   function getPieceAt(
-    PiecePositionComponent piecePositionComponent,
-    BRInGameComponent brInGameComponent,
-    BRIsAliveComponent brIsAliveComponent,
+    BRPiecePositionTrackerComponent brPiecePositionTracker,
     Coord memory position,
     uint256 game
   ) internal view returns (bool hasPiece, uint256 piece) {
-    uint256[] memory collidedPieces = piecePositionComponent.getEntitiesWithValue(abi.encode(position));
-    for (uint256 i = 0; i < collidedPieces.length; i++) {
-      uint256 collidedPiece = collidedPieces[i];
-      // There can only be one alive piece in a game at a given position
-      // so return the first one found
-      if (
-        BRLibGame.isPieceInGame(brInGameComponent, collidedPiece, game) &&
-        isPieceAlive(brIsAliveComponent, collidedPiece)
-      ) {
-        return (true, collidedPiece);
-      }
+    uint256 positionEntity = createPiecePositionTrackerComponentEntityFromPosition(position, game);
+    if (brPiecePositionTracker.has(positionEntity)) {
+      return (true, brPiecePositionTracker.getValue(positionEntity));
     }
     return (false, 0);
+  }
+
+  /// @notice Checks that there is no piece at a given position in a game
+  function checkPositionIsEmpty(
+    BRPiecePositionTrackerComponent brPiecePositionTracker,
+    Coord memory position,
+    uint256 game
+  ) internal view {
+    (bool hasPiece, uint256 piece) = getPieceAt(brPiecePositionTracker, position, game);
+
+    if (hasPiece) {
+      revert BRPieceAlreadyAtPosition();
+    }
   }
 
   /// @notice Kills all pieces that are out of bounds
@@ -189,11 +224,7 @@ library BRLibPiece {
   }
 
   /// @notice Increments the points of a given entity
-  function incrementPoints(
-    BRPointsComponent brPointsComponent,
-    uint256 piece,
-    uint32 increment
-  ) internal {
+  function incrementPoints(BRPointsComponent brPointsComponent, uint256 piece, uint32 increment) internal {
     if (!brPointsComponent.has(piece)) {
       brPointsComponent.set(piece, increment);
       return;
@@ -203,11 +234,7 @@ library BRLibPiece {
   }
 
   /// @notice Increments the points of a given entity
-  function decrementPoints(
-    BRPointsComponent brPointsComponent,
-    uint256 piece,
-    uint32 decrement
-  ) internal {
+  function decrementPoints(BRPointsComponent brPointsComponent, uint256 piece, uint32 decrement) internal {
     if (!brPointsComponent.has(piece)) {
       revert BRNotEnoughPoints();
     }
@@ -230,5 +257,13 @@ library BRLibPiece {
       return 9;
     }
     revert UnimplementedPieceType();
+  }
+
+  /// @notice Get position-indexed entity ID for a component
+  function createPiecePositionTrackerComponentEntityFromPosition(
+    Coord memory position,
+    uint256 game
+  ) internal pure returns (uint256) {
+    return uint256(keccak256(abi.encodePacked(position.x, position.y, game, BRPiecePositionTrackerComponentID)));
   }
 }
