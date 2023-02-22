@@ -5,7 +5,7 @@ import {
   RenderDepth,
   TILE_HEIGHT,
   TILE_WIDTH,
-} from "../constants";
+} from "../../constants";
 import {
   EntityID,
   EntityIndex,
@@ -15,7 +15,7 @@ import {
   runQuery,
   withValue,
 } from "@latticexyz/recs";
-import { Game, GameConfig, Scene } from "../types";
+import { Game, GameConfig, Scene } from "../../types";
 import { Perlin, createPerlin } from "@latticexyz/noise";
 import {
   defaultAbiCoder,
@@ -25,8 +25,8 @@ import {
 } from "ethers/lib/utils";
 
 import { Coord } from "@latticexyz/utils";
-import { Network } from "../../network/types";
-import { getEntityIndexFromEntity } from "./resolveEntity";
+import { Network } from "../../../network/types";
+import { getEntityIndexFromEntity } from "../resolveEntity";
 import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
 
 const PERLIN_DIGITS = 3;

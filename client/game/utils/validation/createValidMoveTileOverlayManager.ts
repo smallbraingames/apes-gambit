@@ -4,7 +4,7 @@ import {
   TILE_OVERLAY_COLOR,
   TILE_OVERLAY_TAKE_COLOR,
   TILE_WIDTH,
-} from "../constants";
+} from "../../constants";
 import { Coord, coordToKey } from "@latticexyz/utils";
 import {
   EntityID,
@@ -13,11 +13,11 @@ import {
   getComponentValueStrict,
   getEntitiesWithValue,
 } from "@latticexyz/recs";
-import { Game, MoveValidator, Scene } from "../types";
-import { Network, PieceType } from "../../network/types";
+import { Game, MoveValidator, Scene } from "../../types";
+import { Network, PieceType } from "../../../network/types";
 
-import { RenderDepth } from "../constants";
-import isLiveGamePiece from "./isLiveGamePiece";
+import { RenderDepth } from "../../constants";
+import isLiveGamePiece from "../isLiveGamePiece";
 import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
 
 enum TileOverlayType {
@@ -26,37 +26,37 @@ enum TileOverlayType {
   TAKE = "TAKE",
 }
 
-type TileOverlayConfig = {
+type ValidMoveTileOverlayConfig = {
   tilePosition: Coord;
   type: TileOverlayType;
 };
 
-type TileOverlay = {
-  config: TileOverlayConfig;
+type ValidMoveTileOverlay = {
+  config: ValidMoveTileOverlayConfig;
   overlay: Phaser.GameObjects.GameObject;
 };
 
-const getTileKey = (tileConfig: TileOverlayConfig) =>
+const getTileKey = (tileConfig: ValidMoveTileOverlayConfig) =>
   `${coordToKey(tileConfig.tilePosition)}**${tileConfig.type}`;
 
-const createTileOverlayManager = (
+const createValidMoveTileOverlayManager = (
   network: Network,
   game: Game,
   scene: Scene,
   moveValidator: MoveValidator,
   gameEntity?: EntityID
 ) => {
-  let currentTileOverlays: Map<number, TileOverlay> = new Map();
+  let currentValidMoveOverlays: Map<number, ValidMoveTileOverlay> = new Map();
 
   const clearValidMoveOverlays = () => {
-    [...currentTileOverlays.values()].forEach((overlay) =>
+    [...currentValidMoveOverlays.values()].forEach((overlay) =>
       overlay.overlay.destroy()
     );
-    currentTileOverlays = new Map();
+    currentValidMoveOverlays = new Map();
   };
 
   const hasValidMoveOverlays = () => {
-    return currentTileOverlays.size > 0;
+    return currentValidMoveOverlays.size > 0;
   };
 
   const setValidMoveOverlays = () => {
@@ -85,7 +85,7 @@ const createTileOverlayManager = (
     );
 
     // Create ovlerays
-    const overlayConfigs: TileOverlayConfig[] = [];
+    const overlayConfigs: ValidMoveTileOverlayConfig[] = [];
     const validMoves = moveValidator.getValidMoves(pieceType, piecePosition);
     validMoves.forEach((potentialMove) => {
       const pieceAtPosition = getEntitiesWithValue(
@@ -105,12 +105,12 @@ const createTileOverlayManager = (
     });
 
     // Only update what is necessary
-    const newOverlayConfigs: TileOverlayConfig[] = [];
+    const newOverlayConfigs: ValidMoveTileOverlayConfig[] = [];
     const keepOverlayConfigKeys: Set<number> = new Set();
 
     overlayConfigs.forEach((config) => {
       const configKey = coordToKey(config.tilePosition);
-      const existingConfig = currentTileOverlays.get(configKey);
+      const existingConfig = currentValidMoveOverlays.get(configKey);
       if (
         existingConfig &&
         getTileKey(existingConfig.config) === getTileKey(config)
@@ -122,19 +122,19 @@ const createTileOverlayManager = (
     });
 
     // Remove old tiles
-    [...currentTileOverlays.entries()].forEach((entry) => {
+    [...currentValidMoveOverlays.entries()].forEach((entry) => {
       const key = entry[0];
       const tileOverlay = entry[1];
       if (!keepOverlayConfigKeys.has(key)) {
         tileOverlay.overlay.destroy();
-        currentTileOverlays.delete(key);
+        currentValidMoveOverlays.delete(key);
       }
     });
 
     // Add tiles and update the map
     newOverlayConfigs.forEach((config) => {
-      const overlay = addTileOverlay(config);
-      currentTileOverlays.set(coordToKey(config.tilePosition), {
+      const overlay = addValidMoveOverlay(config);
+      currentValidMoveOverlays.set(coordToKey(config.tilePosition), {
         overlay,
         config,
       });
@@ -148,8 +148,8 @@ const createTileOverlayManager = (
     return TILE_OVERLAY_COLOR;
   };
 
-  const addTileOverlay = (
-    tileConfig: TileOverlayConfig
+  const addValidMoveOverlay = (
+    tileConfig: ValidMoveTileOverlayConfig
   ): Phaser.GameObjects.Rectangle => {
     const { scene: phaserScene } = scene;
     const { x, y } = tileCoordToPixelCoord(
@@ -185,4 +185,4 @@ const createTileOverlayManager = (
   };
 };
 
-export default createTileOverlayManager;
+export default createValidMoveTileOverlayManager;

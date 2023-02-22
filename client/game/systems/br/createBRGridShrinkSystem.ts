@@ -2,7 +2,7 @@ import { Game } from "../../types";
 import { Network } from "../../../network/types";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
-import overlayShrinkingGridTiles from "../../utils/overlayShrinkingGridTiles";
+import overlayShrinkingGridTiles from "../../utils/tilemap/overlayShrinkingGridTiles";
 
 const createBRGridShrinkSystem = (
   network: Network,
