@@ -17,12 +17,7 @@ import {
 } from "@latticexyz/recs";
 import { Game, GameConfig, Scene } from "../../types";
 import { Perlin, createPerlin } from "@latticexyz/noise";
-import {
-  defaultAbiCoder,
-  keccak256,
-  solidityKeccak256,
-  toUtf8Bytes,
-} from "ethers/lib/utils";
+import { keccak256, solidityKeccak256, toUtf8Bytes } from "ethers/lib/utils";
 
 import { Coord } from "@latticexyz/utils";
 import { Network } from "../../../network/types";
@@ -37,10 +32,12 @@ const createBananaMananger = () => {
   let game: Game;
   let gameConfig: GameConfig;
   let scene: Scene;
+  let gameEntity: EntityID;
 
   const setup = async (
     networkContext: Network,
     gameContext: Game,
+    gameEntityID: EntityID,
     gameConfiguration: GameConfig,
     bananaScene: Scene
   ) => {
@@ -48,6 +45,7 @@ const createBananaMananger = () => {
     game = gameContext;
     gameConfig = gameConfiguration;
     scene = bananaScene;
+    gameEntity = gameEntityID;
     perlin = await createPerlin();
   };
 
@@ -162,7 +160,6 @@ const createBananaMananger = () => {
       world,
       components: { BRBananasPickedUp },
     } = network;
-    const { gameEntity } = game;
     const componentID = keccak256(toUtf8Bytes(BRBananasPickedUp.id));
     const entityID = solidityKeccak256(
       ["int32", "int32", "uint256", "uint256"],

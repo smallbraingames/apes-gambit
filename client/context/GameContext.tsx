@@ -11,6 +11,7 @@ import { Game } from "../game/types";
 import { Network } from "../network/types";
 import { NetworkContext } from "./NetworkContext";
 import { Game as PhaserGame } from "../game/types";
+import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../game/utils/defineComponentSystemUnsubscribable";
 
 interface GameContextInterface {
@@ -34,12 +35,8 @@ const GameProvider = (props: { children: ReactNode }) => {
   const [gameEntity, setGameEntity] = useState<EntityID | undefined>(undefined);
 
   const setupGame = async (network: Network) => {
-    const params = new URLSearchParams(window.location.search);
-    const gameEntity = params.get("gameEntity") as EntityID | undefined;
-    setGameEntity(gameEntity);
-
     const createGame = (await import("../game/createGame")).createGame;
-    const game: PhaserGame = await createGame(network, gameEntity);
+    const game: PhaserGame = await createGame(network);
 
     setGame((prevGame) => {
       if (prevGame) prevGame.game.destroy(true);
@@ -56,8 +53,9 @@ const GameProvider = (props: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!network.network) return;
+    let subscriptions: Subscription[] = [];
     if (game) {
-      defineComponentSystemUnsubscribable(
+      const activePieceSub = defineComponentSystemUnsubscribable(
         game.gameWorld,
         game.components.ActivePiece,
         (update) => {
@@ -65,7 +63,21 @@ const GameProvider = (props: { children: ReactNode }) => {
           setActivePiece(activePiece ? activePiece : (-1 as EntityIndex));
         }
       );
+      const gameEntitySub = defineComponentSystemUnsubscribable(
+        game.gameWorld,
+        game.components.EmbodiedBRGameEntity,
+        (update) => {
+          const gameEntity = update.value[0]?.value as EntityID;
+          setGameEntity(gameEntity);
+        }
+      );
+      subscriptions.push(activePieceSub);
+      subscriptions.push(gameEntitySub);
     }
+
+    return () => {
+      subscriptions.forEach((sub) => sub.unsubscribe());
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [game]);
 
