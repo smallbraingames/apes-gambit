@@ -32,6 +32,7 @@ const createBRValidMoveOverlaySystem = (
       br!.tileOverlayManager.setValidMoveOverlays();
     } else if (time > 0) {
       br!.tileOverlayManager.clearValidMoveOverlays();
+      br!.rechargeOverlayManager.animateRechargeOverlay(time);
     }
   };
 
