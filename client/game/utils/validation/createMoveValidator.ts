@@ -1,5 +1,5 @@
 import { Coord } from "@latticexyz/utils";
-import { PieceType } from "../../network/types";
+import { PieceType } from "../../../network/types";
 
 export type MoveValidatorConfig = { [key in PieceType]: number };
 

@@ -1,4 +1,4 @@
-import { Assets, TILE_HEIGHT, TILE_WIDTH } from "../constants";
+import { Assets, TILE_HEIGHT, TILE_WIDTH } from "../../constants";
 
 const createChessBoardTilemap = (
   scene: Phaser.Scene,
