@@ -5,6 +5,11 @@ import {
   TILE_HEIGHT,
   TILE_WIDTH,
 } from "../../constants";
+import {
+  EntityID,
+  getComponentValue,
+  getComponentValueStrict,
+} from "@latticexyz/recs";
 import { Game, Scene } from "../../types";
 
 import { Network } from "../../../network/types";
@@ -14,18 +19,20 @@ import createMoveValidator from "../../utils/validation/createMoveValidator";
 import createRechargeOverlayManager from "../../utils/createRechargeOverlayManager";
 import createSpeechBubbleManager from "../../utils/chat/createSpeechBubbleManager";
 import createValidMoveTileOverlayManager from "../../utils/validation/createValidMoveTileOverlayManager";
-import { getComponentValueStrict } from "@latticexyz/recs";
 import { getEntityIndexFromEntity } from "../../utils/resolveEntity";
 import { setupBRSystems } from "../setupSystems";
 
 const setupBRGame = async (network: Network, scene: Scene, game: Game) => {
-  const { gameEntity } = game;
-
+  const {
+    components: { EmbodiedBRGameEntity },
+  } = game;
   const {
     godEntityIndex,
     world,
     components: { BRGame },
   } = network;
+  const gameEntity = getComponentValue(EmbodiedBRGameEntity, godEntityIndex)
+    ?.value as EntityID | undefined;
 
   if (!gameEntity) {
     console.error("Cannot setup BR game without game entity");
@@ -56,7 +63,7 @@ const setupBRGame = async (network: Network, scene: Scene, game: Game) => {
 
   // Setup banana manager
   const bananaManager = createBananaMananger();
-  await bananaManager.setup(network, game, gameConfig, scene);
+  await bananaManager.setup(network, game, gameEntity, gameConfig, scene);
   bananaManager.placeBananas(tilemap);
 
   const moveValidator = createMoveValidator(DEFAULT_MOVE_VALIDATOR_CONFIG);

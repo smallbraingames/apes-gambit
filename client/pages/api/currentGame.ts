@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import { EntityID } from "@latticexyz/recs";
 
-type CurrentGameResponse = {
+export type CurrentGameResponse = {
   gameEntity: EntityID;
 };
 
