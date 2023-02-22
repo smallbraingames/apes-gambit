@@ -1,17 +1,14 @@
 import {
-  DEFAULT_MOVE_VALIDATOR_CONFIG,
-  GAME_WORLD_NAMESPACE,
-  INITIAL_ZOOM,
-} from "./constants";
-import {
   EntityID,
   Type,
   defineComponent,
   namespaceWorld,
 } from "@latticexyz/recs";
+import { GAME_WORLD_NAMESPACE, INITIAL_ZOOM } from "./constants";
 import {
   defineCoordComponent,
   defineNumberComponent,
+  defineStringComponent,
 } from "@latticexyz/std-client";
 import setupPiecePositionContextComponent, {
   definePiecePositionContextComponent,
@@ -22,9 +19,7 @@ import { Scene } from "./types";
 import { Subscription } from "rxjs";
 import assets from "./utils/config/assets";
 import { config } from "./config";
-import createBananaMananger from "./utils/tilemap/createBananaManager";
 import { createCamera } from "@latticexyz/phaserx";
-import createMoveValidator from "./utils/validation/createMoveValidator";
 import createPhaserGame from "../phaser/createPhaserGame";
 import createPhaserObjectRegistry from "../phaser/createPhaserObjectRegistry";
 import createScene from "../phaser/createScene";
@@ -34,9 +29,10 @@ import setupBRGame from "./systems/br/setupBRGame";
 import setupBRGridDimComponent from "./components/setupBRGridDimComponent";
 import setupBRRechargeTimerComponent from "./components/setupBRRechargeTimerComponent";
 import setupChatComponent from "./components/setupChatComponent";
+import setupEmbodiedBRGameEntityComponent from "./components/setupEmbodiedBRGameEntityComponent";
 import setupLobbyGame from "./systems/lobby/setupLobbyGame";
 
-export async function createGame(network: Network, gameEntity?: EntityID) {
+export async function createGame(network: Network) {
   const sceneConstructors = Object.keys(config.scenes).map((key) => {
     return createScene({ key });
   });
@@ -105,6 +101,9 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   const components = {
     HoveredPiece: defineNumberComponent(gameWorld, { id: "HoveredPiece" }),
     ActivePiece: defineNumberComponent(gameWorld, { id: "ActivePiece" }),
+    EmbodiedBRGameEntity: defineStringComponent(gameWorld, {
+      id: "EmbodiedBRGameEntity",
+    }),
     ChatComponent: defineComponent(
       gameWorld,
       {
@@ -130,7 +129,6 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
   };
 
   const context = {
-    gameEntity,
     gameWorld,
     components,
     subscribedSystems: [] as Subscription[],
@@ -138,16 +136,17 @@ export async function createGame(network: Network, gameEntity?: EntityID) {
     scenes,
   };
 
-  // Setup scenes
-  setupLobbyGame(network, scenes.Lobby, context);
-  setupBRGame(network, scenes.BR, context);
-
   // Setup game components
   setupActivePieceComponent(network, context);
   setupChatComponent(network, context);
   setupPiecePositionContextComponent(network, context);
   setupBRRechargeTimerComponent(network, context);
   setupBRGridDimComponent(network, context);
+  await setupEmbodiedBRGameEntityComponent(network, context);
+
+  // Setup scenes
+  setupLobbyGame(network, scenes.Lobby, context);
+  setupBRGame(network, scenes.BR, context);
 
   (window as any).game = context;
 
