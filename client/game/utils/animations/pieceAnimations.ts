@@ -1,9 +1,9 @@
-import { Assets, MOVE_ANIMATION_DURATION, TILE_HEIGHT } from "../constants";
+import { Assets, MOVE_ANIMATION_DURATION, TILE_HEIGHT } from "../../constants";
 import { Coord, tween } from "@latticexyz/phaserx";
 
-import { PieceState } from "../types";
-import { PieceType } from "../../network/types";
-import { getAssetKeyForPiece } from "./config/assets";
+import { PieceState } from "../../types";
+import { PieceType } from "../../../network/types";
+import { getAssetKeyForPiece } from "../config/assets";
 
 export const loopPieceIdleAnimation = async (
   gameObject: Phaser.GameObjects.Sprite,

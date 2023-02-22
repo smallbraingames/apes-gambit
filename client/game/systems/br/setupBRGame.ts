@@ -8,11 +8,11 @@ import {
 import { Game, Scene } from "../../types";
 
 import { Network } from "../../../network/types";
-import createBananaMananger from "../../utils/createBananaManager";
-import createChessBoardTilemap from "../../utils/createChessBoardTilemap";
-import createMoveValidator from "../../utils/createMoveValidator";
+import createBananaMananger from "../../utils/tilemap/createBananaManager";
+import createChessBoardTilemap from "../../utils/tilemap/createChessBoardTilemap";
+import createMoveValidator from "../../utils/validation/createMoveValidator";
 import createSpeechBubbleManager from "../../utils/chat/createSpeechBubbleManager";
-import createTileOverlayManager from "../../utils/createTileOverlayManager";
+import createValidMoveTileOverlayManager from "../../utils/validation/createValidMoveTileOverlayManager";
 import { getComponentValueStrict } from "@latticexyz/recs";
 import { getEntityIndexFromEntity } from "../../utils/resolveEntity";
 import { setupBRSystems } from "../setupSystems";
@@ -64,7 +64,7 @@ const setupBRGame = async (network: Network, scene: Scene, game: Game) => {
   const brContext = {
     bananaManager,
     moveValidator: createMoveValidator(DEFAULT_MOVE_VALIDATOR_CONFIG),
-    tileOverlayManager: createTileOverlayManager(
+    tileOverlayManager: createValidMoveTileOverlayManager(
       network,
       game,
       scene,

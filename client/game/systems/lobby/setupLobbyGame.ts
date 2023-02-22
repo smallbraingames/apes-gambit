@@ -9,10 +9,11 @@ import {
 import { Game, Scene } from "../../types";
 
 import { Network } from "../../../network/types";
-import createChessBoardTilemap from "../../utils/createChessBoardTilemap";
-import createMoveValidator from "../../utils/createMoveValidator";
+import createChessBoardTilemap from "../../utils/tilemap/createChessBoardTilemap";
+import createMoveValidator from "../../utils/validation/createMoveValidator";
+import createRechargeOverlayManager from "../../utils/createRechargeOverlayManager";
 import createSpeechBubbleManager from "../../utils/chat/createSpeechBubbleManager";
-import createTileOverlayManager from "../../utils/createTileOverlayManager";
+import createValidMoveTileOverlayManager from "../../utils/validation/createValidMoveTileOverlayManager";
 import { setupLobbySystems } from "../setupSystems";
 
 const setupLobbyGame = (network: Network, scene: Scene, game: Game) => {
@@ -38,7 +39,7 @@ const setupLobbyGame = (network: Network, scene: Scene, game: Game) => {
 
   const lobbyContext = {
     moveValidator,
-    tileOverlayManager: createTileOverlayManager(
+    tileOverlayManager: createValidMoveTileOverlayManager(
       network,
       game,
       scene,
@@ -46,6 +47,14 @@ const setupLobbyGame = (network: Network, scene: Scene, game: Game) => {
     ),
     speechBubbleManager,
   };
+
+  // Test
+  const test = async () => {
+    const rechargeOverlayManager = await createRechargeOverlayManager(scene);
+    rechargeOverlayManager.animateRechargeOverlay({ x: 0, y: 0 });
+  };
+
+  test();
 
   setupLobbySystems(network, game, lobbyContext);
 
