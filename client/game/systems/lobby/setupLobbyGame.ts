@@ -48,14 +48,6 @@ const setupLobbyGame = (network: Network, scene: Scene, game: Game) => {
     speechBubbleManager,
   };
 
-  // Test
-  const test = async () => {
-    const rechargeOverlayManager = await createRechargeOverlayManager(scene);
-    rechargeOverlayManager.animateRechargeOverlay({ x: 0, y: 0 });
-  };
-
-  test();
-
   setupLobbySystems(network, game, lobbyContext);
 
   return lobbyContext;

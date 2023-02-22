@@ -57,7 +57,7 @@ export const setupBRSystems = (network: Network, game: Game, br: BR) => {
       createBRMovementInputSystem,
       createBRPiecePositionSystem,
       createBRPieceTypeSystem,
-      createBRValidMoveOverlaySystem,
+      // createBRValidMoveOverlaySystem,
       createBRGridShrinkSystem,
       createBRChatSystem,
     ],
