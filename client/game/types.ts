@@ -3,7 +3,7 @@ import { Component, World } from "@latticexyz/recs";
 import { Camera } from "@latticexyz/phaserx";
 import { ObjectRegistry } from "../phaser/types";
 import { createGame } from "./createGame";
-import createMoveValidator from "./utils/createMoveValidator";
+import createMoveValidator from "./utils/validation/createMoveValidator";
 import setupBRGame from "./systems/br/setupBRGame";
 import setupLobbyGame from "./systems/lobby/setupLobbyGame";
 

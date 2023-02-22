@@ -1,7 +1,7 @@
-import { CHESS_TILEMAP_ID } from "../constants";
+import { CHESS_TILEMAP_ID } from "../../constants";
 import { Coord } from "@latticexyz/utils";
 import { EntityIndex } from "@latticexyz/recs";
-import { ObjectRegistry } from "../../phaser/types";
+import { ObjectRegistry } from "../../../phaser/types";
 
 let previouslyUpdatedDim: number;
 

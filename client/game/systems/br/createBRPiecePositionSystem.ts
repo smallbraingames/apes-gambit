@@ -14,7 +14,7 @@ import {
   loopPieceIdleAnimation,
   playMovePieceAnimation,
   playPieceAttackAnimation,
-} from "../../utils/pieceAnimations";
+} from "../../utils/animations/pieceAnimations";
 
 import { Subscription } from "rxjs";
 import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
