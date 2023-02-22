@@ -11,15 +11,15 @@ import {
 import { Network, PieceType } from "../../../network/types";
 import { PIECE_SPRITE_ID, TILE_HEIGHT, TILE_WIDTH } from "../../constants";
 import {
-  loopPieceIdleAnimation,
-  playMovePieceAnimation,
   playPieceAttackAnimation,
-} from "../../utils/animations/pieceAnimations";
+  playPieceMoveAnimation,
+} from "../../utils/animations/pieceMoveAnimation";
+import { removeAllTweens, tileCoordToPixelCoord } from "@latticexyz/phaserx";
 
 import { Subscription } from "rxjs";
 import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
 import isLiveGamePiece from "../../utils/isLiveGamePiece";
-import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
+import loopPieceIdleAnimation from "../../utils/animations/loopPieceIdleAnimation";
 
 const createBRPiecePositionSystem = (
   network: Network,
@@ -38,7 +38,89 @@ const createBRPiecePositionSystem = (
     scenes: {
       BR: { objectRegistry, scene },
     },
+    components: { BRRechargeTimerComponent },
   } = game;
+
+  const runRechargeAnimation = async () => {
+    const time = getComponentValueStrict(
+      BRRechargeTimerComponent,
+      godEntityIndex
+    ).value;
+    await br!.rechargeOverlayManager.animateRechargeOverlay(time);
+    br!.tileOverlayManager.setValidMoveOverlays();
+  };
+
+  const runPiecePositionContextChangedAnimation = async (
+    piece: EntityIndex
+  ) => {
+    const positionContext = getComponentValueStrict(
+      PiecePositionContext,
+      piece
+    );
+    const sprite = getPieceSpriteGameObject(piece, objectRegistry, scene);
+    const { x, y } = tileCoordToPixelCoord(
+      positionContext,
+      TILE_WIDTH,
+      TILE_HEIGHT
+    );
+    const pieceType: PieceType = getComponentValueStrict(
+      PieceType,
+      piece
+    ).value;
+    const activePiece = getComponentValueStrict(ActivePiece, godEntityIndex)
+      .value as EntityIndex;
+    const isActivePiece = activePiece === piece;
+
+    // 1. If necessary, clear overlays before move
+    if (isActivePiece) {
+      br!.tileOverlayManager.clearValidMoveOverlays();
+    }
+
+    // 2. Make the move / attack movement depending on if a piece was taken
+    removeAllTweens(sprite);
+    let moveAnimation;
+    if (positionContext.pieceTaken !== undefined) {
+      moveAnimation = playPieceAttackAnimation(
+        sprite,
+        { x, y },
+        pieceType,
+        !isActivePiece
+      );
+    } else {
+      moveAnimation = playPieceMoveAnimation(
+        scene,
+        sprite,
+        { x, y },
+        pieceType,
+        !isActivePiece
+      );
+    }
+    await moveAnimation;
+
+    // HACK: Take the opponents piece or a banana
+    if (positionContext.bananaPickedUp) {
+      br!.bananaManager.removeBananaAtPosition({
+        x: positionContext.x,
+        y: positionContext.y,
+      });
+    } else if (positionContext.pieceTaken !== undefined) {
+      objectRegistry.gameObjectRegistry.remove(
+        positionContext.pieceTaken as EntityIndex,
+        PIECE_SPRITE_ID
+      );
+    }
+
+    // 3. Run the recharge and piece overlay animation if this piece is active
+    // If not, just set them to idle
+    if (isActivePiece) {
+      sprite.setX(x);
+      sprite.setY(y);
+      await runRechargeAnimation();
+    }
+
+    // 4. End with idle piece
+    loopPieceIdleAnimation(sprite, x, y);
+  };
 
   defineEnterSystem(
     world,
@@ -46,7 +128,7 @@ const createBRPiecePositionSystem = (
       Has(PiecePositionContext),
       // @ts-ignore
       HasValue(BRInGame, { value: gameEntity }),
-      Has(BRIsAlive),
+      HasValue(BRIsAlive, { value: true }),
     ],
     async (update) => {
       const positionContext = getComponentValueStrict(
@@ -64,6 +146,12 @@ const createBRPiecePositionSystem = (
         TILE_HEIGHT
       );
       sprite.setPosition(x, y);
+      const activePiece = getComponentValueStrict(ActivePiece, godEntityIndex)
+        .value as EntityIndex;
+      const isActivePiece = activePiece === update.entity;
+      if (isActivePiece) {
+        await runRechargeAnimation();
+      }
       loopPieceIdleAnimation(sprite, x, y);
     }
   );
@@ -74,91 +162,10 @@ const createBRPiecePositionSystem = (
       Has(PiecePositionContext),
       // @ts-ignore
       HasValue(BRInGame, { value: gameEntity }),
-      Has(BRIsAlive),
+      HasValue(BRIsAlive, { value: true }),
     ],
     async (update) => {
-      if (!isLiveGamePiece(update.entity, network, gameEntity!)) return;
-      const positionContext = getComponentValueStrict(
-        PiecePositionContext,
-        update.entity
-      );
-
-      const sprite = getPieceSpriteGameObject(
-        update.entity,
-        objectRegistry,
-        scene
-      );
-      const { x, y } = tileCoordToPixelCoord(
-        positionContext,
-        TILE_WIDTH,
-        TILE_HEIGHT
-      );
-
-      const activePiece = getComponentValueStrict(ActivePiece, godEntityIndex)
-        .value as EntityIndex;
-
-      const pieceType: PieceType = getComponentValueStrict(
-        PieceType,
-        update.entity
-      ).value;
-
-      const isEnemy = activePiece !== update.entity;
-      if (!isEnemy) {
-        br!.tileOverlayManager.clearValidMoveOverlays();
-      }
-
-      let moveAnimation;
-      if (positionContext.pieceTaken !== undefined) {
-        moveAnimation = playPieceAttackAnimation(
-          sprite,
-          { x, y },
-          pieceType,
-          isEnemy
-        );
-      } else {
-        moveAnimation = playMovePieceAnimation(
-          scene,
-          sprite,
-          { x, y },
-          pieceType,
-          isEnemy
-        );
-      }
-      // const cameraAnimation = !isEnemy
-      //   ? tweenCamera(
-      //       camera,
-      //       Main,
-      //       pieceX,
-      //       pieceY,
-      //       getMoveAnimationDuration(
-      //         { x: pieceX, y: pieceY },
-      //         { x: gameObject.x, y: gameObject.y }
-      //       )
-      //     )
-      //   : async () => true;
-      await Promise.all([moveAnimation]);
-
-      sprite.setPosition(x, y);
-      sprite.setAngle(0);
-      loopPieceIdleAnimation(sprite, x, y);
-
-      // Banana test
-      if (positionContext.bananaPickedUp) {
-        br!.bananaManager.removeBananaAtPosition({
-          x: positionContext.x,
-          y: positionContext.y,
-        });
-      }
-      if (br!.tileOverlayManager.hasValidMoveOverlays()) {
-        br!.tileOverlayManager.setValidMoveOverlays();
-      }
-      // Take other piece
-      if (positionContext.pieceTaken !== undefined) {
-        objectRegistry.gameObjectRegistry.remove(
-          positionContext.pieceTaken as EntityIndex,
-          PIECE_SPRITE_ID
-        );
-      }
+      await runPiecePositionContextChangedAnimation(update.entity);
     }
   );
 

@@ -1,20 +1,38 @@
+import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
+import { Game, Scene } from "../types";
 import { TILE_HEIGHT, TILE_WIDTH } from "../constants";
 import { tileCoordToPixelCoord, tween } from "@latticexyz/phaserx";
 
-import { Coord } from "@latticexyz/utils";
-import { Scene } from "../types";
+import { Network } from "../../network/types";
 
-type RechargeOverlayConfig = {
-  overlay: Phaser.GameObjects.GameObject;
-  percentage: number;
-};
+const createRechargeOverlayManager = (
+  network: Network,
+  game: Game,
+  scene: Scene
+) => {
+  let rechargeOverlay: Phaser.GameObjects.GameObject | undefined;
 
-const createRechargeOverlayManager = async (scene: Scene) => {
-  let rechargeOverlay: RechargeOverlayConfig;
-
-  const animateRechargeOverlay = async (tileCoord: Coord) => {
+  const animateRechargeOverlay = async (time: number) => {
+    if (rechargeOverlay) return;
     const { scene: phaserScene } = scene;
-    const { x, y } = tileCoordToPixelCoord(tileCoord, TILE_WIDTH, TILE_HEIGHT);
+    const {
+      components: { ActivePiece },
+    } = game;
+    const {
+      godEntityIndex,
+      components: { PiecePosition },
+    } = network;
+
+    const activePiece = getComponentValueStrict(ActivePiece, godEntityIndex);
+    const activePiecePosition = getComponentValueStrict(
+      PiecePosition,
+      activePiece.value as EntityIndex
+    );
+    const { x, y } = tileCoordToPixelCoord(
+      activePiecePosition,
+      TILE_WIDTH,
+      TILE_HEIGHT
+    );
     const overlay = phaserScene.add.rectangle(
       x + TILE_WIDTH / 2,
       y + TILE_HEIGHT / 2,
@@ -23,11 +41,13 @@ const createRechargeOverlayManager = async (scene: Scene) => {
       0xffffff,
       0.3
     );
+    rechargeOverlay = overlay;
+
     await tween(
       {
         // @ts-ignore
         targets: overlay,
-        duration: 5000,
+        duration: time * 1000,
         props: {
           height: 0,
         },
@@ -35,8 +55,8 @@ const createRechargeOverlayManager = async (scene: Scene) => {
       },
       { keepExistingTweens: true }
     );
-    console.log("setting overlay");
-    overlay.setInteractive();
+    rechargeOverlay.destroy();
+    rechargeOverlay = undefined;
   };
 
   return { animateRechargeOverlay };

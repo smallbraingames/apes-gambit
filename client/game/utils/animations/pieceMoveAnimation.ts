@@ -5,21 +5,6 @@ import { PieceState } from "../../types";
 import { PieceType } from "../../../network/types";
 import { getAssetKeyForPiece } from "../config/assets";
 
-export const loopPieceIdleAnimation = async (
-  gameObject: Phaser.GameObjects.Sprite,
-  x: number,
-  y: number
-): Promise<void> => {
-  tween({
-    targets: gameObject,
-    duration: 300,
-    props: { x: x, y: y - 150 },
-    yoyo: true,
-    ease: Phaser.Math.Easing.Sine.Out,
-    repeat: -1,
-  });
-};
-
 export const getMoveAnimationDuration = (
   position: Coord,
   previousPosition: Coord
@@ -31,15 +16,13 @@ export const getMoveAnimationDuration = (
     TILE_HEIGHT) *
   MOVE_ANIMATION_DURATION;
 
-export const playMovePieceAnimation = async (
+export const playPieceMoveAnimation = async (
   scene: Phaser.Scene,
   gameObject: Phaser.GameObjects.Sprite,
   position: Coord,
   pieceType: PieceType,
   isEnemy: boolean
 ) => {
-  console.log("move piece");
-
   // Don't emit trails for now
   // const particles = scene.add.particles(Assets.ChessTileset, undefined, {
   //   speed: { min: 20, max: 100 },
@@ -85,6 +68,7 @@ export const playMovePieceAnimation = async (
   gameObject.setTexture(
     getAssetKeyForPiece(pieceType, PieceState.IDLE, isEnemy)
   );
+  gameObject.setPosition(position.x, position.y);
 
   // emitter.stopFollow();
   // emitter.stop();
@@ -96,8 +80,6 @@ export const playPieceAttackAnimation = async (
   pieceType: PieceType,
   isEnemy: boolean
 ) => {
-  console.log("attack piece");
-
   gameObject.setTexture(
     getAssetKeyForPiece(pieceType, PieceState.ATTACK, isEnemy)
   );
@@ -131,4 +113,5 @@ export const playPieceAttackAnimation = async (
   gameObject.setTexture(
     getAssetKeyForPiece(pieceType, PieceState.IDLE, isEnemy)
   );
+  gameObject.setPosition(position.x, position.y);
 };
