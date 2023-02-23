@@ -1,6 +1,7 @@
 import BRControls from "./BRControls";
 import CenterActivePieceOnLoad from "../CenterActivePieceOnLoad";
 import { GameContext } from "../../context/GameContext";
+import GameEnd from "./GameEnd";
 import { NetworkContext } from "../../context/NetworkContext";
 import Pieces from "./Pieces";
 import { Scenes } from "../../game/constants";
@@ -25,6 +26,7 @@ const BRGame = () => {
           />
         )}
       </div>
+      <GameEnd />
     </>
   );
 };
