@@ -45,7 +45,7 @@ export async function createGame(network: Network) {
     antialias: true,
     scale: {
       parent: "phaser-game",
-      zoom: 1,
+      zoom: INITIAL_ZOOM,
       mode: Phaser.Scale.RESIZE,
     },
     physics: {
@@ -80,8 +80,8 @@ export async function createGame(network: Network) {
       const camera = createCamera(scene.cameras.main, {
         pinchSpeed: 1,
         wheelSpeed: 1,
-        maxZoom: 2,
-        minZoom: 0.01,
+        maxZoom: INITIAL_ZOOM,
+        minZoom: INITIAL_ZOOM,
       });
 
       // Set zoom
