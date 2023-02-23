@@ -6,6 +6,7 @@ import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
 import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
 import isActivePiece from "../../utils/isActivePiece";
+import setDepthFromCoord from "../../utils/setDepthFromCoord";
 import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
 
 const createPiecePositionSystem = (
@@ -47,6 +48,7 @@ const createPiecePositionSystem = (
       if (isActivePiece(game, godEntityIndex, update.entity)) {
         lobby.tileOverlayManager.setValidMoveOverlays();
       }
+      setDepthFromCoord(sprite);
     },
     { runOnInit: true }
   );
