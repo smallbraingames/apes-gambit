@@ -1,4 +1,5 @@
 import {
+  EntityID,
   getComponentValue,
   getComponentValueStrict,
   setComponent,
@@ -10,8 +11,7 @@ import { getEntityIndexFromEntity } from "../utils/resolveEntity";
 
 const setupBRGridDimComponent = (network: Network, game: Game) => {
   const {
-    gameEntity,
-    components: { BRGridDimComponent },
+    components: { BRGridDimComponent, EmbodiedBRGameEntity },
   } = game;
 
   const {
@@ -20,6 +20,9 @@ const setupBRGridDimComponent = (network: Network, game: Game) => {
     network: { clock },
     components: { BRGame },
   } = network;
+
+  const gameEntity = getComponentValue(EmbodiedBRGameEntity, godEntityIndex)
+    ?.value as EntityID | undefined;
 
   if (!gameEntity) {
     console.warn(`Not setting up grid dim component, game entity not found`);

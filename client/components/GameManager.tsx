@@ -5,55 +5,50 @@ import { GameContext } from "../context/GameContext";
 import Lobby from "./lobby/Lobby";
 import { NetworkContext } from "../context/NetworkContext";
 import { Scenes } from "../game/constants";
+import { defineComponentSystemUnsubscribable } from "../game/utils/defineComponentSystemUnsubscribable";
 import revokeGameControllersIfNecessary from "../game/utils/setup/revokeGameControllersIfNecessary";
-
-enum GameState {
-  LOADING = "Loading",
-  LOBBY = "Lobby",
-  BR = "Br",
-}
-
-export type SwitchGameState = () => void;
 
 const GameManager = () => {
   const { network } = useContext(NetworkContext);
   const { game, activePiece } = useContext(GameContext);
-  const [gameState, setGameState] = useState<GameState>(GameState.LOBBY);
+  const [gameState, setGameState] = useState(Scenes.Lobby);
+
+  useEffect(() => {
+    if (!game || !network) {
+      return;
+    }
+    const gameStateSub = defineComponentSystemUnsubscribable(
+      game.gameWorld,
+      game.components.ActiveScene,
+      (update) => {
+        const state = update.value[0]?.value;
+        if (state) {
+          setGameState(state as Scenes);
+        }
+      }
+    );
+
+    return () => {
+      gameStateSub.unsubscribe();
+    };
+  }, [game, network]);
 
   useEffect(() => {
     // Cleanup extra controllers whenever state changes
     if (network && activePiece) {
       revokeGameControllersIfNecessary(network, activePiece);
     }
-  }, [gameState, network, activePiece]);
+  }, [network, activePiece]);
 
-  const switchFromLobbyToBR = () => {
-    if (!game) {
-      console.warn("Cannot switch game state before game is loaded");
-      return;
-    }
-    const { game: phaserGame } = game;
-    phaserGame.scene.switch(Scenes.Lobby, Scenes.BR);
-    setGameState(GameState.BR);
-  };
-
-  const switchFromBRToLobby = () => {
-    if (!game) {
-      console.warn("Cannot switch game state before game is loaded");
-      return;
-    }
-    const { game: phaserGame } = game;
-    phaserGame.scene.switch(Scenes.BR, Scenes.Lobby);
-    setGameState(GameState.LOBBY);
-  };
+  if (!game || !network) {
+    return <div></div>;
+  }
 
   let Main;
-  if (gameState === GameState.BR) {
+  if (gameState === Scenes.BR) {
     Main = <BRGame />;
-  } else if (gameState === GameState.LOADING) {
-    Main = <div>Loading...</div>;
   } else {
-    Main = <Lobby switchFromLobbyToBR={switchFromLobbyToBR} />;
+    Main = <Lobby />;
   }
 
   return <div>{Main}</div>;

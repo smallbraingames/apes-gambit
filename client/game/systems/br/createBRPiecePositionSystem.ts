@@ -1,5 +1,6 @@
 import { BR, Game } from "../../types";
 import {
+  EntityID,
   EntityIndex,
   Has,
   HasValue,
@@ -33,13 +34,17 @@ const createBRPiecePositionSystem = (
   } = network;
 
   const {
-    gameEntity,
-    components: { ActivePiece, PiecePositionContext },
+    components: { ActivePiece, PiecePositionContext, EmbodiedBRGameEntity },
     scenes: {
       BR: { objectRegistry, scene },
     },
     components: { BRRechargeTimerComponent },
   } = game;
+
+  const gameEntity = getComponentValueStrict(
+    EmbodiedBRGameEntity,
+    godEntityIndex
+  ).value as EntityID;
 
   const runRechargeAnimation = async () => {
     const time = getComponentValueStrict(
