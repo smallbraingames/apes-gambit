@@ -1,5 +1,9 @@
 import { BR, Game } from "../../../types";
-import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
+import {
+  EntityID,
+  EntityIndex,
+  getComponentValueStrict,
+} from "@latticexyz/recs";
 import { Network, PieceType } from "../../../../network/types";
 import { TILE_HEIGHT, TILE_WIDTH } from "../../../constants";
 import { createInput, pixelCoordToTileCoord } from "@latticexyz/phaserx";
@@ -19,8 +23,7 @@ const createBRMovementInputSystem = (
   } = network;
   const {
     game: phaserGame,
-    gameEntity,
-    components: { ActivePiece },
+    components: { ActivePiece, EmbodiedBRGameEntity },
     scenes: {
       BR: { scene },
     },
@@ -32,8 +35,12 @@ const createBRMovementInputSystem = (
     if (!phaserGame.scene.isActive(scene)) return;
     const entityIndex = getComponentValueStrict(ActivePiece, godEntityIndex)
       .value as EntityIndex;
+    const gameEntity = getComponentValueStrict(
+      EmbodiedBRGameEntity,
+      godEntityIndex
+    ).value as EntityID;
     // Check if is active game piece (alive, in right game, piece entity)
-    if (!isLiveGamePiece(entityIndex, network, gameEntity!)) return;
+    if (!isLiveGamePiece(entityIndex, network, gameEntity)) return;
 
     const pointer = p as Phaser.Input.Pointer;
     const tilePosition = pixelCoordToTileCoord(
@@ -60,7 +67,7 @@ const createBRMovementInputSystem = (
 
     network.api.br.moveBRPiece(
       getEntityFromEntityIndex(entityIndex, network.world),
-      game.gameEntity!,
+      gameEntity,
       tilePosition
     );
   });

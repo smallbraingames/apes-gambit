@@ -2,10 +2,11 @@ import { PieceType } from "../network/types";
 
 export const TILE_WIDTH = 800;
 export const TILE_HEIGHT = 800;
+export const TILESET_VARIATIONS = 6;
 export const PIECE_SPRITE_SCALE = 1;
 export const PIECE_X_OFFSET = 400;
 export const PIECE_Y_OFFSET = 400;
-export const INITIAL_ZOOM = 0.1;
+export const INITIAL_ZOOM = 0.25;
 export const GAME_WORLD_NAMESPACE = "game";
 export const MOVE_ANIMATION_DURATION = 200;
 export const TILE_OVERLAY_COLOR = 0x86efac;
@@ -36,6 +37,7 @@ export enum Maps {
 }
 
 export enum RenderDepth {
+  TILE = 0,
   TILE_OVERLAY = 1,
   PIECE = 2,
   SPEECH = 3,
@@ -50,6 +52,7 @@ export enum Assets {
   Shadow = "Shadow",
   Boundary = "Boundary",
   Banana = "Banana",
+  TempleFull = "TempleFull",
 }
 
 export enum Sprites {}
