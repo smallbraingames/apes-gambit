@@ -55,7 +55,7 @@ const assets: { [key: string]: Asset } = {
   [Assets.ChessTileset]: {
     type: AssetType.IMAGE,
     key: Assets.ChessTileset,
-    path: "assets/tilesets/chess-textured-tileset.png",
+    path: "assets/tilesets/chess-muted-tileset.png",
   },
 
   [Assets.Shadow]: {

@@ -10,9 +10,8 @@ import ChatInput from "./Chat";
 import { GameContext } from "../../context/GameContext";
 import { NetworkContext } from "../../context/NetworkContext";
 import { Scenes } from "../../game/constants";
-import { SwitchGameState } from "../GameManager";
 
-const Lobby = (props: { switchFromLobbyToBR: SwitchGameState }) => {
+const Lobby = () => {
   const { network } = useContext(NetworkContext);
   const { game, activePiece, gameEntity } = useContext(GameContext);
 
@@ -32,7 +31,6 @@ const Lobby = (props: { switchFromLobbyToBR: SwitchGameState }) => {
                   gameEntity={gameEntity}
                   network={network}
                   activePiece={activePiece}
-                  switchFromLobbyToBR={props.switchFromLobbyToBR}
                 />
               </div>
             </div>
