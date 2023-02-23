@@ -21,11 +21,11 @@ import { parseChatMessageFromKey } from "../../game/utils/chat/encodeChatMessage
 
 const ActivityStream = () => {
   const network = useContext(NetworkContext);
-  const game = useContext(GameContext);
+  const { game, gameEntity } = useContext(GameContext);
   const [activity, setActivity] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
-    if (!network.network || !game.game) return;
+    if (!network.network || !game) return;
 
     const activityUpdateFormatter = createActivityUpdateFormatter(
       network.network
@@ -37,10 +37,9 @@ const ActivityStream = () => {
     } = network.network;
 
     const {
-      gameEntity,
       gameWorld,
       components: { BRGridDimComponent, ChatComponent },
-    } = game.game;
+    } = game;
 
     if (!gameEntity) {
       return;
@@ -218,7 +217,7 @@ const ActivityStream = () => {
   }, [network, game]);
 
   return (
-    <div className="bg-yellow-50 py-4 pl-5 border border-b-4 border-r-2 border-yellow-900 text-yellow-900 rounded-lg w-full flex flex-col">
+    <div className="container w-full flex flex-col">
       <p className="mt-1 mb-2">ACTIVITY</p>
       <div className="h-full flex flex-col flex-col-reverse overflow-y-hidden">
         <div className="flex flex-col flex-col-reverse overflow-y-auto">
