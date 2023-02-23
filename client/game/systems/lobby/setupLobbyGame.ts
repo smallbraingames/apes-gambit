@@ -49,7 +49,14 @@ const setupLobbyGame = (network: Network, scene: Scene, game: Game) => {
     speechBubbleManager,
   };
 
-  createEmbodiedBRGameEntrance(network, game, { x: 0, y: 0 }, scene);
+  const positions = createEmbodiedBRGameEntrance(
+    network,
+    game,
+    { x: 3, y: 3 },
+    scene
+  );
+  console.log("invalid positoins", positions);
+  positions.forEach((position) => moveValidator.addInvalidPosition(position));
 
   setupLobbySystems(network, game, lobbyContext);
 
