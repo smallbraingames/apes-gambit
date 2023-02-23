@@ -23,10 +23,10 @@ const Lobby = (props: { switchFromLobbyToBR: SwitchGameState }) => {
   return (
     <>
       <div className={CONTROLLER_COMPONENT_CLASS_NAME}>
-        <div className="absolute p-6 h-full">
+        <div className="absolute right-0 p-4 h-full">
           <CenterActivePieceOnLoad scene={Scenes.Lobby} />
           {network && game && activePiece && (
-            <div className="h-full flex flex-col">
+            <div className="h-full flex flex-col items-end">
               <div>
                 <BRGameIndicator
                   gameEntity={gameEntity}
@@ -35,11 +35,13 @@ const Lobby = (props: { switchFromLobbyToBR: SwitchGameState }) => {
                   switchFromLobbyToBR={props.switchFromLobbyToBR}
                 />
               </div>
-              <div className="h-full flex flex-col-reverse w-fit">
-                <ChatInput />
-              </div>
             </div>
           )}
+        </div>
+        <div className="absolute bottom-0 p-4">
+          <div className="container">
+            <ChatInput />
+          </div>
         </div>
       </div>
     </>
