@@ -39,23 +39,21 @@ export async function createGame(network: Network) {
 
   const phaserConfig = {
     type: Phaser.WEBGL,
+    roundPixels: true,
+    antialias: true,
     scale: {
       parent: "phaser-game",
       zoom: 1,
       mode: Phaser.Scale.RESIZE,
     },
     mipmapFilter: "LINEAR_MIPMAP_LINEAR",
-    autoFocus: true,
-    autoResize: true,
     physics: {
       default: "arcade",
       arcade: {
         debug: false,
       },
     },
-    render: {
-      antialiasGL: true,
-    },
+    renderer: { mipmapFilter: "LINEAR_MIPMAP_LINEAR" },
     scene: sceneConstructors,
   };
 

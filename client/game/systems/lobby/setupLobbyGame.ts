@@ -10,6 +10,7 @@ import { Game, Scene } from "../../types";
 
 import { Network } from "../../../network/types";
 import createChessBoardTilemap from "../../utils/tilemap/createChessBoardTilemap";
+import createEmbodiedBRGameEntrance from "../../utils/createEmbodiedBRGameEntrance";
 import createMoveValidator from "../../utils/validation/createMoveValidator";
 import createRechargeOverlayManager from "../../utils/createRechargeOverlayManager";
 import createSpeechBubbleManager from "../../utils/chat/createSpeechBubbleManager";
@@ -47,6 +48,8 @@ const setupLobbyGame = (network: Network, scene: Scene, game: Game) => {
     ),
     speechBubbleManager,
   };
+
+  createEmbodiedBRGameEntrance(network, game, { x: 0, y: 0 }, scene);
 
   setupLobbySystems(network, game, lobbyContext);
 
