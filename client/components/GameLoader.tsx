@@ -7,7 +7,6 @@ import { useContext, useEffect, useState } from "react";
 import { GameContext } from "../context/GameContext";
 import Image from "next/image";
 import { NetworkContext } from "../context/NetworkContext";
-import spawnPiece from "../game/utils/setup/spawnPiece";
 
 enum LoadingState {
   // Loading game and network
@@ -28,15 +27,8 @@ const GameLoader = () => {
   }, []);
 
   useEffect(() => {
-    if (network && game) {
-      // If there is no active piece, spawn one
-      if (!activePiece) {
-        spawnPiece(network, game);
-        return;
-      }
-      if (network && game && activePiece) {
-        setLoadingState(LoadingState.GAME_LOADED);
-      }
+    if (network && game && activePiece) {
+      setLoadingState(LoadingState.GAME_LOADED);
     }
   }, [network, game, activePiece]);
 

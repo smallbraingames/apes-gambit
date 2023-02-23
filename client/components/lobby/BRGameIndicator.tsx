@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 import Image from "next/image";
 import { Network } from "../../network/types";
-import { SwitchGameState } from "../GameManager";
 import getCountdown from "../../utils/getCountdown";
 import { getEntityIndexFromEntity } from "../../game/utils/resolveEntity";
 import { useComponentValue } from "@latticexyz/react";
@@ -35,7 +34,6 @@ const BRGameIndicator = (props: {
   network: Network;
   activePiece: EntityIndex;
   gameEntity?: EntityID;
-  switchFromLobbyToBR: SwitchGameState;
 }) => {
   const {
     world,
@@ -62,7 +60,7 @@ const BRGameIndicator = (props: {
             src={"/assets/sprites/temple-full.png"}
             width="40"
             height="40"
-            alt="Battle Royale Temple"
+            alt="Battle Royale Entrance"
           />
         </div>
         <div>
@@ -81,7 +79,7 @@ const BRGameIndicator = (props: {
             src={"/assets/sprites/temple-full.png"}
             width="40"
             height="40"
-            alt="Battle Royale Temple"
+            alt="Battle Royale Entrance"
           />
         </div>
         <div>
@@ -89,7 +87,7 @@ const BRGameIndicator = (props: {
           <div className="opacity-90 text-sm">
             {" "}
             {isInGame
-              ? "You are in this game, enter the temple to join"
+              ? "You are in this game, click the entrance to join"
               : "You are not in this game"}
           </div>
         </div>
@@ -103,7 +101,7 @@ const BRGameIndicator = (props: {
             src={"/assets/sprites/temple-full.png"}
             width="40"
             height="40"
-            alt="Battle Royale Temple"
+            alt="Battle Royale Entrance"
           />
         </div>
         <div>

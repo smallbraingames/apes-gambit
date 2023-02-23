@@ -42,9 +42,7 @@ const createPieceTypeSystem = (
     // Create a new sprite
     const sprite = getPieceSpriteGameObject(entity, objectRegistry, scene);
     setPieceSprite(sprite, pieceType, PieceState.IDLE, entity !== activePiece);
-    console.log(entity, activePiece);
     if (entity === activePiece) {
-      console.log("setting move overlays");
       lobby.tileOverlayManager.setValidMoveOverlays();
     }
   };

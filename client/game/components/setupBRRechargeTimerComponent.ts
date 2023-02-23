@@ -1,4 +1,5 @@
 import {
+  EntityID,
   EntityIndex,
   defineComponentSystem,
   getComponentValue,
@@ -13,15 +14,18 @@ import { getEntityIndexFromEntity } from "../utils/resolveEntity";
 const setupBRRechargeTimerComponent = (network: Network, game: Game) => {
   const {
     gameWorld,
-    gameEntity,
-    components: { BRRechargeTimerComponent, ActivePiece },
+    components: { BRRechargeTimerComponent, ActivePiece, EmbodiedBRGameEntity },
   } = game;
 
   const {
+    godEntityIndex,
     world,
     network: { clock },
     components: { BRPreviousMoveTimestamp, BRGame },
   } = network;
+
+  const gameEntity = getComponentValue(EmbodiedBRGameEntity, godEntityIndex)
+    ?.value as EntityID | undefined;
 
   if (!gameEntity) {
     console.warn(`Not setting up recharge timer, game entity not found`);
@@ -55,6 +59,10 @@ const setupBRRechargeTimerComponent = (network: Network, game: Game) => {
         BRPreviousMoveTimestamp,
         activePiece
       )?.value;
+      const currentTimerValue = getComponentValue(
+        BRRechargeTimerComponent,
+        update.entity
+      );
       if (previousMoveTime) {
         const rechargeTime = Math.max(
           gameConfig.rechargeTime - (nowSeconds - previousMoveTime),
@@ -64,10 +72,12 @@ const setupBRRechargeTimerComponent = (network: Network, game: Game) => {
           value: rechargeTime,
         });
       } else {
-        console.warn("Could not find previous move time, setting to zero");
-        setComponent(BRRechargeTimerComponent, update.entity, {
-          value: 0,
-        });
+        if (currentTimerValue?.value !== 0) {
+          console.warn("Could not find previous move time, setting to zero");
+          setComponent(BRRechargeTimerComponent, update.entity, {
+            value: 0,
+          });
+        }
       }
     });
   });
