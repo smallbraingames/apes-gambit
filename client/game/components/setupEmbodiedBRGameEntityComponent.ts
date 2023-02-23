@@ -1,7 +1,6 @@
 import { CurrentGameResponse } from "../../pages/api/currentGame";
 import { Game } from "../types";
 import { Network } from "../../network/types";
-import { getEntityIndexFromEntity } from "../utils/resolveEntity";
 import { setComponent } from "@latticexyz/recs";
 
 const setupEmbodiedBRGameEntityComponent = async (
