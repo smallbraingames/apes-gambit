@@ -1,9 +1,12 @@
-import { Coord } from "@latticexyz/utils";
+import { Coord, coordToKey } from "@latticexyz/utils";
+
 import { PieceType } from "../../../network/types";
 
 export type MoveValidatorConfig = { [key in PieceType]: number };
 
 const createMoveValidator = (config: MoveValidatorConfig) => {
+  const invalidPositions: Set<number> = new Set();
+
   const getPieceLimit = (pieceType: PieceType): number => {
     return config[pieceType];
   };
@@ -31,16 +34,18 @@ const createMoveValidator = (config: MoveValidatorConfig) => {
   };
 
   const getValidMoves = (pieceType: PieceType, position: Coord): Set<Coord> => {
+    let validMoves: Set<Coord> = new Set();
     switch (pieceType) {
       case PieceType.PAWN:
-        return new Set([
+        validMoves = new Set([
           { x: position.x + 1, y: position.y },
           { x: position.x - 1, y: position.y },
           { x: position.x, y: position.y + 1 },
           { x: position.x, y: position.y - 1 },
         ]);
+        break;
       case PieceType.KNIGHT:
-        return new Set([
+        validMoves = new Set([
           { x: position.x + 2, y: position.y + 1 },
           { x: position.x + 2, y: position.y - 1 },
           { x: position.x - 2, y: position.y + 1 },
@@ -50,18 +55,25 @@ const createMoveValidator = (config: MoveValidatorConfig) => {
           { x: position.x - 1, y: position.y + 2 },
           { x: position.x - 1, y: position.y - 2 },
         ]);
+        break;
       case PieceType.BISHOP:
-        return getValidBishopMoves(position, getPieceLimit(PieceType.BISHOP));
+        validMoves = getValidBishopMoves(
+          position,
+          getPieceLimit(PieceType.BISHOP)
+        );
+        break;
       case PieceType.ROOK:
-        return getValidRookMoves(position, getPieceLimit(PieceType.ROOK));
+        validMoves = getValidRookMoves(position, getPieceLimit(PieceType.ROOK));
+        break;
       case PieceType.QUEEN:
-        return new Set([
+        validMoves = new Set([
           ...getValidBishopMoves(position, getPieceLimit(PieceType.QUEEN)),
           ...getValidRookMoves(position, getPieceLimit(PieceType.QUEEN)),
         ]);
+        break;
     }
-    throw Error(
-      `Cannot get valid moves for unimplemented piece type ${pieceType}`
+    return new Set(
+      [...validMoves].filter((move) => !invalidPositions.has(coordToKey(move)))
     );
   };
 
@@ -79,7 +91,11 @@ const createMoveValidator = (config: MoveValidatorConfig) => {
     ).has(coordToKey(endPosition));
   };
 
-  return { getValidMoves, isMoveValid };
+  const addInvalidPosition = (position: Coord) => {
+    invalidPositions.add(coordToKey(position));
+  };
+
+  return { getValidMoves, isMoveValid, addInvalidPosition };
 };
 
 export default createMoveValidator;
