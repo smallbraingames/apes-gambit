@@ -1,8 +1,9 @@
-import { Assets, TILE_HEIGHT, TILE_WIDTH } from "../constants";
+import { Assets, Scenes, TILE_HEIGHT, TILE_WIDTH } from "../constants";
 import {
   EntityID,
   EntityIndex,
   getComponentValueStrict,
+  setComponent,
 } from "@latticexyz/recs";
 import { Game, Scene } from "../types";
 
@@ -26,7 +27,7 @@ const createEmbodiedBRGameEntrance = (
   const { godEntityIndex } = network;
 
   const {
-    components: { ActivePiece, EmbodiedBRGameEntity },
+    components: { ActivePiece, EmbodiedBRGameEntity, ActiveScene },
   } = game;
 
   const gameEntity = getComponentValueStrict(
@@ -36,12 +37,17 @@ const createEmbodiedBRGameEntrance = (
 
   let outline: Phaser.GameObjects.Graphics | undefined;
   sprite.setInteractive();
-  sprite.on("pointerdown", () => {
+  sprite.on("pointerdown", async () => {
     const activePiece = getComponentValueStrict(
       ActivePiece,
       godEntityIndex
     ).value;
-    joinMainGame(network, gameEntity as EntityID, activePiece as EntityIndex);
+    await joinMainGame(
+      network,
+      gameEntity as EntityID,
+      activePiece as EntityIndex
+    );
+    setComponent(ActiveScene, godEntityIndex, { value: Scenes.BR });
   });
   sprite.on("pointerover", () => {
     outline = setOutline(sprite);

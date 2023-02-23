@@ -20,11 +20,13 @@ import { Subscription } from "rxjs";
 import assets from "./utils/config/assets";
 import { config } from "./config";
 import { createCamera } from "@latticexyz/phaserx";
+import createDisplaySystem from "./systems/createDisplaySystem";
 import createPhaserGame from "../phaser/createPhaserGame";
 import createPhaserObjectRegistry from "../phaser/createPhaserObjectRegistry";
 import createScene from "../phaser/createScene";
 import load from "../phaser/load";
 import setupActivePieceComponent from "./components/setupActivePieceComponent";
+import setupActiveSceneComponent from "./components/setupActiveSceneComponent";
 import setupBRGame from "./systems/br/setupBRGame";
 import setupBRGridDimComponent from "./components/setupBRGridDimComponent";
 import setupBRRechargeTimerComponent from "./components/setupBRRechargeTimerComponent";
@@ -46,7 +48,6 @@ export async function createGame(network: Network) {
       zoom: 1,
       mode: Phaser.Scale.RESIZE,
     },
-    mipmapFilter: "LINEAR_MIPMAP_LINEAR",
     physics: {
       default: "arcade",
       arcade: {
@@ -102,6 +103,7 @@ export async function createGame(network: Network) {
     EmbodiedBRGameEntity: defineStringComponent(gameWorld, {
       id: "EmbodiedBRGameEntity",
     }),
+    ActiveScene: defineStringComponent(gameWorld, { id: "ActiveScene" }),
     ChatComponent: defineComponent(
       gameWorld,
       {
@@ -135,16 +137,22 @@ export async function createGame(network: Network) {
   };
 
   // Setup game components
-  setupActivePieceComponent(network, context);
+  await Promise.all([
+    setupEmbodiedBRGameEntityComponent(network, context),
+    setupActivePieceComponent(network, context),
+  ]);
   setupChatComponent(network, context);
   setupPiecePositionContextComponent(network, context);
   setupBRRechargeTimerComponent(network, context);
   setupBRGridDimComponent(network, context);
-  await setupEmbodiedBRGameEntityComponent(network, context);
+  setupActiveSceneComponent(network, context);
 
   // Setup scenes
   setupLobbyGame(network, scenes.Lobby, context);
   setupBRGame(network, scenes.BR, context);
+
+  // Setup display system
+  createDisplaySystem(network, context);
 
   (window as any).game = context;
 
