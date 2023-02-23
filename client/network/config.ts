@@ -19,9 +19,9 @@ export const getNetworkConfig: (
   networkConfig: GameConfig
 ) => SetupContractConfig = (config) => ({
   clock: {
-    period: 1000,
+    period: 100,
     initialTime: 0,
-    syncInterval: 5000,
+    syncInterval: 500,
   },
   provider: {
     snapshotServiceUrl: config.snapshotServiceUrl,
