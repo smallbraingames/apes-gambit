@@ -6,11 +6,10 @@ import Lobby from "./lobby/Lobby";
 import { NetworkContext } from "../context/NetworkContext";
 import { Scenes } from "../game/constants";
 import { defineComponentSystemUnsubscribable } from "../game/utils/defineComponentSystemUnsubscribable";
-import revokeGameControllersIfNecessary from "../game/utils/setup/revokeGameControllersIfNecessary";
 
 const GameManager = () => {
   const { network } = useContext(NetworkContext);
-  const { game, activePiece } = useContext(GameContext);
+  const { game } = useContext(GameContext);
   const [gameState, setGameState] = useState(Scenes.Lobby);
 
   useEffect(() => {
@@ -32,13 +31,6 @@ const GameManager = () => {
       gameStateSub.unsubscribe();
     };
   }, [game, network]);
-
-  useEffect(() => {
-    // Cleanup extra controllers whenever state changes
-    if (network && activePiece) {
-      revokeGameControllersIfNecessary(network, activePiece);
-    }
-  }, [network, activePiece]);
 
   if (!game || !network) {
     return <div></div>;
