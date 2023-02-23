@@ -1,5 +1,6 @@
 import { BR, Game, PieceState } from "../../types";
 import {
+  EntityID,
   EntityIndex,
   Has,
   HasValue,
@@ -27,12 +28,16 @@ const createBRPieceTypeSystem = (
   } = network;
 
   const {
-    gameEntity,
-    components: { ActivePiece },
+    components: { ActivePiece, EmbodiedBRGameEntity },
     scenes: {
       BR: { objectRegistry, scene },
     },
   } = game;
+
+  const gameEntity = getComponentValueStrict(
+    EmbodiedBRGameEntity,
+    godEntityIndex
+  ).value as EntityID;
 
   const updatePieceSprite = (entity: EntityIndex) => {
     if (!isLiveGamePiece(entity, network, gameEntity!)) return;
