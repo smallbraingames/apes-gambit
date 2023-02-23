@@ -35,10 +35,10 @@ const UpgradePieceButton = (props: {
     <div
       onClick={handleSetPieceType}
       className={
-        "rounded-xl pr-4 border border-yellow-900 bg-opacity-10 " +
+        "rounded-xl pr-4 " +
         (enabled
-          ? "bg-yellow-600 hover:bg-opacity-40 cursor-pointer border-yellow-900 border-b-4 border-r-2 active:border-0 active:translate-y-0.5"
-          : "bg-gray-600 saturate-0 cursor-not-allowed")
+          ? "button"
+          : "bg-gray-600 bg-opacity-20 saturate-0 cursor-not-allowed")
       }
     >
       <div className="h-20 w-28 flex items-center">
@@ -66,7 +66,7 @@ const UpgradePieceButton = (props: {
 
 const UpgradePiece = () => {
   const network = useContext(NetworkContext);
-  const game = useContext(GameContext);
+  const { game, gameEntity, activePiece } = useContext(GameContext);
 
   const pieceTypes = [
     PieceType.PAWN,
@@ -79,8 +79,9 @@ const UpgradePiece = () => {
   return (
     <>
       {network.network !== undefined &&
-        game.game !== undefined &&
-        game.activePiece && (
+        game !== undefined &&
+        activePiece &&
+        gameEntity && (
           <div className="p-4 bg-yellow-50 text-yellow-900 rounded-lg border border-b-4 border-r-2 border-yellow-900">
             <h1 className="mb-3 ml-1"> SELECT A PIECE </h1>
             <div className="grid grid-cols-2 gap-3">
@@ -89,8 +90,8 @@ const UpgradePiece = () => {
                   <UpgradePieceButton
                     pieceType={pieceType}
                     network={network.network!}
-                    gameEntity={game.game!.gameEntity!}
-                    activePiece={game.activePiece!}
+                    gameEntity={gameEntity!}
+                    activePiece={activePiece!}
                   />
                 </div>
               ))}
