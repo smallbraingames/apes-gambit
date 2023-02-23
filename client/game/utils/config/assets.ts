@@ -57,6 +57,7 @@ const assets: { [key: string]: Asset } = {
     key: Assets.ChessTileset,
     path: "assets/tilesets/chess-textured-tileset.png",
   },
+
   [Assets.Shadow]: {
     type: AssetType.IMAGE,
     key: Assets.Shadow,
@@ -71,6 +72,11 @@ const assets: { [key: string]: Asset } = {
     type: AssetType.IMAGE,
     key: Assets.Banana,
     path: "assets/sprites/banana.svg",
+  },
+  [Assets.TempleFull]: {
+    type: AssetType.IMAGE,
+    key: Assets.TempleFull,
+    path: "assets/sprites/temple-full.png",
   },
   ...getPieceAssets(),
 };

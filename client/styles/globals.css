@@ -4,73 +4,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@300;400;500;700&display=swap");
 
-@layer base {
-  /* Default font declaration */
-
-  /* TODO: Add add'l font formats to max out compatibility */
-  @font-face {
-    font-family: "Fredoka";
-    src: url("/fonts/fredoka/Fredoka-Light.woff") format("woff");
-    font-weight: 200;
-  }
-
-  @font-face {
-    font-family: "Fredoka";
-    src: url("/fonts/fredoka/Fredoka-Regular.woff") format("woff");
-    font-weight: 400;
-  }
-
-  @font-face {
-    font-family: "Fredoka";
-    src: url("/fonts/fredoka/Fredoka-Bold.woff") format("woff");
-    font-weight: 800;
-  }
-}
-
-@layer utilities {
-  /* Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
-}
-
-@layer components {
-  /* Text Components */
-  .label {
-    @apply text-sm uppercase;
-  }
-
-  .bignumber {
-    @apply text-3xl uppercase font-bold;
-  }
-
-  /* Button Components */
-  .btn {
-    @apply px-8 py-4 m-2 rounded-full border-2 border-solid text-center uppercase transition duration-300 ease-in-out w-48;
-  }
-
-  .btn-primary {
-    @apply bg-green-400 border-green-400 text-gray-800 hover:border-green-600;
-  }
-
-  .btn-secondary {
-    @apply bg-gray-50 border-gray-50 text-gray-800 hover:border-gray-600;
-  }
-}
-
 /* Game UI components */
-.container-gamestats {
-  @apply flex bg-yellow-50 text-yellow-800 bg-opacity-90 rounded-lg px-4 py-3 my-1;
-}
-
-@layer utilities {
-  .text-outline-1 {
-    text-shadow: -2px -2px 0 #c08d35, 2px -2px 0 #c08d35, -2px 2px 0 #c08d35,
-      2px 2px 0 #c08d35;
-  }
+.container {
+  @apply bg-yellow-50 border-b-4 border-r-2 border-yellow-900 text-yellow-900 rounded-lg;
 }
