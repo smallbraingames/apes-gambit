@@ -64,6 +64,13 @@ const createEmbodiedBRGameEntrance = (
     scene.scene.add.existing(outline);
     return outline;
   };
+
+  return [
+    position,
+    { x: position.x - 1, y: position.y },
+    { x: position.x - 1, y: position.y - 1 },
+    { x: position.x, y: position.y - 1 },
+  ];
 };
 
 export default createEmbodiedBRGameEntrance;
