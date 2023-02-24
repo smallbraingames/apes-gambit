@@ -1,12 +1,7 @@
-import {
-  EntityID,
-  EntityIndex,
-  getComponentValueStrict,
-} from "@latticexyz/recs";
+import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
 import { Network, PieceType } from "../network/types";
 
 import { Coord } from "@latticexyz/utils";
-import { getEntityIndexFromEntity } from "../game/utils/resolveEntity";
 import getPieceInfo from "./getPieceInfo";
 
 export const getPieceDisplay = (
@@ -24,7 +19,7 @@ export const getPieceDisplay = (
     <div className="flex items-center">
       <div>{getPieceOwner(piece, network).substring(0, 5)} </div>
       <div>
-        <img className="h-10 w-10" src={pieceInfo.image} />
+        <img className="h-6 w-6" src={pieceInfo.image} />
       </div>
     </div>
   );

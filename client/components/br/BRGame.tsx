@@ -19,7 +19,7 @@ const BRGame = () => {
           <BRControls game={game} gameEntity={gameEntity} network={network} />
         )}
       </div>
-      <div className="absolute right-0">
+      <div className="absolute right-0 p-4">
         {network && gameEntity && activePiece && (
           <Pieces
             network={network}
