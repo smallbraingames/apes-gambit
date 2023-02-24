@@ -1,34 +1,11 @@
-import { EntityID, EntityIndex, getComponentValue } from "@latticexyz/recs";
-import { GameConfig, GameStatus } from "../../game/types";
-import { useEffect, useState } from "react";
+import { EntityID, EntityIndex } from "@latticexyz/recs";
 
+import BRGameCountdown from "../BRGameCountdown";
+import { GameStatus } from "../../game/types";
 import Image from "next/image";
 import { Network } from "../../network/types";
-import getCountdown from "../../utils/getCountdown";
 import { getEntityIndexFromEntity } from "../../game/utils/resolveEntity";
 import { useComponentValue } from "@latticexyz/react";
-
-const TIME_UPDATE_INTERVAL = 1000;
-
-const BRCountdown = (props: { startTime: number }) => {
-  const [countdown, setCountdown] = useState("");
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCountdown(getCountdown(props.startTime));
-    }, TIME_UPDATE_INTERVAL);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-
-  return (
-    <div>
-      Battle Royale starts in{" "}
-      <span className="font-bold font-mono">{countdown}</span>
-    </div>
-  );
-};
 
 const BRGameIndicator = (props: {
   network: Network;
@@ -106,7 +83,7 @@ const BRGameIndicator = (props: {
         </div>
         <div>
           <div>
-            <BRCountdown startTime={game.startTime} />
+            <BRGameCountdown startTime={game.startTime} />
           </div>
           <div className="opacity-90 text-sm">Enter the temple to join</div>
         </div>

@@ -1,5 +1,6 @@
 import { BR, Game, Lobby } from "../../types";
 import {
+  EntityID,
   EntityIndex,
   Has,
   HasValue,
@@ -20,6 +21,7 @@ const createBRChatSystem = (
   br: BR
 ): Subscription[] => {
   const {
+    godEntityIndex,
     world,
     components: { BRInGame },
   } = network;
@@ -28,12 +30,17 @@ const createBRChatSystem = (
     scenes: {
       BR: { scene, objectRegistry },
     },
-    components: { ChatComponent },
+    components: { ChatComponent, EmbodiedBRGameEntity },
   } = game;
+
+  const gameEntity = getComponentValueStrict(
+    EmbodiedBRGameEntity,
+    godEntityIndex
+  ).value as EntityID;
 
   const updateDisplayedChatMessages = (pieceEntity: EntityIndex) => {
     const chat = getComponentValueStrict(ChatComponent, pieceEntity);
-    if (chat.value.length === 0) {
+    if (!chat || chat.value.length === 0) {
       console.warn(
         "Received chat component update with no message",
         pieceEntity
@@ -58,7 +65,7 @@ const createBRChatSystem = (
   defineEnterSystem(
     world,
     // @ts-ignore
-    [Has(ChatComponent), HasValue(BRInGame, { value: game.gameEntity! })],
+    [Has(ChatComponent), HasValue(BRInGame, { value: gameEntity })],
     (update) => {
       updateDisplayedChatMessages(update.entity);
     },
@@ -68,7 +75,7 @@ const createBRChatSystem = (
   defineUpdateSystem(
     world,
     // @ts-ignore
-    [Has(ChatComponent), HasValue(BRInGame, { value: game.gameEntity! })],
+    [Has(ChatComponent), HasValue(BRInGame, { value: gameEntity })],
     (update) => {
       updateDisplayedChatMessages(update.entity);
     },

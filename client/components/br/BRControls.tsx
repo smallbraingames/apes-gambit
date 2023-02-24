@@ -2,36 +2,58 @@ import {
   CONTROLLER_COMPONENT_CLASS_NAME,
   disableClickthroughs,
 } from "../../utils/disableControllers";
-import { useContext, useEffect } from "react";
+import { Game, GameStatus } from "../../game/types";
 
 import ActivityStream from "./ActivityStream";
-import { GameContext } from "../../context/GameContext";
+import BRGameCountdown from "../BRGameCountdown";
+import { EntityID } from "@latticexyz/recs";
+import { Network } from "../../network/types";
 import Points from "./Points";
 import UpgradePiece from "./UpgradePiece";
+import { getEntityIndexFromEntity } from "../../game/utils/resolveEntity";
+import { useComponentValue } from "@latticexyz/react";
+import { useEffect } from "react";
 
-const BRControls = () => {
-  const game = useContext(GameContext);
-
+const BRControls = (props: {
+  game: Game;
+  gameEntity: EntityID;
+  network: Network;
+}) => {
   useEffect(() => {
     disableClickthroughs();
   }, []);
 
+  const game = useComponentValue(
+    props.network.components.BRGame,
+    getEntityIndexFromEntity(props.gameEntity, props.network.world)
+  );
+
   return (
     <>
       <div className={CONTROLLER_COMPONENT_CLASS_NAME}>
-        {game.game && (
-          <div className="h-screen py-4 px-4 flex flex-col gap-2">
-            <div>
-              <Points />
+        <div className="h-screen py-4 px-4 flex flex-col gap-2">
+          {game?.status === GameStatus.NOT_STARTED ? (
+            <div className="container p-4 mb-64">
+              <h1 className="font-bold text-lg">
+                {" "}
+                Find your starting position{" "}
+              </h1>
+              <BRGameCountdown startTime={game.startTime} />
             </div>
-            <div>
-              <UpgradePiece />
-            </div>
-            <div className="flex flex-1 overflow-hidden">
-              <ActivityStream />
-            </div>
+          ) : (
+            <>
+              <div>
+                <Points />
+              </div>
+              <div>
+                <UpgradePiece />
+              </div>
+            </>
+          )}
+          <div className="flex flex-1 overflow-hidden">
+            <ActivityStream />
           </div>
-        )}
+        </div>
       </div>
     </>
   );

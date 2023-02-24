@@ -40,7 +40,7 @@ export enum RenderDepth {
   TILE = 0,
   TILE_OVERLAY = 1,
   PIECE = 2,
-  SPEECH = 3,
+  SPEECH = 1000,
 }
 
 export enum Animations {

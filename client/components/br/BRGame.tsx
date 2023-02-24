@@ -9,13 +9,15 @@ import { useContext } from "react";
 
 const BRGame = () => {
   const { network } = useContext(NetworkContext);
-  const { gameEntity, activePiece } = useContext(GameContext);
+  const { gameEntity, activePiece, game } = useContext(GameContext);
 
   return (
     <>
       <CenterActivePieceOnLoad scene={Scenes.BR} />
       <div className="absolute h-screen">
-        <BRControls />
+        {network && gameEntity && game && (
+          <BRControls game={game} gameEntity={gameEntity} network={network} />
+        )}
       </div>
       <div className="absolute right-0">
         {network && gameEntity && activePiece && (

@@ -217,7 +217,7 @@ const ActivityStream = () => {
   }, [network, game]);
 
   return (
-    <div className="container w-full flex flex-col">
+    <div className="container w-full flex flex-col p-4">
       <p className="mt-1 mb-2">ACTIVITY</p>
       <div className="h-full flex flex-col flex-col-reverse overflow-y-hidden">
         <div className="flex flex-col flex-col-reverse overflow-y-auto">
