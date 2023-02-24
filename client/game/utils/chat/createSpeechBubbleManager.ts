@@ -42,6 +42,8 @@ const createSpeechBubbleManager = (scene: Scene) => {
 
     await new Promise((r) => setTimeout(r, BUBBLE_DISAPPEAR_TIME));
 
+    console.log("making speechbubggle");
+
     await Promise.all([
       tween(
         {
@@ -122,6 +124,7 @@ const createSpeechBubbleManager = (scene: Scene) => {
       wordWrap: { width: bubbleWidth - bubblePadding * 2 },
     });
 
+    console.log("making speech");
     bubble.setDepth(RenderDepth.SPEECH);
     content.setDepth(RenderDepth.SPEECH);
 
