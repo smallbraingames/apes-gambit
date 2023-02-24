@@ -25,7 +25,7 @@ const PointDisplay = (props: {
           />
         </div>
         <div className="ml-2">
-          <div className="bignumber flex items-center">
+          <div className="flex items-center text-2xl">
             {points?.value || "0"}
           </div>
         </div>
@@ -41,7 +41,7 @@ const Points = () => {
   return (
     <>
       {network.network && game.activePiece && (
-        <div className="bg-yellow-50 px-2 py-3 rounded-lg text-yellow-900 border border-b-4 border-r-2 border-yellow-900">
+        <div className="container p-4">
           <PointDisplay
             network={network.network}
             activePiece={game.activePiece}
