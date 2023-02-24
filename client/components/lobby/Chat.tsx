@@ -30,9 +30,9 @@ const ChatInput = () => {
   };
 
   return (
-    <div className="flex justify-end items-center">
+    <div className="flex w-full justify-end items-center">
       <input
-        className="rounded-lg bg-yellow-50 text-yellow-900 p-4 focus:outline-none"
+        className="rounded-lg w-full bg-yellow-50 text-yellow-900 p-4 focus:outline-none w-full"
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}

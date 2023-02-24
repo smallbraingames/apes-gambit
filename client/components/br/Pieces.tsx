@@ -24,12 +24,14 @@ type PieceDisplayData = {
 const PieceDisplay = (props: { data: PieceDisplayData; network: Network }) => {
   return (
     <>
-      <div className="font-bold">
+      <div
+        className={"font-bold mt-2 " + (!props.data.isAlive ? "grayscale" : "")}
+      >
         {getPieceDisplay(props.data.pieceEntity, props.network)}
       </div>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-end mt-2">
         <div>{props.data.bananas}</div>
-        <div className="h-10 w-10">
+        <div className="h-6 w-6">
           <img
             alt="Banana"
             src="icons/banana.svg"
@@ -70,6 +72,7 @@ const Pieces = (props: {
     )
   );
 
+  let activePieceData: PieceDisplayData | undefined = undefined;
   const pieces: PieceDisplayData[] = pieceEntities.map((pieceEntity) => {
     const owner = getComponentValueStrict(Owner, pieceEntity).value;
     const pieceType = getComponentValueStrict(PieceType, pieceEntity)
@@ -79,30 +82,38 @@ const Pieces = (props: {
     const bananasComponent = getComponentValue(BRPoints, pieceEntity)?.value;
     const bananas = bananasComponent ? bananasComponent : 0;
     const isActivePiece = pieceEntity === props.activePiece;
-    return { owner, pieceType, isActivePiece, pieceEntity, bananas, isAlive };
+    const data = {
+      owner,
+      pieceType,
+      isActivePiece,
+      pieceEntity,
+      bananas,
+      isAlive,
+    };
+    if (isActivePiece) {
+      activePieceData = data;
+    }
+    return data;
   });
 
-  const livePieces = pieces.filter((piece) => piece.isAlive);
-  const deadPieces = pieces.filter((piece) => !piece.isAlive);
-
   return (
-    <div className="bg-yellow-50 py-4 pl-5 border border-b-4 border-r-2 border-yellow-900 text-yellow-900 rounded-lg flex flex-col m-4">
-      <p className="mt-1 mb-2">PLAYERS</p>
-
-      <div className="overflow-y-hidden">
-        <p> Alive </p>
-        <div className="grid grid-cols-2">
-          {livePieces.map((data) => (
-            <PieceDisplay
-              key={data.pieceEntity}
-              data={data}
-              network={props.network}
-            />
-          ))}
+    <div className="container pb-2">
+      <div className="flex w-full items-center p-4">
+        <div>PLAYERS</div>
+        <div className="w-full flex flex-row-reverse text-sm opacity-80">
+          {pieces.length}
         </div>
-        <p> Dead </p>
-        <div className="grid grid-cols-2">
-          {deadPieces.map((data) => (
+      </div>
+      {activePieceData && (
+        <div className="border-t-2 border-b-2 border-yellow-900">
+          <div className="grid grid-cols-2 px-4 pb-2">
+            <PieceDisplay data={activePieceData} network={props.network} />
+          </div>
+        </div>
+      )}
+      <div className="px-4 overflow-y-auto h-48">
+        <div className="grid grid-cols-2 overflow-y-auto">
+          {pieces.map((data) => (
             <PieceDisplay
               key={data.pieceEntity}
               data={data}

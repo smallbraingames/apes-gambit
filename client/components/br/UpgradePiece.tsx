@@ -56,8 +56,8 @@ const UpgradePieceButton = (props: {
           />
         </div>
         <div className="text-right">
-          <div className="label">{pieceInfo.name}</div>
-          <div className="bignumber">{pieceInfo.points}</div>
+          <div className="text-sm">{pieceInfo.name}</div>
+          <div className="text-2xl">{pieceInfo.points}</div>
         </div>
       </div>
     </div>
@@ -82,9 +82,9 @@ const UpgradePiece = () => {
         game !== undefined &&
         activePiece &&
         gameEntity && (
-          <div className="p-4 bg-yellow-50 text-yellow-900 rounded-lg border border-b-4 border-r-2 border-yellow-900">
-            <h1 className="mb-3 ml-1"> SELECT A PIECE </h1>
-            <div className="grid grid-cols-2 gap-3">
+          <div className="container p-4">
+            <h1 className="mb-4"> SELECT A PIECE </h1>
+            <div className="grid grid-cols-2 gap-2">
               {pieceTypes.map((pieceType) => (
                 <div className="group upgrade-piece" key={pieceType}>
                   <UpgradePieceButton
