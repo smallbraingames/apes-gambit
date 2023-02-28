@@ -62,7 +62,8 @@ const setupPiecePositionContextComponent = (network: Network, game: Game) => {
     const entity = positionUpdates[0].entity;
     const position: Coord = positionUpdates[0].value as Coord;
     setComponent(PiecePositionContext, entity, {
-      ...position,
+      x: position.x,
+      y: position.y,
       pieceTaken: undefined,
       bananaPickedUp: false,
     });
