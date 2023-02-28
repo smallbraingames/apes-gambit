@@ -19,9 +19,6 @@ const createBRChatSystem = (
   const { world } = network;
 
   const {
-    scenes: {
-      BR: { scene, objectRegistry },
-    },
     components: { ChatComponent },
   } = game;
 

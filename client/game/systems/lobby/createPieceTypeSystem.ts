@@ -1,72 +1,32 @@
+import { Game, Lobby } from "../../types";
 import {
-  EntityIndex,
-  getComponentValue,
+  Has,
+  defineUpdateSystem,
   getComponentValueStrict,
 } from "@latticexyz/recs";
-import { Game, Lobby, PieceState } from "../../types";
 import { Network, PieceType } from "../../../network/types";
 
 import { Subscription } from "rxjs";
-import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
-import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
-import setPieceSprite from "../../utils/setPieceSprite";
 
 const createPieceTypeSystem = (
   network: Network,
-  game: Game,
+  _: Game,
   lobby: Lobby
 ): Subscription[] => {
   const {
-    godEntityIndex,
     world,
     components: { PieceType },
   } = network;
 
-  const {
-    gameWorld,
-    components: { ActivePiece },
-    scenes: {
-      Lobby: { scene, objectRegistry },
-    },
-  } = game;
+  const { pieceSpriteManager } = lobby;
 
-  const updatePieceType = (entity: EntityIndex) => {
-    const activePiece = getComponentValue(ActivePiece, godEntityIndex)
-      ?.value as EntityIndex | undefined;
+  defineUpdateSystem(world, [Has(PieceType)], (update) => {
+    const pieceType = getComponentValueStrict(PieceType, update.entity)
+      .value as PieceType;
+    pieceSpriteManager.animateSwitchType(update.entity, pieceType);
+  });
 
-    const pieceType: PieceType = getComponentValueStrict(
-      PieceType,
-      entity
-    ).value;
-
-    // Create a new sprite
-    const sprite = getPieceSpriteGameObject(entity, objectRegistry, scene);
-    setPieceSprite(sprite, pieceType, PieceState.IDLE, entity !== activePiece);
-    if (entity === activePiece) {
-      lobby.tileOverlayManager.setValidMoveOverlays();
-    }
-  };
-
-  const pieceTypeSubscription = defineComponentSystemUnsubscribable(
-    world,
-    PieceType,
-    (update) => {
-      updatePieceType(update.entity);
-    }
-  );
-
-  const activePieceSubscription = defineComponentSystemUnsubscribable(
-    gameWorld,
-    ActivePiece,
-    (update) => {
-      const activePiece = update.value[0]?.value;
-      if (activePiece) {
-        updatePieceType(activePiece as EntityIndex);
-      }
-    }
-  );
-
-  return [pieceTypeSubscription, activePieceSubscription];
+  return [];
 };
 
 export default createPieceTypeSystem;
