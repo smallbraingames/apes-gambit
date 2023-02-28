@@ -17,9 +17,9 @@ export const getAssetKeyForPiece = (
 export const getAssetPathForPiece = (
   pieceType: PieceType,
   pieceState: PieceState,
-  isEnemy: boolean
+  isActivePiece: boolean
 ) => {
-  const folder = isEnemy ? "enemy" : "main";
+  const folder = isActivePiece ? "main" : "enemy";
   const pieceName = getPieceInfo(pieceType).name;
   return `assets/sprites/${folder}/${pieceState}/${pieceName}.svg`.toLowerCase();
 };

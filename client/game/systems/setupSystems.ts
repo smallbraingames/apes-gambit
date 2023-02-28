@@ -5,9 +5,9 @@ import { Subscription } from "rxjs";
 import createBRChatSystem from "./br/createBRChatSystem";
 import createBRGridShrinkSystem from "./br/createBRGridShrinkSystem";
 import createBRMovementInputSystem from "./br/input/createBRMovementInputSystem";
-import createBRPiecePositionSystem from "./br/createBRPiecePositionSystem";
+import createBRPieceEnterExitSystem from "./br/createBRPieceEnterExitSystem";
+import createBRPiecePositionContextSystem from "./br/createBRPiecePositionContextSystem";
 import createBRPieceTypeSystem from "./br/createBRPieceTypeSystem";
-import createBRValidMoveOverlaySystem from "./br/createBRValidMoveOverlaySystem";
 import createChatSystem from "./lobby/createChatSystem";
 import createMovementInputSystem from "./lobby/input/createMovementInputSystem";
 import createPiecePositionSystem from "./lobby/createPiecePositionSystem";
@@ -55,9 +55,9 @@ export const setupBRSystems = (network: Network, game: Game, br: BR) => {
     game,
     [
       createBRMovementInputSystem,
-      createBRPiecePositionSystem,
+      createBRPiecePositionContextSystem,
       createBRPieceTypeSystem,
-      // createBRValidMoveOverlaySystem,
+      createBRPieceEnterExitSystem,
       createBRGridShrinkSystem,
       createBRChatSystem,
     ],
