@@ -1,5 +1,7 @@
 import { BR, Game } from "../../types";
+import { Has, HasValue, runQuery } from "@latticexyz/recs";
 
+import { Coord } from "@latticexyz/utils";
 import { Network } from "../../../network/types";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
@@ -10,12 +12,28 @@ const createBRGridShrinkSystem = (
   game: Game,
   br: BR
 ): Subscription[] => {
-  const { godEntityIndex } = network;
+  const {
+    godEntityIndex,
+    components: { PiecePosition },
+  } = network;
   const {
     gameWorld,
     scenes: { BR },
     components: { BRGridDimComponent },
   } = game;
+
+  const { pieceSpriteManager, IN_GAME_CONSTRAINTS } = br!;
+
+  const cleanupTile = (tileCoord: Coord) => {
+    const piecesAtPosition = runQuery([
+      ...IN_GAME_CONSTRAINTS,
+      HasValue(PiecePosition, { x: tileCoord.x, y: tileCoord.y }),
+    ]);
+    if (piecesAtPosition.size > 0) {
+      const piece = [...piecesAtPosition][0];
+      pieceSpriteManager.animateRemovePiece(piece);
+    }
+  };
 
   const subscription = defineComponentSystemUnsubscribable(
     gameWorld,
@@ -25,7 +43,7 @@ const createBRGridShrinkSystem = (
       if (gridDim === undefined) {
         return;
       }
-      overlayShrinkingGridBoundary(BR, godEntityIndex, gridDim);
+      overlayShrinkingGridBoundary(BR, godEntityIndex, gridDim, cleanupTile);
     },
     { runOnInit: true }
   );

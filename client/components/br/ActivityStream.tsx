@@ -218,7 +218,7 @@ const ActivityStream = () => {
 
   return (
     <div className="container w-full flex flex-col">
-      <p className="mb-4 p-4">ACTIVITY</p>
+      <p className="mb-0 px-4 pt-4">ACTIVITY</p>
       <div className="p-4 h-full flex flex-col flex-col-reverse overflow-y-hidden">
         <div className="flex flex-col flex-col-reverse overflow-y-auto">
           {[...activity].reverse().map((element, i) => (
