@@ -52,6 +52,7 @@ export enum Assets {
   Shadow = "Shadow",
   Boundary = "Boundary",
   Banana = "Banana",
+  UnderBanana = "UnderBanana",
   TempleFull = "TempleFull",
 }
 

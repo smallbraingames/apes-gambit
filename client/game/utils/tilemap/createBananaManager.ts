@@ -18,11 +18,12 @@ import {
 import { Game, GameConfig, Scene } from "../../types";
 import { Perlin, createPerlin } from "@latticexyz/noise";
 import { keccak256, solidityKeccak256, toUtf8Bytes } from "ethers/lib/utils";
+import { tileCoordToPixelCoord, tween } from "@latticexyz/phaserx";
 
 import { Coord } from "@latticexyz/utils";
 import { Network } from "../../../network/types";
 import { getEntityIndexFromEntity } from "../resolveEntity";
-import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
+import setDepthFromCoord from "../setDepthFromCoord";
 
 const PERLIN_DIGITS = 3;
 
@@ -82,7 +83,9 @@ const createBananaMananger = () => {
     const {
       components: { BRBananaComponent },
     } = game;
-    const bananaEntities = runQuery([HasValue(BRBananaComponent, position)]);
+    const bananaEntities = runQuery([
+      HasValue(BRBananaComponent, { x: position.x, y: position.y }),
+    ]);
     if (bananaEntities.size === 0) {
       return undefined;
     }
@@ -100,27 +103,60 @@ const createBananaMananger = () => {
       );
       return;
     }
-    const position = tileCoordToPixelCoord(tileCoord, TILE_WIDTH, TILE_HEIGHT);
-    const {
-      scene: phaserScene,
-      objectRegistry: { gameObjectRegistry },
-    } = scene;
-    const sprite = phaserScene.physics.add.sprite(
-      position.x,
-      position.y,
-      Assets.Banana
-    );
-    sprite.setOrigin(0, 0);
-    sprite.setScale(PIECE_SPRITE_SCALE, PIECE_SPRITE_SCALE);
-    sprite.setDepth(RenderDepth.PIECE);
+    createBananaSprites(tileCoord);
+  };
+
+  const createBananaSprites = (tileCoord: Coord) => {
     const {
       gameWorld,
       components: { BRBananaComponent },
     } = game;
     const entity = createEntity(gameWorld, [
-      withValue(BRBananaComponent, tileCoord),
+      withValue(BRBananaComponent, { x: tileCoord.x, y: tileCoord.y }),
     ]);
-    gameObjectRegistry.set(entity, BANANA_SPRITE_ID, sprite);
+    const position = tileCoordToPixelCoord(tileCoord, TILE_WIDTH, TILE_HEIGHT);
+    const {
+      scene: phaserScene,
+      objectRegistry: { gameObjectRegistry },
+    } = scene;
+    // Add Banana
+    const bananaSprite = phaserScene.physics.add.sprite(
+      position.x,
+      position.y,
+      Assets.Banana
+    );
+    bananaSprite.setOrigin(0, 0);
+    bananaSprite.setPosition(
+      position.x + TILE_WIDTH / 2 - bananaSprite.width / 2,
+      position.y + TILE_HEIGHT / 2 - bananaSprite.height / 2 - 250
+    );
+    setDepthFromCoord(bananaSprite, -TILE_HEIGHT);
+    tween(
+      {
+        targets: bananaSprite,
+        duration: 2000,
+        props: { x: bananaSprite.x, y: bananaSprite.y - 100 },
+        yoyo: true,
+        ease: Phaser.Math.Easing.Sine.InOut,
+        repeat: -1,
+      },
+      { keepExistingTweens: false }
+    );
+    gameObjectRegistry.set(entity, BANANA_SPRITE_ID, bananaSprite);
+
+    // Add under banana sprite
+    const underBanana = phaserScene.add.sprite(
+      position.x,
+      position.y,
+      Assets.UnderBanana
+    );
+    underBanana.setOrigin(0, 0);
+    underBanana.setPosition(
+      position.x + TILE_WIDTH / 2 - underBanana.width / 2,
+      position.y + TILE_HEIGHT / 2 - underBanana.height / 2
+    );
+    setDepthFromCoord(underBanana, -TILE_HEIGHT - 10);
+    gameObjectRegistry.set(entity, `${BANANA_SPRITE_ID}:under`, bananaSprite);
   };
 
   const placeBananas = (tilemap: Phaser.Tilemaps.Tilemap) => {
@@ -138,6 +174,7 @@ const createBananaMananger = () => {
 
   const removeBananaAtPosition = (position: Coord) => {
     const bananaEntity = getBananaEntityAtPosition(position);
+    console.log(bananaEntity);
     if (!bananaEntity) {
       console.warn(
         "Cannot remove banana at position since no banana entity found",

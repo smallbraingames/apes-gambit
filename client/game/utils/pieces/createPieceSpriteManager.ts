@@ -77,6 +77,8 @@ const createPieceSpriteManager = (
       getSpritePieceType(entityIndex),
       PieceState.IDLE
     );
+    sprite.setScale(PIECE_SPRITE_SCALE, PIECE_SPRITE_SCALE);
+    setDepthFromCoord(sprite);
   };
 
   const getSpritePieceType = (entityIndex: EntityIndex) => {
