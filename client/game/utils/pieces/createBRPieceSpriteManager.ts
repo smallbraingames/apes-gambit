@@ -29,8 +29,10 @@ const createBRPieceSpriteManager = (
   bananaManager: BananaManager,
   speechBubbleManager: SpeechBubbleManager
 ) => {
-  const { scene: phaserScene } = scene;
-  const { godEntityIndex } = network;
+  const {
+    godEntityIndex,
+    components: { PiecePosition },
+  } = network;
   const {
     components: { BRRechargeTimerComponent },
   } = game;
@@ -78,7 +80,10 @@ const createBRPieceSpriteManager = (
     pieceSpriteManager.switchType(piece, pieceType);
   };
 
-  const animateTake = (taker: EntityIndex, taken: EntityIndex) => {};
+  const animateTake = async (taker: EntityIndex, taken: EntityIndex) => {
+    await animateMoveTo(taker, getPiecePosition(taken));
+    await animateRemovePiece(taken);
+  };
 
   const animateSpeechBubble = (piece: EntityIndex, message: string) => {
     const sprite = pieceSpriteManager.getSprite(piece);
@@ -173,6 +178,10 @@ const createBRPieceSpriteManager = (
       },
       { keepExistingTweens: false }
     );
+  };
+
+  const getPiecePosition = (piece: EntityIndex) => {
+    return getComponentValueStrict(PiecePosition, piece);
   };
 
   return {
