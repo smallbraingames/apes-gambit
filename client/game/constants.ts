@@ -16,13 +16,14 @@ export const LOBBY_DISPLAY_GRID_SIZE = 200;
 export const CHESS_TILEMAP_ID = "chesstilemap";
 export const PIECE_SPRITE_ID = "piece-sprite";
 export const BANANA_SPRITE_ID = "banana-sprite";
+export const BOUNDARY_SPRITE_ID = "boundary-sprite";
 export const BR_VALID_MOVE_GROUP_ID = "br-valid-moves";
 
 export const DEFAULT_MOVE_VALIDATOR_CONFIG = {
-  [PieceType.BISHOP]: 10,
-  [PieceType.QUEEN]: 6,
-  [PieceType.ROOK]: 8,
-  [PieceType.KING]: 10,
+  [PieceType.BISHOP]: 4,
+  [PieceType.QUEEN]: 3,
+  [PieceType.ROOK]: 4,
+  [PieceType.KING]: 1,
   [PieceType.PAWN]: 1,
   [PieceType.KNIGHT]: 1,
 };
@@ -41,6 +42,7 @@ export enum RenderDepth {
   TILE_OVERLAY = 1,
   PIECE = 2,
   SPEECH = 1000,
+  BOUNDARY = 10000,
 }
 
 export enum Animations {
