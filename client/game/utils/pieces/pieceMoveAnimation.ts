@@ -1,7 +1,13 @@
-import { Assets, MOVE_ANIMATION_DURATION, TILE_HEIGHT } from "../../constants";
-import { Coord, tween } from "@latticexyz/phaserx";
+import {
+  Assets,
+  MOVE_ANIMATION_DURATION,
+  TILE_HEIGHT,
+  TILE_WIDTH,
+} from "../../constants";
+import { Coord, tileCoordToPixelCoord, tween } from "@latticexyz/phaserx";
+import { PieceSpriteManager, PieceState } from "../../types";
 
-import { PieceState } from "../../types";
+import { EntityIndex } from "@latticexyz/recs";
 import { PieceType } from "../../../network/types";
 import { getAssetKeyForPiece } from "../config/assets";
 
@@ -17,11 +23,9 @@ export const getMoveAnimationDuration = (
   MOVE_ANIMATION_DURATION;
 
 export const playPieceMoveAnimation = async (
-  scene: Phaser.Scene,
-  gameObject: Phaser.GameObjects.Sprite,
-  position: Coord,
-  pieceType: PieceType,
-  isActivePiece: boolean
+  pieceSpriteManager: PieceSpriteManager,
+  entityIndex: EntityIndex,
+  tileCoord: Coord
 ) => {
   // Don't emit trails for now
   // const particles = scene.add.particles(Assets.ChessTileset, undefined, {
@@ -35,17 +39,17 @@ export const playPieceMoveAnimation = async (
   // const emitter = particles.emitters.first;
   // emitter.startFollow(gameObject);
 
-  gameObject.setTexture(
-    getAssetKeyForPiece(pieceType, PieceState.MOVE, isActivePiece)
-  );
+  const sprite = pieceSpriteManager.getSprite(entityIndex);
+  const position = tileCoordToPixelCoord(tileCoord, TILE_WIDTH, TILE_HEIGHT);
+  pieceSpriteManager.switchState(entityIndex, PieceState.MOVE);
   const animationDuration = getMoveAnimationDuration(
-    { x: gameObject.x, y: gameObject.y },
+    { x: sprite.x, y: sprite.y },
     position
   );
   await Promise.all([
     tween(
       {
-        targets: gameObject,
+        targets: sprite,
         duration: animationDuration / 2,
         props: {
           angle: 40,
@@ -57,7 +61,7 @@ export const playPieceMoveAnimation = async (
     ),
     tween(
       {
-        targets: gameObject,
+        targets: sprite,
         duration: animationDuration,
         props: { x: position.x, y: position.y },
         ease: Phaser.Math.Easing.Sine.InOut,
@@ -65,11 +69,8 @@ export const playPieceMoveAnimation = async (
       { keepExistingTweens: true }
     ),
   ]);
-  gameObject.setTexture(
-    getAssetKeyForPiece(pieceType, PieceState.IDLE, isActivePiece)
-  );
-  gameObject.setPosition(position.x, position.y);
-
+  pieceSpriteManager.switchState(entityIndex, PieceState.IDLE);
+  pieceSpriteManager.moveTo(entityIndex, tileCoord);
   // emitter.stopFollow();
   // emitter.stop();
 };

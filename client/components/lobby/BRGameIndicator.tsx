@@ -85,7 +85,7 @@ const BRGameIndicator = (props: {
           <div>
             <BRGameCountdown startTime={game.startTime} />
           </div>
-          <div className="opacity-90 text-sm">Enter the temple to join</div>
+          <div className="opacity-90 text-sm">Click the temple to join</div>
         </div>
       </div>
     );

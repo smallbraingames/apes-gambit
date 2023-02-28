@@ -10,6 +10,7 @@ import createBRPiecePositionContextSystem from "./br/createBRPiecePositionContex
 import createBRPieceTypeSystem from "./br/createBRPieceTypeSystem";
 import createChatSystem from "./lobby/createChatSystem";
 import createMovementInputSystem from "./lobby/input/createMovementInputSystem";
+import createPieceEnterExitSystem from "./lobby/createPieceEnterExitSystem";
 import createPiecePositionSystem from "./lobby/createPiecePositionSystem";
 import createPieceTypeSystem from "./lobby/createPieceTypeSystem";
 
@@ -40,6 +41,7 @@ export const setupLobbySystems = (
     game,
     [
       createMovementInputSystem,
+      createPieceEnterExitSystem,
       createPiecePositionSystem,
       createPieceTypeSystem,
       createChatSystem,

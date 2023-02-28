@@ -1,10 +1,14 @@
+import {
+  EntityIndex,
+  Has,
+  defineEnterSystem,
+  defineUpdateSystem,
+  getComponentValueStrict,
+} from "@latticexyz/recs";
 import { Game, Lobby } from "../../types";
 
 import { Network } from "../../../network/types";
-import { PIECE_SPRITE_ID } from "../../constants";
 import { Subscription } from "rxjs";
-import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
-import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
 import { parseChatMessageFromKey } from "../../utils/chat/encodeChatMessage";
 
 const createChatSystem = (
@@ -12,46 +16,46 @@ const createChatSystem = (
   game: Game,
   lobby: Lobby
 ): Subscription[] => {
-  const { world } = network;
+  const {
+    world,
+    components: { PiecePosition },
+  } = network;
 
   const {
-    scenes: {
-      Lobby: { scene, objectRegistry },
-    },
     components: { ChatComponent },
   } = game;
 
-  const subscription = defineComponentSystemUnsubscribable(
+  const { pieceSpriteManager } = lobby;
+
+  const updateDisplayedChatMessages = (pieceEntity: EntityIndex) => {
+    const chat = getComponentValueStrict(ChatComponent, pieceEntity);
+    const message = parseChatMessageFromKey(
+      chat.value[chat.value.length - 1]
+    ).message;
+    pieceSpriteManager.animateSpeechBubble(pieceEntity, message);
+  };
+
+  defineEnterSystem(
     world,
-    ChatComponent,
+    // @ts-ignore
+    [Has(ChatComponent), Has(PiecePosition)],
     (update) => {
-      const chat = update.value[0];
-      if (!chat || chat.value.length === 0) {
-        console.warn("Received chat component update with no message", update);
-        return;
-      }
-      const hasPieceSprite = objectRegistry.gameObjectRegistry.has(
-        update.entity,
-        PIECE_SPRITE_ID
-      );
-      if (!hasPieceSprite) {
-        console.warn("Recieved chat message for nonexistent sprite", update);
-        return;
-      }
-      const sprite = getPieceSpriteGameObject(
-        update.entity,
-        objectRegistry,
-        scene
-      );
-      lobby.speechBubbleManager.displayChatBubbleForPieceSprite(
-        sprite,
-        parseChatMessageFromKey(chat.value[chat.value.length - 1]).message
-      );
+      updateDisplayedChatMessages(update.entity);
     },
     { runOnInit: true }
   );
 
-  return [subscription];
+  defineUpdateSystem(
+    world,
+    // @ts-ignore
+    [Has(ChatComponent), Has(PiecePosition)],
+    (update) => {
+      updateDisplayedChatMessages(update.entity);
+    },
+    { runOnInit: true }
+  );
+
+  return [];
 };
 
 export default createChatSystem;
