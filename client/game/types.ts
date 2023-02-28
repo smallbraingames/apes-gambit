@@ -5,6 +5,7 @@ import { ObjectRegistry } from "../phaser/types";
 import createBananaMananger from "./utils/tilemap/createBananaManager";
 import { createGame } from "./createGame";
 import createMoveValidator from "./utils/validation/createMoveValidator";
+import createPieceSpriteManager from "./utils/pieces/createPieceSpriteManager";
 import createRechargeOverlayManager from "./utils/createRechargeOverlayManager";
 import createSpeechBubbleManager from "./utils/chat/createSpeechBubbleManager";
 import createValidMoveTileOverlayManager from "./utils/validation/createValidMoveTileOverlayManager";
@@ -24,6 +25,9 @@ export type RechargeOverlayManager = Awaited<
 export type BananaManager = Awaited<ReturnType<typeof createBananaMananger>>;
 export type SpeechBubbleManager = Awaited<
   ReturnType<typeof createSpeechBubbleManager>
+>;
+export type PieceSpriteManager = Awaited<
+  ReturnType<typeof createPieceSpriteManager>
 >;
 
 export type Scene = {

@@ -1,15 +1,20 @@
+import { EntityIndex } from "@latticexyz/recs";
+import { PieceSpriteManager } from "../../types";
 import { tween } from "@latticexyz/phaserx";
 
-const loopPieceIdleAnimation = async (
-  gameObject: Phaser.GameObjects.Sprite,
-  x: number,
-  y: number
-): Promise<void> => {
+const loopPieceIdleAnimation = (
+  pieceSpriteManager: PieceSpriteManager,
+  piece: EntityIndex,
+  height: number,
+  duration: number,
+  ease = Phaser.Math.Easing.Sine.Out
+) => {
+  const sprite = pieceSpriteManager.getSprite(piece);
   tween(
     {
-      targets: gameObject,
-      duration: 300,
-      props: { x: x, y: y - 150 },
+      targets: sprite,
+      duration: duration,
+      props: { x: sprite.x, y: sprite.y - height },
       yoyo: true,
       ease: Phaser.Math.Easing.Sine.Out,
       repeat: -1,

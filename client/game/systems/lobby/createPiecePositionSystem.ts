@@ -1,59 +1,31 @@
 import { Game, Lobby } from "../../types";
-import { PIECE_SPRITE_ID, TILE_HEIGHT, TILE_WIDTH } from "../../constants";
+import {
+  Has,
+  defineUpdateSystem,
+  getComponentValueStrict,
+} from "@latticexyz/recs";
 
 import { Network } from "../../../network/types";
 import { Subscription } from "rxjs";
-import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
-import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
-import isActivePiece from "../../utils/isActivePiece";
-import setDepthFromCoord from "../../utils/setDepthFromCoord";
-import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
 
 const createPiecePositionSystem = (
   network: Network,
-  game: Game,
+  _: Game,
   lobby: Lobby
 ): Subscription[] => {
   const {
-    godEntityIndex,
     world,
     components: { PiecePosition },
   } = network;
 
-  const {
-    scenes: {
-      Lobby: { scene, objectRegistry },
-    },
-  } = game;
+  const { pieceSpriteManager } = lobby;
 
-  const subscription = defineComponentSystemUnsubscribable(
-    world,
-    PiecePosition,
-    (update) => {
-      const position = update.value[0];
-      if (!position) {
-        objectRegistry.gameObjectRegistry.remove(
-          update.entity,
-          PIECE_SPRITE_ID
-        );
-        return;
-      }
-      const sprite = getPieceSpriteGameObject(
-        update.entity,
-        objectRegistry,
-        scene
-      );
-      const { x, y } = tileCoordToPixelCoord(position, TILE_WIDTH, TILE_HEIGHT);
-      sprite.setPosition(x, y);
-      if (isActivePiece(game, godEntityIndex, update.entity)) {
-        lobby.tileOverlayManager.setValidMoveOverlays();
-      }
-      setDepthFromCoord(sprite);
-    },
-    { runOnInit: true }
-  );
+  defineUpdateSystem(world, [Has(PiecePosition)], (update) => {
+    const piecePosition = getComponentValueStrict(PiecePosition, update.entity);
+    pieceSpriteManager.animateMoveTo(update.entity, piecePosition);
+  });
 
-  return [subscription];
+  return [];
 };
 
 export default createPiecePositionSystem;
