@@ -137,10 +137,8 @@ export async function createGame(network: Network) {
   };
 
   // Setup game components
-  await Promise.all([
-    setupEmbodiedBRGameEntityComponent(network, context),
-    setupActivePieceComponent(network, context),
-  ]);
+  await setupActivePieceComponent(network, context);
+  await setupEmbodiedBRGameEntityComponent(network, context);
   setupChatComponent(network, context);
   setupPiecePositionContextComponent(network, context);
   setupBRRechargeTimerComponent(network, context);
