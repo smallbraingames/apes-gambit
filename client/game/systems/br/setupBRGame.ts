@@ -87,7 +87,8 @@ const setupBRGame = async (network: Network, scene: Scene, game: Game) => {
     scene,
     tileOverlayManager,
     rechargeOverlayManager,
-    bananaManager
+    bananaManager,
+    speechBubbleManager
   );
 
   const IN_GAME_CONSTRAINTS = [

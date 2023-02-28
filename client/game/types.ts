@@ -6,6 +6,7 @@ import createBananaMananger from "./utils/tilemap/createBananaManager";
 import { createGame } from "./createGame";
 import createMoveValidator from "./utils/validation/createMoveValidator";
 import createRechargeOverlayManager from "./utils/createRechargeOverlayManager";
+import createSpeechBubbleManager from "./utils/chat/createSpeechBubbleManager";
 import createValidMoveTileOverlayManager from "./utils/validation/createValidMoveTileOverlayManager";
 import setupBRGame from "./systems/br/setupBRGame";
 import setupLobbyGame from "./systems/lobby/setupLobbyGame";
@@ -21,6 +22,9 @@ export type RechargeOverlayManager = Awaited<
   ReturnType<typeof createRechargeOverlayManager>
 >;
 export type BananaManager = Awaited<ReturnType<typeof createBananaMananger>>;
+export type SpeechBubbleManager = Awaited<
+  ReturnType<typeof createSpeechBubbleManager>
+>;
 
 export type Scene = {
   scene: Phaser.Scene;

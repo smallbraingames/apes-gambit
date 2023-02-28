@@ -53,8 +53,6 @@ const createChessBoardTilemap = (
   for (let i = 0; i < gridSize; i++) {
     const row = [];
     for (let j = 0; j < gridSize; j++) {
-      //console.log(getTileIndex(i + j));
-      //console.log(((i + j) % 2) * 6);
       row.push(((i + j) % 2) * 5 + getTileIndex(i * j + i + j));
     }
     tileIndices.push(row);
