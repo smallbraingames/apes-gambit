@@ -4,15 +4,12 @@ import {
   PieceState,
   RechargeOverlayManager,
   Scene,
+  SpeechBubbleManager,
   ValidMoveTileOverlayManager,
 } from "../../types";
 import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
 import { Network, PieceType } from "../../../network/types";
 import { PIECE_SPRITE_ID, TILE_HEIGHT, TILE_WIDTH } from "../../constants";
-import {
-  getMoveAnimationDuration,
-  playPieceMoveAnimation,
-} from "./pieceMoveAnimation";
 import {
   removeAllTweens,
   tileCoordToPixelCoord,
@@ -21,6 +18,7 @@ import {
 
 import { Coord } from "@latticexyz/utils";
 import createPieceSpriteManager from "./createPieceSpriteManager";
+import { getMoveAnimationDuration } from "./pieceMoveAnimation";
 
 const createBRPieceSpriteManager = (
   network: Network,
@@ -28,7 +26,8 @@ const createBRPieceSpriteManager = (
   scene: Scene,
   validMoveTileOverlayManager: ValidMoveTileOverlayManager,
   rechargeOverlayManager: RechargeOverlayManager,
-  bananaManager: BananaManager
+  bananaManager: BananaManager,
+  speechBubbleManager: SpeechBubbleManager
 ) => {
   const { scene: phaserScene } = scene;
   const { godEntityIndex } = network;
@@ -47,6 +46,7 @@ const createBRPieceSpriteManager = (
     // TODO: PIECE APPEAR ANIMATION
     pieceSpriteManager.createSprite(piece, tileCoord);
     validMoveTileOverlayManager.setValidMoveOverlays();
+    loopPieceIdleAnimation(piece);
   };
 
   const animateMoveTo = async (piece: EntityIndex, tileCoord: Coord) => {
@@ -58,6 +58,7 @@ const createBRPieceSpriteManager = (
     await playPieceMoveAnimation(piece, tileCoord);
 
     runRechargeAnimationIfNecessary(piece);
+    loopPieceIdleAnimation(piece);
   };
 
   const animateBananaPickUp = async (piece: EntityIndex, tileCoord: Coord) => {
@@ -67,6 +68,7 @@ const createBRPieceSpriteManager = (
 
   const animateRemovePiece = async (piece: EntityIndex) => {
     pieceSpriteManager.removeSprite(piece);
+    validMoveTileOverlayManager.clearValidMoveOverlays();
   };
 
   const animateSwitchType = async (
@@ -77,6 +79,11 @@ const createBRPieceSpriteManager = (
   };
 
   const animateTake = (taker: EntityIndex, taken: EntityIndex) => {};
+
+  const animateSpeechBubble = (piece: EntityIndex, message: string) => {
+    const sprite = pieceSpriteManager.getSprite(piece);
+    speechBubbleManager.displayChatBubbleForPieceSprite(sprite, message);
+  };
 
   /// ======= Internal =======
 
@@ -153,6 +160,21 @@ const createBRPieceSpriteManager = (
     // emitter.stop();
   };
 
+  const loopPieceIdleAnimation = (piece: EntityIndex) => {
+    const sprite = pieceSpriteManager.getSprite(piece);
+    tween(
+      {
+        targets: sprite,
+        duration: 300,
+        props: { x: sprite.x, y: sprite.y - 150 },
+        yoyo: true,
+        ease: Phaser.Math.Easing.Sine.Out,
+        repeat: -1,
+      },
+      { keepExistingTweens: false }
+    );
+  };
+
   return {
     createPiece,
     animateBananaPickUp,
@@ -160,6 +182,7 @@ const createBRPieceSpriteManager = (
     animateTake,
     animateRemovePiece,
     animateSwitchType,
+    animateSpeechBubble,
   };
 };
 

@@ -1,18 +1,14 @@
-import { BR, Game, Lobby } from "../../types";
+import { BR, Game } from "../../types";
 import {
-  EntityID,
   EntityIndex,
   Has,
-  HasValue,
   defineEnterSystem,
   defineUpdateSystem,
   getComponentValueStrict,
 } from "@latticexyz/recs";
 
 import { Network } from "../../../network/types";
-import { PIECE_SPRITE_ID } from "../../constants";
 import { Subscription } from "rxjs";
-import getPieceSpriteGameObject from "../../utils/getPieceSpriteGameObject";
 import { parseChatMessageFromKey } from "../../utils/chat/encodeChatMessage";
 
 const createBRChatSystem = (
@@ -20,52 +16,29 @@ const createBRChatSystem = (
   game: Game,
   br: BR
 ): Subscription[] => {
-  const {
-    godEntityIndex,
-    world,
-    components: { BRInGame },
-  } = network;
+  const { world } = network;
 
   const {
     scenes: {
       BR: { scene, objectRegistry },
     },
-    components: { ChatComponent, EmbodiedBRGameEntity },
+    components: { ChatComponent },
   } = game;
 
-  const gameEntity = getComponentValueStrict(
-    EmbodiedBRGameEntity,
-    godEntityIndex
-  ).value as EntityID;
+  const { IN_GAME_CONSTRAINTS, pieceSpriteManager } = br!;
 
   const updateDisplayedChatMessages = (pieceEntity: EntityIndex) => {
     const chat = getComponentValueStrict(ChatComponent, pieceEntity);
-    if (!chat || chat.value.length === 0) {
-      console.warn(
-        "Received chat component update with no message",
-        pieceEntity
-      );
-      return;
-    }
-    const hasPieceSprite = objectRegistry.gameObjectRegistry.has(
-      pieceEntity,
-      PIECE_SPRITE_ID
-    );
-    if (!hasPieceSprite) {
-      console.warn("Recieved chat message for nonexistent sprite", pieceEntity);
-      return;
-    }
-    const sprite = getPieceSpriteGameObject(pieceEntity, objectRegistry, scene);
-    br!.speechBubbleManager.displayChatBubbleForPieceSprite(
-      sprite,
-      parseChatMessageFromKey(chat.value[chat.value.length - 1]).message
-    );
+    const message = parseChatMessageFromKey(
+      chat.value[chat.value.length - 1]
+    ).message;
+    pieceSpriteManager.animateSpeechBubble(pieceEntity, message);
   };
 
   defineEnterSystem(
     world,
     // @ts-ignore
-    [Has(ChatComponent), HasValue(BRInGame, { value: gameEntity })],
+    [...IN_GAME_CONSTRAINTS, Has(ChatComponent)],
     (update) => {
       updateDisplayedChatMessages(update.entity);
     },
@@ -75,7 +48,7 @@ const createBRChatSystem = (
   defineUpdateSystem(
     world,
     // @ts-ignore
-    [Has(ChatComponent), HasValue(BRInGame, { value: gameEntity })],
+    [...IN_GAME_CONSTRAINTS, Has(ChatComponent)],
     (update) => {
       updateDisplayedChatMessages(update.entity);
     },

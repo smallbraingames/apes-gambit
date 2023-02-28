@@ -71,7 +71,12 @@ const assets: { [key: string]: Asset } = {
   [Assets.Banana]: {
     type: AssetType.IMAGE,
     key: Assets.Banana,
-    path: "assets/sprites/banana.svg",
+    path: "assets/sprites/banana.png",
+  },
+  [Assets.UnderBanana]: {
+    type: AssetType.IMAGE,
+    key: Assets.UnderBanana,
+    path: "assets/sprites/underbanana.png",
   },
   [Assets.TempleFull]: {
     type: AssetType.IMAGE,
