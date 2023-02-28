@@ -32,10 +32,30 @@ const createChessBoardTilemap = (
   )!;
 
   const tileIndices: number[][] = [];
+
+  // "Randomly" place tiles
+  let state = 1;
+  const getTileIndex = (n: number): number => {
+    state += Math.abs(n * Math.sin(n) + n) ** 2;
+    const fac = Math.floor(Math.abs((n * state) % 20));
+    if (fac < 6) {
+      return 0;
+    } else if (fac < 10) {
+      return 1;
+    } else if (fac < 12) {
+      return 2;
+    } else if (fac < 14) {
+      return 3;
+    }
+    return 4;
+  };
+
   for (let i = 0; i < gridSize; i++) {
     const row = [];
     for (let j = 0; j < gridSize; j++) {
-      row.push(((i + j) % 2) * 5);
+      //console.log(getTileIndex(i + j));
+      //console.log(((i + j) % 2) * 6);
+      row.push(((i + j) % 2) * 5 + getTileIndex(i * j + i + j));
     }
     tileIndices.push(row);
   }
