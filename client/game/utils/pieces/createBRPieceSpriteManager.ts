@@ -91,7 +91,9 @@ const createBRPieceSpriteManager = (
     piece: EntityIndex,
     pieceType: PieceType
   ) => {
+    validMoveTileOverlayManager.clearValidMoveOverlays();
     pieceSpriteManager.switchType(piece, pieceType);
+    validMoveTileOverlayManager.setValidMoveOverlays();
   };
 
   const animateTake = async (taker: EntityIndex, taken: EntityIndex) => {

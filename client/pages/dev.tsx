@@ -8,7 +8,7 @@ import { getEntityFromEntityIndex } from "../game/utils/resolveEntity";
 const GAME_START_TIME = Math.floor(new Date().getTime() / 1000) + 60 * 5;
 const GAME_RECHARGE_TIME = 5;
 const GAME_INITIAL_GRID_DIM = 20;
-const GAME_SECONDS_PER_GRID_SHRINK = 50000;
+const GAME_SECONDS_PER_GRID_SHRINK = 10;
 const PERLIN_DENOM = 5;
 const PERLIN_THRESHOLD_BANANA = 700;
 const PERLIN_SEED = 0;

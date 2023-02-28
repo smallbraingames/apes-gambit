@@ -43,6 +43,9 @@ const setupBRGridDimComponent = (network: Network, game: Game) => {
     const secondsSinceStart =
       // @ts-ignore
       Math.floor(now / 1000) - parseInt(gameConfig.startTime);
+    if (secondsSinceStart < 0) {
+      return;
+    }
     const gridDimShrinkAmount = Math.floor(
       secondsSinceStart / gameConfig.secondsPerGridShrink
     );

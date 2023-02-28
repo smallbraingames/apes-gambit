@@ -1,12 +1,14 @@
-import { Game } from "../../types";
+import { BR, Game } from "../../types";
+
 import { Network } from "../../../network/types";
 import { Subscription } from "rxjs";
 import { defineComponentSystemUnsubscribable } from "../../utils/defineComponentSystemUnsubscribable";
-import overlayShrinkingGridTiles from "../../utils/tilemap/overlayShrinkingGridTiles";
+import overlayShrinkingGridBoundary from "../../utils/tilemap/overlayShrinkingGridBoundary";
 
 const createBRGridShrinkSystem = (
   network: Network,
-  game: Game
+  game: Game,
+  br: BR
 ): Subscription[] => {
   const { godEntityIndex } = network;
   const {
@@ -23,7 +25,7 @@ const createBRGridShrinkSystem = (
       if (gridDim === undefined) {
         return;
       }
-      overlayShrinkingGridTiles(godEntityIndex, gridDim, BR.objectRegistry);
+      overlayShrinkingGridBoundary(BR, godEntityIndex, gridDim);
     },
     { runOnInit: true }
   );
