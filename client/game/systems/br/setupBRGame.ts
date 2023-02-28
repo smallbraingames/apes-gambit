@@ -7,12 +7,14 @@ import {
 } from "../../constants";
 import {
   EntityID,
+  HasValue,
   getComponentValue,
   getComponentValueStrict,
 } from "@latticexyz/recs";
 import { Game, Scene } from "../../types";
 
 import { Network } from "../../../network/types";
+import createBRPieceSpriteManager from "../../utils/pieces/createBRPieceSpriteManager";
 import createBananaMananger from "../../utils/tilemap/createBananaManager";
 import createChessBoardTilemap from "../../utils/tilemap/createChessBoardTilemap";
 import createMoveValidator from "../../utils/validation/createMoveValidator";
@@ -29,7 +31,7 @@ const setupBRGame = async (network: Network, scene: Scene, game: Game) => {
   const {
     godEntityIndex,
     world,
-    components: { BRGame },
+    components: { BRGame, BRInGame, BRIsAlive },
   } = network;
   const gameEntity = getComponentValue(EmbodiedBRGameEntity, godEntityIndex)
     ?.value as EntityID | undefined;
@@ -61,26 +63,47 @@ const setupBRGame = async (network: Network, scene: Scene, game: Game) => {
     tilemap
   );
 
-  // Setup banana manager
+  // Setup Managers
   const bananaManager = createBananaMananger();
   await bananaManager.setup(network, game, gameEntity, gameConfig, scene);
   bananaManager.placeBananas(tilemap);
-
   const moveValidator = createMoveValidator(DEFAULT_MOVE_VALIDATOR_CONFIG);
   const speechBubbleManager = createSpeechBubbleManager(scene);
+  const tileOverlayManager = createValidMoveTileOverlayManager(
+    network,
+    game,
+    scene,
+    moveValidator,
+    gameEntity
+  );
+  const rechargeOverlayManager = createRechargeOverlayManager(
+    network,
+    game,
+    scene
+  );
+  const pieceSpriteManager = createBRPieceSpriteManager(
+    network,
+    game,
+    scene,
+    tileOverlayManager,
+    rechargeOverlayManager,
+    bananaManager
+  );
+
+  const IN_GAME_CONSTRAINTS = [
+    // @ts-ignore
+    HasValue(BRInGame, { value: gameEntity }),
+    HasValue(BRIsAlive, { value: true }),
+  ];
 
   const brContext = {
     bananaManager,
     moveValidator: createMoveValidator(DEFAULT_MOVE_VALIDATOR_CONFIG),
-    rechargeOverlayManager: createRechargeOverlayManager(network, game, scene),
-    tileOverlayManager: createValidMoveTileOverlayManager(
-      network,
-      game,
-      scene,
-      moveValidator,
-      gameEntity
-    ),
+    rechargeOverlayManager,
+    tileOverlayManager,
     speechBubbleManager,
+    pieceSpriteManager,
+    IN_GAME_CONSTRAINTS,
   };
 
   setupBRSystems(network, game, brContext);
