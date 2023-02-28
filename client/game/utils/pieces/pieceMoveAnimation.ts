@@ -21,7 +21,7 @@ export const playPieceMoveAnimation = async (
   gameObject: Phaser.GameObjects.Sprite,
   position: Coord,
   pieceType: PieceType,
-  isEnemy: boolean
+  isActivePiece: boolean
 ) => {
   // Don't emit trails for now
   // const particles = scene.add.particles(Assets.ChessTileset, undefined, {
@@ -36,7 +36,7 @@ export const playPieceMoveAnimation = async (
   // emitter.startFollow(gameObject);
 
   gameObject.setTexture(
-    getAssetKeyForPiece(pieceType, PieceState.MOVE, isEnemy)
+    getAssetKeyForPiece(pieceType, PieceState.MOVE, isActivePiece)
   );
   const animationDuration = getMoveAnimationDuration(
     { x: gameObject.x, y: gameObject.y },
@@ -66,7 +66,7 @@ export const playPieceMoveAnimation = async (
     ),
   ]);
   gameObject.setTexture(
-    getAssetKeyForPiece(pieceType, PieceState.IDLE, isEnemy)
+    getAssetKeyForPiece(pieceType, PieceState.IDLE, isActivePiece)
   );
   gameObject.setPosition(position.x, position.y);
 
