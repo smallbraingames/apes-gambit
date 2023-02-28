@@ -11,6 +11,7 @@ import { Game, Scene } from "../../types";
 import { Network } from "../../../network/types";
 import createChessBoardTilemap from "../../utils/tilemap/createChessBoardTilemap";
 import createEmbodiedBRGameEntrance from "../../utils/createEmbodiedBRGameEntrance";
+import createLobbyPieceSpriteManager from "../../utils/pieces/createLobbySpriteManager";
 import createMoveValidator from "../../utils/validation/createMoveValidator";
 import createSpeechBubbleManager from "../../utils/chat/createSpeechBubbleManager";
 import createValidMoveTileOverlayManager from "../../utils/validation/createValidMoveTileOverlayManager";
@@ -36,16 +37,25 @@ const setupLobbyGame = (network: Network, scene: Scene, game: Game) => {
 
   const moveValidator = createMoveValidator(DEFAULT_MOVE_VALIDATOR_CONFIG);
   const speechBubbleManager = createSpeechBubbleManager(scene);
+  const tileOverlayManager = createValidMoveTileOverlayManager(
+    network,
+    game,
+    scene,
+    moveValidator
+  );
+  const pieceSpriteManager = createLobbyPieceSpriteManager(
+    network,
+    game,
+    scene,
+    tileOverlayManager,
+    speechBubbleManager
+  );
 
   const lobbyContext = {
     moveValidator,
-    tileOverlayManager: createValidMoveTileOverlayManager(
-      network,
-      game,
-      scene,
-      moveValidator
-    ),
+    tileOverlayManager,
     speechBubbleManager,
+    pieceSpriteManager,
   };
 
   const positions = createEmbodiedBRGameEntrance(
