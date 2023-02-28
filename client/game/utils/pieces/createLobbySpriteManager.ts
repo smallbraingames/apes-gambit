@@ -73,7 +73,9 @@ const createLobbyPieceSpriteManager = (
     piece: EntityIndex,
     pieceType: PieceType
   ) => {
+    validMoveTileOverlayManager.clearValidMoveOverlays();
     pieceSpriteManager.switchType(piece, pieceType);
+    validMoveTileOverlayManager.setValidMoveOverlays();
   };
 
   const animateSpeechBubble = (piece: EntityIndex, message: string) => {
