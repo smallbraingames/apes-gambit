@@ -76,6 +76,7 @@ const createBananaMananger = () => {
       ) *
         10 ** PERLIN_DIGITS
     );
+
     return height >= gameConfig.perlinThresholdBanana;
   };
 

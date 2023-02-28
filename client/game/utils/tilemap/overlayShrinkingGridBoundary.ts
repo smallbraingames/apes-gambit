@@ -7,38 +7,51 @@ import {
   TILE_WIDTH,
 } from "../../constants";
 import { Coord, tile } from "@latticexyz/utils";
+import { tileCoordToPixelCoord, tween } from "@latticexyz/phaserx";
 
 import { EntityIndex } from "@latticexyz/recs";
 import { Scene } from "../../types";
-import { tileCoordToPixelCoord } from "@latticexyz/phaserx";
 
 let previouslyUpdatedDim: number;
 
-const addBoundarySprite = (
+const addBoundarySprite = async (
   scene: Scene,
   tileCoord: Coord,
   godEntityIndex: EntityIndex
 ) => {
   const { objectRegistry, scene: phaserScene } = scene;
   const { x, y } = tileCoordToPixelCoord(tileCoord, TILE_WIDTH, TILE_HEIGHT);
-  const boundaryImage = phaserScene.add.image(x, y, Assets.Boundary);
+  const boundaryImage = phaserScene.add.sprite(x, y, Assets.Boundary);
   boundaryImage.setOrigin(0, 0);
   boundaryImage.setDepth(RenderDepth.BOUNDARY);
+  const finalY = y + TILE_HEIGHT / 2 - boundaryImage.height / 1.5;
   boundaryImage.setPosition(
     x + TILE_WIDTH / 2 - boundaryImage.width / 2,
-    y + TILE_HEIGHT / 2 - boundaryImage.height
+    finalY - scene.camera.phaserCamera.displayHeight
   );
-  objectRegistry.gameObjectRegistry.set(
-    godEntityIndex,
-    `${BOUNDARY_SPRITE_ID}-${x}-${y}`,
-    boundaryImage
-  );
+  tween(
+    {
+      targets: boundaryImage,
+      duration: 500,
+      props: {
+        y: finalY,
+      },
+      ease: Phaser.Math.Easing.Sine.In,
+    },
+    { keepExistingTweens: true }
+  ),
+    objectRegistry.gameObjectRegistry.set(
+      godEntityIndex,
+      `${BOUNDARY_SPRITE_ID}-${x}-${y}`,
+      boundaryImage
+    );
 };
 
 const overlayShrinkingGridBoundary = (
   scene: Scene,
   godEntityIndex: EntityIndex,
-  gridDim: number
+  gridDim: number,
+  cleanupTile: (tileCoord: Coord) => void
 ) => {
   const { objectRegistry } = scene;
   const tilemap = objectRegistry.tilemapRegistry.get(
@@ -70,6 +83,7 @@ const overlayShrinkingGridBoundary = (
   previouslyUpdatedDim = gridDim;
   tilesToChange.forEach((tile) => {
     addBoundarySprite(scene, tile, godEntityIndex);
+    cleanupTile(tile);
   });
 };
 
