@@ -58,9 +58,9 @@ export const playPieceMoveAnimation = async (
         targets: sprite,
         duration: animationDuration / 2,
         props: {
-          angle: 5,
+          angle: 10,
         },
-        ease: Phaser.Math.Easing.Sine.InOut,
+        ease: Phaser.Math.Easing.Bounce.Out,
         yoyo: true,
       },
       { keepExistingTweens: true }
