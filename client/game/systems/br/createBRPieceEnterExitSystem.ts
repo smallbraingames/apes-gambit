@@ -35,7 +35,7 @@ const createBRPieceEnterExitSystem = (
   );
 
   defineExitSystem(world, IN_GAME_CONSTRAINTS, async (update) => {
-    await pieceSpriteManager.animateRemovePiece(update.entity);
+    // await pieceSpriteManager.animateRemovePiece(update.entity);
   });
 
   return [];

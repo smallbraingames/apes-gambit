@@ -5,7 +5,12 @@ import {
   TILE_HEIGHT,
   TILE_WIDTH,
 } from "../../constants";
-import { Coord, tileCoordToPixelCoord, tween } from "@latticexyz/phaserx";
+import {
+  Coord,
+  removeAllTweens,
+  tileCoordToPixelCoord,
+  tween,
+} from "@latticexyz/phaserx";
 import { PieceSpriteManager, PieceState, Scene } from "../../types";
 
 import { EntityIndex } from "@latticexyz/recs";
@@ -79,46 +84,5 @@ export const playPieceMoveAnimation = async (
   pieceSpriteManager.moveTo(entityIndex, tileCoord);
   emitter.stopFollow();
   emitter.stop();
-};
-
-export const playPieceAttackAnimation = async (
-  gameObject: Phaser.GameObjects.Sprite,
-  position: Coord,
-  pieceType: PieceType,
-  isEnemy: boolean
-) => {
-  gameObject.setTexture(
-    getAssetKeyForPiece(pieceType, PieceState.ATTACK, isEnemy)
-  );
-  const animationDuration = getMoveAnimationDuration(
-    { x: gameObject.x, y: gameObject.y },
-    position
-  );
-  await Promise.all([
-    tween(
-      {
-        targets: gameObject,
-        duration: animationDuration / 2,
-        props: {
-          angle: 40,
-        },
-        ease: Phaser.Math.Easing.Sine.InOut,
-        yoyo: true,
-      },
-      { keepExistingTweens: true }
-    ),
-    tween(
-      {
-        targets: gameObject,
-        duration: animationDuration,
-        props: { x: position.x, y: position.y },
-        ease: Phaser.Math.Easing.Sine.InOut,
-      },
-      { keepExistingTweens: true }
-    ),
-  ]);
-  gameObject.setTexture(
-    getAssetKeyForPiece(pieceType, PieceState.IDLE, isEnemy)
-  );
-  gameObject.setPosition(position.x, position.y);
+  particles.destroy();
 };
