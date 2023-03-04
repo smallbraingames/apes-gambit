@@ -53,7 +53,7 @@ const createLobbyPieceSpriteManager = (
       piece
     );
     removeAllTweens(sprite);
-    await playPieceMoveAnimation(pieceSpriteManager, piece, tileCoord);
+    await playPieceMoveAnimation(pieceSpriteManager, piece, tileCoord, scene);
     validMoveTileOverlayManager.setValidMoveOverlays();
     loopPieceIdleAnimation(
       pieceSpriteManager,
