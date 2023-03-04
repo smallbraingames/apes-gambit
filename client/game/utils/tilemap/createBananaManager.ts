@@ -23,6 +23,7 @@ import { tileCoordToPixelCoord, tween } from "@latticexyz/phaserx";
 import { Coord } from "@latticexyz/utils";
 import { Network } from "../../../network/types";
 import { getEntityIndexFromEntity } from "../resolveEntity";
+import { getMoveAnimationDuration } from "../pieces/pieceMoveAnimation";
 import setDepthFromCoord from "../setDepthFromCoord";
 
 const PERLIN_DIGITS = 3;
@@ -131,7 +132,7 @@ const createBananaMananger = () => {
       position.x + TILE_WIDTH / 2 - bananaSprite.width / 2,
       position.y + TILE_HEIGHT / 2 - bananaSprite.height / 2 - 250
     );
-    setDepthFromCoord(bananaSprite, -TILE_HEIGHT);
+    setDepthFromCoord(bananaSprite, +TILE_HEIGHT);
     tween(
       {
         targets: bananaSprite,
@@ -175,7 +176,6 @@ const createBananaMananger = () => {
 
   const removeBananaAtPosition = (position: Coord) => {
     const bananaEntity = getBananaEntityAtPosition(position);
-    console.log(bananaEntity);
     if (!bananaEntity) {
       console.warn(
         "Cannot remove banana at position since no banana entity found",
@@ -184,6 +184,27 @@ const createBananaMananger = () => {
       return;
     }
     removeBanana(bananaEntity);
+  };
+
+  const animateRemoveBanana = async (entityIndex: EntityIndex) => {
+    const {
+      camera,
+      objectRegistry: { gameObjectRegistry },
+    } = scene;
+    const banana = gameObjectRegistry.get(entityIndex, BANANA_SPRITE_ID);
+    const x = camera.phaserCamera.worldView.left;
+    const y = camera.phaserCamera.worldView.top;
+    await tween(
+      {
+        // @ts-ignore
+        targets: banana,
+        duration: 700,
+        props: { x, y, angle: 180 },
+        ease: Phaser.Math.Easing.Sine.InOut,
+      },
+      { keepExistingTweens: false }
+    );
+    removeBanana(entityIndex);
   };
 
   const removeBanana = (entityIndex: EntityIndex) => {
@@ -214,6 +235,8 @@ const createBananaMananger = () => {
     placeBananas,
     removeBanana,
     removeBananaAtPosition,
+    getBananaEntityAtPosition,
+    animateRemoveBanana,
   };
 };
 
