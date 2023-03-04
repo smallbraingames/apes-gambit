@@ -157,11 +157,15 @@ const createValidMoveTileOverlayManager = (
       TILE_WIDTH,
       TILE_HEIGHT
     );
-    const overlay = phaserScene.add.rectangle(
+    const overlay = phaserScene.add.ellipse(
       x + TILE_WIDTH / 2,
       y + TILE_HEIGHT / 2,
-      TILE_WIDTH,
-      TILE_HEIGHT,
+      tileConfig.type === TileOverlayType.TAKE
+        ? TILE_WIDTH / 1.2
+        : TILE_WIDTH / 3,
+      tileConfig.type === TileOverlayType.TAKE
+        ? TILE_HEIGHT / 1.2
+        : TILE_HEIGHT / 3,
       getTileColor(tileConfig.type),
       1
     );
