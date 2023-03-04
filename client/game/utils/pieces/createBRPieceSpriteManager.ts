@@ -8,6 +8,7 @@ import {
 } from "../../types";
 import { EntityIndex, getComponentValueStrict } from "@latticexyz/recs";
 import { Network, PieceType } from "../../../network/types";
+import { removeAllTweens, tween } from "@latticexyz/phaserx";
 
 import { Coord } from "@latticexyz/utils";
 import { PIECE_SPRITE_ID } from "../../constants";
@@ -15,7 +16,6 @@ import clearValidMoveOverlaysIfNecessary from "./clearValidMoveOverlaysIfNecessa
 import createPieceSpriteManager from "./createPieceSpriteManager";
 import loopPieceIdleAnimation from "./loopPieceIdleAnimation";
 import { playPieceMoveAnimation } from "./pieceMoveAnimation";
-import { removeAllTweens } from "@latticexyz/phaserx";
 
 const LOOP_IDLE_HEIGHT = 130;
 const LOOP_IDLE_DURATION = 300;
@@ -66,7 +66,7 @@ const createBRPieceSpriteManager = (
     const sprite = pieceSpriteManager.getSprite(piece);
 
     removeAllTweens(sprite);
-    await playPieceMoveAnimation(pieceSpriteManager, piece, tileCoord);
+    await playPieceMoveAnimation(pieceSpriteManager, piece, tileCoord, scene);
 
     runRechargeAnimationIfNecessary(piece);
     loopPieceIdleAnimation(
@@ -79,7 +79,7 @@ const createBRPieceSpriteManager = (
 
   const animateBananaPickUp = async (piece: EntityIndex, tileCoord: Coord) => {
     await animateMoveTo(piece, tileCoord);
-    await pickUpBanana(tileCoord);
+    await pickUpBanana(piece, tileCoord);
   };
 
   const animateRemovePiece = async (piece: EntityIndex) => {
@@ -108,7 +108,28 @@ const createBRPieceSpriteManager = (
 
   /// ======= Internal =======
 
-  const pickUpBanana = (tileCoord: Coord) => {
+  const pickUpBanana = async (piece: EntityIndex, tileCoord: Coord) => {
+    bananaManager.animateRemoveBanana(
+      bananaManager.getBananaEntityAtPosition(tileCoord)!
+    );
+    const sprite = pieceSpriteManager.getSprite(piece);
+    removeAllTweens(sprite);
+    await tween(
+      {
+        targets: sprite,
+        duration: 200,
+        props: { x: sprite.x, y: sprite.y - 400 },
+        yoyo: true,
+        ease: Phaser.Math.Easing.Sine.InOut,
+      },
+      { keepExistingTweens: true }
+    );
+    loopPieceIdleAnimation(
+      pieceSpriteManager,
+      piece,
+      LOOP_IDLE_HEIGHT,
+      LOOP_IDLE_DURATION
+    );
     bananaManager.removeBananaAtPosition(tileCoord);
   };
 

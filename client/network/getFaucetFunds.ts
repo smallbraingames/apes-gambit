@@ -14,7 +14,7 @@ const getFaucetFunds = async () => {
 const isPlayerBroke = async (jsonRpcUrl: string): Promise<boolean> => {
   const provider = new JsonRpcProvider(jsonRpcUrl);
   const balance = await provider.getBalance(getBurnerWallet().address);
-  return balance.lte(parseEther("0.05"));
+  return balance.lte(parseEther("0.5"));
 };
 
 export const getFaucetFundsIfNecessary = async (jsonRpcUrl: string) => {
