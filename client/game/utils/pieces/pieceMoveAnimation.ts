@@ -1,11 +1,12 @@
 import {
   Assets,
   MOVE_ANIMATION_DURATION,
+  RenderDepth,
   TILE_HEIGHT,
   TILE_WIDTH,
 } from "../../constants";
 import { Coord, tileCoordToPixelCoord, tween } from "@latticexyz/phaserx";
-import { PieceSpriteManager, PieceState } from "../../types";
+import { PieceSpriteManager, PieceState, Scene } from "../../types";
 
 import { EntityIndex } from "@latticexyz/recs";
 import { PieceType } from "../../../network/types";
@@ -25,34 +26,39 @@ export const getMoveAnimationDuration = (
 export const playPieceMoveAnimation = async (
   pieceSpriteManager: PieceSpriteManager,
   entityIndex: EntityIndex,
-  tileCoord: Coord
+  tileCoord: Coord,
+  scene: Scene
 ) => {
   // Don't emit trails for now
-  // const particles = scene.add.particles(Assets.ChessTileset, undefined, {
-  //   speed: { min: 20, max: 100 },
-  //   angle: { min: 0, max: 360 },
-  //   scale: { start: 1, end: 0 },
-  //   alpha: { start: 0, end: 0.1 },
-  //   lifespan: 2000,
-  // });
-
-  // const emitter = particles.emitters.first;
-  // emitter.startFollow(gameObject);
-
+  const { scene: phaserScene } = scene;
   const sprite = pieceSpriteManager.getSprite(entityIndex);
   const position = tileCoordToPixelCoord(tileCoord, TILE_WIDTH, TILE_HEIGHT);
-  pieceSpriteManager.switchState(entityIndex, PieceState.MOVE);
   const animationDuration = getMoveAnimationDuration(
     { x: sprite.x, y: sprite.y },
     position
   );
+
+  const particles = phaserScene.add.particles(Assets.ParticleTrail, undefined, {
+    speed: { min: 10, max: 100 },
+    angle: { min: 0, max: 0 },
+    scale: { start: 2, end: 0 },
+    alpha: { start: 1, end: 0 },
+    lifespan: animationDuration,
+  });
+
+  const emitter = particles.emitters.first;
+  emitter.startFollow(sprite, sprite.width / 2, sprite.height / 2);
+  particles.setDepth(RenderDepth.TILE_OVERLAY + 1);
+
+  pieceSpriteManager.switchState(entityIndex, PieceState.MOVE);
+
   await Promise.all([
     tween(
       {
         targets: sprite,
         duration: animationDuration / 2,
         props: {
-          angle: 40,
+          angle: 5,
         },
         ease: Phaser.Math.Easing.Sine.InOut,
         yoyo: true,
@@ -71,8 +77,8 @@ export const playPieceMoveAnimation = async (
   ]);
   pieceSpriteManager.switchState(entityIndex, PieceState.IDLE);
   pieceSpriteManager.moveTo(entityIndex, tileCoord);
-  // emitter.stopFollow();
-  // emitter.stop();
+  emitter.stopFollow();
+  emitter.stop();
 };
 
 export const playPieceAttackAnimation = async (
