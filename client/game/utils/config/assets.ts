@@ -83,6 +83,11 @@ const assets: { [key: string]: Asset } = {
     key: Assets.TempleFull,
     path: "assets/sprites/temple-full.png",
   },
+  [Assets.ParticleTrail]: {
+    type: AssetType.IMAGE,
+    key: Assets.ParticleTrail,
+    path: "assets/particles/soft.png",
+  },
   ...getPieceAssets(),
 };
 

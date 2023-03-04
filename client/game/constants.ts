@@ -56,6 +56,7 @@ export enum Assets {
   Banana = "Banana",
   UnderBanana = "UnderBanana",
   TempleFull = "TempleFull",
+  ParticleTrail = "ParticleTrail",
 }
 
 export enum Sprites {}
