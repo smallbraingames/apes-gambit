@@ -75,6 +75,7 @@ const createBRPieceSpriteManager = (
       LOOP_IDLE_HEIGHT,
       LOOP_IDLE_DURATION
     );
+    const { camera } = scene;
   };
 
   const animateBananaPickUp = async (piece: EntityIndex, tileCoord: Coord) => {
@@ -83,8 +84,22 @@ const createBRPieceSpriteManager = (
   };
 
   const animateRemovePiece = async (piece: EntityIndex) => {
+    const { camera } = scene;
+    const x = camera.phaserCamera.worldView.right;
+    const y = camera.phaserCamera.worldView.top;
+    const taken = pieceSpriteManager.getSprite(piece);
+    removeAllTweens(taken);
+    await tween(
+      {
+        // @ts-ignore
+        targets: taken,
+        duration: 700,
+        props: { x, y, angle: 180 },
+        ease: Phaser.Math.Easing.Sine.InOut,
+      },
+      { keepExistingTweens: false }
+    );
     pieceSpriteManager.removeSprite(piece);
-    validMoveTileOverlayManager.clearValidMoveOverlays();
   };
 
   const animateSwitchType = async (
@@ -98,6 +113,11 @@ const createBRPieceSpriteManager = (
 
   const animateTake = async (taker: EntityIndex, taken: EntityIndex) => {
     await animateMoveTo(taker, getPiecePosition(taken));
+    const takerSprite = pieceSpriteManager.getSprite(taker);
+    const takenSprite = pieceSpriteManager.getSprite(taken);
+    takenSprite.setDepth(takerSprite.depth - 1);
+    const { camera } = scene;
+    camera.phaserCamera.shake(300, 0.3);
     await animateRemovePiece(taken);
   };
 
