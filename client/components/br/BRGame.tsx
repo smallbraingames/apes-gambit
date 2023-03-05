@@ -2,6 +2,7 @@ import BRControls from "./BRControls";
 import CenterActivePieceOnLoad from "../CenterActivePieceOnLoad";
 import { GameContext } from "../../context/GameContext";
 import GameEnd from "./GameEnd";
+import Info from "./Info";
 import { NetworkContext } from "../../context/NetworkContext";
 import Pieces from "./Pieces";
 import { Scenes } from "../../game/constants";
@@ -19,7 +20,7 @@ const BRGame = () => {
           <BRControls game={game} gameEntity={gameEntity} network={network} />
         )}
       </div>
-      <div className="absolute right-0 p-4">
+      <div className="absolute right-0 p-4 flex flex-col gap-4">
         {network && gameEntity && activePiece && (
           <Pieces
             network={network}
@@ -27,6 +28,7 @@ const BRGame = () => {
             activePiece={activePiece}
           />
         )}
+        <Info />
       </div>
       <GameEnd />
     </>
