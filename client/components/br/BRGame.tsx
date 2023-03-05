@@ -2,7 +2,7 @@ import BRControls from "./BRControls";
 import CenterActivePieceOnLoad from "../CenterActivePieceOnLoad";
 import { GameContext } from "../../context/GameContext";
 import GameEnd from "./GameEnd";
-import Info from "./Info";
+import Info from "../Info";
 import { NetworkContext } from "../../context/NetworkContext";
 import Pieces from "./Pieces";
 import { Scenes } from "../../game/constants";

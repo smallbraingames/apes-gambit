@@ -8,6 +8,7 @@ import BRGameIndicator from "./BRGameIndicator";
 import CenterActivePieceOnLoad from "../CenterActivePieceOnLoad";
 import ChatInput from "./Chat";
 import { GameContext } from "../../context/GameContext";
+import Info from "../Info";
 import { NetworkContext } from "../../context/NetworkContext";
 import { Scenes } from "../../game/constants";
 
@@ -25,13 +26,16 @@ const Lobby = () => {
         <div className="absolute right-0 p-4 h-full">
           <CenterActivePieceOnLoad scene={Scenes.Lobby} />
           {network && game && activePiece && (
-            <div className="h-full flex flex-col items-end">
+            <div className="h-full flex flex-col items-end gap-2">
               <div>
                 <BRGameIndicator
                   gameEntity={gameEntity}
                   network={network}
                   activePiece={activePiece}
                 />
+                <div className="mt-2">
+                  <Info />
+                </div>
               </div>
             </div>
           )}
