@@ -2,6 +2,7 @@
 import { EntityID, EntityIndex } from "@latticexyz/recs";
 import { Network, PieceType } from "../../network/types";
 
+import { CONTROLLER_COMPONENT_CLASS_NAME } from "../../utils/disableControllers";
 import { GameContext } from "../../context/GameContext";
 import { NetworkContext } from "../../context/NetworkContext";
 import { getEntityFromEntityIndex } from "../../game/utils/resolveEntity";
@@ -82,19 +83,21 @@ const UpgradePiece = () => {
         game !== undefined &&
         activePiece &&
         gameEntity && (
-          <div className="container p-4">
-            <h1 className="mb-4"> SELECT A PIECE </h1>
-            <div className="grid grid-cols-2 gap-2">
-              {pieceTypes.map((pieceType) => (
-                <div className="group upgrade-piece" key={pieceType}>
-                  <UpgradePieceButton
-                    pieceType={pieceType}
-                    network={network.network!}
-                    gameEntity={gameEntity!}
-                    activePiece={activePiece!}
-                  />
-                </div>
-              ))}
+          <div className={CONTROLLER_COMPONENT_CLASS_NAME}>
+            <div className="container p-4">
+              <h1 className="mb-4"> SELECT A PIECE </h1>
+              <div className="grid grid-cols-2 gap-2">
+                {pieceTypes.map((pieceType) => (
+                  <div className="group upgrade-piece" key={pieceType}>
+                    <UpgradePieceButton
+                      pieceType={pieceType}
+                      network={network.network!}
+                      gameEntity={gameEntity!}
+                      activePiece={activePiece!}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
