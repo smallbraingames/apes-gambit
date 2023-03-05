@@ -20,7 +20,7 @@ const BRGame = () => {
           <BRControls game={game} gameEntity={gameEntity} network={network} />
         )}
       </div>
-      <div className="absolute right-0 p-4 flex flex-col gap-4">
+      <div className="absolute right-0 p-4 flex flex-col gap-2">
         {network && gameEntity && activePiece && (
           <Pieces
             network={network}
