@@ -54,7 +54,6 @@ const moveCameraFromMouse = (camera: Camera) => {
 
       event.target?.nodeName === "IMG"
     ) {
-      console.log("not movings");
       return;
     }
     const movement = getCameraMovementFromPointerPosition(event as MouseEvent);
