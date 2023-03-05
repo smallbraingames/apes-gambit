@@ -9,6 +9,7 @@ import createBRMovementInputSystem from "./br/input/createBRMovementInputSystem"
 import createBRPieceEnterExitSystem from "./br/createBRPieceEnterExitSystem";
 import createBRPiecePositionContextSystem from "./br/createBRPiecePositionContextSystem";
 import createBRPieceTypeSystem from "./br/createBRPieceTypeSystem";
+import createCameraSystem from "./lobby/input/createCameraSystem";
 import createChatSystem from "./lobby/createChatSystem";
 import createMovementInputSystem from "./lobby/input/createMovementInputSystem";
 import createPieceEnterExitSystem from "./lobby/createPieceEnterExitSystem";
@@ -46,6 +47,7 @@ export const setupLobbySystems = (
       createPiecePositionSystem,
       createPieceTypeSystem,
       createChatSystem,
+      createCameraSystem,
     ],
     lobby
   );
