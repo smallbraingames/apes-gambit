@@ -30,8 +30,13 @@ const BRControls = (props: {
 
   return (
     <>
-      <div className={CONTROLLER_COMPONENT_CLASS_NAME}>
-        <div className="h-screen py-4 px-4 flex flex-col gap-2">
+      <div>
+        <div
+          className={
+            "h-screen my-4 mx-4 flex flex-col gap-2 " +
+            CONTROLLER_COMPONENT_CLASS_NAME
+          }
+        >
           {game?.status === GameStatus.NOT_STARTED ? (
             <div className="container p-4 mb-64">
               <h1 className="font-bold text-lg">
