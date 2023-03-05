@@ -6,9 +6,9 @@ import {
   TILE_HEIGHT,
   TILE_WIDTH,
 } from "../../constants";
-import { Coord, tile } from "@latticexyz/utils";
 import { tileCoordToPixelCoord, tween } from "@latticexyz/phaserx";
 
+import { Coord } from "@latticexyz/utils";
 import { EntityIndex } from "@latticexyz/recs";
 import { Scene } from "../../types";
 

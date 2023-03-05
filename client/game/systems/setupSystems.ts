@@ -2,6 +2,7 @@ import { BR, Game, Lobby } from "../types";
 
 import { Network } from "../../network/types";
 import { Subscription } from "rxjs";
+import createBRCenterCameraSystem from "./br/input/createBRCenterCameraSystem";
 import createBRChatSystem from "./br/createBRChatSystem";
 import createBRGridShrinkSystem from "./br/createBRGridShrinkSystem";
 import createBRMovementInputSystem from "./br/input/createBRMovementInputSystem";
@@ -62,6 +63,7 @@ export const setupBRSystems = (network: Network, game: Game, br: BR) => {
       createBRPieceEnterExitSystem,
       createBRGridShrinkSystem,
       createBRChatSystem,
+      createBRCenterCameraSystem,
     ],
     br
   );
