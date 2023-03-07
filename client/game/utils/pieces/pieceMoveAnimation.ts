@@ -5,17 +5,10 @@ import {
   TILE_HEIGHT,
   TILE_WIDTH,
 } from "../../constants";
-import {
-  Coord,
-  removeAllTweens,
-  tileCoordToPixelCoord,
-  tween,
-} from "@latticexyz/phaserx";
+import { Coord, tileCoordToPixelCoord, tween } from "@latticexyz/phaserx";
 import { PieceSpriteManager, PieceState, Scene } from "../../types";
 
 import { EntityIndex } from "@latticexyz/recs";
-import { PieceType } from "../../../network/types";
-import { getAssetKeyForPiece } from "../config/assets";
 
 export const getMoveAnimationDuration = (
   position: Coord,
