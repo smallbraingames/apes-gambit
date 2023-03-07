@@ -80,7 +80,11 @@ const createBRPieceSpriteManager = (
 
   const animateBananaPickUp = async (piece: EntityIndex, tileCoord: Coord) => {
     await animateMoveTo(piece, tileCoord);
-    await pickUpBanana(piece, tileCoord);
+    if (pieceSpriteManager.isActivePiece(piece)) {
+      await pickUpBanana(piece, tileCoord);
+    } else {
+      bananaManager.removeBananaAtPosition(tileCoord);
+    }
   };
 
   const animateRemovePiece = async (piece: EntityIndex) => {

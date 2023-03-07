@@ -33,10 +33,11 @@ const joinMainGame = async (
   );
   if (game && game.status !== GameStatus.NOT_STARTED) {
     console.log("Not attempting to join game that has not started");
-    return;
+    return false;
   }
   await revokeGameControllersIfNecessary(network, activePiece);
   await joinGame(activePiece, gameEntity, network);
+  return true;
 };
 
 export default joinMainGame;
