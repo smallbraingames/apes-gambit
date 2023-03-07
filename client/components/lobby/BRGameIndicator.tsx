@@ -78,11 +78,21 @@ const BRGameIndicator = (props: {
     );
     joinGameTimeout = setTimeout(async () => {
       setJoiningGame(JoiningGameState.JOINING);
-      await joinMainGame(props.network, props.gameEntity!, props.activePiece);
+      const joinedGame = await joinMainGame(
+        props.network,
+        props.gameEntity!,
+        props.activePiece
+      );
       setJoiningGame(JoiningGameState.JOINED);
-      setComponent(game!.components.ActiveScene, props.network.godEntityIndex, {
-        value: Scenes.BR,
-      });
+      if (joinedGame) {
+        setComponent(
+          game!.components.ActiveScene,
+          props.network.godEntityIndex,
+          {
+            value: Scenes.BR,
+          }
+        );
+      }
     }, timeout * 1000);
     () => {
       if (joinGameTimeout) {
