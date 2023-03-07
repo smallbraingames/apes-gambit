@@ -75,7 +75,10 @@ const createBRPieceSpriteManager = (
       LOOP_IDLE_HEIGHT,
       LOOP_IDLE_DURATION
     );
-    const { camera } = scene;
+
+    if (!pieceSpriteManager.isActivePiece(piece)) {
+      validMoveTileOverlayManager.setValidMoveOverlays();
+    }
   };
 
   const animateBananaPickUp = async (piece: EntityIndex, tileCoord: Coord) => {
