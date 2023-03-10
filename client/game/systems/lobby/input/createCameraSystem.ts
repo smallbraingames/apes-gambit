@@ -24,6 +24,8 @@ const createCameraSystem = (
     },
   } = game;
 
+  moveCameraOnDrag(game.scenes.Lobby);
+
   const input = createInput(scene.input);
 
   // Subscription to center game
@@ -46,8 +48,6 @@ const createCameraSystem = (
       tweenCamera(camera, x, y, 1000);
     }
   });
-
-  moveCameraOnDrag(game.scenes.Lobby);
 
   return [centerSubscription];
 };
