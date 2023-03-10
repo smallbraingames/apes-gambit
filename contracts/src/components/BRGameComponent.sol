@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
-import "solecs/Component.sol";
+import "solecs/BareComponent.sol";
 import { BRGame } from "common/BRGame.sol";
 
 uint256 constant ID = uint256(keccak256("component.BRGame"));
 
-contract BRGameComponent is Component {
-  constructor(address world) Component(world, ID) {}
+contract BRGameComponent is BareComponent {
+  constructor(address world) BareComponent(world, ID) {}
 
   function getSchema() public pure override returns (string[] memory keys, LibTypes.SchemaValue[] memory values) {
     keys = new string[](9);
