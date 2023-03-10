@@ -13,8 +13,8 @@ type BubbleConfig = {
   quote: string;
 };
 
-const BUBBLE_DISAPPEAR_TIME = 3000;
-const BUBBLE_ANIMATION_DURATION = 150;
+const BUBBLE_DISAPPEAR_TIME = 6000;
+const BUBBLE_ANIMATION_DURATION = 200;
 
 const createSpeechBubbleManager = (scene: Scene) => {
   const displayChatBubbleForPieceSprite = async (

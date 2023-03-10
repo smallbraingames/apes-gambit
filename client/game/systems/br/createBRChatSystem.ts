@@ -45,7 +45,7 @@ const createBRChatSystem = (
   defineUpdateSystem(
     world,
     // @ts-ignore
-    [...IN_GAME_CONSTRAINTS, Has(ChatComponent)],
+    [Has(ChatComponent)],
     (update) => {
       updateDisplayedChatMessages(update.entity);
     },
