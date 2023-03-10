@@ -5,13 +5,13 @@ import { createInput, tileCoordToPixelCoord } from "@latticexyz/phaserx";
 
 import { Network } from "../../../../network/types";
 import { Subscription } from "rxjs";
-import moveCameraFromMouse from "../../../utils/cameraMouseMovement";
+import { moveCameraOnDrag } from "../../../utils/cameraMouseMovement";
 import tweenCamera from "../../../utils/animations/tweenCamera";
 
 const createCameraSystem = (
   network: Network,
   game: Game,
-  _: Lobby
+  lobby: Lobby
 ): Subscription[] => {
   const {
     godEntityIndex,
@@ -47,7 +47,7 @@ const createCameraSystem = (
     }
   });
 
-  moveCameraFromMouse(camera);
+  moveCameraOnDrag(game.scenes.Lobby);
 
   return [centerSubscription];
 };

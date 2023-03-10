@@ -1,6 +1,7 @@
 // Adapted from Dark Seas (https://github.com/0xhank/dark-seas/blob/main/packages/client/src/systems/phaser/camera/registerCameraControls.ts)
 
 import { CAMERA_SCROLL_SPEED, EDGE_PIXEL_SIZE } from "../constants";
+import { Camera, createInput } from "@latticexyz/phaserx";
 import {
   Subscription,
   fromEvent,
@@ -11,10 +12,25 @@ import {
   throttleTime,
 } from "rxjs";
 
-import { Camera } from "@latticexyz/phaserx";
+import { Scene } from "../types";
 import { filterNullish } from "@latticexyz/utils";
 
-const moveCameraFromMouse = (camera: Camera) => {
+export const moveCameraOnDrag = (scene: Scene) => {
+  const { camera } = scene;
+  const input = createInput(scene.scene.input);
+  input.pointermove$.subscribe((move) => {
+    if (move.pointer.isDown) {
+      camera.phaserCamera.scrollX -=
+        (move.pointer.x - move.pointer.prevPosition.x) /
+        camera.phaserCamera.zoom;
+      camera.phaserCamera.scrollY -=
+        (move.pointer.y - move.pointer.prevPosition.y) /
+        camera.phaserCamera.zoom;
+    }
+  });
+};
+
+export const moveCameraFromMouse = (camera: Camera) => {
   const getCameraMovementFromPointerPosition = (event: MouseEvent) => {
     const cameraMovement = { x: 0, y: 0 };
     if (event.clientX < EDGE_PIXEL_SIZE) cameraMovement.x = -1;
@@ -76,5 +92,3 @@ const moveCameraFromMouse = (camera: Camera) => {
   });
   return sub;
 };
-
-export default moveCameraFromMouse;
