@@ -11,7 +11,7 @@ import tweenCamera from "../../../utils/animations/tweenCamera";
 const createBRCameraSystem = (
   network: Network,
   game: Game,
-  BR: BR
+  _: BR
 ): Subscription[] => {
   const {
     godEntityIndex,
@@ -23,6 +23,8 @@ const createBRCameraSystem = (
       BR: { scene, camera },
     },
   } = game;
+
+  moveCameraOnDrag(game.scenes.BR);
 
   const input = createInput(scene.input);
 
@@ -46,8 +48,6 @@ const createBRCameraSystem = (
       tweenCamera(camera, x, y, 1000);
     }
   });
-
-  moveCameraOnDrag(game.scenes.BR);
 
   return [centerSubscription];
 };
