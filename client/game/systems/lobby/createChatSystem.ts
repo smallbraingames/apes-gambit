@@ -48,7 +48,7 @@ const createChatSystem = (
   defineUpdateSystem(
     world,
     // @ts-ignore
-    [Has(ChatComponent), Has(PiecePosition)],
+    [Has(ChatComponent)],
     (update) => {
       updateDisplayedChatMessages(update.entity);
     },
