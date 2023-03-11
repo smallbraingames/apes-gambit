@@ -29,7 +29,7 @@ const addBoundarySprite = async (
     x + TILE_WIDTH / 2 - boundaryImage.width / 2,
     finalY - scene.camera.phaserCamera.displayHeight
   );
-  tween(
+  await tween(
     {
       targets: boundaryImage,
       duration: 500,
@@ -47,7 +47,7 @@ const addBoundarySprite = async (
     );
 };
 
-const overlayShrinkingGridBoundary = (
+const overlayShrinkingGridBoundary = async (
   scene: Scene,
   godEntityIndex: EntityIndex,
   gridDim: number,
@@ -81,10 +81,13 @@ const overlayShrinkingGridBoundary = (
     }
   }
   previouslyUpdatedDim = gridDim;
-  tilesToChange.forEach((tile) => {
-    addBoundarySprite(scene, tile, godEntityIndex);
-    cleanupTile(tile);
-  });
+  await Promise.all(
+    tilesToChange.map(async (tile) => {
+      await addBoundarySprite(scene, tile, godEntityIndex);
+      cleanupTile(tile);
+    })
+  );
+  scene.camera.phaserCamera.shake(300, 0.3);
 };
 
 export default overlayShrinkingGridBoundary;
