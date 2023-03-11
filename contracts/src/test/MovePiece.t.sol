@@ -25,7 +25,7 @@ contract MovePieceTest is MudTest {
     );
 
     // Spawn a new piece and check position
-    uint256 entityId = spawnSystem.executeTyped();
+    uint256 entityId = spawnSystem.executeTyped("test");
     Coord memory spawnPosition = piecePositionComponent.getValue(entityId);
     assertEq(spawnPosition.x, 0);
     assertEq(spawnPosition.y, 0);

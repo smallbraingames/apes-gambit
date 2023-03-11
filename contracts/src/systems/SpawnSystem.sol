@@ -7,6 +7,7 @@ import { Coord } from "std-contracts/components/CoordComponent.sol";
 import { OwnerComponent, ID as OwnerComponentID } from "components/OwnerComponent.sol";
 import { PieceTypeComponent, ID as PieceTypeComponentID } from "components/PieceTypeComponent.sol";
 import { PiecePositionComponent, ID as PiecePositionComponentID } from "components/PiecePositionComponent.sol";
+import { PieceNameComponent, ID as PieceNameComponentID } from "components/PieceNameComponent.sol";
 
 uint256 constant ID = uint256(keccak256("system.Spawn"));
 
@@ -14,7 +15,9 @@ contract SpawnSystem is System {
   constructor(IWorld _world, address _components) System(_world, _components) {}
 
   /// @notice Spawns a new piece with msg.sender as owner
-  function execute(bytes memory) public returns (bytes memory) {
+  function execute(bytes memory arguments) public returns (bytes memory) {
+    string memory name = abi.decode(arguments, (string));
+
     // Unique entity
     uint256 entityId = world.getUniqueEntityId();
 
@@ -26,6 +29,10 @@ contract SpawnSystem is System {
     PieceTypeComponent pieceTypeComponent = PieceTypeComponent(getAddressById(components, PieceTypeComponentID));
     pieceTypeComponent.set(entityId, PieceType.PAWN);
 
+    // Set piece name
+    PieceNameComponent pieceNameComponent = PieceNameComponent(getAddressById(components, PieceNameComponentID));
+    pieceNameComponent.set(entityId, name);
+
     // Set initial position to (0, 0)
     PiecePositionComponent piecePositionComponent = PiecePositionComponent(
       getAddressById(components, PiecePositionComponentID)
@@ -35,8 +42,8 @@ contract SpawnSystem is System {
     return abi.encode(entityId);
   }
 
-  function executeTyped() public returns (uint256) {
-    uint256 entityId = abi.decode(execute(abi.encode()), (uint256));
+  function executeTyped(string memory name) public returns (uint256) {
+    uint256 entityId = abi.decode(execute(abi.encode(name)), (uint256));
     return entityId;
   }
 }

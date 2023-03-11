@@ -4,6 +4,7 @@
     "ControllerComponent",
     "PieceTypeComponent",
     "PiecePositionComponent",
+    "PieceNameComponent",
     "BRGameComponent",
     "BRInGameComponent",
     "BRIsAliveComponent",
@@ -16,7 +17,10 @@
     { "name": "RevokeControllerSystem", "writeAccess": ["ControllerComponent"] },
     { "name": "SetControllerSystem", "writeAccess": ["ControllerComponent"] },
     { "name": "TransferOwnerSystem", "writeAccess": ["OwnerComponent"] },
-    { "name": "SpawnSystem", "writeAccess": ["OwnerComponent", "PieceTypeComponent", "PiecePositionComponent"] },
+    {
+      "name": "SpawnSystem",
+      "writeAccess": ["OwnerComponent", "PieceTypeComponent", "PiecePositionComponent", "PieceNameComponent"]
+    },
     { "name": "SetPieceTypeSystem", "writeAccess": ["PieceTypeComponent"] },
     { "name": "MovePieceSystem", "writeAccess": ["PiecePositionComponent"] },
     { "name": "BRCreateGameSystem", "writeAccess": ["BRGameComponent"] },

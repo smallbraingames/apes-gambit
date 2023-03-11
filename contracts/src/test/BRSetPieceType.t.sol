@@ -82,7 +82,7 @@ contract BRMovePieceTest is MudTest {
     address[] memory controllers = new address[](2);
     controllers[0] = system(BRMovePieceSystemID);
     controllers[1] = system(BRSetPieceTypeSystemID);
-    uint256 piece = spawnSystem.executeTyped();
+    uint256 piece = spawnSystem.executeTyped("test");
     setControllerSystem.executeTyped(piece, controllers);
     brJoinGameSystem.executeTyped(piece, game);
     return piece;
