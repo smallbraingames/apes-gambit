@@ -11,7 +11,7 @@ import { getEntityIndexFromEntity } from "../utils/resolveEntity";
 
 const setupBRGridDimComponent = (network: Network, game: Game) => {
   const {
-    components: { BRGridDimComponent, EmbodiedBRGameEntity },
+    components: { BRGridDim: BRGridDimComponent, EmbodiedBRGameEntity },
   } = game;
 
   const {

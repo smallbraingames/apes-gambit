@@ -42,6 +42,11 @@ export enum GameStatus {
   OVER = 2,
 }
 
+export enum CauseOfDeath {
+  TAKEN = 0,
+  BOUNDARY = 1,
+}
+
 export enum EntityType {
   GAME_CONFIG, // Not a piece, but rather a game configuration entity
   BR_PIECE, // A piece in the given game

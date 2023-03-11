@@ -1,5 +1,5 @@
-import { BR, Game } from "../../types";
-import { Has, HasValue, runQuery } from "@latticexyz/recs";
+import { BR, CauseOfDeath, Game } from "../../types";
+import { Has, HasValue, runQuery, setComponent } from "@latticexyz/recs";
 
 import { Coord } from "@latticexyz/utils";
 import { Network } from "../../../network/types";
@@ -19,11 +19,12 @@ const createBRGridShrinkSystem = (
   const {
     gameWorld,
     scenes: { BR },
-    components: { BRGridDimComponent },
+    components: { BRGridDim, BRPieceDeadContext },
   } = game;
 
   const { pieceSpriteManager, IN_GAME_CONSTRAINTS } = br!;
 
+  let deathOrder = 0;
   const cleanupTile = (tileCoord: Coord) => {
     const piecesAtPosition = runQuery([
       ...IN_GAME_CONSTRAINTS,
@@ -32,12 +33,16 @@ const createBRGridShrinkSystem = (
     if (piecesAtPosition.size > 0) {
       const piece = [...piecesAtPosition][0];
       pieceSpriteManager.animateRemovePiece(piece);
+      setComponent(BRPieceDeadContext, piece, {
+        order: deathOrder,
+        cause: CauseOfDeath.BOUNDARY,
+      });
     }
   };
 
   const subscription = defineComponentSystemUnsubscribable(
     gameWorld,
-    BRGridDimComponent,
+    BRGridDim,
     (update) => {
       const gridDim = update.value[0]?.value;
       if (gridDim === undefined) {

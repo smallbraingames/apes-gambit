@@ -30,7 +30,7 @@ const BRGame = () => {
         )}
         <Info />
       </div>
-      <GameEnd />
+      {network && game && <GameEnd network={network} game={game} />}
     </>
   );
 };

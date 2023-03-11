@@ -6,7 +6,8 @@ import getPieceInfo from "./getPieceInfo";
 
 export const getPieceDisplay = (
   piece: EntityIndex,
-  network: Network
+  network: Network,
+  imageSize: number = 6
 ): JSX.Element => {
   const {
     components: { PieceType },
@@ -19,7 +20,10 @@ export const getPieceDisplay = (
     <div className="flex items-center">
       <div>{getPieceOwner(piece, network).substring(0, 5)} </div>
       <div>
-        <img className="h-6 w-6" src={pieceInfo.image} />
+        <img
+          className={`h-${imageSize} w-${imageSize}`}
+          src={pieceInfo.image}
+        />
       </div>
     </div>
   );
