@@ -120,12 +120,22 @@ export async function createGame(network: Network) {
     BRRechargeTimerComponent: defineNumberComponent(gameWorld, {
       id: "BRRechargeTimer",
     }),
-    BRGridDimComponent: defineNumberComponent(gameWorld, {
+    BRGridDim: defineNumberComponent(gameWorld, {
       id: "BRGridDim",
     }),
     BRBananaComponent: defineCoordComponent(gameWorld, {
       id: "BRBananaComponent",
     }),
+    BRPieceDeadContext: defineComponent(
+      gameWorld,
+      {
+        order: Type.Number,
+        cause: Type.Number,
+      },
+      {
+        id: "BRPieceDead",
+      }
+    ),
   };
 
   const context = {

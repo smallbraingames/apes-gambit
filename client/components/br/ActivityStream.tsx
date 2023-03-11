@@ -38,7 +38,7 @@ const ActivityStream = () => {
 
     const {
       gameWorld,
-      components: { BRGridDimComponent, ChatComponent },
+      components: { BRGridDim: BRGridDimComponent, ChatComponent },
     } = game;
 
     if (!gameEntity) {

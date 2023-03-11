@@ -107,6 +107,9 @@ const createBRPieceSpriteManager = (
       { keepExistingTweens: false }
     );
     pieceSpriteManager.removeSprite(piece);
+    if (pieceSpriteManager.isActivePiece(piece)) {
+      validMoveTileOverlayManager.clearValidMoveOverlays();
+    }
   };
 
   const animateSwitchType = async (
