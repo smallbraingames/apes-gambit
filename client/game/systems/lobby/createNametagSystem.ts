@@ -27,6 +27,7 @@ const createPieceNametagSystem = (
     const pieceName = getComponentValueStrict(PieceName, piece);
     nametagManager.displayNametagForSprite(
       pieceSpriteManager.getSprite(piece),
+      piece,
       pieceName.value
     );
   };

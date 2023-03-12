@@ -82,6 +82,7 @@ const setupBRGame = async (network: Network, scene: Scene, game: Game) => {
     game,
     scene
   );
+  const nametagManager = createNametagManager(scene);
   const pieceSpriteManager = createBRPieceSpriteManager(
     network,
     game,
@@ -89,7 +90,8 @@ const setupBRGame = async (network: Network, scene: Scene, game: Game) => {
     tileOverlayManager,
     rechargeOverlayManager,
     bananaManager,
-    speechBubbleManager
+    speechBubbleManager,
+    nametagManager
   );
 
   const IN_GAME_CONSTRAINTS = [
@@ -105,7 +107,7 @@ const setupBRGame = async (network: Network, scene: Scene, game: Game) => {
     tileOverlayManager,
     speechBubbleManager,
     pieceSpriteManager,
-    nametagManager: createNametagManager(scene),
+    nametagManager,
     IN_GAME_CONSTRAINTS,
   };
 

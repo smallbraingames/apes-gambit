@@ -19,7 +19,7 @@ const createPieceEnterExitSystem = (
     components: { PiecePosition, PieceType },
   } = network;
 
-  const { pieceSpriteManager } = lobby;
+  const { pieceSpriteManager, nametagManager } = lobby;
 
   defineEnterSystem(world, [Has(PiecePosition), Has(PieceType)], (update) => {
     const piecePosition = getComponentValueStrict(PiecePosition, update.entity);
@@ -31,6 +31,7 @@ const createPieceEnterExitSystem = (
     [Has(PiecePosition), Has(PieceType)],
     async (update) => {
       await pieceSpriteManager.animateRemovePiece(update.entity);
+      nametagManager.removeNametagForPiece(update.entity);
     }
   );
 

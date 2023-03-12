@@ -28,7 +28,8 @@ const createBRPieceSpriteManager = (
   validMoveTileOverlayManager: ValidMoveTileOverlayManager,
   rechargeOverlayManager: RechargeOverlayManager,
   bananaManager: BananaManager,
-  speechBubbleManager: SpeechBubbleManager
+  speechBubbleManager: SpeechBubbleManager,
+  nametagManager: NametagManager
 ) => {
   const {
     godEntityIndex,
@@ -111,6 +112,7 @@ const createBRPieceSpriteManager = (
     if (pieceSpriteManager.isActivePiece(piece)) {
       validMoveTileOverlayManager.clearValidMoveOverlays();
     }
+    nametagManager.removeNametagForPiece(piece);
   };
 
   const animateSwitchType = async (

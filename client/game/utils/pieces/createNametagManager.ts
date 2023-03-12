@@ -1,13 +1,22 @@
+import { EntityIndex } from "@latticexyz/recs";
 import { RenderDepth } from "../../constants";
 import { Scene } from "../../types";
 
 const NAMETAG_PADDING = 30;
 const NAMETAG_HEIGHT = 140;
 
+type Nametag = {
+  back: Phaser.GameObjects.Graphics;
+  content: Phaser.GameObjects.Text;
+};
+
 const createNametagManager = (scene: Scene) => {
   const { scene: phaserScene } = scene;
+
+  const nametags: Map<EntityIndex, Nametag> = new Map();
   const displayNametagForSprite = (
     pieceSprite: Phaser.GameObjects.Sprite,
+    piece: EntityIndex,
     nametag: string
   ) => {
     const width = NAMETAG_PADDING * 2 + nametag.length * 70;
@@ -47,9 +56,20 @@ const createNametagManager = (scene: Scene) => {
     };
 
     phaserScene.events.on("postupdate", updateNametagPosition);
+
+    nametags.set(piece, { back, content });
   };
 
-  return { displayNametagForSprite };
+  const removeNametagForPiece = (piece: EntityIndex) => {
+    const nametag = nametags.get(piece);
+    if (nametag) {
+      nametag.back.destroy();
+      nametag.content.destroy();
+      nametags.delete(piece);
+    }
+  };
+
+  return { displayNametagForSprite, removeNametagForPiece };
 };
 
 export default createNametagManager;
