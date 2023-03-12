@@ -29,7 +29,7 @@ contract BRJoinGameTest is MudTest {
     SetControllerSystem setControllerSystem = SetControllerSystem(system(SetControllerSystemID));
 
     // Spawn a new piece
-    uint256 piece = spawnSystem.executeTyped("test");
+    uint256 piece = spawnSystem.executeTyped();
 
     // Start a new game
     uint256 startTime = block.timestamp;

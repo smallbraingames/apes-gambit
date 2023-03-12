@@ -41,6 +41,10 @@ export async function createNetwork(config: GameConfig) {
       id: "PieceType",
       metadata: { contractId: "component.PieceType" },
     }),
+    PieceName: defineStringComponent(world, {
+      id: "PieceName",
+      metadata: { contractId: "component.PieceName" },
+    }),
     BRBananasPickedUp: defineNumberComponent(world, {
       id: "component.BRBananasPickedUp", // Important that this is the same, used to hash
       metadata: { contractId: "component.BRBananasPickedUp" },
@@ -104,6 +108,13 @@ export async function createNetwork(config: GameConfig) {
 
   const spawnPiece = (): Promise<ContractTransaction> => {
     return systems["system.Spawn"].executeTyped();
+  };
+
+  const setPieceName = (
+    pieceEntity: EntityID,
+    name: string
+  ): Promise<ContractTransaction> => {
+    return systems["system.SetPieceName"].executeTyped(pieceEntity, name);
   };
 
   const movePiece = (
@@ -213,6 +224,7 @@ export async function createNetwork(config: GameConfig) {
     api: {
       spawnPiece,
       movePiece,
+      setPieceName,
       br: {
         getBRControllers,
         moveBRPiece: parseTxErrors(moveBRPiece),

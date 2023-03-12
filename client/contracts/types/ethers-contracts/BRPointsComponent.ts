@@ -31,7 +31,6 @@ export interface BRPointsComponentInterface extends utils.Interface {
   functions: {
     "authorizeWriter(address)": FunctionFragment;
     "getEntities()": FunctionFragment;
-    "getEntitiesWithValue(uint32)": FunctionFragment;
     "getEntitiesWithValue(bytes)": FunctionFragment;
     "getRawValue(uint256)": FunctionFragment;
     "getSchema()": FunctionFragment;
@@ -54,8 +53,7 @@ export interface BRPointsComponentInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "authorizeWriter"
       | "getEntities"
-      | "getEntitiesWithValue(uint32)"
-      | "getEntitiesWithValue(bytes)"
+      | "getEntitiesWithValue"
       | "getRawValue"
       | "getSchema"
       | "getValue"
@@ -82,11 +80,7 @@ export interface BRPointsComponentInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "getEntitiesWithValue(uint32)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getEntitiesWithValue(bytes)",
+    functionFragment: "getEntitiesWithValue",
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
@@ -147,11 +141,7 @@ export interface BRPointsComponentInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getEntitiesWithValue(uint32)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getEntitiesWithValue(bytes)",
+    functionFragment: "getEntitiesWithValue",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -247,13 +237,8 @@ export interface BRPointsComponent extends BaseContract {
 
     getEntities(overrides?: CallOverrides): Promise<[BigNumber[]]>;
 
-    "getEntitiesWithValue(uint32)"(
-      value: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber[]]>;
-
-    "getEntitiesWithValue(bytes)"(
-      value: PromiseOrValue<BytesLike>,
+    getEntitiesWithValue(
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
 
@@ -281,7 +266,7 @@ export interface BRPointsComponent extends BaseContract {
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     registerIndexer(
-      indexer: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -332,13 +317,8 @@ export interface BRPointsComponent extends BaseContract {
 
   getEntities(overrides?: CallOverrides): Promise<BigNumber[]>;
 
-  "getEntitiesWithValue(uint32)"(
-    value: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber[]>;
-
-  "getEntitiesWithValue(bytes)"(
-    value: PromiseOrValue<BytesLike>,
+  getEntitiesWithValue(
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
 
@@ -366,7 +346,7 @@ export interface BRPointsComponent extends BaseContract {
   owner(overrides?: CallOverrides): Promise<string>;
 
   registerIndexer(
-    indexer: PromiseOrValue<string>,
+    arg0: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -417,13 +397,8 @@ export interface BRPointsComponent extends BaseContract {
 
     getEntities(overrides?: CallOverrides): Promise<BigNumber[]>;
 
-    "getEntitiesWithValue(uint32)"(
-      value: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber[]>;
-
-    "getEntitiesWithValue(bytes)"(
-      value: PromiseOrValue<BytesLike>,
+    getEntitiesWithValue(
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
 
@@ -451,7 +426,7 @@ export interface BRPointsComponent extends BaseContract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     registerIndexer(
-      indexer: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -514,13 +489,8 @@ export interface BRPointsComponent extends BaseContract {
 
     getEntities(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "getEntitiesWithValue(uint32)"(
-      value: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "getEntitiesWithValue(bytes)"(
-      value: PromiseOrValue<BytesLike>,
+    getEntitiesWithValue(
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -546,7 +516,7 @@ export interface BRPointsComponent extends BaseContract {
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     registerIndexer(
-      indexer: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -598,13 +568,8 @@ export interface BRPointsComponent extends BaseContract {
 
     getEntities(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "getEntitiesWithValue(uint32)"(
-      value: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "getEntitiesWithValue(bytes)"(
-      value: PromiseOrValue<BytesLike>,
+    getEntitiesWithValue(
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -630,7 +595,7 @@ export interface BRPointsComponent extends BaseContract {
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     registerIndexer(
-      indexer: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

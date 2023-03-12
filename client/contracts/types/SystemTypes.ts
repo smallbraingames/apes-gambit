@@ -10,6 +10,7 @@ import { BRStartGameSystem } from "./ethers-contracts/BRStartGameSystem";
 import { MovePieceSystem } from "./ethers-contracts/MovePieceSystem";
 import { RevokeControllerSystem } from "./ethers-contracts/RevokeControllerSystem";
 import { SetControllerSystem } from "./ethers-contracts/SetControllerSystem";
+import { SetPieceNameSystem } from "./ethers-contracts/SetPieceNameSystem";
 import { SetPieceTypeSystem } from "./ethers-contracts/SetPieceTypeSystem";
 import { SpawnSystem } from "./ethers-contracts/SpawnSystem";
 import { TransferOwnerSystem } from "./ethers-contracts/TransferOwnerSystem";
@@ -26,6 +27,7 @@ export type SystemTypes = {
   "system.MovePiece": MovePieceSystem;
   "system.RevokeController": RevokeControllerSystem;
   "system.SetController": SetControllerSystem;
+  "system.SetPieceName": SetPieceNameSystem;
   "system.SetPieceType": SetPieceTypeSystem;
   "system.Spawn": SpawnSystem;
   "system.TransferOwner": TransferOwnerSystem;

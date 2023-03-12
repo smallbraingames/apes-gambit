@@ -19,7 +19,7 @@ contract SetControllerTest is MudTest {
     ControllerComponent controllerComponent = ControllerComponent(component(ControllerComponentID));
 
     // Spawn a new piece
-    uint256 entityId = spawnSystem.executeTyped("test");
+    uint256 entityId = spawnSystem.executeTyped();
 
     // Set controller and check that it was set correctly
     address[] memory controllers = new address[](1);

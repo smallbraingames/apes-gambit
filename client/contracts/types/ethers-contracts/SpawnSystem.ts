@@ -114,7 +114,7 @@ export interface SpawnSystem extends BaseContract {
 
   functions: {
     execute(
-      arg0: PromiseOrValue<BytesLike>,
+      arguments: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -131,7 +131,7 @@ export interface SpawnSystem extends BaseContract {
   };
 
   execute(
-    arg0: PromiseOrValue<BytesLike>,
+    arguments: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -148,7 +148,7 @@ export interface SpawnSystem extends BaseContract {
 
   callStatic: {
     execute(
-      arg0: PromiseOrValue<BytesLike>,
+      arguments: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -175,7 +175,7 @@ export interface SpawnSystem extends BaseContract {
 
   estimateGas: {
     execute(
-      arg0: PromiseOrValue<BytesLike>,
+      arguments: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -193,7 +193,7 @@ export interface SpawnSystem extends BaseContract {
 
   populateTransaction: {
     execute(
-      arg0: PromiseOrValue<BytesLike>,
+      arguments: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

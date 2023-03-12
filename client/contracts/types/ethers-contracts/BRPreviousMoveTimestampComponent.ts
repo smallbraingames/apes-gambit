@@ -33,7 +33,6 @@ export interface BRPreviousMoveTimestampComponentInterface
     "authorizeWriter(address)": FunctionFragment;
     "getEntities()": FunctionFragment;
     "getEntitiesWithValue(bytes)": FunctionFragment;
-    "getEntitiesWithValue(uint256)": FunctionFragment;
     "getRawValue(uint256)": FunctionFragment;
     "getSchema()": FunctionFragment;
     "getValue(uint256)": FunctionFragment;
@@ -55,8 +54,7 @@ export interface BRPreviousMoveTimestampComponentInterface
     nameOrSignatureOrTopic:
       | "authorizeWriter"
       | "getEntities"
-      | "getEntitiesWithValue(bytes)"
-      | "getEntitiesWithValue(uint256)"
+      | "getEntitiesWithValue"
       | "getRawValue"
       | "getSchema"
       | "getValue"
@@ -83,12 +81,8 @@ export interface BRPreviousMoveTimestampComponentInterface
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "getEntitiesWithValue(bytes)",
+    functionFragment: "getEntitiesWithValue",
     values: [PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getEntitiesWithValue(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getRawValue",
@@ -148,11 +142,7 @@ export interface BRPreviousMoveTimestampComponentInterface
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getEntitiesWithValue(bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getEntitiesWithValue(uint256)",
+    functionFragment: "getEntitiesWithValue",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -248,13 +238,8 @@ export interface BRPreviousMoveTimestampComponent extends BaseContract {
 
     getEntities(overrides?: CallOverrides): Promise<[BigNumber[]]>;
 
-    "getEntitiesWithValue(bytes)"(
-      value: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber[]]>;
-
-    "getEntitiesWithValue(uint256)"(
-      value: PromiseOrValue<BigNumberish>,
+    getEntitiesWithValue(
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
 
@@ -282,7 +267,7 @@ export interface BRPreviousMoveTimestampComponent extends BaseContract {
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     registerIndexer(
-      indexer: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -333,13 +318,8 @@ export interface BRPreviousMoveTimestampComponent extends BaseContract {
 
   getEntities(overrides?: CallOverrides): Promise<BigNumber[]>;
 
-  "getEntitiesWithValue(bytes)"(
-    value: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber[]>;
-
-  "getEntitiesWithValue(uint256)"(
-    value: PromiseOrValue<BigNumberish>,
+  getEntitiesWithValue(
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
 
@@ -367,7 +347,7 @@ export interface BRPreviousMoveTimestampComponent extends BaseContract {
   owner(overrides?: CallOverrides): Promise<string>;
 
   registerIndexer(
-    indexer: PromiseOrValue<string>,
+    arg0: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -418,13 +398,8 @@ export interface BRPreviousMoveTimestampComponent extends BaseContract {
 
     getEntities(overrides?: CallOverrides): Promise<BigNumber[]>;
 
-    "getEntitiesWithValue(bytes)"(
-      value: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber[]>;
-
-    "getEntitiesWithValue(uint256)"(
-      value: PromiseOrValue<BigNumberish>,
+    getEntitiesWithValue(
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
 
@@ -452,7 +427,7 @@ export interface BRPreviousMoveTimestampComponent extends BaseContract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     registerIndexer(
-      indexer: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -515,13 +490,8 @@ export interface BRPreviousMoveTimestampComponent extends BaseContract {
 
     getEntities(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "getEntitiesWithValue(bytes)"(
-      value: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "getEntitiesWithValue(uint256)"(
-      value: PromiseOrValue<BigNumberish>,
+    getEntitiesWithValue(
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -547,7 +517,7 @@ export interface BRPreviousMoveTimestampComponent extends BaseContract {
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     registerIndexer(
-      indexer: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -599,13 +569,8 @@ export interface BRPreviousMoveTimestampComponent extends BaseContract {
 
     getEntities(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "getEntitiesWithValue(bytes)"(
-      value: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "getEntitiesWithValue(uint256)"(
-      value: PromiseOrValue<BigNumberish>,
+    getEntitiesWithValue(
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -631,7 +596,7 @@ export interface BRPreviousMoveTimestampComponent extends BaseContract {
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     registerIndexer(
-      indexer: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

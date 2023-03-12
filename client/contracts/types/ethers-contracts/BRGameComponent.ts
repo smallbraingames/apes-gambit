@@ -287,7 +287,7 @@ export interface BRGameComponent extends BaseContract {
     ): Promise<[BigNumber[]]>;
 
     "getEntitiesWithValue(bytes)"(
-      value: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
 
@@ -315,7 +315,7 @@ export interface BRGameComponent extends BaseContract {
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     registerIndexer(
-      indexer: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -372,7 +372,7 @@ export interface BRGameComponent extends BaseContract {
   ): Promise<BigNumber[]>;
 
   "getEntitiesWithValue(bytes)"(
-    value: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
 
@@ -400,7 +400,7 @@ export interface BRGameComponent extends BaseContract {
   owner(overrides?: CallOverrides): Promise<string>;
 
   registerIndexer(
-    indexer: PromiseOrValue<string>,
+    arg0: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -457,7 +457,7 @@ export interface BRGameComponent extends BaseContract {
     ): Promise<BigNumber[]>;
 
     "getEntitiesWithValue(bytes)"(
-      value: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
 
@@ -485,7 +485,7 @@ export interface BRGameComponent extends BaseContract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     registerIndexer(
-      indexer: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -554,7 +554,7 @@ export interface BRGameComponent extends BaseContract {
     ): Promise<BigNumber>;
 
     "getEntitiesWithValue(bytes)"(
-      value: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -580,7 +580,7 @@ export interface BRGameComponent extends BaseContract {
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     registerIndexer(
-      indexer: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -638,7 +638,7 @@ export interface BRGameComponent extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "getEntitiesWithValue(bytes)"(
-      value: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -664,7 +664,7 @@ export interface BRGameComponent extends BaseContract {
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     registerIndexer(
-      indexer: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

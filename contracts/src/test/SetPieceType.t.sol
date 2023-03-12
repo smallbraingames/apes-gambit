@@ -23,7 +23,7 @@ contract SetPieceTypeTest is MudTest {
     PieceTypeComponent pieceTypeComponent = PieceTypeComponent(component(PieceTypeComponentID));
 
     // Spawn a new piece and check piece type
-    uint256 entityId = spawnSystem.executeTyped("test");
+    uint256 entityId = spawnSystem.executeTyped();
     assertEq(uint8(pieceTypeComponent.getValue(entityId)), uint8(PieceType.PAWN));
 
     // Edit piece type as owner and check (then switch back to pawn)

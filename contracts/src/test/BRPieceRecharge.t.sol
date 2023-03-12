@@ -29,7 +29,7 @@ contract BRPieceRechargeTest is MudTest {
     SetControllerSystem setControllerSystem = SetControllerSystem(system(SetControllerSystemID));
 
     // Spawn a new piece
-    uint256 piece = spawnSystem.executeTyped("test");
+    uint256 piece = spawnSystem.executeTyped();
 
     // Set the piece's controller to the BRMoveSystem
     address[] memory controllers = new address[](2);

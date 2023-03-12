@@ -19,10 +19,11 @@
     { "name": "TransferOwnerSystem", "writeAccess": ["OwnerComponent"] },
     {
       "name": "SpawnSystem",
-      "writeAccess": ["OwnerComponent", "PieceTypeComponent", "PiecePositionComponent", "PieceNameComponent"]
+      "writeAccess": ["OwnerComponent", "PieceTypeComponent", "PiecePositionComponent"]
     },
     { "name": "SetPieceTypeSystem", "writeAccess": ["PieceTypeComponent"] },
     { "name": "MovePieceSystem", "writeAccess": ["PiecePositionComponent"] },
+    { "name": "SetPieceNameSystem", "writeAccess": ["PieceNameComponent"] },
     { "name": "BRCreateGameSystem", "writeAccess": ["BRGameComponent"] },
     {
       "name": "BRJoinGameSystem",

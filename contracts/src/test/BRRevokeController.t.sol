@@ -31,7 +31,7 @@ contract BRRevokeControllerTest is MudTest {
     BRLeaveGameSystem brLeaveGameSystem = BRLeaveGameSystem(system(BRLeaveGameSystemID));
 
     // Spawn a new piece
-    uint256 piece = spawnSystem.executeTyped("test");
+    uint256 piece = spawnSystem.executeTyped();
 
     // Set the piece's controller to the BRMoveSystem and the BRPieceTypeSystem
     address[] memory controllers = new address[](2);

@@ -19,7 +19,7 @@ contract TransferOwnerTest is MudTest {
     OwnerComponent ownerComponent = OwnerComponent(component(OwnerComponentID));
 
     // Spawn a new piece and check owner
-    uint256 entityId = spawnSystem.executeTyped("test");
+    uint256 entityId = spawnSystem.executeTyped();
     assertEq(ownerComponent.getValue(entityId), address(this));
 
     // Transfer ownership to another address

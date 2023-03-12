@@ -1797,7 +1797,7 @@
                     "1348:9:1"
                   ],
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 8459,
+                  "referencedDeclaration": 8626,
                   "src": "1348:9:1"
                 },
                 "nodeType": "ModifierInvocation",
@@ -3504,14 +3504,14 @@
           3733,
           5623,
           5535,
-          8431,
-          8555,
-          8394,
-          8383,
+          8598,
+          8722,
+          8561,
+          8550,
           6746,
           6810,
-          8598,
-          8608
+          8765,
+          8775
         ],
         "name": "BareComponent",
         "nameLocation": "706:13:1",
@@ -3519,8 +3519,8 @@
         "usedErrors": [
           3533,
           5550,
-          8391,
-          8393
+          8558,
+          8560
         ]
       }
     ],

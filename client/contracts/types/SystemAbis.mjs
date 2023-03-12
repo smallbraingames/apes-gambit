@@ -10,6 +10,7 @@ import BRStartGameSystem from "../abi/BRStartGameSystem.json";
 import MovePieceSystem from "../abi/MovePieceSystem.json";
 import RevokeControllerSystem from "../abi/RevokeControllerSystem.json";
 import SetControllerSystem from "../abi/SetControllerSystem.json";
+import SetPieceNameSystem from "../abi/SetPieceNameSystem.json";
 import SetPieceTypeSystem from "../abi/SetPieceTypeSystem.json";
 import SpawnSystem from "../abi/SpawnSystem.json";
 import TransferOwnerSystem from "../abi/TransferOwnerSystem.json";
@@ -26,6 +27,7 @@ export const SystemAbis = {
   "system.MovePiece": MovePieceSystem.abi,
   "system.RevokeController": RevokeControllerSystem.abi,
   "system.SetController": SetControllerSystem.abi,
+  "system.SetPieceName": SetPieceNameSystem.abi,
   "system.SetPieceType": SetPieceTypeSystem.abi,
   "system.Spawn": SpawnSystem.abi,
   "system.TransferOwner": TransferOwnerSystem.abi,

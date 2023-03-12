@@ -34,7 +34,7 @@ contract BRMovePieceTest is MudTest {
     BRGameComponent brGameComponent = BRGameComponent(getAddressById(components, BRGameComponentID));
 
     // Spawn a new piece
-    uint256 piece = spawnSystem.executeTyped("test");
+    uint256 piece = spawnSystem.executeTyped();
 
     // Set the piece's controller to the BRMoveSystem
     address[] memory controllers = new address[](2);
@@ -69,7 +69,7 @@ contract BRMovePieceTest is MudTest {
     BRPointsComponent brPointsComponent = BRPointsComponent(getAddressById(components, BRPointsComponentID));
 
     // Setup
-    uint256 piece = spawnSystem.executeTyped("test");
+    uint256 piece = spawnSystem.executeTyped();
 
     // Set the piece's controller to the BRMoveSystem
     address[] memory controllers = new address[](2);
@@ -90,7 +90,7 @@ contract BRMovePieceTest is MudTest {
     vm.startPrank(taker);
 
     // Spawn a piece for taker, add controller, and join game
-    uint256 takerPiece = spawnSystem.executeTyped("test");
+    uint256 takerPiece = spawnSystem.executeTyped();
     setControllerSystem.executeTyped(takerPiece, controllers);
     brJoinGameSystem.executeTyped(takerPiece, game);
 
@@ -119,7 +119,7 @@ contract BRMovePieceTest is MudTest {
     );
 
     // Setup
-    uint256 piece = spawnSystem.executeTyped("test");
+    uint256 piece = spawnSystem.executeTyped();
 
     // Set the piece's controller to the BRMoveSystem
     address[] memory controllers = new address[](2);

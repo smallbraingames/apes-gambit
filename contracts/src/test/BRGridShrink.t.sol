@@ -32,7 +32,7 @@ contract BRGridShrinkTest is MudTest {
     BRIsAliveComponent brIsAliveComponent = BRIsAliveComponent(getAddressById(components, BRIsAliveComponentID));
 
     // Spawn a new piece
-    uint256 piece = spawnSystem.executeTyped("test");
+    uint256 piece = spawnSystem.executeTyped();
 
     // Set the piece's controller to the BRMoveSystem and BRSetPieceTypeSystem
     address[] memory controllers = new address[](2);
@@ -52,7 +52,7 @@ contract BRGridShrinkTest is MudTest {
 
     address winner = address(12345);
     vm.startPrank(winner);
-    uint256 winnerPiece = spawnSystem.executeTyped("test");
+    uint256 winnerPiece = spawnSystem.executeTyped();
     setControllerSystem.executeTyped(winnerPiece, controllers);
     brJoinGameSystem.executeTyped(winnerPiece, game);
 

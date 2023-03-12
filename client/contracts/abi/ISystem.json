@@ -251,7 +251,7 @@
     "id": 6825,
     "exportedSymbols": {
       "IERC173": [
-        8598
+        8765
       ],
       "ISystem": [
         6824
@@ -289,7 +289,7 @@
               "name": "IERC173",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 8598,
+              "referencedDeclaration": 8765,
               "src": "67:7:20",
               "typeDescriptions": {}
             },
@@ -398,7 +398,7 @@
                 "285:7:20"
               ],
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 8598,
+              "referencedDeclaration": 8765,
               "src": "285:7:20"
             },
             "id": 6816,
@@ -412,8 +412,8 @@
         "fullyImplemented": false,
         "linearizedBaseContracts": [
           6824,
-          8598,
-          8608
+          8765,
+          8775
         ],
         "name": "ISystem",
         "nameLocation": "274:7:20",
