@@ -11,6 +11,7 @@ import { GameContext } from "../../context/GameContext";
 import Info from "../Info";
 import { NetworkContext } from "../../context/NetworkContext";
 import { Scenes } from "../../game/constants";
+import SetPieceName from "./SetPieceName";
 
 const Lobby = () => {
   const { network } = useContext(NetworkContext);
@@ -33,6 +34,9 @@ const Lobby = () => {
                   network={network}
                   activePiece={activePiece}
                 />
+                <div className="mt-2">
+                  <SetPieceName />
+                </div>
                 <div className="mt-2">
                   <Info />
                 </div>

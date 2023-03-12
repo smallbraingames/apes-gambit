@@ -83,6 +83,10 @@ const createLobbyPieceSpriteManager = (
     speechBubbleManager.displayChatBubbleForPieceSprite(sprite, message);
   };
 
+  const getSprite = (piece: EntityIndex) => {
+    return pieceSpriteManager.getSprite(piece);
+  };
+
   /// ======= Internal =======
 
   return {
@@ -91,6 +95,7 @@ const createLobbyPieceSpriteManager = (
     animateRemovePiece,
     animateSwitchType,
     animateSpeechBubble,
+    getSprite,
   };
 };
 

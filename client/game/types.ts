@@ -5,6 +5,7 @@ import { ObjectRegistry } from "../phaser/types";
 import createBananaMananger from "./utils/tilemap/createBananaManager";
 import { createGame } from "./createGame";
 import createMoveValidator from "./utils/validation/createMoveValidator";
+import createNametagManager from "./utils/pieces/createNametagManager";
 import createPieceSpriteManager from "./utils/pieces/createPieceSpriteManager";
 import createRechargeOverlayManager from "./utils/createRechargeOverlayManager";
 import createSpeechBubbleManager from "./utils/chat/createSpeechBubbleManager";
@@ -29,6 +30,7 @@ export type SpeechBubbleManager = Awaited<
 export type PieceSpriteManager = Awaited<
   ReturnType<typeof createPieceSpriteManager>
 >;
+export type NametagManager = Awaited<ReturnType<typeof createNametagManager>>;
 
 export type Scene = {
   scene: Phaser.Scene;

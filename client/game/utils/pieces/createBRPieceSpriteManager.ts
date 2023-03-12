@@ -1,6 +1,7 @@
 import {
   BananaManager,
   Game,
+  NametagManager,
   RechargeOverlayManager,
   Scene,
   SpeechBubbleManager,
@@ -136,6 +137,10 @@ const createBRPieceSpriteManager = (
     speechBubbleManager.displayChatBubbleForPieceSprite(sprite, message);
   };
 
+  const getSprite = (piece: EntityIndex) => {
+    return pieceSpriteManager.getSprite(piece);
+  };
+
   /// ======= Internal =======
 
   const pickUpBanana = async (piece: EntityIndex, tileCoord: Coord) => {
@@ -186,6 +191,7 @@ const createBRPieceSpriteManager = (
     animateRemovePiece,
     animateSwitchType,
     animateSpeechBubble,
+    getSprite,
   };
 };
 

@@ -13,6 +13,7 @@ import createCameraSystem from "./lobby/input/createCameraSystem";
 import createChatSystem from "./lobby/createChatSystem";
 import createMovementInputSystem from "./lobby/input/createMovementInputSystem";
 import createPieceEnterExitSystem from "./lobby/createPieceEnterExitSystem";
+import createPieceNametagSystem from "./lobby/createNametagSystem";
 import createPiecePositionSystem from "./lobby/createPiecePositionSystem";
 import createPieceTypeSystem from "./lobby/createPieceTypeSystem";
 
@@ -48,6 +49,7 @@ export const setupLobbySystems = (
       createPieceTypeSystem,
       createChatSystem,
       createCameraSystem,
+      createPieceNametagSystem,
     ],
     lobby
   );

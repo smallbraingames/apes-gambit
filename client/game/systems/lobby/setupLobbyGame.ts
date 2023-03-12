@@ -13,6 +13,7 @@ import createChessBoardTilemap from "../../utils/tilemap/createChessBoardTilemap
 import createEmbodiedBRGameEntrance from "../../utils/createEmbodiedBRGameEntrance";
 import createLobbyPieceSpriteManager from "../../utils/pieces/createLobbySpriteManager";
 import createMoveValidator from "../../utils/validation/createMoveValidator";
+import createNametagManager from "../../utils/pieces/createNametagManager";
 import createSpeechBubbleManager from "../../utils/chat/createSpeechBubbleManager";
 import createValidMoveTileOverlayManager from "../../utils/validation/createValidMoveTileOverlayManager";
 import { setupLobbySystems } from "../setupSystems";
@@ -56,6 +57,7 @@ const setupLobbyGame = (network: Network, scene: Scene, game: Game) => {
     tileOverlayManager,
     speechBubbleManager,
     pieceSpriteManager,
+    nametagManager: createNametagManager(scene),
   };
 
   const positions = createEmbodiedBRGameEntrance(

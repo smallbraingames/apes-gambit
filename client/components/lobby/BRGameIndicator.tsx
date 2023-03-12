@@ -19,7 +19,7 @@ enum JoiningGameState {
   JOINED,
 }
 
-const Loading = () => (
+export const Loading = () => (
   <div role="status">
     <svg
       aria-hidden="true"

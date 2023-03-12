@@ -18,6 +18,7 @@ import createBRPieceSpriteManager from "../../utils/pieces/createBRPieceSpriteMa
 import createBananaMananger from "../../utils/tilemap/createBananaManager";
 import createChessBoardTilemap from "../../utils/tilemap/createChessBoardTilemap";
 import createMoveValidator from "../../utils/validation/createMoveValidator";
+import createNametagManager from "../../utils/pieces/createNametagManager";
 import createRechargeOverlayManager from "../../utils/createRechargeOverlayManager";
 import createSpeechBubbleManager from "../../utils/chat/createSpeechBubbleManager";
 import createValidMoveTileOverlayManager from "../../utils/validation/createValidMoveTileOverlayManager";
@@ -104,6 +105,7 @@ const setupBRGame = async (network: Network, scene: Scene, game: Game) => {
     tileOverlayManager,
     speechBubbleManager,
     pieceSpriteManager,
+    nametagManager: createNametagManager(scene),
     IN_GAME_CONSTRAINTS,
   };
 
